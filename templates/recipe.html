@@ -1,0 +1,209 @@
+{% extends 'layout.html' %}
+
+
+{% block jumbotron %}
+    <div class="jumbotron jumbotron-recipe">
+      <div class="container">
+        <div class="row">
+          <h1>Kaiserschmarrn</h1>
+          <p class="lead">The Emperor's Nonsense (or Mess). A light fluffy scrambled pancake, great for late night comfort food.</p>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p class="step-nav-buttons">
+              <a class="btn btn-lg btn-primary" href="#step-0" role="button">Get Started!</a>
+            </p>
+            <p>
+              Rating ****<br>
+              Easy!
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <img class="img-responsive img-rounded featured-image" src="/files/originals/kaiserschmarrn.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+  <div class="row step-nav hidden-xs">
+    <div class="panel panel-default">
+      <div class="panel-body step-nav-buttons">
+        <a class="btn btn-primary" href="#step-0">Overview</a>
+        <a class="btn btn-default" href="#step-1">Step 1</a>
+        <a class="btn btn-default" href="#step-2">Step 2</a>
+        <a class="btn btn-default" href="#step-3">Step 3</a>
+        <a class="btn btn-default" href="#step-4">Step 4</a>
+        <a class="btn btn-default" href="#step-5">Step 5</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block afterBodyContainer %}
+  <div class="container step-scroll-container">
+    <div class="row step-row">
+
+      <div class="step-container col-sm-12" id="step-0" data-step="0">     
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="step-number h3"></span>
+            <div class="step-ingredients col-xs-12 col-sm-3">
+              <ul class="list-unstyled">
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 cup Milk</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 tbsp Oil</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 2 tbsp Sugar</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1/4 tsp Salt</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1/2 tsp Vanilla extract</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 4 Egg Yolks</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 cup Flour</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 4 Egg Whites</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 tbsp Butter</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> Powdered Sugar</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> Apple Sauce</label></li>
+              </ul>
+            </div>
+
+            <div class="step-instructions col-xs-12 col-sm-5">
+                <p>Gather all ingredients.</p>
+            </div>
+
+            <div class="hidden-xs col-sm-4 thumbnail">
+              <img src="/files/originals/kaiserschmarrn.jpg">
+            </div>
+          </div>
+        </div>
+      </div> 
+
+
+      <div class="step-container col-sm-12" id="step-1" data-step="1">     
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="step-number h3">1</span>
+            <div class="step-ingredients col-xs-12 col-sm-3">
+              <ul class="list-unstyled">
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 cup Milk</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 tbsp Oil</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 2 tbsp Sugar</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1/4 tsp Salt</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1/2 tsp Vanilla extract</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> 4 Egg Yolks</label></li>
+              </ul>
+            </div>
+
+            <div class="step-instructions col-xs-12 col-sm-5">
+                <p>Soak the raisins or cranberries in a little bit of rum and set aside. Briefly microwaving the berries and rum will accelerate this process.</p>
+                <p>In a blender combine the milk, oil, sugar, salt, vanilla, and the egg yolks until smooth.</p>
+            </div>
+
+            <div class="hidden-xs col-sm-4 thumbnail">
+              <img src="/files/originals/kaiserschmarrn.jpg">
+            </div>
+          </div>
+        </div>
+      </div> 
+
+
+      <div class="step-container col-sm-12" id="step-2" data-step="2">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="step-number h3">2</span>
+
+            <div class="step-ingredients col-xs-12 col-sm-3">
+              <ul class="list-unstyled">
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 cup Flour</label></li>
+              </ul>
+            </div>
+
+            <div class="step-instructions col-xs-12 col-sm-5">
+                <p>Pour the wet mixture over the flour in a large bowl and thoroughly combine and set aside.</p>
+            </div>
+
+            <div class="hidden-xs col-sm-4 thumbnail">
+              <img src="/files/originals/kaiserschmarrn.jpg">
+            </div>
+
+          </div>
+        </div>
+      </div> 
+
+
+      <div class="step-container col-sm-12" id="step-3" data-step="3">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="step-number h3">3</span>
+
+            <div class="step-ingredients col-xs-12 col-sm-3">
+              <ul class="list-unstyled">
+                <li><label><input class="step-ingredient-check" type="checkbox"> 4 Egg Whites</label></li>
+              </ul>
+            </div>
+
+            <div class="step-instructions col-xs-12 col-sm-5">
+                <p>Beat the egg whites until soft peaks form, then carefully fold into the batter.</p>
+            </div>
+
+            <div class="hidden-xs col-sm-4 thumbnail">
+              <img src="/files/originals/kaiserschmarrn.jpg">
+            </div>
+
+          </div>
+        </div>
+      </div> 
+
+
+      <div class="step-container col-sm-12" id="step-4" data-step="4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="step-number h3">4</span>
+
+            <div class="step-ingredients col-xs-12 col-sm-3">
+              <ul class="list-unstyled">
+                <li><label><input class="step-ingredient-check" type="checkbox"> 1 tbsp Butter</label></li>
+              </ul>
+            </div>
+
+            <div class="step-instructions col-xs-12 col-sm-5">
+                <p>Melt the butter in a large non-stick skillet over medium heat. Pour in the batter and then top with the rum soaked berries and almonds.</p>
+                <p>Let the batter cook partially until the bottom is golden brown (use a spatula to peek), and then dig in with your spatula and tear and toss the batter into pieces.</p>
+                <p>Make a mess! Fry until golden, but not over cooked.</p>
+                <p>Depending on the size of you skillet,  you might find it easier to cook this in two separate servings.</p>
+            </div>
+
+            <div class="hidden-xs col-sm-4 thumbnail">
+              <img src="/files/originals/kaiserschmarrn.jpg">
+            </div>
+
+          </div>
+        </div>
+      </div> 
+
+
+      <div class="step-container col-sm-12" id="step-5" data-step="5">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="step-number h3">5</span>
+
+            <div class="step-ingredients col-xs-12 col-sm-3">
+              <ul class="list-unstyled">
+                <li><label><input class="step-ingredient-check" type="checkbox"> Powdered Sugar</label></li>
+                <li><label><input class="step-ingredient-check" type="checkbox"> Apple Sauce</label></li>
+              </ul>
+            </div>
+
+            <div class="step-instructions col-xs-12 col-sm-5">
+                <p>Serve with a liberal dusting of powdered sugar, and serve with applesauce.</p>
+            </div>
+
+            <div class="hidden-xs col-sm-4 thumbnail">
+              <img src="/files/originals/kaiserschmarrn.jpg">
+            </div>
+
+          </div>
+        </div>
+      </div> 
+
+    </div><!-- /.row -->
+
+{% endblock %}

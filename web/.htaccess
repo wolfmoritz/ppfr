@@ -1,0 +1,27 @@
+# Hide git directory
+RedirectMatch 404 /\.git
+
+# Prevent direct directory access
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Note, when deploying the application to a different server, you will need to
+    # update this RewriteBase line to the base directory of the site:
+    # /site_folder_root
+    # RewriteBase /
+
+    # Redirect from www subdomain to preferred domain
+    #RewriteCond %{HTTP_HOST} !^(localhost$) [NC]
+    #RewriteCond %{HTTP_HOST} ^www [NC]
+    #RewriteRule ^(.*)$ http://perisplaceforrecipes.com/$1 [L,R=301]
+
+    #Checks to see if the user is attempting to access a valid file,
+    #such as an image or css document, if this isn't true it sends the
+    #request to index.php.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+
+</IfModule>

@@ -1,0 +1,21 @@
+{
+    "require": {
+        "slim/slim": "2.*",
+        "slim/views": "0.1.*",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "slim/logger": "0.1.*",
+        "codeguy/upload": "*",
+        "intervention/image": "2.*",
+        "wolfmoritz/session": "~1.0.0",
+        "zeuxisoo/slim-whoops": "0.3.0"
+    },
+    "autoload": {
+      "psr-4": {
+          "Recipe\\": "app/Recipe/"
+      }
+    },
+    "config": {
+      "preferred-install": "dist",
+      "optimize-autoloader": true
+    }
+}

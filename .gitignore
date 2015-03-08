@@ -1,0 +1,23 @@
+# Things to ignore
+
+# Development configuration file
+config/config.dev.php
+
+# Uploaded files
+web/files/
+
+# Log files
+logs/*.log
+
+# Twig Cache
+twigcache/*
+
+# Vendor files which are loaded by composer
+vendor/
+
+# Hostmonster files
+cig-bin/
+*.shtml
+default.html
+500.php
+*.xml
