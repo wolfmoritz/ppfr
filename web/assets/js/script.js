@@ -7,7 +7,23 @@ $('.step-ingredient-check').on('click', function() {
   }
 });
 
+// Fix step navigation
+// var $stepNav = $('.step-nav');
 
+// $(window).on('scroll', function() {
+
+//   console.log($(window).scrollTop())
+
+//   if($(window).scrollTop() >= 520) {
+//     $stepNav.addClass('step-nav-fixed');
+//     if($('.step-nav').is(':visible')) {
+//       $('.step-row').css('margin-top','86px');
+//     }
+//   } else {
+//     $stepNav.removeClass('step-nav-fixed');
+//     $('.step-row').css('margin-top','0');
+//   }
+// });
 
 (function($) {
   var priorStepId = '1';
@@ -26,8 +42,6 @@ $('.step-ingredient-check').on('click', function() {
     $('html,body').animate({scrollTop: step.offset().top - 150}, 'slow', 'easeOutQuad');
     $('.step-row').animate({scrollLeft: stepLeftPos}, 'slow', 'easeOutQuad');
   });
-
-
 
   var getBoundary = function(stepContainer, stepId) {
     if (stepContainer.getBoundingClientRect().left >= 0 && stepContainer.getBoundingClientRect().left < stepContainer.getBoundingClientRect().width/2 && stepId !== priorStepId) {

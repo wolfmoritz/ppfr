@@ -9,7 +9,7 @@ body {
 /* Horizontal Step Scroll on iPad or larger */
 @media (min-width: 768px) and (max-width: 1024px) {
   .step-scroll-container {
-    width: 100%;
+    /*width: 100%;*/
   }
   .step-row {
     overflow-x: scroll;
@@ -18,15 +18,24 @@ body {
     -webkit-overflow-scrolling: touch;
   }
   .step-container  {
-      float: none;
-      display: inline-block;
-      white-space: normal;
-      vertical-align: top;
+    float: none;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
   }
 }
+
+.step-nav-fixed {
+  position: fixed;
+  top: 65px;
+  z-index: 10;
+  width: inherit;
+}
+
 .step-container {
   position: relative;
-
+  padding-left: 0;
+  padding-right: 0;
 }
 .step-container .step-number {
   position: absolute;
