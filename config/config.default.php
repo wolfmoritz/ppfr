@@ -38,7 +38,6 @@ $config['database']['password'] = '';
  * Sessions
  */
 $config['session']['cookieName']      = 'ApplicationCookie'; // Name of the cookie
-$config['session']['tableName']       = 'piton_session';       // Database table name
 $config['session']['checkIpAddress']  = true;            // Will check the user's IP address against the one stored in the database. Make sure this is a string which is a valid IP address. FALSE by default.
 $config['session']['checkUserAgent']  = true;            // Will check the user's user agent against the one stored in the database. FALSE by default.
 $config['session']['salt']            = ''; // Salt key to hash

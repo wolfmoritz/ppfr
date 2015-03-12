@@ -12,6 +12,8 @@
  */
 namespace Recipe;
 
+use PDO;
+
 // Define the application root directory
 define('ROOT_DIR', dirname(__DIR__) . '/');
 
@@ -92,7 +94,7 @@ return call_user_func(
 
     // Sessions
     $app->container->singleton('SessionHandler', function() use ($app) {
-      return new WolfMoritz\Session\SessionHandler($app->db, $app->config('session'));
+      return new \WolfMoritz\Session\SessionHandler($app->db, $app->config('session'));
     });
 
     // Email
@@ -125,9 +127,6 @@ return call_user_func(
     $app->image = function() {
         return new Intervention\Image\ImageManager();
     };
-
-    // Load site settings from database
-    // $app->config('site', (new Recipe\Library\SiteSettingsHandler())->getSettings());
 
     // Twig Template Rendering
     $app->container->singleton('twig', function() use ($app) {

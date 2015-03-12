@@ -10,52 +10,52 @@ class IndexController
 {
   private $app;
 
+  /**
+   * Constructor
+   */
   public function __construct ()
   {
     $this->app = \Slim\Slim::getInstance();
   }
 
+  /**
+   * Index
+   *
+   * Primary controller for home page
+   **/
   public function index()
   {
     $twig = $this->app->twig;
     $twig->display('home.html');
   }
 
-  public function showRecipe($id, $slug)
-  {
-    $twig = $this->app->twig;
-    $twig->display('recipe.html');
-  }
-
   /**
-   * Get Page By Slug
+   * Show a Single Recipe
    *
-   * @param String, $slug
+   * @param int, recipe id
+   * @param string, recipe slug
+   * @return void
    */
-  // public function getPageByID($slug)
-  // {
-  //   // Get data mappers
-  //   $dataMapper = $this->app->dataMapper;
-  //   $PageMapper = $dataMapper('PageMapper');
-  //   $PageFieldMapper =  $dataMapper('PageFieldMapper');
+  public function showRecipe($id, $slug = null)
+  {
+    // Get data mappers
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+    $RecipeStepMapper = $dataMapper('RecipeStepMapper');
 
-  //   $page = $PageMapper->getPageBySlug($slug);
+    // Fetch recipe
+    $recipe = $RecipeMapper->findById((int) $id);
 
-  //   // If no page record was found, raise 404
-  //   if ($page === false) {
-  //     // $this->app->log->error('IndexController->getPageBySlug() did not return a page record to load, redirecting to 404.');
-  //     $this->app->notFound();
-  //     return;
-  //   }
-  
-  //   // Get fields
-  //   $fields = $PageFieldMapper->getPageFieldsById($page->id);
-  //   // TODO Move this into some mapper function
-  //   foreach ($fields as $row) {
-  //     $page->{$row->field_name} = ($row->field) ? $row->field : $row->field_text;
-  //   }
+    // If no recipe found then 404 it
+    if (!$recipe) {
+      $this->app->notFound();
+      return;
+    }
 
-  //   $twig = $this->app->twig;
-  //   $twig->display($page->template . '.html', array('page' => $page));
-  // }
+    // Get the steps
+    $recipe->steps = $RecipeStepMapper->findSteps($id);
+
+    $twig = $this->app->twig;
+    $twig->display('recipe.html', array('recipe' => $recipe));
+  }
 }

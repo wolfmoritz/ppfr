@@ -15,6 +15,7 @@ body {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
   .step-container  {
       float: none;
@@ -52,20 +53,20 @@ body {
   color: grey;
 }
 /* Home page masonry */
-#home-masonry .row {
+.masonry .row {
   -moz-column-width: 20em;
   -webkit-column-width: 20em;
   -moz-column-gap: 10px;
   -webkit-column-gap:10px; 
 }
 
-#home-masonry .row > .col-lg-3 {
+.masonry .row > .col-lg-3 {
   display: inline-block;
   padding: 0;
   margin: 10px;
   width:  100%; 
   float:none;
 }
-#home-masonry .recipe-tile {
+.masonry .recipe-tile {
   /*border: 1px solid #ddd;*/
 }

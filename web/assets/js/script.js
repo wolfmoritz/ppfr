@@ -11,6 +11,10 @@ $('.step-ingredient-check').on('click', function() {
 
 (function($) {
   var priorStepId = '1';
+  $.easing.easeOutQuad = function (x, t, b, c, d) {
+        return -c *(t/=d)*(t-2) + b;
+  };
+
   $('.step-nav-buttons > a').on('click', function(e) {
     e.preventDefault();
     var anchor = $(this).prop('href');
@@ -19,9 +23,11 @@ $('.step-ingredient-check').on('click', function() {
     var stepLeftPos = '+=' + (step.offset().left - 15);
 
     // Scroll down to row, then to step
-    $('html,body').animate({scrollTop: step.offset().top - 150}, 'slow');
-    $('.step-row').animate({scrollLeft: stepLeftPos}, 'slow');
+    $('html,body').animate({scrollTop: step.offset().top - 150}, 'slow', 'easeOutQuad');
+    $('.step-row').animate({scrollLeft: stepLeftPos}, 'slow', 'easeOutQuad');
   });
+
+
 
   var getBoundary = function(stepContainer, stepId) {
     if (stepContainer.getBoundingClientRect().left >= 0 && stepContainer.getBoundingClientRect().left < stepContainer.getBoundingClientRect().width/2 && stepId !== priorStepId) {
