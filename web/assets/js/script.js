@@ -83,4 +83,4 @@ var defaults      = {
     dark:       "ab-dark"
   }
 };
-$.adaptiveBackground.run(defaults)
+// $.adaptiveBackground.run(defaults)

@@ -54,8 +54,8 @@ $config['email']['smtp_pass'] = '';
 /** 
  * File Uploads Config
  */
-$config['file.path'] =  ROOT_DIR . 'files/originals/';
-$config['file.thumb.path'] =  ROOT_DIR . 'files/thumbnails/';
+$config['file.path'] =  ROOT_DIR . 'web/files/originals/';
+$config['file.thumb.path'] =  ROOT_DIR . 'web/files/thumbnails/';
 $config['file.uri'] =  'files/originals/';
 $config['file.thumb.uri'] = 'files/thumbnails/';
 $config['file.mimetypes'] = array('image/jpeg', 'image/pjpeg', 'image/png'); // Be sure to update /Thumbs.php with any new allowed extensions. //TODO make this check the config file

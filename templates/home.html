@@ -16,51 +16,19 @@
   <div class="masonry">
     <div class="row">
 
+      {% for r in recipes %}
         <div class="col-lg-3 col-md-4 col-sm-6 recipe-tile">
-            <a href="{{ siteUrl('125') }}">
-              <img src="{{ baseUrl() }}/files/originals/kaiserschmarrn.jpg" class="img-responsive" alt="...">
-            </a>
+          <a href="{{ siteUrl(r.id) }}">
+          {% if r.image_name %}
+            <img src="{{ imageUrl(r.id, r.image_name) }}" class="img-responsive" alt="{{ r.subtitle }}">
+          {% endif %}
             <div class="caption">
-              <h3>Kaiserschmarrn</h3>
-              <p>The Emperor's Nonsense (or Mess). A light fluffy scrambled pancake, great for late night comfort food.</p>
+              <h3>{{ r.title }}</h3>
             </div>
+          </a>
         </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/480" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/480" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/580" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/430" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/400" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/490" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/480" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <img src="//placehold.it/530" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/460" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/430" class="img-responsive">
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-           <img src="//placehold.it/400" class="img-responsive">
-        </div>
+      {% endfor %}
 
     </div>
   </div><!-- /.home-masonry -->
-
 {% endblock %}

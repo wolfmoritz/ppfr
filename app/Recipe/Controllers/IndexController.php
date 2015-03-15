@@ -25,8 +25,15 @@ class IndexController
    **/
   public function index()
   {
+    // Get mapper
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+
+    // Fetch recipes
+    $recipes = $RecipeMapper->find();
+
     $twig = $this->app->twig;
-    $twig->display('home.html');
+    $twig->display('home.html', ['recipes' => $recipes]);
   }
 
   /**
@@ -46,7 +53,7 @@ class IndexController
     // Fetch recipe
     $recipe = $RecipeMapper->findById((int) $id);
 
-    // If no recipe found then 404 it
+    // If no recipe found then 404
     if (!$recipe) {
       $this->app->notFound();
       return;

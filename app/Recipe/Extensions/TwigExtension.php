@@ -115,7 +115,7 @@ class TwigExtension extends \Twig_Extension
    * @return string Trimmed string.
    */
 
-  function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) 
+  public function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) 
   {
     if ($considerHtml) {
       // If the plain text is shorter than the maximum length, return the whole text
@@ -214,7 +214,7 @@ class TwigExtension extends \Twig_Extension
   /**
    * Get Upload Image URL
    */
-  public function imageUrl($filename, $width = null, $height = null)
+  public function imageUrl($id, $filename, $width = null, $height = null)
   {
     // If no filename was provided, then return nothing
     if (empty($filename)) {
@@ -223,20 +223,25 @@ class TwigExtension extends \Twig_Extension
 
     static $largeUri;
     static $thumbUri;
-    static $uri = '';
+    static $url = '';
+    static $app;
 
     // Cache variables for next request
     if (!isset($largeUri)) {
       $app = \Slim\Slim::getInstance();
+
       $largeUri = $app->config('file.uri');
       $thumbUri = $app->config('file.thumb.uri');
-      $uri = $app->request->getUrl() . $app->request->getRootUri() . '/';
+      $url = $app->request->getUrl() . $app->request->getRootUri() . '/';
     }
+
+    $imagePath = $app->imagePath;
+    $imageFilePath = $imagePath($id);
 
     // Was the full sized image requested?
     if ($width === null and $height === null) {
       // Just return url to the original image
-      return $uri . $largeUri . $filename;
+      return $url . $largeUri . $imageFilePath . $filename;
     }
     
     // Make sure at least one dimension is set to a size
@@ -248,7 +253,7 @@ class TwigExtension extends \Twig_Extension
     $width = (is_numeric($width)) ? $width : '';
     $height = (is_numeric($height)) ? $height : '';
 
-    return $uri . $thumbUri . $width . 'x' . $height . '/' . $filename;
+    return $url . $thumbUri . $width . 'x' . $height . '/' . $filename;
   }
 
   /**

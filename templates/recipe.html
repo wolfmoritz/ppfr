@@ -24,7 +24,7 @@
             </p>
           </div>
           <div class="col-sm-6">
-            <img class="img-responsive img-rounded featured-image" src="{{ imageUrl(recipe.image_name) }}">
+            <img class="img-responsive img-rounded featured-image" src="{{ imageUrl(recipe.id, recipe.image_name) }}">
           </div>
         </div>
       </div>
@@ -59,7 +59,8 @@
               {{ s.instructions|raw }}
             </div>
             <div class="hidden-xs col-sm-4 thumbnail">
-              <img class="img-responsive" src="{{ imageUrl(s.image_name) }}">
+{# TODO Replace with step id #}
+              <img class="img-responsive" src="{{ imageUrl(recipe.id, s.image_name) }}">
             </div>
           </div>
         </div>
