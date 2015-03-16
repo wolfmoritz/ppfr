@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block jumbotron %}
-<div class="jumbotron">
+<div class="jumbotron" id="jumbotron">
   <div class="container">
     <div class="row">
       <h1>Peri&apos;s Recipes</h1>
@@ -13,14 +13,14 @@
 
 {% block body %}
   <h2>Favorite Recipes</h2>
-  <div class="masonry">
+  
     <div class="row">
 
       {% for r in recipes %}
         <div class="col-lg-3 col-md-4 col-sm-6 recipe-tile">
           <a href="{{ siteUrl(r.id) }}/{{ r.slug }}">
           
-            <img src="{% if r.image_name %}{{ imageUrl(r.id, r.image_name) }}{% else %}{{ baseUrl() }}/assets/img/filler.png{% endif %}" class="img-responsive" alt="{{ r.subtitle }}">
+            <img src="{% if r.image_name %}{{ imageUrl(r.id, r.image_name) }}{% else %}{{ baseUrl() }}/assets/img/filler.png{% endif %}" class="img-responsive"  height="100"alt="{{ r.subtitle }}">
           
             <div class="caption">
               <h3>{{ r.title }}</h3>
@@ -30,5 +30,5 @@
       {% endfor %}
 
     </div>
-  </div><!-- /.home-masonry -->
+ 
 {% endblock %}
