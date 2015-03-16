@@ -19,9 +19,8 @@
       {% for r in recipes %}
         <div class="col-lg-3 col-md-4 col-sm-6 recipe-tile">
           <a href="{{ siteUrl(r.id) }}/{{ r.slug }}">
-          
-            <img src="{% if r.image_name %}{{ imageUrl(r.id, r.image_name) }}{% else %}{{ baseUrl() }}/assets/img/filler.png{% endif %}" class="img-responsive"  height="100"alt="{{ r.subtitle }}">
-          
+              <img src="{% if r.image_name %}{{ imageUrl(r.id, r.image_name) }}{% else %}{{ baseUrl() }}/assets/img/filler.png{% endif %}" class="img-responsive" alt="{{ r.subtitle }}">
+
             <div class="caption">
               <h3>{{ r.title }}</h3>
             </div>

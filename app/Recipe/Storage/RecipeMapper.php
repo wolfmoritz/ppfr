@@ -14,4 +14,27 @@ class RecipeMapper extends DataMapperAbstract
   protected $domainObjectClass = 'Recipe';
   protected $defaultSelect = 'select r.*, concat(u.first_name, \' \', u.last_name) user_name from recipe r left join user u on r.created_by = u.id';
 
+  /**
+   * Get Recipes with Offset
+   *
+   * Define limit and offset to limit result set.
+   * Returns an array of Domain Objects (one for each record)
+   * @param int, limit
+   * @param int, offset
+   * @return Array
+   */
+  public function getRecipes($limit = null, $offset = null)
+  {
+    $this->sql = $this->defaultSelect;
+
+    if ($limit) {
+      $this->sql .= " limit {$limit}";
+    }
+
+    if ($offset) {
+      $this->sql .= " offset {$offset}";
+    }
+
+    return $this->find();
+  }
 }
