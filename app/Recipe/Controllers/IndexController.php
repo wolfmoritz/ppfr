@@ -30,7 +30,7 @@ class IndexController
     $RecipeMapper = $dataMapper('RecipeMapper');
 
     // Fetch recipes
-    $recipes = $RecipeMapper->find();
+    $recipes = $RecipeMapper->getRecipes(8);
 
     $twig = $this->app->twig;
     $twig->display('home.html', ['recipes' => $recipes]);
