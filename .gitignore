@@ -22,3 +22,6 @@ cig-bin/
 default.html
 500.php
 *.xml
+
+# Sandbox file
+templates/peri.html
