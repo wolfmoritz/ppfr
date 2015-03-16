@@ -175,6 +175,16 @@ return call_user_func(
      * Application Routes
      */
 
+    $app->get('/peri', function () use ($app) {
+      $twig = $app->twig;
+      $twig->display('peri.html');
+    });
+
+    // Get recipes by API call
+    $app->get('/api/recipes/:limit/:offset', function ($limit, $offset) {
+      (new Controllers\ApiController())->getOffsetRecipes($limit, $offset);
+    });
+
     // Show a recipe
     $app->get('(/:id(/:slug))', function ($id, $slug = 'none') {
       (new Controllers\IndexController())->showRecipe($id, $slug);
