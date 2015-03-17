@@ -1,9 +1,11 @@
 body {
 	/* For static nav bar and min page height */
 	min-height: 2000px;
-	padding-top: 0px;
+	padding-top: 70px;
+ 
 }
-.jumbotron {
+
+/* .jumbotron {
 	padding-top: 80px;
 	background-image: url(../img/jumbotron.jpg);
 	background-position: 0% 25%;
@@ -19,7 +21,30 @@ body {
 }
 .jumbotron-recipe {
 	padding-top: 80px;
+} */
+
+.custom-nav {
+	-webkit-box-shadow: 4px 4px 4px #333;
+	-moz-box-shadow: 4px 4px 4px #333;
+	box-shadow: 4px 4px 4px #333;
+	z-index: 999;
 }
+@media (max-width: 767px) {
+	body{padding-top: 140px;}
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #333333;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #f2720d;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #f2720d;
+    background-color: #000000;
+  }
+}
+
+
+
 /* Horizontal Step Scroll on iPad or larger */
 @media (min-width: 768px) and (max-width: 1024px) {
 .step-scroll-container {
@@ -89,4 +114,7 @@ body {
 }
 .masonry .recipe-tile {
 /*border: 1px solid #ddd;*/
+}
+.recipe-section{
+	background-color:tomato;	
 }
