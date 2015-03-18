@@ -65,4 +65,22 @@ class IndexController
     $twig = $this->app->twig;
     $twig->display('recipe.html', array('recipe' => $recipe));
   }
+
+  /**
+   * Index
+   *
+   * Primary controller for home page
+   **/
+  public function peri()
+  {
+    // Get mapper
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+
+    // Fetch recipes
+    $recipes = $RecipeMapper->getRecipes(10);
+
+    $twig = $this->app->twig;
+    $twig->display('peri.html', ['recipes' => $recipes]);
+  }
 }

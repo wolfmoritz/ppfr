@@ -176,8 +176,7 @@ return call_user_func(
      */
 
     $app->get('/peri', function () use ($app) {
-      $twig = $app->twig;
-      $twig->display('peri.html');
+      (new Controllers\IndexController())->peri();
     });
 
     // Get recipes by API call
