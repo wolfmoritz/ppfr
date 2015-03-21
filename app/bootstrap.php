@@ -72,7 +72,7 @@ return call_user_func(
     // Now create the application
     $app = new \Slim\Slim($config);
 
-    // In development mode Whoops pretty exceptions are displayed, 
+    // In development mode Whoops pretty exceptions are displayed,
     // but in production the Slim\Logger writes exceptions to file.
     $app->config('whoops.editor', 'sublime');
     $app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
@@ -185,7 +185,7 @@ return call_user_func(
     });
 
     // Show a recipe
-    $app->get('(/:id(/:slug))', function ($id, $slug = 'none') {
+    $app->get('(/recipe(/:id(/:slug)))', function ($id, $slug = 'none') {
       (new Controllers\IndexController())->showRecipe($id, $slug);
     })->conditions(['id' => '\d+'])->name('showRecipe');
 

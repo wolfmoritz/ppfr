@@ -13,12 +13,12 @@
 
 {% block body %}
   <h2>Favorite Recipes</h2>
-  
+
     <div class="row">
 
       {% for r in recipes %}
         <div class="col-lg-3 col-md-4 col-sm-6 recipe-tile">
-          <a href="{{ siteUrl(r.id) }}/{{ r.slug }}">
+          <a href="{{ siteUrlFor('showRecipe', [r.id, r.slug]) }}">
               <img src="{% if r.image_name %}{{ imageUrl(r.id, r.image_name) }}{% else %}{{ baseUrl() }}/assets/img/filler.png{% endif %}" class="img-responsive" alt="{{ r.subtitle }}">
 
             <div class="caption">
@@ -29,5 +29,5 @@
       {% endfor %}
 
     </div>
- 
+
 {% endblock %}

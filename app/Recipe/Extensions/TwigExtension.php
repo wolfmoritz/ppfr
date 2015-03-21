@@ -25,7 +25,11 @@ class TwigExtension extends \Twig_Extension
    */
   public function getGlobals()
   {
-    return array('site' => $this->getGlobalSettings(), 'request' => $this->getServerVars());
+    return array(
+      'site' => $this->getGlobalSettings(),
+      'request' => $this->getServerVars(),
+      'categories' => $this->categories()
+    );
   }
 
   /**
@@ -57,13 +61,13 @@ class TwigExtension extends \Twig_Extension
 
   /**
    * Get Global Settings
-   * 
+   *
    * Gets settings from $app->config('site');
    */
   public function getGlobalSettings()
   {
     $app = \Slim\Slim::getInstance();
-    
+
     return $app->config('site');
   }
 
@@ -72,7 +76,7 @@ class TwigExtension extends \Twig_Extension
    *
    * Gets selected variables from $_SERVER
    */
-  public function getServerVars() 
+  public function getServerVars()
   {
     return array('host' => $_SERVER['HTTP_HOST'], 'path' => $_SERVER['REQUEST_URI']);
   }
@@ -105,7 +109,7 @@ class TwigExtension extends \Twig_Extension
   /**
    * truncateHtml can truncate a string up to a number of characters while preserving whole words and HTML tags
    * http://alanwhipple.com/2011/05/25/php-truncate-string-preserving-html-tags-words/
-   * 
+   *
    * @param string $text String to truncate.
    * @param integer $length Length of returned string, including ellipsis.
    * @param string $ending Ending to be appended to the trimmed string.
@@ -115,7 +119,7 @@ class TwigExtension extends \Twig_Extension
    * @return string Trimmed string.
    */
 
-  public function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true) 
+  public function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
   {
     if ($considerHtml) {
       // If the plain text is shorter than the maximum length, return the whole text
@@ -188,7 +192,7 @@ class TwigExtension extends \Twig_Extension
         $truncate = substr($text, 0, $length - strlen($ending));
       }
     }
-    
+
     // If the words shouldn't be cut in the middle...
     if (!$exact) {
       // ...Search the last occurance of a space...
@@ -198,7 +202,7 @@ class TwigExtension extends \Twig_Extension
         $truncate = substr($truncate, 0, $spacepos);
       }
     }
-    
+
     // Add the defined ending to the text
     $truncate .= $ending;
     if($considerHtml) {
@@ -243,7 +247,7 @@ class TwigExtension extends \Twig_Extension
       // Just return url to the original image
       return $url . $largeUri . $imageFilePath . $filename;
     }
-    
+
     // Make sure at least one dimension is set to a size
     if (!is_numeric($width) and !is_numeric($height)) {
       throw new \Exception('getImageUrl expects at least one numeric dimension');
@@ -258,17 +262,23 @@ class TwigExtension extends \Twig_Extension
 
   /**
    * Get Full URL to Named Route
-   * 
+   *
    * @param String, the named route
+   * @param Array, segments
    * @return String, the site URL + route path
    */
-  public function siteUrlFor($namedroute)
+  public function siteUrlFor($namedroute, $segments = [])
   {
-      $app = \Slim\Slim::getInstance();
-      $uri = $app->request()->getUrl();
-      $path = $app->urlFor($namedroute);
-      
-      return $uri . $path;
+    $app = \Slim\Slim::getInstance();
+    $uri = $app->request()->getUrl();
+    $path = $app->urlFor($namedroute);
+    $urlSegments = '';
+
+    if ($segments) {
+      $urlSegments = '/' . implode('/', $segments);
+    }
+
+    return $uri . $path . $urlSegments;
   }
 
   /**
@@ -303,5 +313,26 @@ class TwigExtension extends \Twig_Extension
     $ingrStr .= "</label></li>\n";
 
     return $ingrStr;
+  }
+
+  /**
+   * Get Categories
+   *
+   * Get all categories
+   */
+  public function categories()
+  {
+    // Cache results
+    static $categories;
+
+    if ($categories) {
+      return $categories;
+    }
+
+    $app = \Slim\Slim::getInstance();
+    $dataMapper = $app->dataMapper;
+    $CategoryMapper = $dataMapper('CategoryMapper');
+
+    return $categories = $CategoryMapper->getAllCategories();
   }
 }
