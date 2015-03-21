@@ -189,6 +189,11 @@ return call_user_func(
       (new Controllers\IndexController())->showRecipe($id, $slug);
     })->conditions(['id' => '\d+'])->name('showRecipe');
 
+    // Get recipes by category
+    $app->get('/category(/:slug)', function ($slug) {
+      (new Controllers\IndexController())->getRecipesByCategory($slug);
+    })->name('recipesByCategory');
+
     // Home page
     $app->get('/', function () {
       (new Controllers\IndexController())->index();

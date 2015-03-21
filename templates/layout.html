@@ -39,7 +39,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 {% for c in categories %}
-                <li><a href="#">{{ c.name }}</a></li>
+                <li><a href="{{ siteUrlFor('recipesByCategory', [c.slug]) }}">{{ c.name }}</a></li>
                 {% endfor %}
               </ul>
             </li>

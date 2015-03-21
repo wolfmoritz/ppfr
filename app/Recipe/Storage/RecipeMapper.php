@@ -21,11 +21,13 @@ class RecipeMapper extends DataMapperAbstract
    * Returns an array of Domain Objects (one for each record)
    * @param int, limit
    * @param int, offset
-   * @return Array
+   * @return array
    */
   public function getRecipes($limit = null, $offset = null)
   {
-    $this->sql = $this->defaultSelect;
+    if (empty($this->sql)) {
+      $this->sql = $this->defaultSelect;
+    }
 
     if ($limit) {
       $this->sql .= " limit {$limit}";
@@ -36,5 +38,31 @@ class RecipeMapper extends DataMapperAbstract
     }
 
     return $this->find();
+  }
+
+  /**
+   * Get Recipes by Category
+   *
+   * @param mixed, int or string, category
+   * @param int, limit
+   * @param int, offset
+   * @return array
+   */
+  public function getRecipesByCategory($category, $limit = null, $offset = null)
+  {
+    $this->sql = $this->defaultSelect . " join category_recipe_map crm on {$this->tableAlias}.id = crm.recipe_id";
+
+    // Was a category slug or ID passed in?
+    if (is_numeric($category)) {
+      $where = ' where crm.category_id = ?';
+      $this->bindValues[] = $category;
+    } else {
+      $where = ' join category c on crm.category_id = c.id where c.slug = ?';
+      $this->bindValues[] = $category;
+    }
+
+    $this->sql .= $where;
+
+    return $this->getRecipes();
   }
 }

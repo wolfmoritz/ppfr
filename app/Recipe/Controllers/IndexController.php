@@ -37,6 +37,24 @@ class IndexController
   }
 
   /**
+   * Get Recipes by Category
+   *
+   * @param mixed, category slug or ID
+   **/
+  public function getRecipesByCategory($category, $limit = null, $offset = null)
+  {
+    // Get mapper
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+
+    // Fetch recipes
+    $recipes = $RecipeMapper->getRecipesByCategory($category, $limit = null, $offset = null);
+
+    $twig = $this->app->twig;
+    $twig->display('home.html', ['recipes' => $recipes]);
+  }
+
+  /**
    * Show a Single Recipe
    *
    * @param int, recipe id
