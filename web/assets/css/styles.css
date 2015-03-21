@@ -4,8 +4,11 @@ body {
 	padding-top: 70px;
  
 }
-
-/* .jumbotron {
+.recipe-link{
+	/* [disabled]opacity: 0.4; */
+	/* [disabled]filter: alpha(opacity=40); */ /* For IE8 and earlier */
+}
+.jumbotron {
 	padding-top: 80px;
 	background-image: url(../img/jumbotron.jpg);
 	background-position: 0% 25%;
@@ -21,13 +24,18 @@ body {
 }
 .jumbotron-recipe {
 	padding-top: 80px;
-} */
+} 
 
 .custom-nav {
 	-webkit-box-shadow: 4px 4px 4px #333;
 	-moz-box-shadow: 4px 4px 4px #333;
 	box-shadow: 4px 4px 4px #333;
 	z-index: 999;
+}
+.effect1{
+	-webkit-box-shadow: 0 8px 4px -4px #777;
+	   -moz-box-shadow: 0 8px 4px -4px #777;
+	        box-shadow: 0 8px 4px -4px #777;
 }
 @media (max-width: 767px) {
 	body{padding-top: 140px;}
@@ -98,23 +106,21 @@ body {
 	font-weight: normal;
 	color: grey;
 }
-/* Home page masonry */
-.masonry .row {
-	-moz-column-width: 20em;
-	-webkit-column-width: 20em;
-	-moz-column-gap: 10px;
-	-webkit-column-gap: 10px;
+
+.wrapper {
+	float: left; /* important */
+	position: relative; /* important (so we can absolutely position the description div */
 }
-.masonry .row > .col-lg-3 {
-	display: inline-block;
-	padding: 0;
-	margin: 10px;
+.description {
+	position: absolute; /* absolute position (so we can position it where we want)*/
+	bottom: 0px; /* position will be on bottom */
+	left: 0px;
 	width: 100%;
-	float: none;
+	/* styling bellow */
+	background-color: rgba(255,255,255,0.5);
+	color: rgba(0,0,0,1.0);
 }
-.masonry .recipe-tile {
-/*border: 1px solid #ddd;*/
-}
-.recipe-section{
-	background-color:tomato;	
+p.description_content {
+	padding: 10px;
+	margin: 0px;
 }

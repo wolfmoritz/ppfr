@@ -17,7 +17,7 @@
     <div class="row">
 
       {% for r in recipes %}
-        <div class="col-lg-3 col-md-4 col-sm-6 recipe-tile">
+        <div class="col-md-3 col-sm-4 col-xs-6 recipe-tile">
           <a href="{{ siteUrl(r.id) }}/{{ r.slug }}">
               <img src="{% if r.image_name %}{{ imageUrl(r.id, r.image_name) }}{% else %}{{ baseUrl() }}/assets/img/filler.png{% endif %}" class="img-responsive" alt="{{ r.subtitle }}">
 
