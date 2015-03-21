@@ -71,14 +71,14 @@ class IndexController
    *
    * Primary controller for home page
    **/
-  public function peri()
+  public function peri($num = null)
   {
     // Get mapper
     $dataMapper = $this->app->dataMapper;
     $RecipeMapper = $dataMapper('RecipeMapper');
 
     // Fetch recipes
-    $recipes = $RecipeMapper->getRecipes(10);
+    $recipes = $RecipeMapper->getRecipes($num);
 
     $twig = $this->app->twig;
     $twig->display('peri.html', ['recipes' => $recipes]);

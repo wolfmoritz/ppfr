@@ -175,8 +175,8 @@ return call_user_func(
      * Application Routes
      */
 
-    $app->get('/peri', function () use ($app) {
-      (new Controllers\IndexController())->peri();
+    $app->get('/peri(/:num)', function ($num = null) use ($app) {
+      (new Controllers\IndexController())->peri($num);
     });
 
     // Get recipes by API call
