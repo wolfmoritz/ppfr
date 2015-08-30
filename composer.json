@@ -6,7 +6,7 @@
         "slim/logger": "0.1.*",
         "codeguy/upload": "*",
         "intervention/image": "2.*",
-        "wolfmoritz/session": "~1.0.0",
+        "wolfmoritz/session": "~1",
         "zeuxisoo/slim-whoops": "0.3.0"
     },
     "autoload": {

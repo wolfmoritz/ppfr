@@ -71,6 +71,27 @@ abstract class AbstractDecoder
     }
 
     /**
+     * Init from given stream
+     *
+     * @param $stream
+     * @return \Intervention\Image\Image
+     */
+    public function initFromStream($stream)
+    {
+        $offset = ftell($stream);
+        rewind($stream);
+        $data = @stream_get_contents($stream);
+        fseek($stream, $offset);
+        if ($data) {
+            return $this->initFromBinary($data);
+        }
+
+        throw new \Intervention\Image\Exception\NotReadableException(
+            "Unable to init from given stream"
+        );
+    }
+
+    /**
      * Determines if current source data is GD resource
      *
      * @return boolean
@@ -149,6 +170,19 @@ abstract class AbstractDecoder
     }
 
     /**
+     * Determines if current source data is a stream resource
+     *
+     * @return boolean
+     */
+    public function isStream()
+    {
+        if (!is_resource($this->data)) return false;
+        if (get_resource_type($this->data) !== 'stream') return false;
+
+        return true;
+    }
+
+    /**
      * Determines if current source data is binary data
      *
      * @return boolean
@@ -182,6 +216,10 @@ abstract class AbstractDecoder
      */
     public function isBase64()
     {
+        if (!is_string($this->data)) {
+            return false;
+        }
+
         return base64_encode(base64_decode($this->data)) === $this->data;
     }
 
@@ -204,6 +242,10 @@ abstract class AbstractDecoder
      */
     private function decodeDataUrl($data_url)
     {
+        if (!is_string($data_url)) {
+            return null;
+        }
+
         $pattern = "/^data:(?:image\/[a-zA-Z\-\.]+)(?:charset=\".+\")?;base64,(?P<data>.+)$/";
         preg_match($pattern, $data_url, $matches);
 
@@ -243,6 +285,9 @@ abstract class AbstractDecoder
 
             case $this->isUrl():
                 return $this->initFromUrl($this->data);
+
+            case $this->isStream():
+                return $this->initFromStream($this->data);
 
             case $this->isFilePath():
                 return $this->initFromPath($this->data);

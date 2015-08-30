@@ -10,5 +10,7 @@ return array(
     'Slim\\Views\\' => array($vendorDir . '/slim/views'),
     'Slim\\Logger\\' => array($vendorDir . '/slim/logger'),
     'Recipe\\' => array($baseDir . '/app/Recipe'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
+    'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
 );

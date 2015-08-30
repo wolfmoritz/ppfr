@@ -24,6 +24,7 @@ mb_http_output('UTF-8');
 // Load the Composer Autoloader
 require_once ROOT_DIR . 'vendor/autoload.php';
 
+// Wrap bootstrap code in an anonymous function to avoid globals
 return call_user_func(
   function() {
 
