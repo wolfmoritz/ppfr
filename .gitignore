@@ -3,6 +3,7 @@
 # Development configuration file
 config/config.dev.php
 migrate.php
+*-old/
 
 # Uploaded files
 web/files/
@@ -26,3 +27,6 @@ default.html
 # Sandbox file
 templates/peri.html
 web/peri1.html
+
+# Temporary
+web/assets/img/
