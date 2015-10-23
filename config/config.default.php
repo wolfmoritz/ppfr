@@ -64,11 +64,6 @@ $config['file.max.width'] = 1024;
 $config['file.usable.max.size'] = 2000; // Kb
 
 /**
- * Navigation Menu Options
- */
-//$config['navigation.menu'] = [];
-
-/**
  * Pagination Options
  */
 $config['pagination']['rowsPerPage'] = 10;

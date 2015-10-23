@@ -89,7 +89,7 @@ return call_user_func(
     // Database connection
     $app->container->singleton('db', function() use ($app) {
       $dbConfig = $app->config('database');
-      $dsn = 'mysql:host=' . $dbConfig['host'] . ';dbname=' . $dbConfig['dbname'];
+      $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']};charset=utf8";
       return new PDO($dsn, $dbConfig['username'], $dbConfig['password'], $dbConfig['options']);
     });
 
