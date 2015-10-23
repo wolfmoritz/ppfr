@@ -3,7 +3,7 @@
 <nav>
   <ul class="pagination">
   	{% for p in links %}
-  	{% if loop.first %}
+  	{% if loop.first %}{# Always start with the "Previous" link #}
     <li>
       <a href="{{ p.href }}" aria-label="Previous" title="Previous">
         <span aria-hidden="true">&laquo;</span>
@@ -11,11 +11,15 @@
     </li>
     {% endif %}
 
-    {% if not loop.first and not loop.last %}
-    <li {% if currentPage == p.link %}class="active"{% endif %}><a href="{{ p.href }}">{{ p.link|raw }}</a></li>
+    {% if p.link == 'ellipsis' %}{# Include if the link is set to be some sort ellipsis #}
+    <li class="disabled"><a>&hellip;</a></li>
     {% endif %}
 
-    {% if loop.last %}
+    {% if not loop.first and not loop.last and p.link != 'ellipsis' %}{# For all other working links #}
+    <li {% if currentPage == p.link %}class="active"{% endif %}><a href="{{ p.href }}">{{ p.link }}</a></li>
+    {% endif %}
+
+    {% if loop.last %}{# Always end with the "Next" link #}
     <li>
       <a href="{{ p.href }}" aria-label="Next" title="Next">
         <span aria-hidden="true">&raquo;</span>

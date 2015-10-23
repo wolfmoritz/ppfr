@@ -149,7 +149,7 @@ class TwigExtensionPagination extends \Twig_Extension
 
     // Do we need to add ellipsis after '1' and before the link series?
     if ($startPage >= 3) {
-      $pageList[] = ['href' => '', 'link' => '&hellip;'];
+      $pageList[] = ['href' => '', 'link' => 'ellipsis'];
     }
 
     // Build link series
@@ -159,7 +159,7 @@ class TwigExtensionPagination extends \Twig_Extension
 
     // Do we need to add ellipsis after the link series?
     if ($endPage <= $numberOfPages - 2) {
-      $pageList[] = ['href' => '', 'link' => '&hellip;'];
+      $pageList[] = ['href' => '', 'link' => 'ellipsis'];
     }
 
     // Always include last page link

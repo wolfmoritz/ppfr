@@ -19,31 +19,7 @@ class IndexController
   }
 
   /**
-   * Index
-   *
-   * Primary controller for home page
-   **/
-  public function index()
-  {
-    // Get mapper and twig template engine
-    $dataMapper = $this->app->dataMapper;
-    $RecipeMapper = $dataMapper('RecipeMapper');
-    $twig = $this->app->twig;
-
-    // Configure pagination object
-    $paginator = new \Recipe\Extensions\TwigExtensionPagination();
-    $paginator->setPagePath($this->app->urlFor('recipesByCategory') . '/' . $category);
-    $paginator->setCurrentPageNumber($pageNumber);
-
-    // Fetch recipes
-    $recipes = $RecipeMapper->getRecipes(8);
-
-
-    $twig->display('recipeList.html', ['recipes' => $recipes]);
-  }
-
-  /**
-   * Get Recipes by Category
+   * Get Recipes by Category, including 'All'
    *
    * @param mixed, category slug or ID
    * @param int, page number
@@ -55,18 +31,17 @@ class IndexController
     $RecipeMapper = $dataMapper('RecipeMapper');
     $twig = $this->app->twig;
 
-    // If "All" was requested, send over null
-    if ($category === 'All') {
-      $category = null;
-    }
-
     // Configure pagination object
     $paginator = new \Recipe\Extensions\TwigExtensionPagination();
     $paginator->setPagePath($this->app->urlFor('recipesByCategory') . '/' . $category);
     $paginator->setCurrentPageNumber($pageNumber);
 
     // Fetch recipes
-    $recipes = $RecipeMapper->getRecipesByCategory($category, $paginator->getRowsPerPage(), $paginator->getOffset());
+    if ($category === 'All') {
+      $recipes = $RecipeMapper->getRecipes($paginator->getRowsPerPage(), $paginator->getOffset());
+    } else {
+      $recipes = $RecipeMapper->getRecipesByCategory($category, $paginator->getRowsPerPage(), $paginator->getOffset());
+    }
 
     // Get count of recipes returned by query
     $paginator->setTotalRowsFound($RecipeMapper->foundRows());

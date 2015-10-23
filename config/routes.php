@@ -21,5 +21,5 @@ $app->get('/category(/:slug(/:page))', function ($slug = 'All', $page = 1) {
 
 // Home page
 $app->get('/', function () {
-  (new Controllers\IndexController())->getRecipesByCategory('All');
+  (new Controllers\IndexController())->getRecipesByCategory('All', 1);
 })->name('home');
