@@ -1,36 +1,5 @@
 {% extends 'layout.html' %}
 
-
-{% block jumbotron %}
-    <div class="jumbotron-recipe">
-      <div class="container">
-        <div class="row">
-          <h1>{{ recipe.title }}</h1>
-          <p>{{ recipe.subtitle }}</p>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <p class="step-nav-buttons">
-              <a class="btn btn-lg btn-primary" href="#step-1" role="button">Get Started!</a>
-            </p>
-            <p>
-              Rating ****<br>
-              Servings {{ recipe.servings }}<br>
-              Temp {{ recipe.temperature }}<br>
-              Prep Time {{ recipe.prep_time }}<br>
-              Cook Time {{ recipe.cook_time }}<br>
-              Contributed by {{ recipe.user_name }}<br>
-              on {{ recipe.created_date|date('d/m/Y') }}
-            </p>
-          </div>
-          <div class="col-sm-6">
-            <img class="img-responsive img-rounded featured-image" src="{{ imageUrl(recipe.id, recipe.image_name) }}">
-          </div>
-        </div>
-      </div>
-    </div>
-{% endblock %}
-
 {% block body %}
   <div class="row step-nav hidden-xs">
     <div class="panel panel-default">
@@ -46,7 +15,7 @@
     <div class="row step-row">
 
       {% for s in recipe.steps %}
-      <div class="step-container col-sm-12" id="step-{{ loop.index }}" data-step="{{ loop.index }}">     
+      <div class="step-container col-sm-12" id="step-{{ loop.index }}" data-step="{{ loop.index }}">
         <div class="panel panel-default">
           <div class="panel-body">
             <span class="step-number h3">{{ loop.index }}</span>
@@ -64,7 +33,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
       {% endfor %}
 
     </div>

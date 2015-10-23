@@ -8,11 +8,12 @@ use \PDO;
  */
 class CategoryMapper extends DataMapperAbstract
 {
-  protected $table = 'category';
+  protected $table = 'pp_category';
+  protected $primaryKey = 'category_id';
   protected $tableAlias = 'c';
   protected $modifyColumns = [];
   protected $domainObjectClass = 'Category';
-  protected $defaultSelect = 'select * from category';
+  protected $defaultSelect = 'select * from pp_category';
 
   /**
    * Get All Categories

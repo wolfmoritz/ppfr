@@ -1,69 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A fun place to share recipes with friends and family.">
-    <link rel="icon" href="favicon.ico">
-
-    <title>Peri's Place For Recipes</title>
-
+    <title>Peri's Recipes - Home</title>
     <link rel="stylesheet" href="{{ baseUrl() }}/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ baseUrl() }}/assets/css/styles.css">
+    <link href="{{ baseUrl() }}/assets/css/style.css" rel="stylesheet" type="text/css" media="screen">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ baseUrl() }}/"><img src="{{ baseUrl() }}/assets/img/logo.png" alt="Peri's Place For Recipes"></a>
+    </div>
 
-      <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top effect1">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{ baseUrl() }}/"><img src="{{ baseUrl() }}/assets/img/logo.png"</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                {% for c in categories %}
-                <li><a href="{{ siteUrlFor('recipesByCategory', [c.slug]) }}">{{ c.name }}</a></li>
-                {% endfor %}
-              </ul>
-            </li>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"> <a href="{{ baseUrl() }}">Home</a> </li>
+        <li> <a href="about.html">About Me</a> </li>
+        <li> <a href="blog.html">Blog</a> </li>
+        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ urlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
+            <li class="dropdown-header">Select a category</li>
+            {% for cat in categories %}
+            <li ><a href="{{ urlFor('recipesByCategory') }}/{{ cat.url }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>
+            {% endfor %}
           </ul>
-        <form class="navbar-form navbar-right" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control navbar-search" placeholder="Search recipes, ingredients,...">
-          </div>
-          <button type="submit" class="btn btn-success">Find</button>
-        </form>
-        </div><!--/.nav-collapse -->
+          <!-- end dropdown-menu -->
+        </li>
+      </ul>
+      <form class="navbar-form pull-left">
+        <input type="text" class="form-control" placeholder="Search this site..." id="searchInput" />
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+      <!-- end navbar-form -->
+
+      <ul class="nav navbar-nav pull-right">
+
+        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> My Account <strong class="caret"></strong></a>
+          <ul class="dropdown-menu">
+          <li><a href="#">Add new Recipe</a>
+          <li><a href="#">Edit current Recipe</a>
+          <li><a href="#">My Recipes</a>
+          <div class="nav-divider"></div>
+            <li> <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
+            <li> <a href="#"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
+            <li class="divider"></li>
+            <li> <a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a> </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- end nav pull-right -->
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+    {% block body %}
+    {% endblock %}
+    </div>
+    <!--end col-md-10 left column -->
+
+    <div class="col-sm-2 hidden-xs hidden-sm">
+    <div class="sidenav">
+        <div class="widgetTitle">My Pantry</div>
+        <ul>
+          <li><a href="#">Add Recipe</a></li>
+          <li><a href="#">My Recipes</a></li>
+
+        </ul>
       </div>
-    </nav>
+      <div class="sidenav">
+        <div class="widgetTitle">Top Five Recipes</div>
+        <ul>
+          <li><a href="/recipe/show/115/Scotchmallows" title="Soft & Chewy, Better than See's Candy.">Scotchmallows</a></li>
+          <li><a href="/recipe/show/47/Eier-Liquor" title="German Egg Nog">Eier Liquor</a></li>
+          <li><a href="/recipe/show/97/Sangria" title="Easy, this stuff packs a punch!">Sangria</a></li>
+          <li><a href="/recipe/show/142/Tortilla-Soup" title="Fast & Simple">Tortilla Soup</a></li>
+          <li><a href="/recipe/show/26/Cranberry-Fruit-Nut-Bread" title="">Cranberry Fruit Nut Bread</a></li>
+        </ul>
+      </div>
+      <div class="sidenav">
+        <div class="widgetTitle">Random Recipe</div>
+        <ul>
+          <li><a href="/recipe/show/115/Scotchmallows" title="Soft & Chewy, Better than See's Candy.">Scotchmallows</a></li>
+          <li><a href="/recipe/show/12/Garlicky-White-Bean-Dip" title="">Garlicky White Bean Dip</a></li>
+          <li><a href="/recipe/show/98/Orange-Sorbet" title="(the one from the now Defunct Locomotive)">Orange Sorbet</a></li>
+          <li><a href="/recipe/show/102/Chocolate-Cake" title="The Only Chocolate Cake Recipe You'll Ever Need!">Chocolate Cake</a></li>
+          <li><a href="/recipe/show/39/Napoli-Style-Crutons" title="how Mary tries to burn bread cubes">Napoli Style Crutons</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--end col-me-2 right column -->
+  </div>
+  <!--End of content row -->
 
-    {% block jumbotron %}{% endblock %}
+</div>
+<!--End of content container -->
+<!--End Content Container -->
+  <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">
+        <h6>Copyright &copy; 2015<br> Peri's Place For Recipes</h6>
+      </div>
+      <!-- end col-sm-2 -->
 
-    <div class="container">
-      {% block body %}{% endblock %}
-    </div><!-- /container -->
+      <div class="col-sm-4">
+        <h6>About Us</h6>
+        <p>Mom is a great cook. She has all kinds of recipes written on small pieces of paper, typed on mimeo, stuck between pages of other recipes in cookbooks. I realized that technology had finally caught enough that instead of having all of those wonderful examples of food sitting around in a filing system that only she seemed to know maybe I could put together a little corner of the internets that would be a place to store  those wonderful Christmas candies and the goopy cinnamon rolls that only she seems to be able to make. So here it is, my version of small pieces of paper, mimeo and sticky 3x5 cards.</p>
+      </div>
+      <!-- end col-sm-4 -->
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/adaptive-backgrounds/src/jquery.adaptive-backgrounds.js"></script>
-    <script src="{{ baseUrl() }}/assets/js/script.js"></script>
+      <div class="col-sm-2">
+        <h6>Navigation</h6>
+        <ul class="unstyled">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <!-- end col-sm-2 -->
 
-  </body>
+      <div class="col-sm-2">
+        <h6>Follow Us</h6>
+        <ul class="unstyled">
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Google Plus</a></li>
+        </ul>
+      </div>
+      <!-- end col-sm-2 -->
+
+      <div class="col-sm-2">
+        <h6>Coded with <span class="glyphicon glyphicon-heart"></span> by Peri, Wolf &amp; Bootstrap</h6>
+      </div>
+      <!-- end col-sm-2 -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+
+</footer>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="{{ baseUrl() }}/assets/js/script.js"></script>
+</body>
 </html>

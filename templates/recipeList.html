@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+      <div class="listTitle">All Recipes</div>
+
+      <!--Begin Recipe List Panels -->
+      {% for r in recipes %}
+      {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title"><a href="{{ recipeUrl }}">{{ r.title }}</a></h3>
+        </div>
+        <!--end panel-heading -->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">
+              {% if r.main_photo %}
+              <a href="{{ recipeUrl }}">
+                <img src="{{ imageUrl(r.recipe_id, r.main_photo) }}" class="img img-thumbnail img-responsive" alt="Photo of {{ r.title }}">
+              </a>
+              {% endif %}
+            </div>
+            <!--End col-md-2 panel-body -->
+            <div class="col-md-9">
+              <p>
+                {{ r.instructions_excerpt }}
+                <small><a href="{{ recipeUrl }}">read more...</a></small>
+              </p>
+              <small>
+                <p>Shared by <a href="#" data-toggle="tooltip" title="See more recipe&apos;s from {{ r.user_name }}">{{ r.user_name }}</a> on {{ r.created_date|date('F j, Y') }}</p>
+              </small>
+            </div>
+            <!--End col-md-9 panel-body -->
+          </div>
+          <!--End panel-body row -->
+        </div>
+        <!--end panel-body -->
+      </div><!--end panel panel-success -->
+      {% endfor %}
+
+  {{ pagination() }}
+
+{% endblock %}

@@ -8,7 +8,7 @@ use \PDO;
  *
  * All domain data mapper classes extend this class
  */
-abstract class DataMapperAbstract 
+abstract class DataMapperAbstract
 {
   // ------------------------------------------
   // Define these properties in the child class
@@ -81,7 +81,7 @@ abstract class DataMapperAbstract
   * @var Int
   */
   protected $sessionUserId = 1;
-  
+
   /**
    * Application Object
    * @var Application Object
@@ -150,7 +150,7 @@ abstract class DataMapperAbstract
    * @param $id, Numeric primary key ID
    * @return mixed, Domain Object if found, null otherwise
    */
-  public function findById($id) 
+  public function findById($id)
   {
     // Verify that a numeric key was supplied
     if(is_numeric($id)) {
@@ -166,7 +166,7 @@ abstract class DataMapperAbstract
       $this->execute();
       $result = $this->statement->fetch();
       $this->clear();
-      
+
       return $result;
     }
 
@@ -195,13 +195,26 @@ abstract class DataMapperAbstract
   }
 
   /**
+   * Count Found Rows
+   *
+   * Returns the total number of rows for the last query
+   * In theory it should work when the last query included SQL_CALC_FOUND_ROWS
+   * but it seems to work anyway.
+   *
+   */
+  public function foundRows()
+  {
+    return self::$dbh->query('select found_rows()')->fetch(PDO::FETCH_COLUMN);
+  }
+
+  /**
    * Save Domain Object
    *
    * Inserts or updates Domain Object record
    * @param Domain Object
    * @return mixed, Domain Object on success, false otherwise
    */
-  public function save(DomainObjectAbstract $domainObject) 
+  public function save(DomainObjectAbstract $domainObject)
   {
     if(is_numeric($domainObject->{$this->primaryKey})) {
       return $this->update($domainObject);
@@ -209,10 +222,10 @@ abstract class DataMapperAbstract
       return $this->insert($domainObject);
     }
   }
-  
+
   /**
    * Update a Record (Public)
-   * 
+   *
    * Define in child class to add any manipulation before _update()
    * @param Domain Object
    * @return Domain Object
@@ -224,7 +237,7 @@ abstract class DataMapperAbstract
 
   /**
    * Insert a Record (Public)
-   * 
+   *
    * Define in child class to add any manipulation before _insert()
    * @param Domain Object
    * @return Domain Object
@@ -233,10 +246,10 @@ abstract class DataMapperAbstract
   {
     return $this->_insert($domainObject);
   }
-  
+
   /**
    * Delete a Record (Public)
-   * 
+   *
    * Define in child class to override behavior
    * @param Domain Object
    * @return Boolean
@@ -245,12 +258,12 @@ abstract class DataMapperAbstract
   {
     return $this->_delete($domainObject);
   }
-  
+
   /**
    * Clear Prior SQL Statement
    * @return void
    */
-  public function clear() 
+  public function clear()
   {
     $this->sql = null;
     $this->bindValues = array();
@@ -265,7 +278,7 @@ abstract class DataMapperAbstract
   {
     return date('Y-m-d H:i:s');
   }
- 
+
   // ------------------------------------------
   // Protected Methods
   // ------------------------------------------
@@ -300,13 +313,13 @@ abstract class DataMapperAbstract
     // Is there anything to actually update?
     if ($hasBeenSet === 0) {
       // No, log and return
-      self::$logger->debug('Nothing to update');      
+      self::$logger->debug('Nothing to update');
       return null;
     }
 
     // Remove last comma at end of SQL string
     $this->sql = rtrim($this->sql, ', ');
-    
+
     // Set Who columns
     if ($this->who) {
       $this->sql .= ', updated_by = ?, updated_date = ? ';
@@ -321,7 +334,7 @@ abstract class DataMapperAbstract
     // Execute
     $this->execute();
     $this->clear();
-    
+
     return $domainObject;
   }
 
@@ -331,7 +344,7 @@ abstract class DataMapperAbstract
    * @param Domain Object
    * @return Domain Object
    */
-  protected function _insert(DomainObjectAbstract $domainObject) 
+  protected function _insert(DomainObjectAbstract $domainObject)
   {
     // Get started
     $this->sql = 'insert into ' . $this->table . ' (';
@@ -352,10 +365,10 @@ abstract class DataMapperAbstract
     // Is there anything to actually insert?
     if ($hasBeenSet === 0) {
       // No, log and return
-      self::$logger->debug('Nothing to insert');      
+      self::$logger->debug('Nothing to insert');
       return null;
     }
-    
+
     // Remove trailing commas
     $this->sql = rtrim($this->sql,', ');
     $insertValues = rtrim($insertValues,', ');
@@ -370,7 +383,7 @@ abstract class DataMapperAbstract
       $this->bindValues[] = $this->sessionUserId;
       $this->bindValues[] = $this->now();
       $this->bindValues[] = $this->sessionUserId;
-      $this->bindValues[] = $this->now();      
+      $this->bindValues[] = $this->now();
     }
 
     // Close and concatenate strings
@@ -404,7 +417,7 @@ abstract class DataMapperAbstract
     // Execute
     $this->execute();
     $this->clear();
-    
+
     return;
   }
 
@@ -453,7 +466,7 @@ abstract class DataMapperAbstract
     if (stristr($this->sql, 'select')) {
       $this->statement->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ . '\\' . $this->domainObjectClass);
     }
-    
+
     return $outcome;
   }
 }

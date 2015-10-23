@@ -54,7 +54,7 @@ class TwigExtension extends \Twig_Extension
           new \Twig_SimpleFunction('excerpt', array($this, 'truncateHtml')),
           new \Twig_SimpleFunction('imageUrl', array($this, 'imageUrl')),
           new \Twig_SimpleFunction('siteUrlFor', array($this, 'siteUrlFor')),
-          new \Twig_SimpleFunction('uriSegment', array($this, 'getUriSegment')),
+          new \Twig_SimpleFunction('uriSegment', array($this, 'uriSegment')),
           new \Twig_SimpleFunction('formatIngredients', array($this, 'formatIngredients'))
       );
   }
@@ -286,7 +286,7 @@ class TwigExtension extends \Twig_Extension
    *
    * Get request URI segment by position (1 indexed)
    */
-  public function getUriSegment($pos)
+  public function uriSegment($pos)
   {
     if (isset($_SERVER['REQUEST_URI'])) {
       $segments = explode('/', $_SERVER['REQUEST_URI']);

@@ -154,6 +154,11 @@ return call_user_func(
       $serverVars .= isset($_SERVER['REMOTE_ADDR']) ? ' [REMOTE_ADDR] ' . $_SERVER['REMOTE_ADDR'] : '';
       $app->log->error(print_r($serverVars,true));
 
+      // If request is for a file image then just return
+      if (preg_match('/^.*\.(jpg|jpeg|png|gif)$/i', $request->getResourceUri())) {
+        return;
+      }
+
       // Render 404 page
       $twig = $app->twig;
       $twig->display('notFound.html');
@@ -172,33 +177,8 @@ return call_user_func(
         //'cipher_mode' => MCRYPT_MODE_CBC
     )));
 
-    /**
-     * Application Routes
-     */
-
-    $app->get('/peri(/:num)', function ($num = null) use ($app) {
-      (new Controllers\IndexController())->peri($num);
-    });
-
-    // Get recipes by API call
-    $app->get('/api/recipes/:limit/:offset', function ($limit, $offset) {
-      (new Controllers\ApiController())->getOffsetRecipes($limit, $offset);
-    });
-
-    // Show a recipe
-    $app->get('(/recipe(/:id(/:slug)))', function ($id, $slug = 'none') {
-      (new Controllers\IndexController())->showRecipe($id, $slug);
-    })->conditions(['id' => '\d+'])->name('showRecipe');
-
-    // Get recipes by category
-    $app->get('/category(/:slug)', function ($slug) {
-      (new Controllers\IndexController())->getRecipesByCategory($slug);
-    })->name('recipesByCategory');
-
-    // Home page
-    $app->get('/', function () {
-      (new Controllers\IndexController())->index();
-    })->name('home');
+    // Load routes
+    require_once ROOT_DIR . 'config/routes.php';
 
     return $app;
   }

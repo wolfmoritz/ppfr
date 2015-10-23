@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "c2059d2f9514d388c0647c5f6d89a842",
+    "content-hash": "6632da50297d28ce52aec9be50b407d8",
     "packages": [
         {
             "name": "codeguy/upload",
