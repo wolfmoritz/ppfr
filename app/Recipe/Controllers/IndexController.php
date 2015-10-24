@@ -84,7 +84,11 @@ class IndexController
     // Get data mappers
     $dataMapper = $this->app->dataMapper;
     $RecipeMapper = $dataMapper('RecipeMapper');
-    $RecipeStepMapper = $dataMapper('RecipeStepMapper');
+
+    // If $id is not an integer or at least numeric, throw 404
+    if ( ! is_integer((int) $id)) {
+      $this->app->notFound();
+    }
 
     // Fetch recipe
     $recipe = $RecipeMapper->findById((int) $id);
@@ -94,9 +98,6 @@ class IndexController
       $this->app->notFound();
       return;
     }
-
-    // Get the steps
-    $recipe->steps = $RecipeStepMapper->findSteps($id);
 
     $twig = $this->app->twig;
     $twig->display('recipe.html', array('recipe' => $recipe));

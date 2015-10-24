@@ -1,41 +1,56 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <div class="row step-nav hidden-xs">
-    <div class="panel panel-default">
-      <div class="panel-body step-nav-buttons">
-        {% for s in recipe.steps %}
-        <a class="btn btn-{% if loop.first %}primary{% else %}default{% endif %}" href="#step-{{ loop.index }}">Step {{ loop.index }}</a>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-
-  <div class="step-scroll-container">
-    <div class="row step-row">
-
-      {% for s in recipe.steps %}
-      <div class="step-container col-sm-12" id="step-{{ loop.index }}" data-step="{{ loop.index }}">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <span class="step-number h3">{{ loop.index }}</span>
-            <div class="step-ingredients col-xs-12 col-sm-3">
-              <ul class="list-unstyled">
-                {{ s.ingredients|formatIngredients|raw }}
-              </ul>
-            </div>
-            <div class="step-instructions col-xs-12 col-sm-5">
-              {{ s.instructions|raw }}
-            </div>
-            <div class="hidden-xs col-sm-4 thumbnail">
-{# TODO Replace with step id #}
-              <img class="img-responsive" src="{{ imageUrl(recipe.id, s.image_name) }}">
-            </div>
-          </div>
+    <div class="col-md-8">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h2>{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
         </div>
-      </div>
-      {% endfor %}
+        <!--End panel-heading -->
+        <div class="panel-body">
 
+          <img itemprop="image" src="{{ baseUrl() }}/files/originals/{{ recipe.recipe_id }}/files/{{ recipe.main_photo }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
+          <div class="servings"> Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>
+          </div>
+          <!-- .servings -->
+          <h4>Ingredients</h4>
+          <div class="ingredients">
+            {{ recipe.ingredients|raw }}
+          </div>
+          <!--end ingredients -->
+          <h4>Preparation</h4>
+          <div class="recipetext" itemprop="recipeInstructions">
+            {{ recipe.instructions|raw }}
+          </div>
+          <!--end preparation -->
+          <h4>Notes</h4>
+          <div class="recipetext" itemprop="description">
+            {{ recipe.notes|raw }}
+          </div>
+          <div class="recipeOwner"> Other recipes by <a href="{{ baseUrl() }}#">
+            <span itemprop="author">{{ recipe.user_name }}</span></a><br>
+            Added on:
+            <meta itemprop="datePublished" content="2012-06-23 12:00:00">
+            {{ recipe.created_date|date('F j, Y') }}<br>
+            Viewed: {{ recipe.view_count }} Times </div>
+          <!-- .recipeOwner -->
+          <h4>Recipe Categories</h4>
+          <div itemprop="recipeCategory">
+          <a href="/recipe/category/Drink" title="View recipes listed as Drink" class="btn btn-link">TODO Drink</a>
+          <a href="/recipe/category/Cocktail" title="View recipes listed as Cocktail" class="btn btn-link">TODO Cocktail</a> </div>
+          <!--end recipe categories -->
+          <div class="row">
+            <div class="col-md-10">This is the place that the social btns go</div>
+            <!--End Social Btns -->
+            <div class="col-md-2"><a href="#">Printer Friendly</a></div>
+          </div>
+          <!--end social button row -->
+        </div>
+        <!--end Panel-body -->
+         <hr>
+        <img src="assets/img/comment.png" class="img-responsive">
+      </div>
+      <!--End panel panel-success -->
     </div>
-  </div><!-- /.step-scroll-container -->
+    <!--end col-md-8 middle column -->
 {% endblock %}
