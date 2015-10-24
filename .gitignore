@@ -5,6 +5,9 @@ config/config.dev.php
 migrate.php
 *-old/
 
+# Ignore Dreamweaver files
+*_notes/
+
 # Uploaded files
 web/files/
 
