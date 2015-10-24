@@ -29,26 +29,47 @@ class IndexController
     // Get mapper and twig template engine
     $dataMapper = $this->app->dataMapper;
     $RecipeMapper = $dataMapper('RecipeMapper');
+    $CategoryMapper = $dataMapper('CategoryMapper');
     $twig = $this->app->twig;
+
+    // Verify category and get proper name and ID
+    if ($category !== 'All') {
+      $categoryResult = $CategoryMapper->getCategory($category);
+
+      // If no valid category was found then return 404
+      if ( ! $categoryResult) {
+        $this->app->notFound();
+      }
+
+      $categoryResult = (Array) $categoryResult[0];
+    } else {
+      // Create the array we will need for "all" recipes
+      $categoryResult['url'] = 'All';
+      $categoryResult['name'] = 'All';
+      $categoryResult['category_id'] = 'All';
+    }
 
     // Configure pagination object
     $paginator = new \Recipe\Extensions\TwigExtensionPagination();
-    $paginator->setPagePath($this->app->urlFor('recipesByCategory') . '/' . $category);
+    $paginator->setPagePath($this->app->urlFor('recipesByCategory') . '/' . $categoryResult['url']);
     $paginator->setCurrentPageNumber($pageNumber);
 
     // Fetch recipes
     if ($category === 'All') {
       $recipes = $RecipeMapper->getRecipes($paginator->getRowsPerPage(), $paginator->getOffset());
     } else {
-      $recipes = $RecipeMapper->getRecipesByCategory($category, $paginator->getRowsPerPage(), $paginator->getOffset());
+      $recipes = $RecipeMapper->getRecipesByCategory($categoryResult['category_id'], $paginator->getRowsPerPage(), $paginator->getOffset());
     }
 
-    // Get count of recipes returned by query
+    // Get count of recipes returned by query and load pagination
     $paginator->setTotalRowsFound($RecipeMapper->foundRows());
-
-    // Add the pagination object
     $twig->parserExtensions[] = $paginator;
-    $twig->display('recipeList.html', ['recipes' => $recipes]);
+
+    // Return the array of recipes and the category name
+    $data['list'] = $recipes;
+    $data['category'] = $categoryResult;
+
+    $twig->display('recipeList.html', ['recipes' => $data]);
   }
 
   /**

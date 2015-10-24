@@ -28,4 +28,19 @@ class CategoryMapper extends DataMapperAbstract
 
     return $this->find();
   }
+
+  /**
+   * Get Category
+   *
+   * Get a category by URL slug
+   * @param string, category url
+   * @return mixed, category record or null
+   */
+  public function getCategory($slug)
+  {
+    $this->sql = $this->defaultSelect . ' where url = ?';
+    $this->bindValues[] = $slug;
+
+    return $this->find();
+  }
 }

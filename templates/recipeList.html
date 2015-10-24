@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-      <div class="listTitle">All Recipes</div>
+      <div class="listTitle">{{ recipes.category.name }} Recipes</div>
 
       <!--Begin Recipe List Panels -->
-      {% for r in recipes %}
+      {% for r in recipes.list %}
       {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
       <div class="panel panel-success">
         <div class="panel-heading">

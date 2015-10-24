@@ -59,24 +59,23 @@ class RecipeMapper extends DataMapperAbstract
     // Was a category slug or ID passed in?
     if (is_numeric($category)) {
       $where = ' where rc.category_id = ?';
-      $this->bindValues[] = $category;
     } else {
       $where = ' join pp_category c on rc.category_id = c.category_id where c.url = ?';
-      $this->bindValues[] = $category;
     }
 
     $this->sql .= $where;
+    $this->bindValues[] = $category;
 
     // Add order by
     $this->sql .= ' order by r.created_date desc';
 
     // Add limit
-    if ($limit !== null) {
+    if ($limit) {
       $this->sql .= " limit {$limit}";
     }
 
     // Add offset
-    if ($offset !== null) {
+    if ($offset) {
       $this->sql .= " offset {$offset}";
     }
 
