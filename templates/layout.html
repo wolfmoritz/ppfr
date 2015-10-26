@@ -93,21 +93,17 @@
       <div class="sidenav">
         <div class="widgetTitle">Top Five Recipes</div>
         <ul>
-          <li><a href="/recipe/show/115/Scotchmallows" title="Soft & Chewy, Better than See's Candy.">Scotchmallows</a></li>
-          <li><a href="/recipe/show/47/Eier-Liquor" title="German Egg Nog">Eier Liquor</a></li>
-          <li><a href="/recipe/show/97/Sangria" title="Easy, this stuff packs a punch!">Sangria</a></li>
-          <li><a href="/recipe/show/142/Tortilla-Soup" title="Fast & Simple">Tortilla Soup</a></li>
-          <li><a href="/recipe/show/26/Cranberry-Fruit-Nut-Bread" title="">Cranberry Fruit Nut Bread</a></li>
+          {% for r in topRecipes(5) %}
+          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+          {% endfor %}
         </ul>
       </div>
       <div class="sidenav">
         <div class="widgetTitle">Random Recipe</div>
         <ul>
-          <li><a href="/recipe/show/115/Scotchmallows" title="Soft & Chewy, Better than See's Candy.">Scotchmallows</a></li>
-          <li><a href="/recipe/show/12/Garlicky-White-Bean-Dip" title="">Garlicky White Bean Dip</a></li>
-          <li><a href="/recipe/show/98/Orange-Sorbet" title="(the one from the now Defunct Locomotive)">Orange Sorbet</a></li>
-          <li><a href="/recipe/show/102/Chocolate-Cake" title="The Only Chocolate Cake Recipe You'll Ever Need!">Chocolate Cake</a></li>
-          <li><a href="/recipe/show/39/Napoli-Style-Crutons" title="how Mary tries to burn bread cubes">Napoli Style Crutons</a></li>
+          {% for r in randomRecipes(5) %}
+          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+          {% endfor %}
         </ul>
       </div>
     </div>

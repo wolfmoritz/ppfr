@@ -135,4 +135,30 @@ class RecipeMapper extends DataMapperAbstract
     // Execute
     return $this->find();
   }
+
+  /**
+   * Get top recipes by view count
+   *
+   * @param int, limit
+   * @return array
+   */
+  public function getTopRecipes($limit = 5)
+  {
+    $this->sql = $this->defaultSelect . " order by r.view_count desc limit {$limit}";
+
+    return $this->find();
+  }
+
+  /**
+   * Get a random recipe
+   *
+   * @param int, limit
+   * @return array
+   */
+  public function getRandomRecipes($limit = 5)
+  {
+    $this->sql = $this->defaultSelect . " order by rand() limit {$limit}";
+
+    return $this->find();
+  }
 }

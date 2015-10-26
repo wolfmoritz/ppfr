@@ -55,7 +55,9 @@ class TwigExtension extends \Twig_Extension
           new \Twig_SimpleFunction('imageUrl', array($this, 'imageUrl')),
           new \Twig_SimpleFunction('siteUrlFor', array($this, 'siteUrlFor')),
           new \Twig_SimpleFunction('uriSegment', array($this, 'uriSegment')),
-          new \Twig_SimpleFunction('formatIngredients', array($this, 'formatIngredients'))
+          new \Twig_SimpleFunction('formatIngredients', array($this, 'formatIngredients')),
+          new \Twig_SimpleFunction('topRecipes', array($this, 'topRecipes')),
+          new \Twig_SimpleFunction('randomRecipes', array($this, 'randomRecipes'))
       );
   }
 
@@ -334,5 +336,43 @@ class TwigExtension extends \Twig_Extension
     $CategoryMapper = $dataMapper('CategoryMapper');
 
     return $categories = $CategoryMapper->getAllCategories();
+  }
+
+  /**
+   * Get Top Recipes
+   */
+  public function topRecipes($limit = 5)
+  {
+    // Cache results
+    static $topRecipes;
+
+    if ($topRecipes) {
+      return $topRecipes;
+    }
+
+    $app = \Slim\Slim::getInstance();
+    $dataMapper = $app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+
+    return $topRecipes = $RecipeMapper->getTopRecipes($limit);
+  }
+
+  /**
+   * Get Random Recipes
+   */
+  public function randomRecipes($limit = 5)
+  {
+    // Cache results
+    static $randomRecipes;
+
+    if ($randomRecipes) {
+      return $randomRecipes;
+    }
+
+    $app = \Slim\Slim::getInstance();
+    $dataMapper = $app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+
+    return $randomRecipes = $RecipeMapper->getRandomRecipes($limit);
   }
 }
