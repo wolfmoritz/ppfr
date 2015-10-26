@@ -47,23 +47,25 @@
           <!-- end dropdown-menu -->
         </li>
       </ul>
-      <form action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8" class="navbar-form pull-left">
-        <input type="text" name="terms" class="form-control" value="{{ recipes.searchTerms }}" placeholder="Search this site..." id="searchInput" autocomplete="off">
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-      </form>
-      <!-- end navbar-form -->
+      <form action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8" class="navbar-form navbar-left">
+		<div class="form-group" style="display:inline;">
+			<div class="input-group">
+				<input type="text" name="terms" class="form-control" value="{{ recipes.searchTerms }}" placeholder="Search this site..." id="searchInput" autocomplete="off">
+				<div type="submit" class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+			</div>
+		</div>
+	</form>
+	<!-- end navbar-form -->
 
-      <ul class="nav navbar-nav pull-right">
+      <ul class="nav navbar-nav navbar-right">
 
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> My Account <strong class="caret"></strong></a>
+        <li class="dropdown"> <a href="#" class="dropdown-toggle" roll="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          <li><a href="#">Add new Recipe</a>
-          <li><a href="#">Edit current Recipe</a>
-          <li><a href="#">My Recipes</a>
-          <div class="nav-divider"></div>
+                    <div class="nav-divider"></div>
             <li> <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
             <li> <a href="#"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
             <li class="divider"></li>
+            <li> <a href="admin/index.html">My Account</a>
             <li> <a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a> </li>
           </ul>
         </li>
