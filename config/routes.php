@@ -4,18 +4,18 @@
  */
 namespace Recipe;
 
-// Get recipes by API call
-$app->get('/api/recipes/:limit/:offset', function ($limit, $offset) {
-  (new Controllers\ApiController())->getOffsetRecipes($limit, $offset);
-});
+// Search recipes
+$app->get('/recipe/search', function () use ($app) {
+  (new Controllers\IndexController())->searchRecipes();
+})->name('recipeSearch');
 
 // Show a recipe
-$app->get('(/recipe(/:id(/:slug)))', function ($id, $slug = 'none') {
+$app->get('(/recipe/show(/:id(/:slug)))', function ($id, $slug = 'none') {
   (new Controllers\IndexController())->showRecipe($id, $slug);
 })->conditions(['id' => '\d+'])->name('showRecipe');
 
 // Get recipes by category
-$app->get('/category(/:slug(/:page))', function ($slug = 'All', $page = 1) {
+$app->get('/recipe/category(/:slug(/:page))', function ($slug = 'All', $page = 1) {
   (new Controllers\IndexController())->getRecipesByCategory($slug, $page);
 })->name('recipesByCategory');
 

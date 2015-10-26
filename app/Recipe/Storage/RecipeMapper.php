@@ -81,4 +81,58 @@ class RecipeMapper extends DataMapperAbstract
 
     return $this->find();
   }
+
+  /**
+   * Search Recipes
+   *
+   * Terms separated by a space are treated as separate search terms.
+   * This query searches:
+   *  - Categories
+   *  - Title
+   *  - Ingredients
+   *  - Instructions
+   */
+  public function searchRecipes($terms, $limit, $offset)
+  {
+    // Create array of search terms and append wildcards
+    $termsArray = preg_split('/\s+/', $terms);
+    array_walk($termsArray, function(&$item) { $item = '%' . $item . '%'; });
+
+    // Start building SQL statement
+    $this->sql = $this->defaultSelect . ' where ';
+
+    // First search categories
+    $categoryMatch = '';
+    foreach ($termsArray as $term) {
+      $categoryMatch .= ' and c.name like ?';
+      $this->bindValues[] = $term;
+    }
+
+    $this->sql .= " r.recipe_id in (select rc.recipe_id
+        from pp_recipe_category rc
+        join pp_category c on rc.category_id = c.category_id
+        where 1=1 {$categoryMatch}) ";
+
+    // Add search on other fields
+    $fieldMatch = '';
+    foreach ($termsArray as $term) {
+      $fieldMatch .= ' or r.title like ? or r.ingredients like ? or r.instructions like ?';
+      $this->bindValues[] = $term;
+      $this->bindValues[] = $term;
+      $this->bindValues[] = $term;
+    }
+
+    $this->sql .= " {$fieldMatch}";
+
+    if ($limit) {
+      $this->sql .= " limit {$limit}";
+    }
+
+    if ($offset) {
+      $this->sql .= " offset {$offset}";
+    }
+
+    // Execute
+    return $this->find();
+  }
 }

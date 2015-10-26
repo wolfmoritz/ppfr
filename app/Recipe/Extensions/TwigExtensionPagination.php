@@ -9,6 +9,8 @@ class TwigExtensionPagination extends \Twig_Extension
   protected $environment;
   protected $baseUrl;
   protected $pageUrl;
+  public  $useQueryString = false;
+  public $queryStringParam = 'pageno';
   protected $currentPageNumber;
   protected $rowsPerPage;
   protected $numberOfLinks;
@@ -68,7 +70,12 @@ class TwigExtensionPagination extends \Twig_Extension
    */
   public function setPagePath($pagePath)
   {
-    $this->pageUrl = $this->baseUrl . $pagePath . '/';
+    // Are we using query strings?
+    if ($this->useQueryString) {
+      $this->pageUrl = $this->baseUrl . $pagePath . '&' . $this->queryStringParam . '=';
+    } else {
+      $this->pageUrl = $this->baseUrl . $pagePath . '/';
+    }
   }
 
   /**
@@ -79,7 +86,7 @@ class TwigExtensionPagination extends \Twig_Extension
    */
   public function setCurrentPageNumber($pageNumber)
   {
-    $this->currentPageNumber = $pageNumber;
+    $this->currentPageNumber = ($pageNumber) ? $pageNumber : 1;
   }
 
   /**

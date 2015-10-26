@@ -102,4 +102,53 @@ class IndexController
     $twig = $this->app->twig;
     $twig->display('recipe.html', array('recipe' => $recipe));
   }
+
+  /**
+   * Search Recipes
+   *
+   * @return mixed, array of results or null
+   */
+  public function searchRecipes()
+  {
+    // Get parameters
+    $terms = $this->app->request->get('terms');
+    $pageNo = $this->app->request->get('pageno');
+
+    // If no terms were provided (just the search button clicked), then go to home page
+    if ($terms == '') {
+      $this->app->redirectTo('home');
+    }
+
+    // Get data mappers and twig
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+    $twig = $this->app->twig;
+
+    // Configure pagination object
+    $paginator = new \Recipe\Extensions\TwigExtensionPagination();
+    $paginator->useQueryString = true;
+    $paginator->setPagePath($this->app->urlFor('recipeSearch') . '?terms=' . $terms);
+    $paginator->setCurrentPageNumber($pageNo);
+
+    // Fetch recipes
+    $recipes = $RecipeMapper->searchRecipes($terms, $paginator->getRowsPerPage(), $paginator->getOffset());
+
+    // If we found just one row **on the first page of results**, just show the recipe page
+    // Note, this is faster than count($recipes) === 1
+    if ($pageNo == 1 && isset($recipes[0]) && ! isset($recipes[1])) {
+      $twig->display('recipe.html', array('recipe' => $recipes[0]));
+      return;
+    }
+
+    // Get count of recipes returned by query and load pagination
+    $paginator->setTotalRowsFound($RecipeMapper->foundRows());
+    $twig->parserExtensions[] = $paginator;
+
+    // Return the array of recipes and the category name
+    $data['list'] = $recipes;
+    $data['category'] = $terms;
+    $data['searchTerms'] = $terms;
+
+    $twig->display('recipeList.html', ['recipes' => $data]);
+  }
 }
