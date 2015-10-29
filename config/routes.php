@@ -19,6 +19,11 @@ $app->get('/recipe/category(/:slug(/:page))', function ($slug = 'All', $page = 1
   (new Controllers\IndexController())->getRecipesByCategory($slug, $page);
 })->name('recipesByCategory');
 
+// About page
+$app->get('/about', function() {
+  (new Controllers\IndexController())->about();
+})->name('about');
+
 // Home page
 $app->get('/', function () {
   (new Controllers\IndexController())->getRecipesByCategory('All', 1);

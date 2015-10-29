@@ -159,4 +159,13 @@ class IndexController
 
     $twig->display('recipeList.html', ['recipes' => $data]);
   }
+
+  /**
+   * About Page
+   */
+  public function about()
+  {
+    $twig = $this->app->twig;
+    $twig->display('about.html');
+  }
 }
