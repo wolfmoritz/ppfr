@@ -36,7 +36,7 @@
         <li class="active"> <a href="{{ siteUrlFor('home') }}">Home</a> </li>
         <li> <a href="#">About Me</a> </li>
         <li> <a href="#">Blog</a> </li>
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
+        <li class="dropdown hidden-sm hidden-xs"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
           <ul class="dropdown-menu">
             <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
             <li class="dropdown-header">Select a category</li>
@@ -83,26 +83,26 @@
     </div>
     <!--end col-md-10 left column -->
 
-    <div class="col-sm-2 hidden-xs hidden-sm">
-    <div class="sidenav">
+    <div class="col-md-2 hidden-xs hidden-sm">
+   <!-- <div class="sidenav">
         <div class="widgetTitle">My Pantry</div>
         <ul>
           <li><a href="#">Add Recipe</a></li>
           <li><a href="#">My Recipes</a></li>
 
         </ul>
-      </div>
+      </div> --> <!-- Commented out MY Pantry Widget -->
       <div class="sidenav">
-        <div class="widgetTitle">Top Five Recipes</div>
-        <ul>
+        <h5 class="page-header">Top Five Recipes</h5>
+        <ul class="list-unstyled">
           {% for r in topRecipes(5) %}
           <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
       <div class="sidenav">
-        <div class="widgetTitle">Random Recipe</div>
-        <ul>
+        <h5 class="page-header">Random Recipe</h5>
+        <ul class="list-unstyled">
           {% for r in randomRecipes(5) %}
           <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
           {% endfor %}
@@ -116,7 +116,7 @@
 </div>
 <!--End of content container -->
 <!--End Content Container -->
-  <footer>
+  <footer class="footer">
   <div class="container">
     <div class="row">
       <div class="col-sm-2">
@@ -152,8 +152,7 @@
       <!-- end col-sm-2 -->
 
       <div class="col-sm-2">
-        <h6>Coded with <span class="glyphicon glyphicon-heart"></span> by Peri, Wolf &amp; Bootstrap</h6>
-      </div>
+        <h6>Coded by </h6><a href="moritzmedia.com">Moritz Media Solutions LLC</a>      </div>
       <!-- end col-sm-2 -->
     </div>
     <!-- end row -->

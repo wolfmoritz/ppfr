@@ -8,7 +8,7 @@
         <!--End panel-heading -->
         <div class="panel-body">
 
-          <img itemprop="image" src="{{ baseUrl() }}/files/originals/{{ recipe.recipe_id }}/files/{{ recipe.main_photo }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
+          <img itemprop="image" src="{{ baseUrl() }}/files/originals/{{ recipe.recipe_id }}/files/{{ recipe.main_photo }}" width="320" class="pull-right img-responsive dropshadowimg"  alt="Photo of {{ recipe.title }}">
           <div class="servings"> Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>
           </div>
           <!-- .servings -->
@@ -26,6 +26,8 @@
           <div class="recipetext" itemprop="description">
             {{ recipe.notes|raw }}
           </div>
+          <hr>
+
           <div class="recipeOwner"> Other recipes by <a href="{{ baseUrl() }}#">
             <span itemprop="author">{{ recipe.user_name }}</span></a><br>
             Added on:
@@ -46,8 +48,7 @@
           <!--end social button row -->
         </div>
         <!--end Panel-body -->
-         <hr>
-        <img src="assets/img/comment.png" class="img-responsive">
+                 
       </div>
       <!--End panel panel-success -->
 {% endblock %}

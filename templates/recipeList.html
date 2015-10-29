@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-      <div class="listTitle">{{ recipes.category.name }} Recipes</div>
+      <h2 class="page-header">{{ recipes.category.name }} Recipes</h2>
 
       <!--Begin Recipe List Panels -->
       {% for r in recipes.list %}
       {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
       <div class="panel panel-success">
-        <div class="panel-heading">
-          <h3 class="panel-title"><a href="{{ recipeUrl }}">{{ r.title }}</a></h3>
+        <div class="panel-heading panel-heading-custom">
+          <h4 class="recipe"><a href="{{ recipeUrl }}">{{ r.title }}</a></h4>
         </div>
         <!--end panel-heading -->
         <div class="panel-body">
@@ -22,7 +22,7 @@
             </div>
             <!--End col-md-2 panel-body -->
             <div class="col-md-9">
-              <p>
+              <p class="lead">
                 {{ r.instructions_excerpt|raw }}
                 <small><a href="{{ recipeUrl }}">read more...</a></small>
               </p>
