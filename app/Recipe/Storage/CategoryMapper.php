@@ -43,4 +43,19 @@ class CategoryMapper extends DataMapperAbstract
 
     return $this->find();
   }
+
+  /**
+   * Get Assigned Categories
+   *
+   * Returns all categories assigned to a recipe
+   * @param int, recipe_id
+   * @return mixed, array of categories on success, null if not found
+   */
+  public function getAssignedCategories($recipeId)
+  {
+    $this->sql = 'select c.* from pp_category c join pp_recipe_category rc on c.category_id = rc.category_id where rc.recipe_id = ?;';
+    $this->bindValues[] = $recipeId;
+
+    return $this->find();
+  }
 }
