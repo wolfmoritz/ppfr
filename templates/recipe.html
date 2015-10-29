@@ -7,8 +7,9 @@
         </div>
         <!--End panel-heading -->
         <div class="panel-body">
-
+          {% if recipe.main_photo %}
           <img itemprop="image" src="{{ baseUrl() }}/files/originals/{{ recipe.recipe_id }}/files/{{ recipe.main_photo }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
+          {% endif %}
           <div class="servings"> Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>
           </div>
           <!-- .servings -->
