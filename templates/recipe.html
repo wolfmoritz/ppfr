@@ -8,7 +8,10 @@
         <!--End panel-heading -->
         <div class="panel-body">
 
-          <img itemprop="image" src="{{ baseUrl() }}/files/originals/{{ recipe.recipe_id }}/files/{{ recipe.main_photo }}" width="320" class="pull-right img-responsive dropshadowimg"  alt="Photo of {{ recipe.title }}">
+          {% if recipe.main_photo %}
+          <img itemprop="image" src="{{ baseUrl() }}/files/originals/{{ recipe.recipe_id }}/files/{{ recipe.main_photo }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
+          {% endif %}
+
           <div class="servings"> Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>
           </div>
           <!-- .servings -->
@@ -37,9 +40,11 @@
           <!-- .recipeOwner -->
           <h4>Recipe Categories</h4>
           <div itemprop="recipeCategory">
-          <a href="/recipe/category/Drink" title="View recipes listed as Drink" class="btn btn-link">TODO Drink</a>
-          <a href="/recipe/category/Cocktail" title="View recipes listed as Cocktail" class="btn btn-link">TODO Cocktail</a> </div>
+          {% for c in recipe.categories %}
+            <a href="{{ siteUrlFor('recipesByCategory') }}/{{ c.url }}" title="View recipes for {{ c.name }}">{{ c.name }}</a>
           <!--end recipe categories -->
+          {% endfor %}
+          </div>
           <div class="row">
             <div class="col-md-10">This is the place that the social btns go</div>
             <!--End Social Btns -->

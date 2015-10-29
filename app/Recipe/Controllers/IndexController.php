@@ -84,6 +84,7 @@ class IndexController
     // Get data mappers
     $dataMapper = $this->app->dataMapper;
     $RecipeMapper = $dataMapper('RecipeMapper');
+    $CategoryMapper = $dataMapper('CategoryMapper');
 
     // If $id is not an integer or at least numeric, throw 404
     if ( ! is_integer((int) $id)) {
@@ -98,6 +99,13 @@ class IndexController
       $this->app->notFound();
       return;
     }
+
+    // Get categories
+    $recipe->categories = $CategoryMapper->getAssignedCategories($recipe->recipe_id);
+
+    // Increment view counter
+    $RecipeMapper->incrementRecipeViewCount($recipe->recipe_id);
+    $recipe->view_count++;
 
     $twig = $this->app->twig;
     $twig->display('recipe.html', array('recipe' => $recipe));

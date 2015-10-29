@@ -161,4 +161,20 @@ class RecipeMapper extends DataMapperAbstract
 
     return $this->find();
   }
+
+  /**
+   * Increment Recipe View Count
+   *
+   * @param
+   */
+  public function incrementRecipeViewCount($recipeId)
+  {
+    $this->sql = 'update pp_recipe set view_count = view_count + 1 where recipe_id = ?;';
+    $this->bindValues[] = $recipeId;
+
+    $outcome = $this->execute();
+    $this->clear();
+
+    return $outcome;
+  }
 }
