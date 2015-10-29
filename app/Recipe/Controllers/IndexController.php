@@ -99,6 +99,10 @@ class IndexController
       return;
     }
 
+    // Increment view counter
+    $RecipeMapper->incrementRecipeViewCount($recipe->recipe_id);
+    $recipe->view_count++;
+
     $twig = $this->app->twig;
     $twig->display('recipe.html', array('recipe' => $recipe));
   }
