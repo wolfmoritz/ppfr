@@ -24,6 +24,11 @@ $app->get('/about', function() {
   (new Controllers\IndexController())->about();
 })->name('about');
 
+// Blog page
+$app->get('/blog', function() {
+  (new Controllers\IndexController())->blogPost();
+})->name('blog');
+
 // Home page
 $app->get('/', function () {
   (new Controllers\IndexController())->getRecipesByCategory('All', 1);

@@ -168,4 +168,13 @@ class IndexController
     $twig = $this->app->twig;
     $twig->display('about.html');
   }
+
+  /**
+   * Blog Post Page
+   */
+  public function blogPost()
+  {
+    $twig = $this->app->twig;
+    $twig->display('blog.html');
+  }
 }
