@@ -31,7 +31,7 @@
           </div>
           <hr>
 
-          <div class="recipeOwner"> Other recipes by <a href="{{ baseUrl() }}#">
+          <div class="recipeOwner"> Other recipes by <a href="{{ siteUrlFor('recipesByUser') }}/{{ recipe.user_url }}">
             <span itemprop="author">{{ recipe.user_name }}</span></a><br>
             Added on:
             <meta itemprop="datePublished" content="2012-06-23 12:00:00">
@@ -48,12 +48,12 @@
           <div class="row">
             <div class="col-md-10">This is the place that the social btns go</div>
             <!--End Social Btns -->
-            <div class="col-md-2"><a href="#">Printer Friendly</a></div>
+            <!-- div class="col-md-2"><a href="#">Printer Friendly</a></div -->
           </div>
           <!--end social button row -->
         </div>
         <!--end Panel-body -->
-                 
+
       </div>
       <!--End panel panel-success -->
 {% endblock %}

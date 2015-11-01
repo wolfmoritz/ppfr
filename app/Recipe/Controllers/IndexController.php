@@ -161,6 +161,47 @@ class IndexController
   }
 
   /**
+   * Get Recipes by User
+   *
+   * @param int, user ID
+   * @param int, page number
+   **/
+  public function getRecipesByUser($userId, $pageNumber)
+  {
+    // Get mapper and twig template engine
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+    $UserMapper = $dataMapper('UserMapper');
+    $twig = $this->app->twig;
+
+    // Verify user and get proper name and ID
+    $userResult = $UserMapper->getUser($userId);
+
+    // If no valid user was found then return 404
+    if ( ! $userResult) {
+      $this->app->notFound();
+    }
+
+    // Configure pagination object
+    $paginator = new \Recipe\Extensions\TwigExtensionPagination();
+    $paginator->setPagePath($this->app->urlFor('recipesByUser') . '/' . $userResult->user_url);
+    $paginator->setCurrentPageNumber($pageNumber);
+
+    // Fetch recipes
+    $recipes = $RecipeMapper->getRecipesByUser($userResult->user_id, $paginator->getRowsPerPage(), $paginator->getOffset());
+
+    // Get count of recipes returned by query and load pagination
+    $paginator->setTotalRowsFound($RecipeMapper->foundRows());
+    $twig->parserExtensions[] = $paginator;
+
+    // Return the array of recipes and the user name (set in the category field)
+    $data['list'] = $recipes;
+    $data['category']['name'] = $userResult->user_name . '\'s';
+
+    $twig->display('recipeList.html', ['recipes' => $data]);
+  }
+
+  /**
    * About Page
    */
   public function about()

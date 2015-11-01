@@ -19,6 +19,11 @@ $app->get('/recipe/category(/:slug(/:page))', function ($slug = 'All', $page = 1
   (new Controllers\IndexController())->getRecipesByCategory($slug, $page);
 })->name('recipesByCategory');
 
+// Get recipes by user. The username segment is a throwaway as far as the route is concerned
+$app->get('/recipe/user(/:id(/:username(/:page)))', function ($id, $username = null, $page = 1) {
+  (new Controllers\IndexController())->getRecipesByUser($id, $page);
+})->name('recipesByUser');
+
 // About page
 $app->get('/about', function() {
   (new Controllers\IndexController())->about();
@@ -29,7 +34,7 @@ $app->get('/blog', function() {
   (new Controllers\IndexController())->blogPost();
 })->name('blog');
 
-// Home page
+// Home page (last route, the default)
 $app->get('/', function () {
   (new Controllers\IndexController())->getRecipesByCategory('All', 1);
 })->name('home');

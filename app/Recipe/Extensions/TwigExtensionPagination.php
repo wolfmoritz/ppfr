@@ -37,6 +37,16 @@ class TwigExtensionPagination extends \Twig_Extension
   }
 
   /**
+   * Register Global variables
+   */
+  public function getGlobals()
+  {
+    return array(
+      'currentPageNumber' => $this->getCurrentPageNumber()
+    );
+  }
+
+  /**
    * Register Custom Functions
    */
   public function getFunctions()
@@ -87,6 +97,17 @@ class TwigExtensionPagination extends \Twig_Extension
   public function setCurrentPageNumber($pageNumber)
   {
     $this->currentPageNumber = ($pageNumber) ? $pageNumber : 1;
+  }
+
+  /**
+   * Get Current Page Number
+   *
+   * Gets the current page number for display in templates
+   * @return string, page number
+   */
+  public function getCurrentPageNumber()
+  {
+    return $this->currentPageNumber;
   }
 
   /**

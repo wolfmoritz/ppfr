@@ -1,22 +1,52 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Peri's Recipes - Home</title>
-    <link rel="stylesheet" href="{{ baseUrl() }}/assets/bootstrap/css/bootstrap.min.css">
-    <link href="{{ baseUrl() }}/assets/css/style.css" rel="stylesheet" type="text/css" media="screen">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="riHp25OEWPo6uLT2_apcdfsf16dwHZ-lUj4oWAPH5BY">
+  <meta description="{{ recipe.instructions_excerpt|default('A place for friends and family to share recipes.') }}{% if currentPageNumber %} - Page {{ currentPageNumber }}{% endif %}">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <title>{% if recipe.title %}{{ recipe.title }} - {% endif %}Peri&apos;s Recipes{% if currentPageNumber %} - Page {{ currentPageNumber }}{% endif %}</title>
+
+  <link rel="shortcut icon" href="{{ baseUrl() }}/favicon.ico">
+  <link rel="apple-touch-icon" href="{{ baseUrl() }}/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ baseUrl() }}/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{ baseUrl() }}/touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ baseUrl() }}/touch-icon-ipad-retina.png">
+
+  <link rel="stylesheet" href="{{ baseUrl() }}/assets/bootstrap/css/bootstrap.min.css">
+  <link href="{{ baseUrl() }}/assets/css/style.css" rel="stylesheet" type="text/css" media="screen">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script>
+    // Facebook Login
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : 251905954939842,
+        status     : false,
+        cookie     : true,
+        xfbml      : true
+      });
+    };
+    (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+    }(document));
+  </script>
+
 <nav class="navbar navbar-default">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -56,12 +86,10 @@
 		</div>
 	</form>
 	<!-- end navbar-form -->
-
+<!--
       <ul class="nav navbar-nav navbar-right">
-
         <li class="dropdown"> <a href="#" class="dropdown-toggle" roll="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
           <ul class="dropdown-menu">
-                    <div class="nav-divider"></div>
             <li> <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
             <li> <a href="#"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
             <li class="divider"></li>
@@ -70,6 +98,7 @@
           </ul>
         </li>
       </ul>
+-->
       <!-- end nav pull-right -->
 
     </div><!-- /.navbar-collapse -->
@@ -108,6 +137,18 @@
           {% endfor %}
         </ul>
       </div>
+
+      <div class="sidenav">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-6388989287678352"
+             data-ad-slot="1745555829"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
     </div>
     <!--end col-me-2 right column -->
   </div>
@@ -120,7 +161,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-2">
-        <h6>Copyright &copy; 2015<br> Peri's Place For Recipes</h6>
+        <h6>Copyright &copy; 2012 - {{ 'now'|date('Y') }}<br> Peri&apos;s Place For Recipes</h6>
       </div>
       <!-- end col-sm-2 -->
 
@@ -133,10 +174,10 @@
       <div class="col-sm-2">
         <h6>Navigation</h6>
         <ul class="unstyled">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="{{ baseUrl() }}">Home</a></li>
+          <li><a href="{{ siteUrlFor('about') }}">About Us</a></li>
+          <li><a href="{{ siteUrlFor('blog') }}">Blog</a></li>
+          <!-- li><a href="contact.html">Contact</a></li -->
         </ul>
       </div>
       <!-- end col-sm-2 -->
@@ -144,15 +185,14 @@
       <div class="col-sm-2">
         <h6>Follow Us</h6>
         <ul class="unstyled">
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Google Plus</a></li>
+          <li><a href="https://instagram.com/peareye/">Instagram</a></li>
+          <li><a href="https://www.pinterest.com/peareye/">Pinterest</a></li>
         </ul>
       </div>
       <!-- end col-sm-2 -->
 
       <div class="col-sm-2">
-        <h6>Coded by </h6><a href="moritzmedia.com">Moritz Media Solutions LLC</a>      </div>
+        <h6>Coded by </h6><a href="http://moritzmedia.com">Moritz Media Solutions LLC</a>      </div>
       <!-- end col-sm-2 -->
     </div>
     <!-- end row -->
@@ -160,8 +200,46 @@
   <!-- end container -->
 
 </footer>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="{{ baseUrl() }}/assets/js/script.js"></script>
+  <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script -->
+  <script src="{{ baseUrl() }}/assets/js/jquery-1.11.3.min.js"></script>
+  <script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ baseUrl() }}/assets/js/script.js"></script>
+
+  <!-- Start of StatCounter Code for Default Guide -->
+  <script type="text/javascript">
+  var sc_project=8036661;
+  var sc_invisible=1;
+  var sc_security="dedf5c22";
+  </script>
+  <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="free hit counters" href="http://statcounter.com/free-hit-counter/" target="_blank"></a>
+    </div>
+  </noscript>
+
+    <!-- Google Analytics -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-33073319-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  <script type="text/javascript">
+  // Pinterest
+  (function(d){
+      var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+      p.type = 'text/javascript';
+      p.async = true;
+      p.src = '//assets.pinterest.com/js/pinit.js';
+      f.parentNode.insertBefore(p, f);
+  }(document));
+  </script>
+
 </body>
 </html>
