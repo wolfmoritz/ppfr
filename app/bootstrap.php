@@ -116,13 +116,6 @@ return call_user_func(
       };
     };
 
-    // Image file path generator
-    $app->imagePath = function() {
-      return function ($id) {
-        return chunk_split($id, 3, '/files/');
-      };
-    };
-
     // Image Uploader
     $app->uploader = function() use ($app) {
       return function ($key) use ($app) {

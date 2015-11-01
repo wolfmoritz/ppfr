@@ -8,8 +8,19 @@
         <!--End panel-heading -->
         <div class="panel-body">
 
+        <div class="socialContainer">
           {% if recipe.main_photo %}
-          <img itemprop="image" src="{{ baseUrl() }}/files/originals/{{ recipe.recipe_id }}/files/{{ recipe.main_photo }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
+          <div class="socialButtonBox">
+            <a href="//www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
+          </div>
+          {% endif %}
+          <div class="socialButtonBox">
+            <div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+          </div>
+        </div>
+
+          {% if recipe.main_photo %}
+          <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
           {% endif %}
 
           <div class="servings"> Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>

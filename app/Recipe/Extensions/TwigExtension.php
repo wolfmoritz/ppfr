@@ -222,11 +222,6 @@ class TwigExtension extends \Twig_Extension
    */
   public function imageUrl($id, $filename, $width = null, $height = null)
   {
-    // If no filename was provided, then return nothing
-    if (empty($filename)) {
-      return '';
-    }
-
     static $largeUri;
     static $thumbUri;
     static $url = '';
@@ -241,25 +236,25 @@ class TwigExtension extends \Twig_Extension
       $url = $app->request->getUrl() . $app->request->getRootUri() . '/';
     }
 
-    $imagePath = $app->imagePath;
-    $imageFilePath = $imagePath($id);
-
     // Was the full sized image requested?
     if ($width === null and $height === null) {
       // Just return url to the original image
-      return $url . $largeUri . $imageFilePath . $filename;
+      return "{$url}{$largeUri}{$id}/files/{$filename}";
     }
+
+    // Else
+    return '';
 
     // Make sure at least one dimension is set to a size
-    if (!is_numeric($width) and !is_numeric($height)) {
-      throw new \Exception('getImageUrl expects at least one numeric dimension');
-    }
+    // if (!is_numeric($width) and !is_numeric($height)) {
+    //   throw new \Exception('getImageUrl expects at least one numeric dimension');
+    // }
 
-    // If width or height is not provided, set to '' to keep aspect ratio
-    $width = (is_numeric($width)) ? $width : '';
-    $height = (is_numeric($height)) ? $height : '';
+    // // If width or height is not provided, set to '' to keep aspect ratio
+    // $width = (is_numeric($width)) ? $width : '';
+    // $height = (is_numeric($height)) ? $height : '';
 
-    return $url . $thumbUri . $width . 'x' . $height . '/' . $filename;
+    // return $url . $thumbUri . $width . 'x' . $height . '/' . $filename;
   }
 
   /**

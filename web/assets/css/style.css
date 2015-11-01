@@ -162,18 +162,27 @@ img.loadingImg {
   width: 60%;
   display: none;
 }
-
+/*------------------ Social Buttons ------------------*/
+.socialContainer {
+  height: 30px;
+  margin-top: 3px;
+}
+.socialContainer .socialButtonBox {
+  float: left;
+  margin-right: 5px;
+  min-width: 90px;
+}
 
 /***************************************/
             Customized Bootstrap
 /**************************************/
 .panel-default > .panel-heading-custom {
    /* background-image: none; */
-   
+
 }
 .panel-default > .panel-heading-custom {
-    
-    /* background: #27ae60; 
+
+    /* background: #27ae60;
     color: #fff; */
 }
 
