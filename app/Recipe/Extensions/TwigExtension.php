@@ -232,8 +232,14 @@ class TwigExtension extends \Twig_Extension
       $app = \Slim\Slim::getInstance();
 
       $largeUri = $app->config('file.uri');
-      $thumbUri = $app->config('file.thumb.uri');
-      $url = $app->request->getUrl() . $app->request->getRootUri() . '/';
+      // $thumbUri = $app->config('file.thumb.uri');
+
+      // Do not include application URL if one was supplied
+      if (strpos($largeUri, 'http') === 0) {
+        $url = '';
+      } else {
+        $url = $app->request->getUrl() . $app->request->getRootUri() . '/';
+      }
     }
 
     // Was the full sized image requested?
