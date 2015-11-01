@@ -285,8 +285,13 @@ class TwigExtension extends \Twig_Extension
    */
   public function uriSegment($pos)
   {
-    if (isset($_SERVER['REQUEST_URI'])) {
-      $segments = explode('/', $_SERVER['REQUEST_URI']);
+    $app = \Slim\Slim::getInstance();
+    $request = $app->request;
+
+    $uriPath = $request->getResourceUri();
+
+    if (isset($uriPath)) {
+      $segments = explode('/', $uriPath);
 
       return isset($segments[$pos]) ? $segments[$pos] : null;
     }
