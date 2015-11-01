@@ -19,16 +19,14 @@ footer {
 }
 
 .navbar-brand {
-	padding: 13px 15px;
+	/* padding: 13px 15px; */
 }
 
 /********************************************************/
 /****************** Content ******************************/
 /********************************************************/
-.recipe h4 {
-  font: bold 19px/22px 'MyUnderwoodRegular', Arial, sans-serif;
-  margin: 15px 0px 10px 2px;
-  font-weight: bold;
+.recipe a {
+color: #fff;
 }
 
 .dropshadowimg {
