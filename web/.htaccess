@@ -1,7 +1,7 @@
-# Hide git directory
-RedirectMatch 404 /\.git
+# Override from parent directory, everything in this directory is web accessible
+Allow from all
 
-# Prevent direct directory access
+# Prevent direct directory access, however
 Options -Indexes
 
 <IfModule mod_rewrite.c>
