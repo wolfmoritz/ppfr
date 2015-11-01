@@ -5,6 +5,9 @@ config/config.dev.php
 migrate.php
 *-old/
 
+# Production config
+config/config.prod.php
+
 # Ignore Dreamweaver files
 *_notes/
 
@@ -17,9 +20,6 @@ logs/*.log
 # Twig Cache
 twigcache/*
 
-# Vendor files which are loaded by composer
-#vendor/
-
 # Hostmonster files
 cig-bin/
 *.shtml
@@ -30,5 +30,3 @@ default.html
 # Sandbox file
 templates/peri.html
 web/peri1.html
-
-# Temporary
