@@ -121,6 +121,7 @@ class IndexController
     // Get parameters
     $terms = $this->app->request->get('terms');
     $pageNo = $this->app->request->get('pageno');
+    $pageNo = ($pageNo) ? $pageNo : 1;
 
     // If no terms were provided (just the search button clicked), then go to home page
     if ($terms == '') {
