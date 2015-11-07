@@ -33,7 +33,7 @@ class IndexController
     $twig = $this->app->twig;
 
     // Verify category and get proper name and ID
-    if ($category !== 'All') {
+    if (strtolower($category) !== 'all') {
       $categoryResult = $CategoryMapper->getCategory($category);
 
       // If no valid category was found then return 404
@@ -44,9 +44,9 @@ class IndexController
       $categoryResult = (Array) $categoryResult[0];
     } else {
       // Create the array we will need for "all" recipes
-      $categoryResult['url'] = 'All';
+      $categoryResult['url'] = 'all';
       $categoryResult['name'] = 'All';
-      $categoryResult['category_id'] = 'All';
+      $categoryResult['category_id'] = 'all';
     }
 
     // Configure pagination object
@@ -55,7 +55,7 @@ class IndexController
     $paginator->setCurrentPageNumber($pageNumber);
 
     // Fetch recipes
-    if ($category === 'All') {
+    if (strtolower($category) === 'all') {
       $recipes = $RecipeMapper->getRecipes($paginator->getRowsPerPage(), $paginator->getOffset());
     } else {
       $recipes = $RecipeMapper->getRecipesByCategory($categoryResult['category_id'], $paginator->getRowsPerPage(), $paginator->getOffset());

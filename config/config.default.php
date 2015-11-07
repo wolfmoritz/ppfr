@@ -68,3 +68,8 @@ $config['file.usable.max.size'] = 2000; // Kb
  */
 $config['pagination']['rowsPerPage'] = 10;
 $config['pagination']['numberOfLinks'] = 2;
+
+/**
+ * Routing Options
+ */
+$config['routes.case_sensitive'] = false;

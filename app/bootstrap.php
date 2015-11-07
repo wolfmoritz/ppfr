@@ -41,6 +41,16 @@ return call_user_func(
       include_once ROOT_DIR . 'config/config.dev.php';
     }
 
+    // Set error reporting level
+    if ($config['debug'] = false) {
+      // Production
+      ini_set('display_errors', 'Off');
+      error_reporting(0);
+    } else {
+      // Development
+      error_reporting(-1);
+    }
+
     // Logging
     $config['log.writer']  = new \Slim\Logger\DateTimeFileWriter(array('path' => ROOT_DIR . 'logs'));
     $config['log.level']   = \Slim\Log::ERROR;

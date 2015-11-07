@@ -26,7 +26,8 @@ class TwigExtension extends \Twig_Extension
   public function getGlobals()
   {
     return array(
-      'site' => $this->getGlobalSettings(),
+      'mode' => $this->getGlobalSettings('mode'),
+      'production' => ($this->getGlobalSettings('mode') === 'production') ? true : false,
       'request' => $this->getServerVars(),
       'categories' => $this->categories()
     );
@@ -64,13 +65,14 @@ class TwigExtension extends \Twig_Extension
   /**
    * Get Global Settings
    *
-   * Gets settings from $app->config('site');
+   * Gets settings from $app->config(<config-items>);
+   * @param string, config item name
    */
-  public function getGlobalSettings()
+  public function getGlobalSettings($item)
   {
     $app = \Slim\Slim::getInstance();
 
-    return $app->config('site');
+    return $app->config($item);
   }
 
   /**

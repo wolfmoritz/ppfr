@@ -10,25 +10,25 @@
   <title>{% if recipe.title %}{{ recipe.title }} - {% endif %}Peri&apos;s Recipes{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}</title>
 
   <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="57x57" href="{{ baseUrl() }}/apple-touch-icon-57x57.png" />
-<link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="114x114" href="{{ baseUrl() }}/apple-touch-icon-114x114.png" />
-<link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="72x72" href="{{ baseUrl() }}/apple-touch-icon-72x72.png" />
-<link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="144x144" href="{{ baseUrl() }}/apple-touch-icon-144x144.png" />
-<link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="60x60" href="{{ baseUrl() }}/apple-touch-icon-60x60.png" />
-<link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="120x120" href="{{ baseUrl() }}/apple-touch-icon-120x120.png" />
-<link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="76x76" href="{{ baseUrl() }}/apple-touch-icon-76x76.png" />
-<link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="152x152" href="{{ baseUrl() }}/apple-touch-icon-152x152.png" />
-<link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-196x196.png" sizes="196x196" />
-<link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-32x32.png" sizes="32x32" />
-<link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-16x16.png" sizes="16x16" />
-<link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-128.png" sizes="128x128" />
-<meta name="application-name" content="&nbsp;"/>
-<meta name="msapplication-TileColor" content="#FFFFFF" />
-<meta name="msapplication-TileImage" content="mstile-144x144.png" />
-<meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
-<meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
-<meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
-<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+  <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="114x114" href="{{ baseUrl() }}/apple-touch-icon-114x114.png" />
+  <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="72x72" href="{{ baseUrl() }}/apple-touch-icon-72x72.png" />
+  <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="144x144" href="{{ baseUrl() }}/apple-touch-icon-144x144.png" />
+  <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="60x60" href="{{ baseUrl() }}/apple-touch-icon-60x60.png" />
+  <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="120x120" href="{{ baseUrl() }}/apple-touch-icon-120x120.png" />
+  <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="76x76" href="{{ baseUrl() }}/apple-touch-icon-76x76.png" />
+  <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="152x152" href="{{ baseUrl() }}/apple-touch-icon-152x152.png" />
+  <link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-196x196.png" sizes="196x196" />
+  <link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="{{ baseUrl() }}/favicon-128.png" sizes="128x128" />
+  <meta name="application-name" content="&nbsp;"/>
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <meta name="msapplication-TileImage" content="mstile-144x144.png" />
+  <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+  <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+  <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+  <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
   <link rel="stylesheet" href="{{ baseUrl() }}/assets/bootstrap/css/bootstrap-theme.min.css">
   <link href="{{ baseUrl() }}/assets/css/style.css" rel="stylesheet" type="text/css" media="screen">
@@ -153,7 +153,7 @@
           {% endfor %}
         </ul>
       </div>
-
+      {% if production %}
       <div class="sidenav">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <ins class="adsbygoogle"
@@ -164,7 +164,7 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
       </div>
-
+      {% endif %}
     </div>
     <!--end col-me-2 right column -->
   </div>
@@ -221,6 +221,7 @@
   <script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="{{ baseUrl() }}/assets/js/script.js"></script>
 
+{% if production %}
   <!-- Start of StatCounter Code for Default Guide -->
   <script type="text/javascript">
   var sc_project=8036661;
@@ -256,6 +257,6 @@
       f.parentNode.insertBefore(p, f);
   }(document));
   </script>
-
+{% endif %}
 </body>
 </html>
