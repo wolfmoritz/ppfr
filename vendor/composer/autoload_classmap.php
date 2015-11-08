@@ -158,6 +158,7 @@ return array(
     'Recipe\\Controllers\\AdminPageController' => $baseDir . '/app/Recipe/Controllers/AdminPageController.php',
     'Recipe\\Controllers\\ApiController' => $baseDir . '/app/Recipe/Controllers/ApiController.php',
     'Recipe\\Controllers\\IndexActionController' => $baseDir . '/app/Recipe/Controllers/IndexActionController.php',
+    'Recipe\\Controllers\\IndexAuthController' => $baseDir . '/app/Recipe/Controllers/IndexAuthController.php',
     'Recipe\\Controllers\\IndexController' => $baseDir . '/app/Recipe/Controllers/IndexController.php',
     'Recipe\\Extensions\\TwigExtension' => $baseDir . '/app/Recipe/Extensions/TwigExtension.php',
     'Recipe\\Extensions\\TwigExtensionPagination' => $baseDir . '/app/Recipe/Extensions/TwigExtensionPagination.php',
