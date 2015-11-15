@@ -42,7 +42,7 @@ return call_user_func(
     }
 
     // Set error reporting level
-    if ($config['debug'] = false) {
+    if ($config['debug'] === false) {
       // Production
       ini_set('display_errors', 'Off');
       error_reporting(0);
@@ -106,6 +106,11 @@ return call_user_func(
     // Sessions
     $app->container->singleton('SessionHandler', function() use ($app) {
       return new \WolfMoritz\Session\SessionHandler($app->db, $app->config('session'));
+    });
+
+    // Facebook Authentication
+    $app->container->singleton('FacebookSDK', function() use ($app) {
+      return new \Facebook\Facebook($app->config('auth.facebook'));
     });
 
     // Email

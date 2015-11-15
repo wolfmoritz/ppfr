@@ -26,8 +26,8 @@ class TwigExtension extends \Twig_Extension
   public function getGlobals()
   {
     return array(
-      'mode' => $this->getGlobalSettings('mode'),
-      'production' => ($this->getGlobalSettings('mode') === 'production') ? true : false,
+      'mode' => $this->getConfig('mode'),
+      'production' => ($this->getConfig('mode') === 'production') ? true : false,
       'request' => $this->getServerVars(),
       'categories' => $this->categories()
     );
@@ -58,17 +58,18 @@ class TwigExtension extends \Twig_Extension
           new \Twig_SimpleFunction('uriSegment', array($this, 'uriSegment')),
           new \Twig_SimpleFunction('formatIngredients', array($this, 'formatIngredients')),
           new \Twig_SimpleFunction('topRecipes', array($this, 'topRecipes')),
-          new \Twig_SimpleFunction('randomRecipes', array($this, 'randomRecipes'))
+          new \Twig_SimpleFunction('randomRecipes', array($this, 'randomRecipes')),
+          new \Twig_SimpleFunction('config', array($this, 'getConfig'))
       );
   }
 
   /**
-   * Get Global Settings
+   * Get Configuration Items
    *
    * Gets settings from $app->config(<config-items>);
    * @param string, config item name
    */
-  public function getGlobalSettings($item)
+  public function getConfig($item)
   {
     $app = \Slim\Slim::getInstance();
 
@@ -82,7 +83,11 @@ class TwigExtension extends \Twig_Extension
    */
   public function getServerVars()
   {
-    return array('host' => $_SERVER['HTTP_HOST'], 'path' => $_SERVER['REQUEST_URI']);
+    $app = \Slim\Slim::getInstance();
+
+    return array(
+      'host' => $app->request->getHost()
+      );
   }
 
   /**

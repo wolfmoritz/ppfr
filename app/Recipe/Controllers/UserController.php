@@ -2,11 +2,9 @@
 namespace Recipe\Controllers;
 
 /**
- * Index Authentication Controller
- *
- * Renders public facing pages
+ * User Controller
  */
-class IndexAuthController
+class UserController
 {
   private $app;
 
@@ -22,13 +20,16 @@ class IndexAuthController
   {
     echo "Login:\n";
 
-    $auth = $this->app->AuthenticationHandler;
+    $FBauth = $this->app->FacebookSDK;
   }
 
   public function response()
   {
+    echo "response from service:";
+  }
 
+  public function logout()
+  {
+    echo "logging out";
   }
 }
-
-//91

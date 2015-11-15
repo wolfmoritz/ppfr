@@ -39,27 +39,28 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+  <script type="text/javascript"> var baseUrl = '{{ baseUrl() }}' </script>
 </head>
 
 <body>
   <div id="fb-root"></div>
   <script>
-    // Facebook Login
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : 251905954939842,
-        status     : false,
-        cookie     : true,
-        xfbml      : true
+        appId: '{{ config('auth.facebook')['app_id'] }}',
+        cookie: true,
+        version: 'v2.2'
       });
     };
-    (function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-    }(document));
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
   </script>
 
 <nav class="navbar navbar-default">
@@ -102,19 +103,18 @@
 	</form>
 	<!-- end navbar-form -->
 
-      <!--<ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right">
 
         <li class="dropdown"> <a href="#" class="dropdown-toggle" roll="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
           <ul class="dropdown-menu">
-                    <div class="nav-divider"></div>
-            <li> <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
+            <li> <a href="#" id="fbLogin"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
             <li> <a href="#"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
             <li class="divider"></li>
             <li> <a href="admin/index.html">My Account</a>
             <li> <a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a> </li>
           </ul>
         </li>
-      </ul> -->
+      </ul>
       <!-- end nav pull-right -->
 
     </div><!-- /.navbar-collapse -->

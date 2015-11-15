@@ -73,3 +73,10 @@ $config['pagination']['numberOfLinks'] = 2;
  * Routing Options
  */
 $config['routes.case_sensitive'] = false;
+
+/**
+ * Authentication Options
+ */
+$config['auth.facebook']['app_id'] = '251905954939842';
+$config['auth.facebook']['app_secret'] = '7c0706233e7ea6de1896676152657cbd';
+$config['auth.facebook']['default_graph_version'] = 'v2.2';

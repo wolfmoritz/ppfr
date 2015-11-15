@@ -34,6 +34,16 @@ $app->get('/blog', function() {
   (new Controllers\IndexController())->blogPost();
 })->name('blog');
 
+// User Login
+$app->get('/user/login/:service', function($service) {
+  (new Controllers\UserController())->login($service);
+});
+
+// User Logout
+$app->get('/user/logout', function() {
+  (new Controllers\UserController())->logout();
+});
+
 // Home page (last route, the default)
 $app->get('/', function () {
   (new Controllers\IndexController())->getRecipesByCategory('All', 1);
