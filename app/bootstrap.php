@@ -152,10 +152,9 @@ return call_user_func(
     $app->notFound(function () use ($app) {
       // Log URL for not found request
       $request = $app->request;
-      $app->log->error('404 Not Found: ' . $request->getMethod() . ' ' . $request->getResourceUri());
       $serverVars = isset($_SERVER['HTTP_USER_AGENT']) ? ' [HTTP_USER_AGENT] ' . $_SERVER['HTTP_USER_AGENT'] : '';
       $serverVars .= isset($_SERVER['REMOTE_ADDR']) ? ' [REMOTE_ADDR] ' . $_SERVER['REMOTE_ADDR'] : '';
-      $app->log->error(print_r($serverVars,true));
+      $app->log->error('404 Not Found: ' . $request->getMethod() . ' ' . $request->getResourceUri() . $serverVars);
 
       // If request is for a file image then just return
       if (preg_match('/^.*\.(jpg|jpeg|png|gif)$/i', $request->getResourceUri())) {
