@@ -142,10 +142,11 @@ class IndexController
     // Fetch recipes
     $recipes = $RecipeMapper->searchRecipes($terms, $paginator->getRowsPerPage(), $paginator->getOffset());
 
-    // If we found just one row **on the first page of results**, just show the recipe page
+    // If we found just one row on the first page of results, just show the recipe page
     // Note, this is faster than count($recipes) === 1
     if ($pageNo == 1 && isset($recipes[0]) && ! isset($recipes[1])) {
-      $twig->display('recipe.html', array('recipe' => $recipes[0]));
+      // Redirect to show recipe page
+      $this->app->redirectTo('showRecipe', ['id' => $recipes[0]->recipe_id, 'slug' => $recipes[0]->url]);
       return;
     }
 
