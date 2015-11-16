@@ -42,7 +42,7 @@ return call_user_func(
     }
 
     // Set error reporting level
-    if ($config['debug'] = false) {
+    if ($config['debug'] === false) {
       // Production
       ini_set('display_errors', 'Off');
       error_reporting(0);
