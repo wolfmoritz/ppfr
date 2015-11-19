@@ -29,6 +29,7 @@ $config['debug'] = false;
 /**
  * Default Domain
  * Used for the sitemap
+ * Note, do not include a trailing slash
  */
 $config['baseurl'] = '';
 
