@@ -6,11 +6,13 @@ namespace Recipe\Library;
  *
  *  Generates or updates sitemap on request
  */
-class SitemapHandler 
+class SitemapHandler
 {
 
   protected $app;
+  protected $baseUrl;
   private $sitemapFileName = 'sitemap.xml';
+  private $sitemapFilePath;
 
   /**
    *  Constructor
@@ -18,32 +20,45 @@ class SitemapHandler
    * @param $app, Object, Slim Application Object
    */
   public function __construct(\Slim\Slim $app) {
-      // Get the instance
+    // Get the instance
     $this->app = $app;
+
+    // Set the base url
+    $this->baseUrl = $this->app->config('baseurl');
+
+    // Set the full file path
+    $this->sitemapFilePath = ROOT_DIR . 'web/' . $this->sitemapFileName;
   }
 
   /**
    *  Generate sitemap
    */
-  public function makeSitemap() {
+  public function make() {
 
     // Get all pages
     $dataMapper = $this->app->dataMapper;
-    $PageMapper = $dataMapper('PageMapper');
-    $pages = $PageMapper->find();
+    $RecipeMapper = $dataMapper('RecipeMapper');
+    $pages = $RecipeMapper->find();
     $log = $this->app->log;
     $log->alert('Updating sitemap');
 
     $siteUrl = $this->app->request->getUrl();
+    $today = date('Y-m-d', time());
 
     // Begin assembling the sitemap starting with the header
     $sitemap = "<\x3Fxml version=\"1.0\" encoding=\"UTF-8\"\x3F>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
-    // Add each page
-    foreach($pages as $page)
-    {
+    // Add static pages
+    $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('about')}</loc>\n";
+    $sitemap .= "\t\t<lastmod>{$today}</lastmod>\n \t</url>\n";
+
+    $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('blog')}</loc>\n";
+    $sitemap .= "\t\t<lastmod>{$today}</lastmod>\n \t</url>\n";
+
+    // Add each recipe page
+    foreach($pages as $page) {
       $modifiedDate = date('Y-m-d', strtotime($page->updated_date));
-      $sitemap .= "\t<url>\n\t\t<loc>{$siteUrl}/{$page->slug}</loc>\n";
+      $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('showRecipe', ['id' => $page->recipe_id, 'slug' => $page->url])}</loc>\n";
       $sitemap .= "\t\t<lastmod>{$modifiedDate}</lastmod>\n \t</url>\n";
     }
 
@@ -52,8 +67,7 @@ class SitemapHandler
 
     // Write the sitemap data to file at web root
     try {
-      $sitemapFilePath = ROOT_DIR . $this->sitemapFileName;
-      $fh = fopen($sitemapFilePath, 'w');
+      $fh = fopen($this->sitemapFilePath, 'w');
       fwrite($fh, $sitemap);
       fclose($fh);
     } catch (\Exception $e) {
@@ -69,7 +83,7 @@ class SitemapHandler
     {
       // Ping Google via http request with updated sitemap
       $log->alert('Submitting sitemap to search engines');
-      $sitemapUrl = urlencode($siteUrl . '/' . $this->sitemapFileName);
+      $sitemapUrl = urlencode($baseUrl . '/' . $this->sitemapFileName);
       $googleSitemapUrl = "http://www.google.com/webmasters/tools/ping?sitemap=" . $sitemapUrl;
 
       try {
@@ -88,6 +102,7 @@ class SitemapHandler
         return false;
       }
 
+      $log->alert('Google response: ' . $httpResponseStatus);
 
       // Log error if update fails
       if (substr($httpResponseStatus, 0, 1) != 2)

@@ -1,0 +1,21 @@
+{
+    "name": "ahmetkapikiran/slim-cli-environment",
+    "description": "Run Slim from Command-line",
+    "authors": [
+        {
+            "name": "Ahmet",
+            "email": "ahmetkapikiran@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "slim/slim": ">=2.0.0",
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Slim\\Extras": "."
+        }
+    },
+    "target-dir": "Slim/Extras"
+}

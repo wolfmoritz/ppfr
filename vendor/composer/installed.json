@@ -583,5 +583,42 @@
             "stream",
             "uri"
         ]
+    },
+    {
+        "name": "ahmetkapikiran/slim-cli-environment",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Slim/Extras",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ahmetkapikiran/Slim-CLI-Environment.git",
+            "reference": "f2057ecca436df960abfe869ec0d44f316aa76fb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ahmetkapikiran/Slim-CLI-Environment/zipball/f2057ecca436df960abfe869ec0d44f316aa76fb",
+            "reference": "f2057ecca436df960abfe869ec0d44f316aa76fb",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "slim/slim": ">=2.0.0"
+        },
+        "time": "2014-10-29 20:44:43",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Slim\\Extras": "."
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Ahmet",
+                "email": "ahmetkapikiran@gmail.com"
+            }
+        ],
+        "description": "Run Slim from Command-line"
     }
 ]

@@ -177,6 +177,7 @@ return array(
     'Slim\\Environment' => $vendorDir . '/slim/slim/Slim/Environment.php',
     'Slim\\Exception\\Pass' => $vendorDir . '/slim/slim/Slim/Exception/Pass.php',
     'Slim\\Exception\\Stop' => $vendorDir . '/slim/slim/Slim/Exception/Stop.php',
+    'Slim\\Extras\\Environment' => $vendorDir . '/ahmetkapikiran/slim-cli-environment/Slim/Extras/Environment.php',
     'Slim\\Helper\\Set' => $vendorDir . '/slim/slim/Slim/Helper/Set.php',
     'Slim\\Http\\Cookies' => $vendorDir . '/slim/slim/Slim/Http/Cookies.php',
     'Slim\\Http\\Headers' => $vendorDir . '/slim/slim/Slim/Http/Headers.php',

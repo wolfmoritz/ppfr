@@ -34,6 +34,17 @@ $app->get('/blog', function() {
   (new Controllers\IndexController())->blogPost();
 })->name('blog');
 
+// Update sitemap **Command Line Only**
+$app->get('/updatesitemap', function() use ($app) {
+    // Does it matter if this is called from a browser?
+    // if (PHP_SAPI !== 'cli') {
+    //  $this->app->halt(500);
+    // }
+
+    $SitemapHandler = $app->sitemap;
+    $SitemapHandler->make();
+});
+
 // Home page (last route, the default)
 $app->get('/', function () {
   (new Controllers\IndexController())->getRecipesByCategory('All', 1);

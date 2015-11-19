@@ -27,6 +27,12 @@ $config['mode'] = 'production';
 $config['debug'] = false;
 
 /**
+ * Default Domain
+ * Used for the sitemap
+ */
+$config['baseurl'] = '';
+
+/**
  * Database Settings
  */
 $config['database']['host'] = 'localhost';
