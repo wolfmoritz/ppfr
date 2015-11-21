@@ -34,7 +34,7 @@ $app->get('/blog', function() {
   (new Controllers\IndexController())->blogPost();
 })->name('blog');
 
-// Update sitemap **Command Line Only**
+// Update sitemap
 $app->get('/updatesitemap', function() use ($app) {
     // Does it matter if this is called from a browser?
     // if (PHP_SAPI !== 'cli') {
