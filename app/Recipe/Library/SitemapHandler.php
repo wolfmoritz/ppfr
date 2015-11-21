@@ -11,8 +11,8 @@ class SitemapHandler
 
   protected $app;
   protected $baseUrl;
-  private $sitemapFileName = 'sitemap.xml';
-  private $sitemapFilePath;
+  protected $sitemapFileName = 'sitemap.xml';
+  protected $sitemapFilePath;
 
   /**
    *  Constructor
@@ -55,9 +55,12 @@ class SitemapHandler
     $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('blog')}</loc>\n";
     $sitemap .= "\t\t<lastmod>{$today}</lastmod>\n \t</url>\n";
 
-    // Add each recipe page
+    // Add each recipe page to sitemap, and track the most recent update date
+    $lastUpdated = strtotime('-2 days'); // Something  before the last update
     foreach($pages as $page) {
-      $modifiedDate = date('Y-m-d', strtotime($page->updated_date));
+      $updated = strtotime($page->updated_date);
+      $lastUpdated = max($lastUpdated, $updated);
+      $modifiedDate = date('Y-m-d', $updated);
       $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('showRecipe', ['id' => $page->recipe_id, 'slug' => $page->url])}</loc>\n";
       $sitemap .= "\t\t<lastmod>{$modifiedDate}</lastmod>\n \t</url>\n";
     }
@@ -79,7 +82,7 @@ class SitemapHandler
     }
 
     // If this is the production instance, attempt to update Google with the new sitemap index.
-    if($this->app->config('mode') === 'production')
+    if($this->app->config('mode') === 'production' && $lastUpdated >= strtotime('-1 day'))
     {
       // Ping Google via http request with updated sitemap
       $log->alert('Submitting sitemap to search engines');
@@ -90,7 +93,7 @@ class SitemapHandler
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,2);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        curl_setopt ($ch, CURLOPT_URL, $googleSitemapUrl);
+        curl_setopt($ch, CURLOPT_URL, $googleSitemapUrl);
         $response = curl_exec($ch);
         $httpResponseStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
