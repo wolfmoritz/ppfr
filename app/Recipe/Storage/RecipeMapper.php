@@ -85,9 +85,7 @@ class RecipeMapper extends DataMapperAbstract
   /**
    * Search Recipes
    *
-   * Terms separated by a space are treated as separate search terms.
-   * This query searches:
-   *  - Categories
+   * This query searches each of these fields for having all supplied terms:
    *  - Title
    *  - Ingredients
    *  - Instructions
@@ -96,33 +94,46 @@ class RecipeMapper extends DataMapperAbstract
   {
     // Create array of search terms and append wildcards
     $termsArray = preg_split('/\s+/', $terms);
-    array_walk($termsArray, function(&$item) { $item = '%' . $item . '%'; });
 
     // Start building SQL statement
     $this->sql = $this->defaultSelect . ' where ';
 
-    // First search categories
-    $categoryMatch = '';
-    foreach ($termsArray as $term) {
-      $categoryMatch .= ' and c.name like ?';
-      $this->bindValues[] = $term;
+    // Our search expression. Searches whole words consider proper word boundaries
+    $regex = ' REGEXP CONCAT(\'([[[:blank:][:punct:]]|^)\', ?, \'([[:blank:][:punct:]]|$)\')';
+
+    // Start search strings on each field
+    $numberOfTerms = count($termsArray) - 1; // Zero indexed
+    $titleSearch = '(';
+    $ingredientSearch = '(';
+    $instructionSearch = '(';
+
+    for ($i = 0; $i <= $numberOfTerms; $i++) {
+      $titleSearch .= "r.title {$regex}";
+      $ingredientSearch .= "r.ingredients {$regex}";
+      $instructionSearch .= "r.instructions {$regex}";
+
+      // Continue search strings with "and" if there is more then one search term
+      if ($i !== $numberOfTerms) {
+        $titleSearch .= ' and ';
+        $ingredientSearch .= ' and ';
+        $instructionSearch .= ' and ';
+      }
     }
 
-    $this->sql .= " r.recipe_id in (select rc.recipe_id
-        from pp_recipe_category rc
-        join pp_category c on rc.category_id = c.category_id
-        where 1=1 {$categoryMatch}) ";
+    // Close field search strings
+    $titleSearch .= ')';
+    $ingredientSearch .= ')';
+    $instructionSearch .= ')';
 
-    // Add search on other fields
-    $fieldMatch = '';
-    foreach ($termsArray as $term) {
-      $fieldMatch .= ' or r.title like ? or r.ingredients like ? or r.instructions like ?';
-      $this->bindValues[] = $term;
-      $this->bindValues[] = $term;
-      $this->bindValues[] = $term;
+    // Add bind parameters, repeating each set of terms for each field
+    for ($i=0; $i < 3; $i++) {
+      foreach ($termsArray as $term) {
+        $this->bindValues[] = $term;
+      }
     }
 
-    $this->sql .= " {$fieldMatch}";
+    // Add predicates to sql statement
+    $this->sql .= " {$titleSearch} or {$ingredientSearch} or {$instructionSearch}";
 
     if ($limit) {
       $this->sql .= " limit {$limit}";
