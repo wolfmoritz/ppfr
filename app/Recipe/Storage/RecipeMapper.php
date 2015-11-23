@@ -26,12 +26,38 @@ class RecipeMapper extends DataMapperAbstract
    */
   public function getRecipes($limit = null, $offset = null)
   {
-    if (empty($this->sql)) {
-      $this->sql = $this->defaultSelect;
-    }
+    $this->sql = $this->defaultSelect;
 
     // Add order by
     $this->sql .= ' order by r.created_date desc';
+
+    if ($limit) {
+      $this->sql .= " limit {$limit}";
+    }
+
+    if ($offset) {
+      $this->sql .= " offset {$offset}";
+    }
+
+    return $this->find();
+  }
+
+  /**
+   * Get Recipes with Photos (first) with Offset
+   *
+   * Define limit and offset to limit result set.
+   * Returns an array of Domain Objects (one for each record)
+   * @param int, limit
+   * @param int, offset
+   * @return array
+   */
+  public function getRecipesWithPhoto($limit = null, $offset = null)
+  {
+    $this->sql = $this->defaultSelect;
+
+    // Add order by clause. MySQL does not have an 'order by nulls last' syntax,
+    // so this 'r.main_photo is not null desc' is a trick I found on Stackoverflow to do the same
+    $this->sql .= ' order by r.main_photo is not null desc, r.created_date desc';
 
     if ($limit) {
       $this->sql .= " limit {$limit}";

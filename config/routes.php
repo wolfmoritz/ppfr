@@ -47,5 +47,5 @@ $app->get('/updatesitemap', function() use ($app) {
 
 // Home page (last route, the default)
 $app->get('/', function () {
-  (new Controllers\IndexController())->getRecipesByCategory('All', 1);
+  (new Controllers\IndexController())->home();
 })->name('home');

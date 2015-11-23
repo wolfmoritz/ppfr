@@ -124,58 +124,13 @@
 </nav>
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
     {% block body %}
     {% endblock %}
-    </div>
-    <!--end col-md-10 left column -->
-
-    <div class="col-md-2 hidden-xs hidden-sm">
-   <!-- <div class="sidenav">
-        <div class="widgetTitle">My Pantry</div>
-        <ul>
-          <li><a href="#">Add Recipe</a></li>
-          <li><a href="#">My Recipes</a></li>
-
-        </ul>
-      </div> --> <!-- Commented out MY Pantry Widget -->
-      <div class="sidenav">
-        <h5 class="page-header">Top Five Recipes</h5>
-        <ul class="list-unstyled">
-          {% for r in topRecipes(5) %}
-          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="sidenav">
-        <h5 class="page-header">Random Recipe</h5>
-        <ul class="list-unstyled">
-          {% for r in randomRecipes(5) %}
-          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% if production %}
-      <div class="sidenav">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:160px;height:600px"
-             data-ad-client="ca-pub-6388989287678352"
-             data-ad-slot="1745555829"></ins>
-        <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-      {% endif %}
-    </div>
-    <!--end col-me-2 right column -->
   </div>
   <!--End of content row -->
-
 </div>
 <!--End of content container -->
-<!--End Content Container -->
-  <footer class="footer">
+<footer class="footer">
   <div class="container">
     <div class="row">
       <div class="col-sm-2">
