@@ -45,6 +45,11 @@ $app->get('/updatesitemap', function() use ($app) {
     $SitemapHandler->make();
 });
 
+// Get more home page recipes (Ajax request)
+$app->get('/getmorephotorecipes/:pageno', function($pageno = 1) {
+  (new Controllers\IndexController())->getMorePhotoRecipes($pageno);
+});
+
 // Home page (last route, the default)
 $app->get('/', function () {
   (new Controllers\IndexController())->home();
