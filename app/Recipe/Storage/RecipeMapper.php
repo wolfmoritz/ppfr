@@ -57,7 +57,8 @@ class RecipeMapper extends DataMapperAbstract
 
     // Add order by clause. MySQL does not have an 'order by nulls last' syntax,
     // so this 'r.main_photo is not null desc' is a trick I found on Stackoverflow to do the same
-    $this->sql .= ' order by r.main_photo is not null desc, r.created_date desc';
+    // Changed to filter out no-photo recipes
+    $this->sql .= ' where r.main_photo is not null order by /* r.main_photo is not null desc,*/ r.created_date desc';
 
     if ($limit) {
       $this->sql .= " limit {$limit}";
