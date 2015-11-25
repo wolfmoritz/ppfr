@@ -30,7 +30,7 @@
   <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
   <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
-  <link rel="stylesheet" href="{{ baseUrl() }}/assets/bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href="{{ baseUrl() }}/assets/css/style.css" rel="stylesheet" type="text/css" media="screen">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -44,10 +44,10 @@
 <body>
   <div id="fb-root"></div>
   <script>
-    // Facebook Login
+    // Facebook SDK
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : 251905954939842,
+        appId      : {{ config('auth.facebook')['app_id'] }},
         status     : false,
         cookie     : true,
         xfbml      : true
@@ -62,67 +62,82 @@
     }(document));
   </script>
 
-<nav class="navbar navbar-default">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ siteUrlFor('home') }}"><img src="{{ baseUrl() }}/assets/img/logo.png" alt="Peri's Place For Recipes"></a>
-    </div>
+<!--Begin Large Logo Container -->
+<div class="container-fluid" id="header">
+  <a href="{{ siteUrlFor('home') }}"><img src="{{ baseUrl() }}/assets/img/ppfrLogo.png" class="img-responsive center-block" alt="Peri's Place For Recipes"></a>
+</div>
+<!--End Large Logo Container -->
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li{% if uriSegment(1) == '' %} class="active"{% endif %}> <a href="{{ siteUrlFor('home') }}">Home</a> </li>
-        <li{% if uriSegment(1) == 'about' %} class="active"{% endif %}> <a href="{{ siteUrlFor('about') }}">About Me</a></li>
-        <li{% if uriSegment(1) == 'blog' %} class="active"{% endif %}> <a href="{{ siteUrlFor('blog') }}">Blog</a></li>
-        <li class="dropdown hidden-sm hidden-xs"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
-            <li class="dropdown-header">Select a category</li>
-            {% for cat in categories %}
-            <li ><a href="{{ siteUrlFor('recipesByCategory') }}/{{ cat.url }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>
-            {% endfor %}
-          </ul>
-          <!-- end dropdown-menu -->
-        </li>
-      </ul>
-      <form action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8" class="navbar-form navbar-left">
-    <div class="form-group" style="display:inline;">
-      <div class="input-group">
-        <input type="text" name="terms" class="form-control" value="{{ recipes.searchTerms }}" placeholder="Search this site..." id="searchInput" autocomplete="off">
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-        </span>
+<!--Begin Navbar -->
+<div id="nav-container">
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="brand-wrapper hidden-sm">
+          <a class="navbar-brand" href="{{ siteUrlFor('home') }}">
+            <img src="{{ baseUrl() }}/assets/img/ppfrLogoSmall.png" width="87" height="50" alt="Peri's Place For Recipes" class="img-responsive">
+          </a>
+        </div>
       </div>
-    </div>
-  </form>
-  <!-- end navbar-form -->
 
-      <!--<ul class="nav navbar-nav navbar-right">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li{% if uriSegment(1) == '' %} class="active"{% endif %}> <a href="{{ siteUrlFor('home') }}">Home</a></li>
+          <li{% if uriSegment(1) == 'about' %} class="active"{% endif %}> <a href="{{ siteUrlFor('about') }}">About Me</a></li>
+          <li{% if uriSegment(1) == 'blog' %} class="active"{% endif %}> <a href="{{ siteUrlFor('blog') }}">Blog</a></li>
+          <li class="dropdown hidden-sm hidden-xs"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
+              <li class="dropdown-header">Select a category</li>
+              {% for cat in categories %}
+              <li ><a href="{{ siteUrlFor('recipesByCategory') }}/{{ cat.url }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>
+              {% endfor %}
+            </ul>
+            <!-- end dropdown-menu -->
+          </li>
+        </ul>
+        <form action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8" class="navbar-form navbar-right">
+          <div class="form-group" style="display:inline;">
+            <div class="input-group">
+              <input type="text" name="terms" class="form-control" value="{{ recipes.searchTerms }}" placeholder="Search this site..." id="searchInput" autocomplete="off">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+              </span>
+            </div>
+          </div>
+      </form>
+    <!-- end navbar-form -->
 
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" roll="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-                    <div class="nav-divider"></div>
-            <li> <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
-            <li> <a href="#"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
-            <li class="divider"></li>
-            <li> <a href="admin/index.html">My Account</a>
-            <li> <a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a> </li>
-          </ul>
-        </li>
-      </ul> -->
-      <!-- end nav pull-right -->
+        <!--<ul class="nav navbar-nav navbar-right">
 
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<div class="container">
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" roll="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                      <div class="nav-divider"></div>
+              <li> <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
+              <li> <a href="#"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
+              <li class="divider"></li>
+              <li> <a href="admin/index.html">My Account</a>
+              <li> <a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a> </li>
+            </ul>
+          </li>
+        </ul> -->
+        <!-- end nav pull-right -->
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+</div>
+<!--End Navbar Container -->
+
+<div class="container top-buffer">
   <div class="row">
     {% block body %}
     {% endblock %}
@@ -130,7 +145,8 @@
   <!--End of content row -->
 </div>
 <!--End of content container -->
-<footer class="footer">
+
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-sm-2">
@@ -150,7 +166,6 @@
           <li><a href="{{ baseUrl() }}">Home</a></li>
           <li><a href="{{ siteUrlFor('about') }}">About Us</a></li>
           <li><a href="{{ siteUrlFor('blog') }}">Blog</a></li>
-          <!-- li><a href="contact.html">Contact</a></li -->
         </ul>
       </div>
       <!-- end col-sm-2 -->
@@ -173,9 +188,12 @@
   <!-- end container -->
 
 </footer>
-  <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script -->
-  <script src="{{ baseUrl() }}/assets/js/jquery-1.11.3.min.js"></script>
-  <script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <!-- script src="{{ baseUrl() }}/assets/js/jquery-1.11.3.min.js"></script -->
+  <!-- script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="{{ baseUrl() }}/assets/js/imagesloaded.js"></script>
+  <script src="{{ baseUrl() }}/assets/js/jquery.masonry.min.js"></script>
   <script src="{{ baseUrl() }}/assets/js/script.js"></script>
 
 {% if production %}

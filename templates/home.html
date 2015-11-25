@@ -2,12 +2,15 @@
 
 {% block body %}
     <div class="col-xs-12">
-        <div id="content" class="center-block">
-            <div class="col-md-10 masonry-tiles">
-            {% include '_masonry.html' %}
-              <button type="button" class="btn btn-default more-recipes-button">More Recipes</button>
-            </div>
-            <!--end col-md-10 left column -->
-        </div>
+      <div id="content" class="center-block masonry-tiles">
+        {% include '_masonry.html' %}
+      </div>
     </div>
+    <!--Begin MoreLoad button -->
+    <div class="row top-buffer">
+      <div class="col-xs-12">
+        <div class="btn btn-info center-block" id="more-recipes-button">Load More</div>
+      </div>
+    </div>
+    <!--End MoreLoad Button -->
 {% endblock %}
