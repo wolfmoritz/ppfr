@@ -1,20 +1,12 @@
 // Home Page Masonry
-$('#content').masonry({
-  itemSelector: '.item'
-}).imagesLoaded(function() {
-  $('#content').masonry('reload');
-});
-
-// Init jQuery Masonry layout
-var $container = $('#content');
-$container.imagesLoaded( function(){
-    $container.masonry({
-      itemSelector: '.item',
-      isAnimated: true
+var $masonryContainer = $('#content').imagesLoaded(function(){
+    $(this).masonry({
+      itemSelector: '.item'
+      // ,isAnimated: true
     });
 });
 
-// Load more recipes on request
+// Load more masonry recipes on request
 var masonryPage = 2;
 $('#more-recipes-button').on('click', function() {
   $.ajax({
@@ -23,7 +15,7 @@ $('#more-recipes-button').on('click', function() {
       var $newElems = $(newElements).css({opacity: 0});
       $newElems.imagesLoaded(function() {
         $newElems.animate({opacity: 1});
-        $container.append($newElems).masonry('appended', $newElems, true);
+        $masonryContainer.append($newElems).masonry('appended', $newElems, true);
       });
       masonryPage++;
     }
@@ -34,7 +26,6 @@ $('#more-recipes-button').on('click', function() {
 $("#collapsed-navbar").change(function () {
   window.location = $(this).val();
 });
-
 
 // On scroll down fix navbar for SM and wider widths
 $(document).on("scroll", function() {
