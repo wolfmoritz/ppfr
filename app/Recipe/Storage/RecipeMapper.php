@@ -119,8 +119,9 @@ class RecipeMapper extends DataMapperAbstract
    */
   public function searchRecipes($terms, $limit, $offset)
   {
-    // Create array of search terms and append wildcards
+    // Create array of search terms split by word
     $termsArray = preg_split('/\s+/', $terms);
+    $termsArray = array_filter($termsArray);
 
     // Start building SQL statement
     $this->sql = $this->defaultSelect . ' where ';
