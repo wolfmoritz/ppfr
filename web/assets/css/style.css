@@ -15,21 +15,22 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
   /* Margin bottom by footer height */
-  margin-bottom: 280px;
+  margin-bottom: 320px;
   background-color: #eae7d6;
   font-family: 'PT Serif', serif;
+  font-size: 16px;
 }
 #header {background-color: #eae7d6;}
-#content {}
+
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 250px;
+  height: 300px;
   background-color: #082e41;
   color: #eee;
-  font-size: 12px;
+  font-size: 14px;
   padding: 20px;
   }
 #content .item {
@@ -65,25 +66,20 @@ footer {
 }
 
 .overlay .title {
-    text-align: center;
-    font-size: 30px;
+   	text-align: center;
+	font-size: 25px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: bold;
 }
 
-.overlay .description {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.80);
-    width: 100%;
-    margin: 0;
-}
 
-.overlay .description p {
-    margin: 20px;
-}
+
 
 .item:hover .overlay {
-    display: block;
+   display: block;
+	color: #fff;
+	text-decoration: none;
+
 }
 img {
   max-width: 100%;
@@ -118,6 +114,9 @@ img {
 .navbar-default {
   background-color: #ef525b;
   border-color: transparent;
+  font-family: Raleway, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-size: 16px;
+
 }
 .navbar-default .navbar-brand {
   color: #000000;
