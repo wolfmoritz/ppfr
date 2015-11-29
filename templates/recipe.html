@@ -24,9 +24,13 @@
           <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
           {% endif %}
 
-          <div class="servings"> Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>
+          <div class="recipe-meta">
+            {% if recipe.servings %}Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>{% endif %}
+            {% if recipe.temperature %}Oven Temp: {{ recipe.temperature }}<br>{% endif %}
+            {% if recipe.prep_time %}Prep Time: <meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time }}<br>{% endif %}
+            {% if recipe.cook_time %}Cook Time: <meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time }}{% endif %}
           </div>
-          <!-- .servings -->
+          <!-- .recipe-meta -->
           <h4>Ingredients</h4>
           <div class="ingredients">
             {{ recipe.ingredients|raw }}
@@ -57,7 +61,7 @@
           <!--end recipe categories -->
           {% endfor %}
           </div>
-
+{{dump()}}
         </div>
         <!--end Panel-body -->
 

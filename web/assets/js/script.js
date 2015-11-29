@@ -12,12 +12,17 @@ $('#more-recipes-button').on('click', function() {
   $.ajax({
     url: 'getmorephotorecipes/' + masonryPage,
     success: function(newElements) {
-      var $newElems = $(newElements).css({opacity: 0});
-      $newElems.imagesLoaded(function() {
-        $newElems.animate({opacity: 1});
-        $masonryContainer.append($newElems).masonry('appended', $newElems, true);
-      });
-      masonryPage++;
+      if ($(newElements).is('div')) {
+        var $newElems = $(newElements).css({opacity: 0});
+        $newElems.imagesLoaded(function() {
+          $newElems.animate({opacity: 1});
+          $masonryContainer.append($newElems).masonry('appended', $newElems, true);
+        });
+        masonryPage++;
+      } else {
+        // Hide more button if we have no more results
+        $('#more-recipes-button').hide();
+      }
     }
   });
 });
