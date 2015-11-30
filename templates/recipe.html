@@ -56,9 +56,9 @@
 		Viewed: {{ recipe.view_count }} Times 
 		</div><!-- .recipeOwner -->
 
-		<h4>Recipe Categories</h4>
+		<h4><strong>Recipe Categories</strong></h4>
 			<div itemprop="recipeCategory">
-				{% for c in recipe.categories %}<a href="{{ siteUrlFor('recipesByCategory') }}/{{ c.url }}" title="View recipes for {{ c.name }}">{{ c.name }}</a>
+				{% for c in recipe.categories %}<div class="btn btn-primary btn-xs"><a href="{{ siteUrlFor('recipesByCategory') }}/{{ c.url }}" title="View recipes for {{ c.name }}">{{ c.name }}</a></div>
 			
 {% endfor %}
 			</div><!--end recipe categories -->

@@ -64,7 +64,13 @@ recipe h4 {
 .image:after {
     clear:both;
 }
-
+.btn-primary{ 
+	background-color: #ef525b;
+	border: none;
+	}
+.btn-primary a{
+	color: #fff;
+}
 .overlay {
     width: 100%;
     height: 100%;
