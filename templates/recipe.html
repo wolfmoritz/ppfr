@@ -1,71 +1,83 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="col-md-12">
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <h2>{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
-        </div>
-        <!--End panel-heading -->
-        <div class="panel-body">
+<h2 class="page-header">{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
+	<div id="recipe" class="col-md-9 col-sm-12">          
+		
 
-        <div class="socialContainer">
-          {% if recipe.main_photo %}
-          <div class="socialButtonBox">
-            <a href="//www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
-          </div>
-          {% endif %}
-          <div class="socialButtonBox">
-            <div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-          </div>
-        </div>
+		<div class="socialContainer clearfix">
+			{% if recipe.main_photo %}
 
-          {% if recipe.main_photo %}
-          <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
-          {% endif %}
+			<div class="socialButtonBox pull-left">
+				<a href="//www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>&nbsp;
+			</div>
+			{% endif %}
+ 
+			<div class="socialButtonBox pull-left">
+				<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+			</div><!-- .end socialButtonBox -->
+		</div><!-- .end socialContainer -->
+		
+		<!-- Begin recipe.main_photo -->
 
-          <div class="recipe-meta">
-            {% if recipe.servings %}Servings: <span itemprop="recipeYield">{{ recipe.servings }}</span><br>{% endif %}
-            {% if recipe.temperature %}Oven Temp: {{ recipe.temperature }}<br>{% endif %}
-            {% if recipe.prep_time %}Prep Time: <meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time }}<br>{% endif %}
-            {% if recipe.cook_time %}Cook Time: <meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time }}{% endif %}
-          </div>
-          <!-- .recipe-meta -->
-          <h4>Ingredients</h4>
-          <div class="ingredients">
-            {{ recipe.ingredients|raw }}
-          </div>
-          <!--end ingredients -->
-          <h4>Preparation</h4>
-          <div class="recipetext" itemprop="recipeInstructions">
-            {{ recipe.instructions|raw }}
-          </div>
-          <!--end preparation -->
-          <h4>Notes</h4>
-          <div class="recipetext" itemprop="description">
-            {{ recipe.notes|raw }}
-          </div>
+			{% if recipe.main_photo %}
+				<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive img-shadow"  alt="Photo of {{ recipe.title }}">
+			{% endif %}
+		<!-- End .recipe.main_photo -->
+
+		<!-- Begin recipe-meta -->
+		<div class="recipe-meta top-buffer hidden-md hidden-lg">
+			{% if recipe.servings %}<strong>Servings: &nbsp;&nbsp;</strong> <span itemprop="recipeYield">{{ recipe.servings }}</span><br>{% endif %}
+			{% if recipe.temperature %}<strong>Oven Temp:&nbsp;&nbsp; </strong>{{ recipe.temperature }}<br>{% endif %}
+			{% if recipe.prep_time %}<strong>Prep Time:&nbsp;&nbsp; </strong><meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time }}<br>{% endif %}
+			{% if recipe.cook_time %}<strong>Cook Time:&nbsp;&nbsp; </strong><meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time }}{% endif %}
+		  <hr></div><!-- .recipe-meta -->
+        
+		<h4><strong>Ingredients</strong></h4>
+		<div class="ingredients">
+			{{ recipe.ingredients|raw }}
+		</div><!--end ingredients -->
+		<hr>
+		<h4><strong>Preparation</strong></h4>
+		<div class="recipetext" itemprop="recipeInstructions">
+			{{ recipe.instructions|raw }}
+		</div><!--end preparation -->
+		<hr>
+		<span class="hidden-md hidden-lg hidden-xl"><h4><strong>Notes</strong></h4>
+		<div class="recipetext" itemprop="description">
+			{{ recipe.notes|raw }}
+		</div><!-- end notes -->
+
+		<hr></span>
+
+		<div class="recipeOwner"> 
+		Other recipes by <a href="{{ siteUrlFor('recipesByUser') }}/{{ recipe.user_url }}"><span itemprop="author">{{ recipe.user_name }}</span></a><br>
+		Added on: <meta itemprop="datePublished" content="2012-06-23 12:00:00"> {{ recipe.created_date|date('F j, Y') }}<br>
+		Viewed: {{ recipe.view_count }} Times 
+		</div><!-- .recipeOwner -->
+
+		<h4>Recipe Categories</h4>
+			<div itemprop="recipeCategory">
+				{% for c in recipe.categories %}<a href="{{ siteUrlFor('recipesByCategory') }}/{{ c.url }}" title="View recipes for {{ c.name }}">{{ c.name }}</a>
+			
+{% endfor %}
+			</div><!--end recipe categories -->
+	</div><!-- end col-md-9 col-sm-12 -->
+    <div class="col-md-3 hidden-sm hidden-xs">
+    <!-- Begin recipe-meta -->
+		<div class="recipe-meta top-buffer">
+			{% if recipe.servings %}<strong>Servings: &nbsp;&nbsp;</strong> <span itemprop="recipeYield">{{ recipe.servings }}</span><br>{% endif %}
+			{% if recipe.temperature %}<strong>Oven Temp:&nbsp;&nbsp; </strong>{{ recipe.temperature }}<br>{% endif %}
+			{% if recipe.prep_time %}<strong>Prep Time:&nbsp;&nbsp; </strong><meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time }}<br>{% endif %}
+			{% if recipe.cook_time %}<strong>Cook Time:&nbsp;&nbsp; </strong><meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time }}{% endif %}
+		</div><!-- .recipe-meta -->
           <hr>
+    <h4><strong>Notes</strong></h4>
+		<div class="recipetext" itemprop="description">
+			{{ recipe.notes|raw }}
+		</div><!-- end notes -->
 
-          <div class="recipeOwner"> Other recipes by <a href="{{ siteUrlFor('recipesByUser') }}/{{ recipe.user_url }}">
-            <span itemprop="author">{{ recipe.user_name }}</span></a><br>
-            Added on:
-            <meta itemprop="datePublished" content="2012-06-23 12:00:00">
-            {{ recipe.created_date|date('F j, Y') }}<br>
-            Viewed: {{ recipe.view_count }} Times </div>
-          <!-- .recipeOwner -->
-          <h4>Recipe Categories</h4>
-          <div itemprop="recipeCategory">
-          {% for c in recipe.categories %}
-            <a href="{{ siteUrlFor('recipesByCategory') }}/{{ c.url }}" title="View recipes for {{ c.name }}">{{ c.name }}</a>
-          <!--end recipe categories -->
-          {% endfor %}
-          </div>
-
-        </div>
-        <!--end Panel-body -->
-
-      </div>
-      <!--End panel panel-success -->
-</div>
-{% endblock %}
+		<hr>
+    </div><!--end col-md-3 -->
+   </div><!--end row -->
+{% endblock %}	
