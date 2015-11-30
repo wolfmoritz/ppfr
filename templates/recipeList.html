@@ -1,45 +1,40 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+
     <div class="col-md-10">
       <h2 class="page-header">{{ recipes.category.name }} Recipes</h2>
       <!--Begin Recipe List Panels -->
+      <div class="row">
       {% for r in recipes.list %}
       {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
-      <div class="panel panel-success">
-        <div class="panel-heading panel-heading-custom">
-          <h4 class="recipe"><a href="{{ recipeUrl }}">{{ r.title }}</a></h4>
-        </div>
-        <!--end panel-heading -->
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-3">
-              {% if r.main_photo %}
-              <a href="{{ recipeUrl }}">
-                <img src="{{ imageUrl(r.recipe_id, r.main_photo) }}" class="img img-thumbnail img-responsive" alt="Photo of {{ r.title }}">
-              </a>
-              {% endif %}
-            </div>
-            <!--End col-md-2 panel-body -->
-            <div class="col-md-9">
-              <p class="lead">
-                {{ r.instructions_excerpt|raw }}
-                <small><a href="{{ recipeUrl }}">read more</a></small>
-              </p>
-              <small>
-                <p>Shared by <a href="{{ siteUrlFor('recipesByUser') }}/{{ r.user_url }}" data-toggle="tooltip" title="See more recipe&apos;s by {{ r.user_name }}">{{ r.user_name }}</a> on {{ r.created_date|date('F j, Y') }}</p>
-              </small>
-            </div>
-            <!--End col-md-9 panel-body -->
-          </div>
-          <!--End panel-body row -->
-        </div>
-        <!--end panel-body -->
-      </div><!--end panel panel-success -->
+      {% if not r.main_photo %}
+      	{% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}
+      {% else %}
+      	{% set imageUrl = imageUrl(r.recipe_id, r.main_photo) %}
+      {% endif %}
+      
+      <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">  
+                
+                
+                <img src="{{ imageUrl }}" class="img  img-responsive" alt="Photo of {{ r.title }}" width="200">
+                  
+				<div class="caption text-center"> <a href="{{ recipeUrl }}"><h4>{{ r.title }}</h4></a> </div>
+                  <!--end caption --> 
+                </div>
+                <!--end thumbnail --> 
+              </div>
+              <!--end col-sm-6 col-md-4 -->
+      
+
       {% else %}
         <h3>No Recipes Found</h3>
       {% endfor %}
-    {{ pagination() }}
+    
+   
+    </div><!--End row -->
+     {{ pagination() }}
     </div>
     <!--end col-md-10 left column -->
 
