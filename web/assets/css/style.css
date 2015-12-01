@@ -48,11 +48,29 @@ footer {
     margin: 0;
     display: block;
 }
-
+recipe h4 {
+	font-weight: bold;	
+	}
+.img-shadow {
+  margin: 5px 5px 5px 5px;
+  -moz-box-shadow: 3px 3px 4px #000;
+  -webkit-box-shadow: 3px 3px 4px #000;
+  box-shadow: 3px 3px 4px #000;
+  /* For IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+  /* For IE 5.5 - 7 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
 .image:after {
     clear:both;
 }
-
+.btn-primary{ 
+	background-color: #ef525b;
+	border: none;
+	}
+.btn-primary a{
+	color: #fff;
+}
 .overlay {
     width: 100%;
     height: 100%;
@@ -69,7 +87,7 @@ footer {
    	text-align: center;
 	font-size: 25px;
 	font-family: Verdana, Geneva, sans-serif;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 
 
