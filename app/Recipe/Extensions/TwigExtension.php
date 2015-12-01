@@ -235,7 +235,7 @@ class TwigExtension extends \Twig_Extension
       $app = \Slim\Slim::getInstance();
 
       $largeUri = $app->config('file.uri');
-      // $thumbUri = $app->config('file.thumb.uri');
+      $thumbUri = $app->config('file.thumb.uri');
 
       // Do not include application URL if one was supplied
       if (strpos($largeUri, 'http') === 0) {
@@ -252,18 +252,18 @@ class TwigExtension extends \Twig_Extension
     }
 
     // Else
-    return '';
+    // return '';
 
-    // Make sure at least one dimension is set to a size
-    // if (!is_numeric($width) and !is_numeric($height)) {
-    //   throw new \Exception('getImageUrl expects at least one numeric dimension');
-    // }
+    // Make sure at least one dimension is set to a numeric size
+    if (!is_numeric($width) and !is_numeric($height)) {
+      throw new \Exception('imageUrl expects at least one numeric dimension');
+    }
 
-    // // If width or height is not provided, set to '' to keep aspect ratio
-    // $width = (is_numeric($width)) ? $width : '';
-    // $height = (is_numeric($height)) ? $height : '';
+    // If width or height is not provided, set to '' to keep aspect ratio
+    $width = (is_numeric($width)) ? $width : '';
+    $height = (is_numeric($height)) ? $height : '';
 
-    // return $url . $thumbUri . $width . 'x' . $height . '/' . $filename;
+    return $url . $thumbUri . $width . 'x' . $height . '/' . $filename;
   }
 
   /**

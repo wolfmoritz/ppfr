@@ -21,7 +21,7 @@
         </div>
 
           {% if recipe.main_photo %}
-          <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
+          <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo, 320) }}" width="320" class="pull-right img-responsive"  alt="Photo of {{ recipe.title }}">
           {% endif %}
 
           <div class="recipe-meta">
