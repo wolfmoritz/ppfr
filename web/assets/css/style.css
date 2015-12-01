@@ -61,6 +61,10 @@ recipe h4 {
   /* For IE 5.5 - 7 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
+#recipeList img {
+    max-width: 200;
+    max-height: 150px;
+}
 .image:after {
     clear:both;
 }
