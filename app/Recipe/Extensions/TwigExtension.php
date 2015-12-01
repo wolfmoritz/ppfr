@@ -227,7 +227,7 @@ class TwigExtension extends \Twig_Extension
   {
     static $largeUri;
     static $thumbUri;
-    static $url = '';
+    static $baseUrl = '';
     static $app;
 
     // Cache variables for next request
@@ -239,16 +239,16 @@ class TwigExtension extends \Twig_Extension
 
       // Do not include application URL if one was supplied
       if (strpos($largeUri, 'http') === 0) {
-        $url = '';
+        $baseUrl = '';
       } else {
-        $url = $app->request->getUrl() . $app->request->getRootUri() . '/';
+        $baseUrl = $app->request->getUrl() . $app->request->getRootUri() . '/';
       }
     }
 
     // Was the full sized image requested?
     if ($width === null and $height === null) {
       // Just return url to the original image
-      return "{$url}{$largeUri}{$id}/files/{$filename}";
+      return "{$baseUrl}{$largeUri}{$id}/files/{$filename}";
     }
 
     // Else
@@ -263,7 +263,7 @@ class TwigExtension extends \Twig_Extension
     $width = (is_numeric($width)) ? $width : '';
     $height = (is_numeric($height)) ? $height : '';
 
-    return $url . $thumbUri . $width . 'x' . $height . '/' . $filename;
+    return $baseUrl . $thumbUri . $width . 'x' . $height . '/' . $filename;
   }
 
   /**
