@@ -62,7 +62,7 @@ recipe h4 {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
 #recipeList img {
-    max-width: 200;
+    max-width: 200px;
     max-height: 150px;
 }
 .image:after {
@@ -76,33 +76,34 @@ recipe h4 {
 	color: #fff;
 }
 .overlay {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-decoration: none;
-    color: #fff;
-    display: none;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: rgba(234, 231, 214, 0);
+	text-decoration: none;
+	background-color: rgba(0,0,0,0.0);
+	-webkit-transition: background-color 500ms linear, color 500ms linear;
+    -moz-transition: background-color 500ms linear, color 500ms linear;
+    -o-transition: background-color 500ms linear, color 500ms linear;
+    transition: background-color 500ms linear, color 600ms linear;
 }
 
 .overlay .title {
-   	text-align: center;
+	text-align: center;
 	font-size: 25px;
 	font-family: Verdana, Geneva, sans-serif;
-	/* font-weight: bold; */
-}
-
-
-
-
-.item:hover .overlay {
-   display: block;
-	color: #fff;
 	text-decoration: none;
-
+	
 }
+.item:hover .overlay {
+	display: block;
+	color: rgba(234, 231, 214, 1);
+	text-decoration: none;
+	background-color: rgba(0,0,0,0.5);
+}
+
 img {
   max-width: 100%;
 }

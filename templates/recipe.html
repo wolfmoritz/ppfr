@@ -2,8 +2,8 @@
 
 {% block body %}
 <h2 class="page-header">{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
-	<div id="recipe" class="col-md-9 col-sm-12">
 
+	<div class="col-md-9 col-sm-12">
 
 		<div class="socialContainer clearfix">
 			{% if recipe.main_photo %}
@@ -18,12 +18,7 @@
 			</div><!-- .end socialButtonBox -->
 		</div><!-- .end socialContainer -->
 
-		<!-- Begin recipe.main_photo -->
-
-			{% if recipe.main_photo %}
-				<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive img-shadow"  alt="Photo of {{ recipe.title }}">
-			{% endif %}
-		<!-- End .recipe.main_photo -->
+		
 
 		<!-- Begin recipe-meta -->
 		<div class="recipe-meta top-buffer hidden-md hidden-lg">
@@ -33,6 +28,13 @@
 			{% if recipe.cook_time %}<strong>Cook Time:&nbsp;&nbsp; </strong><meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time|raw }}{% endif %}
 		  <hr></div><!-- .recipe-meta -->
 
+		<!-- Begin recipe.main_photo -->
+
+			{% if recipe.main_photo %}
+				<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive img-shadow"  alt="Photo of {{ recipe.title }}">
+			{% endif %}
+		<!-- End .recipe.main_photo -->
+        
 		<h4><strong>Ingredients</strong></h4>
 		<div class="ingredients">
 			{{ recipe.ingredients|raw }}
@@ -64,7 +66,7 @@
 
 {% endfor %}
 			</div><!--end recipe categories -->
-	</div><!-- end col-md-9 col-sm-12 -->
+	</div><!-- end #recipe col-md-9 col-sm-12 -->
     <div class="col-md-3 hidden-sm hidden-xs">
     <!-- Begin recipe-meta -->
 		<div class="recipe-meta top-buffer">
