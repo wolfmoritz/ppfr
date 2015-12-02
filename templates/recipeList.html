@@ -5,7 +5,7 @@
     <div class="col-md-10">
       <h2 class="page-header">{{ recipes.category.name }} Recipes</h2>
       <!--Begin Recipe List Panels -->
-      <div class="row">
+      <div id="recipeList"  class="row">
       {% for r in recipes.list %}
       {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
       {% if not r.main_photo %}

@@ -9,25 +9,25 @@
 html {
   position: relative;
   min-height: 100%;
-   overflow-y: scroll;
+   /*overflow-y: scroll;*/
 }
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
   /* Margin bottom by footer height */
-  margin-bottom: 320px;
+  /*margin-bottom: 320px;*/
   background-color: #eae7d6;
   font-family: 'PT Serif', serif;
   font-size: 16px;
 }
 #header {background-color: #eae7d6;}
 
-footer {
+.footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 300px;
+  /*height: 300px;*/
   background-color: #082e41;
   color: #eee;
   font-size: 14px;
@@ -49,7 +49,7 @@ footer {
     display: block;
 }
 recipe h4 {
-	font-weight: bold;	
+	font-weight: bold;
 	}
 .img-shadow {
   margin: 5px 5px 5px 5px;
@@ -61,10 +61,14 @@ recipe h4 {
   /* For IE 5.5 - 7 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
+#recipeList img {
+    max-width: 200;
+    max-height: 150px;
+}
 .image:after {
     clear:both;
 }
-.btn-primary{ 
+.btn-primary{
 	background-color: #ef525b;
 	border: none;
 	}
@@ -124,6 +128,10 @@ img {
 }
 .navbar {
   margin-bottom: 0px;
+}
+.navbar-collapse {
+  padding-left: 0;
+  padding-right: 0;
 }
 /*****************************/
 /******* Modified Navbar *****/

@@ -2,8 +2,8 @@
 
 {% block body %}
 <h2 class="page-header">{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
-	<div id="recipe" class="col-md-9 col-sm-12">          
-		
+	<div id="recipe" class="col-md-9 col-sm-12">
+
 
 		<div class="socialContainer clearfix">
 			{% if recipe.main_photo %}
@@ -12,12 +12,12 @@
 				<a href="//www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>&nbsp;
 			</div>
 			{% endif %}
- 
+
 			<div class="socialButtonBox pull-left">
 				<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 			</div><!-- .end socialButtonBox -->
 		</div><!-- .end socialContainer -->
-		
+
 		<!-- Begin recipe.main_photo -->
 
 			{% if recipe.main_photo %}
@@ -27,12 +27,12 @@
 
 		<!-- Begin recipe-meta -->
 		<div class="recipe-meta top-buffer hidden-md hidden-lg">
-			{% if recipe.servings %}<strong>Servings: &nbsp;&nbsp;</strong> <span itemprop="recipeYield">{{ recipe.servings }}</span><br>{% endif %}
-			{% if recipe.temperature %}<strong>Oven Temp:&nbsp;&nbsp; </strong>{{ recipe.temperature }}<br>{% endif %}
-			{% if recipe.prep_time %}<strong>Prep Time:&nbsp;&nbsp; </strong><meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time }}<br>{% endif %}
-			{% if recipe.cook_time %}<strong>Cook Time:&nbsp;&nbsp; </strong><meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time }}{% endif %}
+			{% if recipe.servings %}<strong>Servings: &nbsp;&nbsp;</strong> <span itemprop="recipeYield">{{ recipe.servings|raw }}</span><br>{% endif %}
+			{% if recipe.temperature %}<strong>Oven Temp:&nbsp;&nbsp; </strong>{{ recipe.temperature|raw }}<br>{% endif %}
+			{% if recipe.prep_time %}<strong>Prep Time:&nbsp;&nbsp; </strong><meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time|raw }}<br>{% endif %}
+			{% if recipe.cook_time %}<strong>Cook Time:&nbsp;&nbsp; </strong><meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time|raw }}{% endif %}
 		  <hr></div><!-- .recipe-meta -->
-        
+
 		<h4><strong>Ingredients</strong></h4>
 		<div class="ingredients">
 			{{ recipe.ingredients|raw }}
@@ -43,23 +43,25 @@
 			{{ recipe.instructions|raw }}
 		</div><!--end preparation -->
 		<hr>
+		{% if recipe.notes %}
 		<span class="hidden-md hidden-lg hidden-xl"><h4><strong>Notes</strong></h4>
 		<div class="recipetext" itemprop="description">
 			{{ recipe.notes|raw }}
 		</div><!-- end notes -->
 
 		<hr></span>
+		{% endif %}
 
-		<div class="recipeOwner"> 
+		<div class="recipeOwner">
 		Other recipes by <a href="{{ siteUrlFor('recipesByUser') }}/{{ recipe.user_url }}"><span itemprop="author">{{ recipe.user_name }}</span></a><br>
 		Added on: <meta itemprop="datePublished" content="2012-06-23 12:00:00"> {{ recipe.created_date|date('F j, Y') }}<br>
-		Viewed: {{ recipe.view_count }} Times 
+		Viewed: {{ recipe.view_count }} Times
 		</div><!-- .recipeOwner -->
 
 		<h4><strong>Recipe Categories</strong></h4>
 			<div itemprop="recipeCategory">
 				{% for c in recipe.categories %}<div class="btn btn-primary btn-xs"><a href="{{ siteUrlFor('recipesByCategory') }}/{{ c.url }}" title="View recipes for {{ c.name }}">{{ c.name }}</a></div>
-			
+
 {% endfor %}
 			</div><!--end recipe categories -->
 	</div><!-- end col-md-9 col-sm-12 -->
@@ -80,4 +82,4 @@
 		<hr>
     </div><!--end col-md-3 -->
    </div><!--end row -->
-{% endblock %}	
+{% endblock %}

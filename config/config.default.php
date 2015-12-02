@@ -80,3 +80,10 @@ $config['pagination']['numberOfLinks'] = 2;
  * Routing Options
  */
 $config['routes.case_sensitive'] = false;
+
+/**
+ * Social Authentication Options
+ */
+$config['auth.facebook']['app_id'] = '';
+$config['auth.facebook']['app_secret'] = '';
+$config['auth.facebook']['default_graph_version'] = '';
