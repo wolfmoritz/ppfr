@@ -93,7 +93,7 @@
           <li{% if uriSegment(1) == '' %} class="active"{% endif %}> <a href="{{ siteUrlFor('home') }}">Home</a></li>
           <li{% if uriSegment(1) == 'about' %} class="active"{% endif %}> <a href="{{ siteUrlFor('about') }}">About Me</a></li>
           <li{% if uriSegment(1) == 'blog' %} class="active"{% endif %}> <a href="{{ siteUrlFor('blog') }}">Blog</a></li>
-          <li class="dropdown hidden-sm hidden-xs"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
+          <li class="dropdown hidden-xs"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
             <ul class="dropdown-menu">
               <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
               <li class="dropdown-header">Select a category</li>
@@ -150,18 +150,13 @@
 <footer class="footer">
   <div class="container">
     <div class="row">
-      <div class="col-sm-2">
-        <h6>Copyright &copy; 2012 - {{ 'now'|date('Y') }}<br> Peri&apos;s Place For Recipes</h6>
-      </div>
-      <!-- end col-sm-2 -->
-
-      <div class="col-sm-4">
-        <h6>About Us</h6>
-        <p>Mom is a great cook. She has all kinds of recipes written on small pieces of paper, typed on mimeo, stuck between pages of other recipes in cookbooks. I realized that technology had finally caught enough that instead of having all of those wonderful examples of food sitting around in a filing system that only she seemed to know maybe I could put together a little corner of the internets that would be a place to store  those wonderful Christmas candies and the goopy cinnamon rolls that only she seems to be able to make. So here it is, my version of small pieces of paper, mimeo and sticky 3x5 cards.</p>
-      </div>
+      
+      <div class="col-sm-6">
+        <h6>About Me</h6>
+  <p>I live in Seattle, WA, and apparently I'm a hipsters because I like to can my own fruit and vegetables. I've been known to pickle almost anything. And if you look hard enough there are a couple of crochet hooks floating around.  Oh, and I liked Johnny Cash & Patsy Cline before you did :-). I'm not sure how more hipster I could get. Anyway, I also like technology, so it only made sense to combine both of my true loves into one. And this is it.</p></div>
       <!-- end col-sm-4 -->
 
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <h6>Navigation</h6>
         <ul class="list-unstyled">
           <li><a href="{{ baseUrl() }}">Home</a></li>
@@ -171,17 +166,13 @@
       </div>
       <!-- end col-sm-2 -->
 
-      <div class="col-sm-2">
-        <h6>Follow Us</h6>
-        <ul class="list-unstyled">
-          <li><a href="https://instagram.com/peareye/">Instagram</a></li>
-          <li><a href="https://www.pinterest.com/peareye/">Pinterest</a></li>
-        </ul>
-      </div>
-      <!-- end col-sm-2 -->
+     
 
-      <div class="col-sm-2">
-        <h6>Coded by </h6><a href="http://moritzmedia.com">Moritz Media Solutions LLC</a>      </div>
+      <div class="col-sm-3">
+        <h6>Coded by </h6><a href="http://moritzmedia.com">Moritz Media Solutions LLC</a>      
+        <h6>Copyright &copy; 2012 - {{ 'now'|date('Y') }}<br> Peri&apos;s Place For Recipes</h6>
+        
+        </div>
       <!-- end col-sm-2 -->
     </div>
     <!-- end row -->

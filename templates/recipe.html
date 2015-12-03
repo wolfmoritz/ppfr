@@ -4,18 +4,18 @@
 <h2 class="page-header">{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
 
 	<div class="col-md-9 col-sm-12">
+	<div class="socialContainer clearfix hidden-lg hidden-md">
+			
 
-		<div class="socialContainer clearfix">
-			{% if recipe.main_photo %}
+			<div class="socialButtonBox">
+				<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+			</div><!-- .end socialButtonBox -->
+            {% if recipe.main_photo %}
 
-			<div class="socialButtonBox pull-left">
+			<div class="socialButtonBox">
 				<a href="//www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>&nbsp;
 			</div>
 			{% endif %}
-
-			<div class="socialButtonBox pull-left">
-				<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-			</div><!-- .end socialButtonBox -->
 		</div><!-- .end socialContainer -->
 
 		
@@ -68,12 +68,26 @@
 			</div><!--end recipe categories -->
 	</div><!-- end #recipe col-md-9 col-sm-12 -->
     <div class="col-md-3 hidden-sm hidden-xs">
+    
+		<div class="socialContainer clearfix">
+			
+
+			<div class="socialButtonBox">
+				<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+			</div><!-- .end socialButtonBox -->
+            {% if recipe.main_photo %}
+
+			<div class="socialButtonBox">
+				<a href="//www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>&nbsp;
+			</div>
+			{% endif %}
+		</div><!-- .end socialContainer -->
     <!-- Begin recipe-meta -->
 		<div class="recipe-meta top-buffer">
-			{% if recipe.servings %}<strong>Servings: &nbsp;&nbsp;</strong> <span itemprop="recipeYield">{{ recipe.servings }}</span><br>{% endif %}
-			{% if recipe.temperature %}<strong>Oven Temp:&nbsp;&nbsp; </strong>{{ recipe.temperature }}<br>{% endif %}
-			{% if recipe.prep_time %}<strong>Prep Time:&nbsp;&nbsp; </strong><meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time }}<br>{% endif %}
-			{% if recipe.cook_time %}<strong>Cook Time:&nbsp;&nbsp; </strong><meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time }}{% endif %}
+			{% if recipe.servings %}<strong>Servings: &nbsp;&nbsp;</strong><br> <span itemprop="recipeYield">{{ recipe.servings }}</span><br>{% endif %}
+			{% if recipe.temperature %}<strong>Oven Temp:&nbsp;&nbsp; </strong><br>{{ recipe.temperature }}<br>{% endif %}
+			{% if recipe.prep_time %}<strong>Prep Time:&nbsp;&nbsp; </strong><br><meta itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time }}<br>{% endif %}
+			{% if recipe.cook_time %}<strong>Cook Time:&nbsp;&nbsp; </strong><br><meta itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time }}{% endif %}
 		</div><!-- .recipe-meta -->
           <hr>
     <h4><strong>Notes</strong></h4>

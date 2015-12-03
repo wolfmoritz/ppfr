@@ -1,78 +1,72 @@
 @charset "utf-8";
 /* CSS Document */
 * {
-  -webkit-border-radius: 0 !important;
-  -moz-border-radius: 0 !important;
-  border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
 }
-
 html {
-  position: relative;
-  min-height: 100%;
-   /*overflow-y: scroll;*/
+	position: relative;
+	min-height: 100%;
+	overflow-y: scroll;
 }
 body {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
-  /* Margin bottom by footer height */
-  /*margin-bottom: 320px;*/
-  background-color: #eae7d6;
-  font-family: 'PT Serif', serif;
-  font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizelegibility;
+	background-color: #eae7d6;
 }
-#header {background-color: #eae7d6;}
-
+#header {
+	background-color: #eae7d6;
+}
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  /*height: 300px;*/
-  background-color: #082e41;
-  color: #eee;
-  font-size: 14px;
-  padding: 20px;
-  }
-#content .item {
-  width: 50%;
-  padding: 3px;
-  display: inline-block;
-  vertical-align: top;
-  margin-bottom: 1px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #082e41;
+	color: #fff;
+	font-size: .9em;
+	padding: 20px;
 }
-.image{
-    max-width: 100%;
-    margin: 0;
-    display: block;
+#content .item {
+	width: 50%;
+	padding: 3px;
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 1px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+.image {
+	max-width: 100%;
+	margin: 0;
+	display: block;
 }
 recipe h4 {
 	font-weight: bold;
-	}
+}
 .img-shadow {
-  margin: 5px 5px 5px 5px;
-  -moz-box-shadow: 3px 3px 4px #000;
-  -webkit-box-shadow: 3px 3px 4px #000;
-  box-shadow: 3px 3px 4px #000;
-  /* For IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	margin: 5px 5px 5px 5px;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
   /* For IE 5.5 - 7 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
 #recipeList img {
-    max-width: 200px;
-    max-height: 150px;
+	max-width: 200px;
+	max-height: 150px;
 }
 .image:after {
-    clear:both;
+	clear: both;
 }
-.btn-primary{
+.btn-primary {
 	background-color: #ef525b;
 	border: none;
-	}
-.btn-primary a{
+}
+.btn-primary a {
 	color: #fff;
 }
 .overlay {
@@ -85,17 +79,15 @@ recipe h4 {
 	text-decoration: none;
 	background-color: rgba(0,0,0,0.0);
 	-webkit-transition: background-color 500ms linear, color 500ms linear;
-    -moz-transition: background-color 500ms linear, color 500ms linear;
-    -o-transition: background-color 500ms linear, color 500ms linear;
-    transition: background-color 500ms linear, color 600ms linear;
+	-moz-transition: background-color 500ms linear, color 500ms linear;
+	-o-transition: background-color 500ms linear, color 500ms linear;
+	transition: background-color 500ms linear, color 600ms linear;
 }
-
 .overlay .title {
 	text-align: center;
 	font-size: 25px;
 	font-family: Verdana, Geneva, sans-serif;
 	text-decoration: none;
-	
 }
 .item:hover .overlay {
 	display: block;
@@ -103,88 +95,89 @@ recipe h4 {
 	text-decoration: none;
 	background-color: rgba(0,0,0,0.5);
 }
-
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
-.btn-info {background-color: #24c2cb;}
-.top-buffer { margin-top:20px; }
+.btn-info {
+	background-color: #24c2cb;
+}
+.top-buffer {
+	margin-top: 20px;
+}
 .brand-wrapper {
-  width: 87px;
-  height: 50px;
+	width: 87px;
+	height: 50px;
 }
 .navbar-brand {
-  padding: 0;
+	padding: 0;
 }
 /* Keeps body from jumping up when we go to a fixed nav */
 #nav-container {
-  min-width: 100%;
+	min-width: 100%;
 }
-
 /*************Navbar***************************/
 .navbar .navbar-nav {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
+	display: inline-block;
+	float: none;
+	vertical-align: top;
 }
 .navbar {
-  margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 .navbar-collapse {
-  padding-left: 0;
-  padding-right: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 /*****************************/
 /******* Modified Navbar *****/
 /****************************/
 
 .navbar-default {
-  background-color: #ef525b;
-  border-color: transparent;
-  font-family: Raleway, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-font-size: 16px;
-
+	background-color: #ef525b;
+	border-color: transparent;
+	font-family: Raleway, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
 }
 .navbar-default .navbar-brand {
-  color: #000000;
+	color: #000000;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #082e41;
+	color: #082e41;
 }
 .navbar-default .navbar-text {
-  color: #000000;
+	color: #000000;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #000000;
+	color: #000000;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  color: #082e41;
+	color: #082e41;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  color: #082e41;
-  background-color: #da2536;
+	color: #082e41;
+	background-color: #da2536;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  color: #082e41;
-  background-color: #da2536;
+	color: #082e41;
+	background-color: #da2536;
 }
 .navbar-default .navbar-toggle {
-  border-color: transparent;
+	border-color: transparent;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-  background-color: #da2536;
+	background-color: #da2536;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #000000;
+	background-color: #000000;
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  border-color: #000000;
+	border-color: #000000;
 }
 .navbar-default .navbar-link {
-  color: #000000;
+	color: #000000;
 }
 .navbar-default .navbar-link:hover {
-  color: #082e41;
+	color: #082e41;
 }
 
 /*****************************/
@@ -194,57 +187,57 @@ font-size: 16px;
 /* Extra small devices Phones (<768px)  */
  @media (max-width: 767px) {
 #header {
-  display: none;
+	display: none;
 }
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-  color: #000000;
+	color: #000000;
 }
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-  color: #082e41;
+	color: #082e41;
 }
 .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-  color: #082e41;
-  background-color: #da2536;
+	color: #082e41;
+	background-color: #da2536;
 }
 #content .item {
-  width: 50%;
+	width: 50%;
 }
 }
 /********sm*******/
 
 @media screen and (min-width:768px) {
 #content .item {
-  width: 33%;
+	width: 33%;
 }
 /* Make Navigation Toggle on Desktop Hover */
 .dropdown:hover .dropdown-menu {
-  display: block;
+	display: block;
 }
 .brand-wrapper img {
-  position: absolute;
-  top: 0;
-  left: -2500px;
-  -webkit-transition: all .75s;
-  -moz-transition: all .75s;
-  transition: all .75s
+	position: absolute;
+	top: 0;
+	left: -2500px;
+	-webkit-transition: all .75s;
+	-moz-transition: all .75s;
+	transition: all .75s
 }
 .navbar-fixed-top .brand-wrapper img {
-  position: relative;
-  top: 0;
-  left: 0;
+	position: relative;
+	top: 0;
+	left: 0;
 }
 }
 
 /* Medium devices Desktops (≥992px) */
 @media screen and (min-width: 992px) {
 #content .item {
-  width: 24%;
+	width: 24%;
 }
 }
 
 /* Large devices Desktops (≥1200px) */
 @media only screen and (min-width : 1200px) {
 #content .item {
-  width: 20%;
+	width: 20%;
 }
 }
