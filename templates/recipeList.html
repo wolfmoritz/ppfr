@@ -11,16 +11,16 @@
       {% if not r.main_photo %}
       	{% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}
       {% else %}
-      	{% set imageUrl = imageUrl(r.recipe_id, r.main_photo, 250) %}
+      	{% set imageUrl = imageUrl(r.recipe_id, r.main_photo, 250,188) %}
       {% endif %}
 
-      <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="col-sm-6 col-md-4">
               <a href="{{ recipeUrl }}">  <div class="thumbnail">
 
+				
+                <img src="{{ imageUrl }}" class="img img-responsive" alt="Photo of {{ r.title }}">
 
-                <img src="{{ imageUrl }}" class="img  img-responsive" alt="Photo of {{ r.title }}" width="200">
-
-				<div class="caption text-center"> <h4>{{ r.title }}</h4></a> </div>
+				<div class="caption text-center"> <h5>{{ r.title }}</h5></a> </div>
                   <!--end caption -->
                 </div>
                 <!--end thumbnail -->

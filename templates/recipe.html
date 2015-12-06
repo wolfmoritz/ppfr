@@ -35,7 +35,7 @@
 					The imageUrl function accepts four parameters, the last two are optional:
 					imageUrl(recipe ID, photo name, width, height)
 				#}
-				<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo, 320) }}" class="pull-right img-responsive img-shadow"  alt="Photo of {{ recipe.title }}">
+				<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo, 300) }}" class="pull-right img-responsive img-shadow"  alt="Photo of {{ recipe.title }}">
 			{% endif %}
 		<!-- End .recipe.main_photo -->
 
