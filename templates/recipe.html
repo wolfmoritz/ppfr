@@ -5,7 +5,7 @@
 
 	<div class="col-md-9 col-sm-12">
 	<div class="socialContainer clearfix hidden-lg hidden-md">
-			
+
 
 			<div class="socialButtonBox">
 				<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
@@ -18,7 +18,7 @@
 			{% endif %}
 		</div><!-- .end socialContainer -->
 
-		
+
 
 		<!-- Begin recipe-meta -->
 		<div class="recipe-meta top-buffer hidden-md hidden-lg">
@@ -31,10 +31,14 @@
 		<!-- Begin recipe.main_photo -->
 
 			{% if recipe.main_photo %}
-				<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320" class="pull-right img-responsive img-shadow"  alt="Photo of {{ recipe.title }}">
+				{#
+					The imageUrl function accepts four parameters, the last two are optional:
+					imageUrl(recipe ID, photo name, width, height)
+				#}
+				<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo, 320) }}" class="pull-right img-responsive img-shadow"  alt="Photo of {{ recipe.title }}">
 			{% endif %}
 		<!-- End .recipe.main_photo -->
-        
+
 		<h4><strong>Ingredients</strong></h4>
 		<div class="ingredients">
 			{{ recipe.ingredients|raw }}
@@ -68,9 +72,9 @@
 			</div><!--end recipe categories -->
 	</div><!-- end #recipe col-md-9 col-sm-12 -->
     <div class="col-md-3 hidden-sm hidden-xs">
-    
+
 		<div class="socialContainer clearfix">
-			
+
 
 			<div class="socialButtonBox">
 				<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
