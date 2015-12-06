@@ -73,7 +73,7 @@ $config['file.usable.max.size'] = 2000; // Kb
 /**
  * Pagination Options
  */
-$config['pagination']['rowsPerPage'] = 20;
+$config['pagination']['rowsPerPage'] = 21;
 $config['pagination']['numberOfLinks'] = 2;
 
 /**
