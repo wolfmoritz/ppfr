@@ -237,18 +237,18 @@ class TwigExtension extends \Twig_Extension
       $largeUri = $app->config('file.uri');
       $thumbUri = $app->config('file.thumb.uri');
 
-      // This is a temporary hack as our photos are on the old site
-      // Do not include application URL if one was supplied
-      if (strpos($largeUri, 'http') === 0) {
-        $baseUrl = '';
-      } else {
-        $baseUrl = $app->request->getUrl() . $app->request->getRootUri() . '/';
-      }
+      $baseUrl = $app->request->getUrl() . $app->request->getRootUri() . '/';
     }
 
     // Was the full sized image requested?
-    if ($width === null and $height === null) {
+    if ($width === null && $height === null) {
       // Just return url to the original image
+
+      // This is a temporary hack (no $baseUrl) as our photos are on the old site
+      if (strpos($largeUri, 'http') === 0) {
+        return "{$largeUri}{$id}/files/{$filename}";
+      }
+
       return "{$baseUrl}{$largeUri}{$id}/files/{$filename}";
     }
 

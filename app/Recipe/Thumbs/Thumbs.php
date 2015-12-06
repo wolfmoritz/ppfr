@@ -68,8 +68,8 @@ $app->get("/{$config['file.thumb.uri']}:recipeId/:dims/:imageName", function ($r
   // Does the original file exist?
   $originalImagePath = $config['file.path'] . $recipeId . '/files/' . $imageName;
   if ( ! file_exists($originalImagePath)) {
-    $app->log->error('Thumbnails: Original does not exist for: ' . $originalImagePath);
     // Large file does not exist so stop and return 404
+    $app->log->error('Thumbnails: Original does not exist for: ' . $originalImagePath);
     $app->notFound();
   }
 
