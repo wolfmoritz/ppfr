@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="col-xs-12 top-buffer">
+      <div id="content" class="center-block masonry-tiles"><!--Masonry Tile Image Block -->
+        {% include '_masonry.html' %}
+      </div><!--End Masonry Tile Image Block -->
+    </div><!--End col-xs-12 -->
+    </div><!--End Masonry Block Row -->
+    <!--Begin MoreLoad button -->
+    <div class="row top-buffer">
+      <div class="col-xs-12">
+        <div class="btn btn-info center-block" id="more-recipes-button">Load More</div>
+      </div><!--End col-xs-12 moreLoad button Block -->
+    </div><!--End MoreLoad Button -->
+    
+{% endblock %}

@@ -119,9 +119,9 @@ return call_user_func(
     // };
 
     // Sitemap
-    // $app->sitemap = function() use ($app) {
-    //     return new Recipe\Library\SitemapHandler($app);
-    // };
+    $app->sitemap = function() use ($app) {
+        return new \Recipe\Library\SitemapHandler($app);
+    };
 
     // Encryption Function
     $app->encrypt = function() use ($app) {

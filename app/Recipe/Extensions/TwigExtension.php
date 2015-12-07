@@ -231,43 +231,41 @@ class TwigExtension extends \Twig_Extension
   {
     static $largeUri;
     static $thumbUri;
-    static $url = '';
+    static $baseUrl = '';
     static $app;
 
     // Cache variables for next request
-    if (!isset($largeUri)) {
+    if (!isset($app)) {
       $app = \Slim\Slim::getInstance();
 
       $largeUri = $app->config('file.uri');
-      // $thumbUri = $app->config('file.thumb.uri');
+      $thumbUri = $app->config('file.thumb.uri');
 
-      // Do not include application URL if one was supplied
-      if (strpos($largeUri, 'http') === 0) {
-        $url = '';
-      } else {
-        $url = $app->request->getUrl() . $app->request->getRootUri() . '/';
-      }
+      $baseUrl = $app->request->getUrl() . $app->request->getRootUri() . '/';
     }
 
     // Was the full sized image requested?
-    if ($width === null and $height === null) {
+    if ($width === null && $height === null) {
       // Just return url to the original image
-      return "{$url}{$largeUri}{$id}/files/{$filename}";
+
+      // This is a temporary hack (no $baseUrl) as our photos are on the old site
+      if (strpos($largeUri, 'http') === 0) {
+        return "{$largeUri}{$id}/files/{$filename}";
+      }
+
+      return "{$baseUrl}{$largeUri}{$id}/files/{$filename}";
     }
 
-    // Else
-    return '';
+    // Make sure at least one dimension is set to a numeric size
+    if (!is_numeric($width) && !is_numeric($height)) {
+      throw new \Exception('imageUrl expects at least one numeric dimension');
+    }
 
-    // Make sure at least one dimension is set to a size
-    // if (!is_numeric($width) and !is_numeric($height)) {
-    //   throw new \Exception('getImageUrl expects at least one numeric dimension');
-    // }
+    // If width or height is not provided, set to empty string to keep aspect ratio
+    $width = (is_numeric($width)) ? $width : '';
+    $height = (is_numeric($height)) ? $height : '';
 
-    // // If width or height is not provided, set to '' to keep aspect ratio
-    // $width = (is_numeric($width)) ? $width : '';
-    // $height = (is_numeric($height)) ? $height : '';
-
-    // return $url . $thumbUri . $width . 'x' . $height . '/' . $filename;
+    return $baseUrl . $thumbUri . $id . '/' . $width . 'x' . $height . '/' . $filename;
   }
 
   /**

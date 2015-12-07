@@ -1,206 +1,244 @@
 @charset "utf-8";
 /* CSS Document */
-
-
+* {
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
 html {
-  position: relative;
-  min-height: 100%;
+	position: relative;
+	min-height: 100%;
+	overflow-y: scroll;
 }
 body {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizelegibility;
+	background-color: #eae7d6;
 }
-
-footer {
-	background: #333333;
-	color: #eee;
+#header {
+	background-color: #eae7d6;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #082e41;
+	color: #fff;
 	font-size: 11px;
 	padding: 20px;
 }
-
-.navbar-brand {
-	/* padding: 13px 15px; */
+#content .item {
+	width: 50%;
+	padding: 3px;
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 1px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
 }
-
-/********************************************************/
-/****************** Content ******************************/
-/********************************************************/
-.recipe a {
-color: #fff;
+.image {
+	max-width: 100%;
+	margin: 0;
+	display: block;
 }
-
-.dropshadowimg {
-  margin: 5px 5px 5px 5px;
-  -moz-box-shadow: 3px 3px 4px #000;
-  -webkit-box-shadow: 3px 3px 4px #000;
-  box-shadow: 3px 3px 4px #000;
-  /* For IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+recipe h4 {
+	font-weight: bold;
+}
+.thumbnail {border:none;background:#eae7d6;}
+.img-shadow {
+	margin: 5px 5px 5px 5px;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
   /* For IE 5.5 - 7 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
+#recipeList img {
+	max-width: 250px;
+	max-height: 188px;
+}
+.image:after {
+	clear: both;
+}
+.btn-primary {
+	background-color: #ef525b;
+	border: none;
+}
+.btn-primary a {
+	color: #fff;
+}
+.overlay {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: rgba(234, 231, 214, 0);
+	text-decoration: none;
+	background-color: rgba(0,0,0,0.0);
+	-webkit-transition: background-color 500ms linear, color 500ms linear;
+	-moz-transition: background-color 500ms linear, color 500ms linear;
+	-o-transition: background-color 500ms linear, color 500ms linear;
+	transition: background-color 500ms linear, color 600ms linear;
+}
+.overlay .title {
+	text-align: center;
+	font-size: 25px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+}
+.item:hover .overlay {
+	display: block;
+	color: rgba(234, 231, 214, 1);
+	text-decoration: none;
+	background-color: rgba(0,0,0,0.5);
+}
+img {
+	max-width: 100%;
+}
+.btn-info {
+	background-color: #24c2cb;
+}
+.top-buffer {
+	margin-top: 20px;
+}
+.brand-wrapper {
+	width: 87px;
+	height: 50px;
+}
+.navbar-brand {
+	padding: 0;
+}
+/* Keeps body from jumping up when we go to a fixed nav */
+#nav-container {
+	min-width: 100%;
+}
+/*************Navbar***************************/
+.navbar .navbar-nav {
+	display: inline-block;
+	float: none;
+	vertical-align: top;
+}
+.navbar {
+	margin-bottom: 0px;
+}
+.navbar-collapse {
+	padding-left: 0;
+	padding-right: 0;
+}
+/*****************************/
+/******* Modified Navbar *****/
+/****************************/
 
-/********************************************************/
-/****************** .sidenav ******************************/
-/********************************************************/
-.sidenav {
-
+.navbar-default {
+	background-color: #ef525b;
+	border-color: transparent;
+	font-family: Raleway, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
 }
-
-.sidenav a {
-  display: block;
-  padding: 6px 14px 6px 10px;
-  text-decoration: none;
-  border-bottom: 1px solid #efefef;
-  color: black;
+.navbar-default .navbar-brand {
+	color: #000000;
 }
-.sidenav a:hover {
-  color: red;
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+	color: #082e41;
 }
-
-/******************************************************/
-/**************** Recipe Edit Form ****************/
-/*****************************************************/
-form.recipeForm {
-/*background-color: yellow;*/
+.navbar-default .navbar-text {
+	color: #000000;
 }
-.recipeForm label {
-  display: block;
-  margin-top: 10px;
-  padding-bottom: 5px;
+.navbar-default .navbar-nav > li > a {
+	color: #000000;
 }
-.recipeForm input {
-  border: 1px solid #CFECFC;
-  font-size: 12px;
-  margin: 5px 0;
-  padding: 4px 0;
-  width: 350px;
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color: #082e41;
 }
-.recipeForm .buttonControls {
-  margin-top: 10px;
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+	color: #082e41;
+	background-color: #da2536;
 }
-.editLink {
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	color: #082e41;
+	background-color: #da2536;
 }
-.editLink a {
-  text-decoration: none;
-  color: #000;
-  display: block;
-  text-align: right;
-  float: right;
+.navbar-default .navbar-toggle {
+	border-color: transparent;
 }
-div#editCategories {
-  margin-top: 10px;
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+	background-color: #da2536;
 }
-div#editCategories ul {
-  list-style: none outside none;
-  padding-left: 10px;
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #000000;
 }
-div#editCategories label {
-  display: inline;
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+	border-color: #000000;
 }
-div#editCategories input {
-  width: 0;
+.navbar-default .navbar-link {
+	color: #000000;
 }
-/******************************************************/
-/**************** Misc ****************/
-/*****************************************************/
-.error {
-  color: red; /* TODO Improve error color. */
-}
-.clearFloat {
-  clear: both;
-}
-#error404 {
-  text-align: center;
-}
-#error404 p {
-  font-size: 1.5em;
-}
-.anchorButton,
-.anchorButton:visited {
-  background-color: #FFF;
-  padding: 2px 8px;
-  background: -moz-linear-gradient(center top , #FFFFFF, #E7E7E7) repeat scroll 0 0 transparent;
-  border-radius: 5px;
-  border: 1px solid #D2D2D2;
-  margin: 0 3px;
-  text-decoration: none;
-  color: black;
-}
-.anchorButton:hover {
-  color: black;
-  background: none repeat scroll 0 0 #E7E7E7;
-}
-img.loadingImg {
-  width: 25px;
-  margin: 0;
-  box-shadow: none;
-  vertical-align: middle;
-}
-#messageBoxContainer {
-  position: fixed;
-  top: 1em;
-  left: 0;
-  right: 0;
-  height: 0;
-  text-align: center;
-  z-index: 10;
-}
-#messageBox {
-  display: inline-block;
-  height: 35px;
-  background-color: lightyellow;
-  color: brown;
-  padding-top: 15px;
-  font-weight: bold;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  border-radius: 3px;
-  width: 60%;
-  display: none;
-}
-/*------------------ Social Buttons ------------------*/
-.socialContainer {
-  height: 30px;
-  margin-top: 3px;
-}
-.socialContainer .socialButtonBox {
-  float: left;
-  margin-right: 5px;
-  min-width: 90px;
+.navbar-default .navbar-link:hover {
+	color: #082e41;
 }
 
-/***************************************/
-            Customized Bootstrap
-/**************************************/
-.panel-default > .panel-heading-custom {
-   /* background-image: none; */
+/*****************************/
+/******* Media Queries *****/
+/****************************/
 
+/* Extra small devices Phones (<768px)  */
+ @media (max-width: 767px) {
+#header {
+	display: none;
 }
-.panel-default > .panel-heading-custom {
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+	color: #000000;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+	color: #082e41;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+	color: #082e41;
+	background-color: #da2536;
+}
+#content .item {
+	width: 50%;
+}
+}
+/********sm*******/
 
-    /* background: #27ae60;
-    color: #fff; */
+@media screen and (min-width:768px) {
+#content .item {
+	width: 33%;
+}
+/* Make Navigation Toggle on Desktop Hover */
+.dropdown:hover .dropdown-menu {
+	display: block;
+}
+.brand-wrapper img {
+	position: absolute;
+	top: 0;
+	left: -2500px;
+	-webkit-transition: all .75s;
+	-moz-transition: all .75s;
+	transition: all .75s
+}
+.navbar-fixed-top .brand-wrapper img {
+	position: relative;
+	top: 0;
+	left: 0;
+}
 }
 
-
-/* --------------------------------------
-   Media Queries
-   -------------------------------------- */
-
-/* Portrait & landscape phone */
-@media (max-width: 480px) {
-
+/* Medium devices Desktops (≥992px) */
+@media screen and (min-width: 992px) {
+#content .item {
+	width: 24%;
+}
 }
 
-/* Landscape phone to portrait tablet */
-@media (max-width: 768px) {
-
+/* Large devices Desktops (≥1200px) */
+@media only screen and (min-width : 1200px) {
+#content .item {
+	width: 20%;
 }
-
-/* Large desktop */
-@media (min-width: 1200px) {
-
-
 }

@@ -19,6 +19,49 @@ class IndexController
   }
 
   /**
+   * Get Home Page
+   */
+  public function home()
+  {
+    // Get data mappers and twig
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+    $twig = $this->app->twig;
+
+    // Get rows per page from config and run query
+    $rowsPerPage = $this->app->config('pagination')['rowsPerPage'];
+    $recipes = $RecipeMapper->getRecipesWithPhoto($rowsPerPage);
+
+    $twig->display('home.html', ['recipes' => $recipes]);
+  }
+
+  /**
+   * Get More Home Page Recipes
+   */
+  public function getMorePhotoRecipes($pageNumber)
+  {
+    // Check input for numeric and abort if not
+    if (! is_numeric($pageNumber)) {
+      return;
+    }
+
+    // Cast to int
+    $pageNumber = (int) $pageNumber;
+
+    // Get data mappers and twig
+    $dataMapper = $this->app->dataMapper;
+    $RecipeMapper = $dataMapper('RecipeMapper');
+    $twig = $this->app->twig;
+
+    // Get rows per page from config and run query
+    $rowsPerPage = $this->app->config('pagination')['rowsPerPage'];
+    $offset = $rowsPerPage * $pageNumber;
+    $recipes = $RecipeMapper->getRecipesWithPhoto($rowsPerPage, $offset);
+
+    $twig->display('_masonry.html', ['recipes' => $recipes]);
+  }
+
+  /**
    * Get Recipes by Category, including 'All'
    *
    * @param mixed, category slug or ID

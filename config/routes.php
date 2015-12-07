@@ -34,17 +34,23 @@ $app->get('/blog', function() {
   (new Controllers\IndexController())->blogPost();
 })->name('blog');
 
-// User Login
-$app->get('/user/login/:service', function($service) {
-  (new Controllers\UserController())->login($service);
+// Update sitemap
+$app->get('/updatesitemap', function() use ($app) {
+    // Does it matter if this is called from a browser?
+    // if (PHP_SAPI !== 'cli') {
+    //  $this->app->halt(500);
+    // }
+
+    $SitemapHandler = $app->sitemap;
+    $SitemapHandler->make();
 });
 
-// User Logout
-$app->get('/user/logout', function() {
-  (new Controllers\UserController())->logout();
+// Get more home page recipes (Ajax request)
+$app->get('/getmorephotorecipes/:pageno', function($pageno = 1) {
+  (new Controllers\IndexController())->getMorePhotoRecipes($pageno);
 });
 
 // Home page (last route, the default)
 $app->get('/', function () {
-  (new Controllers\IndexController())->getRecipesByCategory('All', 1);
+  (new Controllers\IndexController())->home();
 })->name('home');

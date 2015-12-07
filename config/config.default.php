@@ -27,6 +27,13 @@ $config['mode'] = 'production';
 $config['debug'] = false;
 
 /**
+ * Default Domain
+ * Used for the sitemap
+ * Note, do not include a trailing slash
+ */
+$config['baseurl'] = '';
+
+/**
  * Database Settings
  */
 $config['database']['host'] = 'localhost';
@@ -66,7 +73,7 @@ $config['file.usable.max.size'] = 2000; // Kb
 /**
  * Pagination Options
  */
-$config['pagination']['rowsPerPage'] = 10;
+$config['pagination']['rowsPerPage'] = 21;
 $config['pagination']['numberOfLinks'] = 2;
 
 /**
@@ -75,8 +82,8 @@ $config['pagination']['numberOfLinks'] = 2;
 $config['routes.case_sensitive'] = false;
 
 /**
- * Authentication Options
+ * Social Authentication Options
  */
-$config['auth.facebook']['app_id'] = '251905954939842';
-$config['auth.facebook']['app_secret'] = '7c0706233e7ea6de1896676152657cbd';
-$config['auth.facebook']['default_graph_version'] = 'v2.2';
+$config['auth.facebook']['app_id'] = '';
+$config['auth.facebook']['app_secret'] = '';
+$config['auth.facebook']['default_graph_version'] = '';

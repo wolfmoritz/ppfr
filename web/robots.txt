@@ -1,2 +1,1 @@
-# This is not supposed to work...
-# Sitemap: /sitemap.xml
+Sitemap: http://perisplaceforrecipes/sitemap.xml

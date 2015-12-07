@@ -10,5 +10,6 @@ return array(
     'Whoops' => array($vendorDir . '/filp/whoops/src'),
     'Upload' => array($vendorDir . '/codeguy/upload/src'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
+    'Slim\\Extras' => array($vendorDir . '/ahmetkapikiran/slim-cli-environment'),
     'Slim' => array($vendorDir . '/slim/slim'),
 );

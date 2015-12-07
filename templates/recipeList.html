@@ -1,43 +1,72 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-      <h2 class="page-header">{{ recipes.category.name }} Recipes</h2>
 
+    <div class="col-md-10">
+      <h2 class="page-header">{{ recipes.category.name }} Recipes</h2>
       <!--Begin Recipe List Panels -->
+      <div id="recipeList"  class="row">
       {% for r in recipes.list %}
       {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
-      <div class="panel panel-success">
-        <div class="panel-heading panel-heading-custom">
-          <h4 class="recipe"><a href="{{ recipeUrl }}">{{ r.title }}</a></h4>
-        </div>
-        <!--end panel-heading -->
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-3">
-              {% if r.main_photo %}
-              <a href="{{ recipeUrl }}">
-                <img src="{{ imageUrl(r.recipe_id, r.main_photo) }}" class="img img-thumbnail img-responsive" alt="Photo of {{ r.title }}">
-              </a>
-              {% endif %}
-            </div>
-            <!--End col-md-2 panel-body -->
-            <div class="col-md-9">
-              <p class="lead">
-                {{ r.instructions_excerpt|raw }}
-                <small><a href="{{ recipeUrl }}">read more</a></small>
-              </p>
-              <small>
-                <p>Shared by <a href="{{ siteUrlFor('recipesByUser') }}/{{ r.user_url }}" data-toggle="tooltip" title="See more recipe&apos;s by {{ r.user_name }}">{{ r.user_name }}</a> on {{ r.created_date|date('F j, Y') }}</p>
-              </small>
-            </div>
-            <!--End col-md-9 panel-body -->
-          </div>
-          <!--End panel-body row -->
-        </div>
-        <!--end panel-body -->
-      </div><!--end panel panel-success -->
+      {% if not r.main_photo %}
+      	{% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}
+      {% else %}
+      	{% set imageUrl = imageUrl(r.recipe_id, r.main_photo, 250,188) %}
+      {% endif %}
+
+      <div class="col-sm-6 col-md-4">
+              <a href="{{ recipeUrl }}">  <div class="thumbnail">
+
+				
+                <img src="{{ imageUrl }}" class="img img-responsive" alt="Photo of {{ r.title }}">
+
+				<div class="caption text-center"> <h5>{{ r.title }}</h5></a> </div>
+                  <!--end caption -->
+                </div>
+                <!--end thumbnail -->
+              </div>
+              <!--end col-sm-6 col-md-4 -->
+
+
+      {% else %}
+        <h3>No Recipes Found</h3>
       {% endfor %}
 
-  {{ pagination() }}
 
+    </div><!--End row -->
+     {{ pagination() }}
+    </div>
+    <!--end col-md-10 left column -->
+
+    <div class="col-md-2 hidden-xs hidden-sm">
+      <div class="sidenav">
+        <h5 class="page-header">Top Five Recipes</h5>
+        <ul class="list-unstyled">
+          {% for r in topRecipes(5) %}
+          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="sidenav">
+        <h5 class="page-header">Random Recipe</h5>
+        <ul class="list-unstyled">
+          {% for r in randomRecipes(5) %}
+          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% if production %}
+      <div class="sidenav">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-6388989287678352"
+             data-ad-slot="1745555829"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+      {% endif %}
+    </div>
+    <!--end col-me-2 right column -->
 {% endblock %}
