@@ -8,7 +8,8 @@
         "intervention/image": "2.*",
         "wolfmoritz/session": "~1",
         "zeuxisoo/slim-whoops": "0.3.0",
-        "ahmetkapikiran/slim-cli-environment": "dev-master"
+        "ahmetkapikiran/slim-cli-environment": "dev-master",
+        "facebook/php-sdk-v4" : "~5.0"
     },
     "autoload": {
       "psr-4": {
