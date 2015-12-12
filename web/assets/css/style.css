@@ -18,14 +18,15 @@ body {
 #header {
 	background-color: #eae7d6;
 }
-.footer {
-	position: absolute;
-	bottom: 0;
+footer {
+	/* position: absolute;/*
+	/* bottom: 0; */
 	width: 100%;
 	background-color: #082e41;
 	color: #fff;
 	font-size: 11px;
 	padding: 20px;
+	margin-top: 20px;
 }
 #content .item {
 	width: 50%;
