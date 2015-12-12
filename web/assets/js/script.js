@@ -29,7 +29,7 @@ $('#more-recipes-button').on('click', function() {
 
 // This keeps the footer in the footer
 var bumpIt = function() {
-    $('body').css('margin-bottom', $('.footer').height()+50);
+    $('body').css('margin-bottom', $('.footer').height()+0);
     // $('.footer').css('height', $('.footer').height());
     // console.log($('footer').height())
   },
