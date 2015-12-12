@@ -27,26 +27,6 @@ $('#more-recipes-button').on('click', function() {
   });
 });
 
-// This keeps the footer in the footer
-var bumpIt = function() {
-    $('body').css('margin-bottom', $('.footer').height()+0);
-    // $('.footer').css('height', $('.footer').height());
-    // console.log($('footer').height())
-  },
-  didResize = false;
-
-bumpIt();
-
-$(window).resize(function() {
-  didResize = true;
-});
-setInterval(function() {
-  if(didResize) {
-    didResize = false;
-    bumpIt();
-  }
-}, 250);
-
 //Select menu onchange
 $("#collapsed-navbar").change(function () {
   window.location = $(this).val();
