@@ -1,8 +1,7 @@
-// Initialize Home Page Masonry
+// Initialize home page masonry
 var $masonryContainer = $('#content').imagesLoaded(function(){
     $(this).masonry({
       itemSelector: '.item'
-      // ,isAnimated: true
     });
 });
 
@@ -27,22 +26,10 @@ $('#more-recipes-button').on('click', function() {
   });
 });
 
-// This keeps the footer in the footer
-var bumpIt = function() {
-    $('body').css('margin-bottom', $('.footer').height()+50);
-  },
-  didResize = false;
-bumpIt();
-
-$(window).resize(function() {
-  didResize = true;
+// Adjust masonry column width on window resize
+$(window).resize(function () {
+    $masonryContainer.masonry('reload');
 });
-setInterval(function() {
-  if(didResize) {
-    didResize = false;
-    bumpIt();
-  }
-}, 250);
 
 //Select menu onchange
 $("#collapsed-navbar").change(function () {
