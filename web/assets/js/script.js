@@ -1,8 +1,7 @@
-// Home Page Masonry
+// Initialize home page masonry
 var $masonryContainer = $('#content').imagesLoaded(function(){
     $(this).masonry({
       itemSelector: '.item'
-      // ,isAnimated: true
     });
 });
 
@@ -25,6 +24,11 @@ $('#more-recipes-button').on('click', function() {
       }
     }
   });
+});
+
+// Adjust masonry column width on window resize
+$(window).resize(function () {
+    $masonryContainer.masonry('reload');
 });
 
 //Select menu onchange
