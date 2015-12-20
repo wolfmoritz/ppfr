@@ -4,6 +4,16 @@
  */
 namespace Recipe;
 
+// Login
+$app->post('/user/login/:provider', function($provider) use ($app) {
+  (new Controllers\AuthenticationController())->login($provider);
+});
+
+// Logout
+$app->get('/user/logout', function() use ($app) {
+  (new Controllers\AuthenticationController())->logout();
+})->name('logout');
+
 // Search recipes
 $app->get('/recipe/search', function () use ($app) {
   (new Controllers\IndexController())->searchRecipes();

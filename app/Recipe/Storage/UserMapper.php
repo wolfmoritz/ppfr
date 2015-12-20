@@ -25,4 +25,29 @@ class UserMapper extends DataMapperAbstract
   {
     return $this->findById($userId);
   }
+
+  /**
+   * Get User by email
+   */
+  public function getUserByEmail($email)
+  {
+    $this->sql = $this->defaultSelect . ' where email = ?';
+
+    // Clean up email
+    $email = $this->cleanEmailAddress($email);
+    $this->bindValues[] = $email;
+
+    // Fetch and return user
+    $this->execute();
+    $result = $this->statement->fetch();
+    $this->clear();
+
+    return $result;
+  }
+
+  public function cleanEmailAddress($email)
+  {
+    // Trim and lowercase email string
+    return strtolower(trim($email));
+  }
 }

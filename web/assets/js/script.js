@@ -78,25 +78,23 @@ var user = (function($) {
     callback: googleSigninCallback
   }
 
-  // Recipes API call to register/login user
-  function userLogin (service, me) {
-console.log('calling server login')
-    // me[csrfTokenName] = csrfHash;
-    // $.ajax({
-    //   type: 'POST',
-    //   url: baseUrl + 'user/login/'+service,
-    //   data: me,
-    //   success: function(returnData) {
-    //     if(returnData === 1) {
-    //       window.location.reload();
-    //       } else {
-    //         showMessage('There was a registration error, please try again later.');
-    //       }
-    //   },
-    //   error: function(e) {
-    //     showMessage('There was a registration error, please try again later.');
-    //     }
-    //   });
+  // Server call to register/login user
+  function userLogin(service, me) {
+    $.ajax({
+      type: 'POST',
+      url: baseUrl + '/user/login/'+service,
+      data: 1,
+      success: function(returnData) {
+        if(returnData === 1) {
+          window.location.reload();
+          } else {
+            console.log('There was a registration error, please try again later.');
+          }
+      },
+      error: function(e) {
+        console.log('There was a registration error, please try again later.');
+        }
+      });
   }
 
   // Google login callback
@@ -127,12 +125,7 @@ console.log('calling server login')
     facebookLogin: function() {
       FB.login(function(r) {
         if(r.status === 'connected') {
-          FB.api('/me', function(me) {
-            if(me !== undefined) {
-              me.expiresIn = r.authResponse.expiresIn;
-              userLogin('facebook', me);
-            }
-          });
+          userLogin('facebook',1);
         }
       }, {scope: 'email'});
     }
