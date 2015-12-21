@@ -6,7 +6,7 @@ var $masonryContainer = $('#content').imagesLoaded(function(){
 });
 
 // Load more masonry recipes on request
-var masonryPage = 2;
+var masonryPage = 1;
 $('#more-recipes-button').on('click', function() {
   $.ajax({
     url: 'getmorephotorecipes/' + masonryPage,
