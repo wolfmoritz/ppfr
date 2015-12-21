@@ -32,11 +32,13 @@ class RecipeMapper extends DataMapperAbstract
     $this->sql .= ' order by r.created_date desc';
 
     if ($limit) {
-      $this->sql .= " limit {$limit}";
+      $this->sql .= " limit ?";
+      $this->bindValues[] = $limit;
     }
 
     if ($offset) {
-      $this->sql .= " offset {$offset}";
+      $this->sql .= " offset ?";
+      $this->bindValues[] = $offset;
     }
 
     return $this->find();
@@ -61,11 +63,13 @@ class RecipeMapper extends DataMapperAbstract
     $this->sql .= ' where r.main_photo is not null order by r.view_count desc';
 
     if ($limit) {
-      $this->sql .= " limit {$limit}";
+      $this->sql .= " limit ?";
+      $this->bindValues[] = $limit;
     }
 
     if ($offset) {
-      $this->sql .= " offset {$offset}";
+      $this->sql .= " offset ?";
+      $this->bindValues[] = $offset;
     }
 
     return $this->find();
@@ -98,12 +102,14 @@ class RecipeMapper extends DataMapperAbstract
 
     // Add limit
     if ($limit) {
-      $this->sql .= " limit {$limit}";
+      $this->sql .= " limit ?";
+      $this->bindValues[] = $limit;
     }
 
     // Add offset
     if ($offset) {
-      $this->sql .= " offset {$offset}";
+      $this->sql .= " offset ?";
+      $this->bindValues[] = $offset;
     }
 
     return $this->find();
@@ -164,11 +170,13 @@ class RecipeMapper extends DataMapperAbstract
     $this->sql .= " {$titleSearch} or {$ingredientSearch} or {$instructionSearch}";
 
     if ($limit) {
-      $this->sql .= " limit {$limit}";
+      $this->sql .= " limit ?";
+      $this->bindValues[] = $limit;
     }
 
     if ($offset) {
-      $this->sql .= " offset {$offset}";
+      $this->sql .= " offset ?";
+      $this->bindValues[] = $offset;
     }
 
     // Execute
@@ -193,12 +201,14 @@ class RecipeMapper extends DataMapperAbstract
 
     // Add limit
     if ($limit) {
-      $this->sql .= " limit {$limit}";
+      $this->sql .= " limit ?";
+      $this->bindValues[] =  $limit;
     }
 
     // Add offset
     if ($offset) {
-      $this->sql .= " offset {$offset}";
+      $this->sql .= " offset ?";
+      $this->bindValues[] = $offset;
     }
 
     return $this->find();
@@ -212,7 +222,8 @@ class RecipeMapper extends DataMapperAbstract
    */
   public function getTopRecipes($limit = 5)
   {
-    $this->sql = $this->defaultSelect . " order by r.view_count desc limit {$limit}";
+    $this->sql = $this->defaultSelect . " order by r.view_count desc limit ?";
+    $this->bindValues[] = $limit;
 
     return $this->find();
   }
@@ -225,7 +236,8 @@ class RecipeMapper extends DataMapperAbstract
    */
   public function getRandomRecipes($limit = 5)
   {
-    $this->sql = $this->defaultSelect . " order by rand() limit {$limit}";
+    $this->sql = $this->defaultSelect . " order by rand() limit ?";
+    $this->bindValues[] = $limit;
 
     return $this->find();
   }
