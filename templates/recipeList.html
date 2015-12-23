@@ -7,7 +7,7 @@
       <!--Begin Recipe List Panels -->
       <div id="recipeList"  class="row">
       {% for r in recipes.list %}
-      {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
+      {% set recipeUrl = siteUrlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
       {% if not r.main_photo %}
       	{% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}
       {% else %}
@@ -17,7 +17,7 @@
       <div class="col-sm-6 col-md-4">
               <a href="{{ recipeUrl }}">  <div class="thumbnail">
 
-				
+
                 <img src="{{ imageUrl }}" class="img img-responsive" alt="Photo of {{ r.title }}">
 
 				<div class="caption text-center"> <h5>{{ r.title }}</h5></a> </div>
