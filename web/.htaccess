@@ -17,6 +17,14 @@ Options -Indexes
     RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+
     RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
 
+    # Catch requests to the old printable.php page and direct to the current recipe page
+    # The %1 capture group only references the prior RewriteCond, so we are passing the
+    # first capture group into the second condition, and that into the rule
+    # See: http://stackoverflow.com/a/17793597/452133
+    RewriteCond %{REQUEST_URI} ^(.*)/printable\.php
+    RewriteCond %1/##%{QUERY_STRING} (.*)##id=(\d+)
+    RewriteRule ^printable.php$ http://%{HTTP_HOST}%1recipe/show/%2? [NC,R=301,L]
+
     # If a thumbnail is not found then invoke thumbnail maker
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^files/thumbnails/.*\.(jpe?g|png) thumb.php [L,NC]

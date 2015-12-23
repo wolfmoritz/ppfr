@@ -10,7 +10,7 @@ $app->get('/recipe/search', function () use ($app) {
 })->name('recipeSearch');
 
 // Show a recipe
-$app->get('(/recipe/show(/:id(/:slug)))', function ($id, $slug = 'none') {
+$app->get('(/recipe/show(/:id(/:slug)))', function ($id, $slug = null) {
   (new Controllers\IndexController())->showRecipe($id, $slug);
 })->conditions(['id' => '\d+'])->name('showRecipe');
 

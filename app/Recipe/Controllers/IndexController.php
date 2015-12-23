@@ -143,6 +143,12 @@ class IndexController
       return;
     }
 
+    // If there was no slug provided, then 301 redirect back here with the slug
+    if ($slug === null) {
+      $this->app->redirect($this->app->urlFor('showRecipe').'/'.$recipe->recipeUrl(),301);
+      return;
+    }
+
     // Get categories
     $recipe->categories = $CategoryMapper->getAssignedCategories($recipe->recipe_id);
 
