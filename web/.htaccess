@@ -12,11 +12,16 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # User URL's have moved from '/recipe/user/2:Peri+Moritz' to '/recipe/user/2/Peri-Moritz'
+    # The %1 replacement hack references a capture group from the condition above, to include the relative path on localhost
+    RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+
+    RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
+
     # If a thumbnail is not found then invoke thumbnail maker
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^files\/thumbnails\/.*\.(jpe?g|png) thumb.php [L,NC]
+    RewriteRule ^files/thumbnails/.*\.(jpe?g|png) thumb.php [L,NC]
 
-    # Redirect from www subdomain to preferred domain
+    # Redirect from www subdomain to preferred domain (no-www)
     RewriteCond %{HTTP_HOST} !^(localhost$) [NC]
     RewriteCond %{HTTP_HOST} ^www [NC]
     RewriteRule ^(.*)$ http://perisplaceforrecipes.com/$1 [L,R=301]
