@@ -15,7 +15,7 @@ $app->get('(/recipe/show(/:id(/:slug)))', function ($id, $slug = null) {
 })->conditions(['id' => '\d+'])->name('showRecipe');
 
 // Get recipes by category
-$app->get('/recipe/category(/:slug(/:page))/?', function ($slug = 'All', $page = 1) {
+$app->get('/recipe/category(/:slug/?(/:page))', function ($slug = 'All', $page = 1) {
   (new Controllers\IndexController())->getRecipesByCategory($slug, $page);
 })->name('recipesByCategory');
 
