@@ -7,7 +7,7 @@
   <meta name="google-site-verification" content="riHp25OEWPo6uLT2_apcdfsf16dwHZ-lUj4oWAPH5BY">
   <meta description="{{ recipe.instructions_excerpt|default('A place for friends and family to share recipes.') }}{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}">
 
-  <title>{% if recipe.title %}{{ recipe.title }} - {% endif %}Peri&apos;s Recipes{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}</title>
+  <title>{% if title %}{{ title }} - {% endif %}Peri&apos;s Recipes{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}</title>
 
   <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="57x57" href="{{ baseUrl() }}/apple-touch-icon-57x57.png" />
   <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="114x114" href="{{ baseUrl() }}/apple-touch-icon-114x114.png" />

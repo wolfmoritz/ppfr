@@ -112,7 +112,7 @@ class IndexController
     $data['list'] = $recipes;
     $data['category'] = $categoryResult;
 
-    $twig->display('recipeList.html', ['recipes' => $data]);
+    $twig->display('recipeList.html', ['recipes' => $data, 'title' => $categoryResult['name']]);
   }
 
   /**
@@ -157,7 +157,7 @@ class IndexController
     $recipe->view_count++;
 
     $twig = $this->app->twig;
-    $twig->display('recipe.html', array('recipe' => $recipe));
+    $twig->display('recipe.html', array('recipe' => $recipe, 'title' => $recipe->title));
   }
 
   /**
@@ -208,7 +208,7 @@ class IndexController
     $data['category'] = $terms;
     $data['searchTerms'] = $terms;
 
-    $twig->display('recipeList.html', ['recipes' => $data]);
+    $twig->display('recipeList.html', ['recipes' => $data, 'title' => 'Search']);
   }
 
   /**
@@ -249,7 +249,7 @@ class IndexController
     $data['list'] = $recipes;
     $data['category']['name'] = $userResult->user_name . '\'s';
 
-    $twig->display('recipeList.html', ['recipes' => $data]);
+    $twig->display('recipeList.html', ['recipes' => $data, 'title' => $userResult->user_name]);
   }
 
   /**
@@ -258,7 +258,7 @@ class IndexController
   public function about()
   {
     $twig = $this->app->twig;
-    $twig->display('about.html');
+    $twig->display('about.html', ['title' => 'About']);
   }
 
   /**
@@ -267,6 +267,6 @@ class IndexController
   public function blogPost()
   {
     $twig = $this->app->twig;
-    $twig->display('blog.html');
+    $twig->display('blog.html', ['title' => 'Blog']);
   }
 }
