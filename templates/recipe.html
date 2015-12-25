@@ -59,14 +59,14 @@
 		{% endif %}
 
 		<div class="recipeOwner">
-		Other recipes by <a href="{{ siteUrlFor('recipesByUser') }}/{{ recipe.user_url }}"><span itemprop="author">{{ recipe.user_name }}</span></a><br>
+		Other recipes by <a href="{{ siteUrlFor('recipesByUser', recipe.user_url) }}"><span itemprop="author">{{ recipe.user_name }}</span></a><br>
 		Added on: <meta itemprop="datePublished" content="2012-06-23 12:00:00"> {{ recipe.created_date|date('F j, Y') }}<br>
 		Viewed: {{ recipe.view_count|number_format }} Times
 		</div><!-- .recipeOwner -->
 
 		<h4><strong>Recipe Categories</strong></h4>
 			<div itemprop="recipeCategory">
-				{% for c in recipe.categories %}<div class="btn btn-primary btn-xs"><a href="{{ siteUrlFor('recipesByCategory') }}/{{ c.url }}" title="View recipes for {{ c.name }}">{{ c.name }}</a></div>
+				{% for c in recipe.categories %}<div class="btn btn-primary btn-xs"><a href="{{ siteUrlFor('recipesByCategory', c.url) }}" title="View recipes for {{ c.name }}">{{ c.name }}</a></div>
 
 {% endfor %}
 			</div><!--end recipe categories -->

@@ -98,7 +98,7 @@
               <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
               <li class="dropdown-header">Select a category</li>
               {% for cat in categories %}
-              <li ><a href="{{ siteUrlFor('recipesByCategory') }}/{{ cat.url }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>
+              <li ><a href="{{ siteUrlFor('recipesByCategory', cat.url) }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>
               {% endfor %}
             </ul>
             <!-- end dropdown-menu -->
@@ -150,7 +150,7 @@
 <footer>
   <div class="container">
     <div class="row">
-      
+
       <div class="col-sm-7">
         <h6>About Me</h6>
  <p>Around the house growing up food, like most families, was an integral part of our story. At Thanksgiving the stuffing had to be baked in a certain pan. Breakfast always consisted of those goopy rolls (yes the recipe is here) that only our family seemed to know about. We begged our sister to make those cream puffs she seemed to always be able to just whip up. And don't forget the batch of peanut butter cookies that became our version of loaves & fishes.</p>
@@ -166,12 +166,12 @@
       </div>
       <!-- end col-sm-2 -->
 
-     
+
 
       <div class="col-sm-3">
-        <h6>Coded by </h6><a href="http://moritzmedia.com">Moritz Media Solutions LLC</a>      
+        <h6>Coded by </h6><a href="http://moritzmedia.com">Moritz Media Solutions LLC</a>
         <h6>Copyright &copy; 2012 - {{ 'now'|date('Y') }}<br> Peri&apos;s Place For Recipes</h6>
-        
+
         </div>
       <!-- end col-sm-2 -->
     </div>
@@ -181,8 +181,6 @@
 
 </footer>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <!-- script src="{{ baseUrl() }}/assets/js/jquery-1.11.3.min.js"></script -->
-  <!-- script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="{{ baseUrl() }}/assets/js/imagesloaded.js"></script>
   <script src="{{ baseUrl() }}/assets/js/jquery.masonry.min.js"></script>

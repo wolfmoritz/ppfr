@@ -10,7 +10,7 @@ $app->get('/recipe/search', function () use ($app) {
 })->name('recipeSearch');
 
 // Show a recipe
-$app->get('(/recipe/show(/:id(/:slug)))', function ($id, $slug = null) {
+$app->get('(/recipe/show(/:id/?(/:slug)))', function ($id, $slug = null) {
   (new Controllers\IndexController())->showRecipe($id, $slug);
 })->conditions(['id' => '\d+'])->name('showRecipe');
 
@@ -54,3 +54,17 @@ $app->get('/getmorephotorecipes/:pageno', function($pageno = 1) {
 $app->get('/', function () {
   (new Controllers\IndexController())->home();
 })->name('home');
+
+// Example code to remember for admin pages!
+// If using an admin route, set cache control to not cache pages
+// $noCache = function() use ($app) {
+//   return function() use ($app) {
+//     // https://www.owasp.org/index.php/Testing_for_Logout_and_Browser_Cache_Management_(OWASP-AT-007)
+//     $app->response->headers->set('Cache-Control', 'no-cache, must-revalidate');
+//     $app->response->headers->set('Pragma', 'no-cache');
+//     $app->response->headers->set('Expires', '0'); // Purposely illegal vaule
+//   };
+// };
+
+ // All admin routes
+// +$app->group('/db-admin', $noCache(), function () use ($app, $authenticated) {});
