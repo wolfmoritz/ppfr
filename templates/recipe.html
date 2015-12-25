@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h2 class="page-header">{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
+<div class="col-xs-12">
+ <h2 class="page-header">{{ recipe.title }} <small>{{ recipe.subtitle }}</small></h2>
 
 	<div class="col-md-9 col-sm-12">
 	<div class="socialContainer clearfix hidden-lg hidden-md">
@@ -100,6 +101,9 @@
 		</div><!-- end notes -->
 
 		<hr>
-    </div><!--end col-md-3 -->
+    </div><!--end col-md-3 -->   
+    
+</div>
+
    </div><!--end row -->
 {% endblock %}
