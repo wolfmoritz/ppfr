@@ -133,7 +133,7 @@ class RecipeMapper extends DataMapperAbstract
     $this->sql = $this->defaultSelect . ' where ';
 
     // Our search expression. Searches whole words consider proper word boundaries
-    $regex = ' REGEXP CONCAT(\'([[[:blank:][:punct:]]|^)\', ?, \'([[:blank:][:punct:]]|$)\')';
+    $regex = ' REGEXP CONCAT(\'[[:<:]]\', ?, \'e?s?[[:>:]]\')';
 
     // Start search strings on each field
     $numberOfTerms = count($termsArray) - 1; // Zero indexed
