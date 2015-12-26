@@ -7,7 +7,6 @@
       <!--Begin Recipe List Panels -->
       <div id="recipeList"  class="row">
       {% for r in recipes.list %}
-      {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
       {% if not r.main_photo %}
       	{% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}
       {% else %}
@@ -15,9 +14,9 @@
       {% endif %}
 
       <div class="col-sm-6 col-md-4">
-              <a href="{{ recipeUrl }}">  <div class="thumbnail">
+              <a href="{{ siteUrlFor('showRecipe', r.niceUrl, 250) }}">  <div class="thumbnail">
 
-				
+
                 <img src="{{ imageUrl }}" class="img img-responsive" alt="Photo of {{ r.title }}">
 
 				<div class="caption text-center"> <h5>{{ r.title }}</h5></a> </div>
@@ -43,7 +42,7 @@
         <h5 class="page-header">Top Five Recipes</h5>
         <ul class="list-unstyled">
           {% for r in topRecipes(5) %}
-          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+          <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -51,7 +50,7 @@
         <h5 class="page-header">Random Recipe</h5>
         <ul class="list-unstyled">
           {% for r in randomRecipes(5) %}
-          <li><a href="{{ siteUrlFor('showRecipe') }}/{{ r.recipeUrl() }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+          <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
           {% endfor %}
         </ul>
       </div>

@@ -57,7 +57,7 @@ footer {
 recipe h4 {
 	font-weight: bold;
 }
-.thumbnail {border:none;background:#eae7d6;}
+.thumbnail {border:none;background:transparent;}
 .img-shadow {
 	margin: 5px 5px 5px 5px;
 	-moz-box-shadow: 3px 3px 4px #000;
@@ -71,6 +71,11 @@ recipe h4 {
 #recipeList img {
 	max-width: 250px;
 	max-height: 188px;
+}
+.recipe-bg{
+	background: #ffffff;
+    margin-bottom: -20px;
+    padding-bottom: 20px;
 }
 .image:after {
 	clear: both;

@@ -1,9 +1,8 @@
 {# Masonry tile include #}
 
   {% for r in recipes %}
-  {% set recipeUrl = urlFor('showRecipe') ~ '/' ~ r.recipe_id ~ '/' ~ r.url %}
     <div class="item">
-      <img src="{{ imageUrl(r.recipe_id, r.main_photo) }}" alt="Photo of {{ r.title }}" class="image">
-      <a class="overlay" href="{{ recipeUrl }}"><h3 class="title">{{ r.title }}</h3></a>
+      <img src="{{ imageUrl(r.recipe_id, r.main_photo, 222) }}" alt="Photo of {{ r.title }}" class="image">
+      <a class="overlay" href="{{ siteUrlFor('showRecipe', r.niceUrl) }}"><h3 class="title">{{ r.title }}</h3></a>
     </div>
   {% endfor %}

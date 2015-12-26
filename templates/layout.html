@@ -8,7 +8,7 @@
   <meta description="{{ recipe.instructions_excerpt|default('A place for friends and family to share recipes.') }}{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}">
   <script type="text/javascript"> var baseUrl = '{{ baseUrl() }}'</script>
 
-  <title>{% if recipe.title %}{{ recipe.title }} - {% endif %}Peri&apos;s Recipes{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}</title>
+  <title>{% if title %}{{ title }} - {% endif %}Peri&apos;s Recipes{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}</title>
 
   <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="57x57" href="{{ baseUrl() }}/apple-touch-icon-57x57.png" />
   <link rel="{{ baseUrl() }}/apple-touch-icon-precomposed" sizes="114x114" href="{{ baseUrl() }}/apple-touch-icon-114x114.png" />
@@ -100,7 +100,7 @@
               <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
               <li class="dropdown-header">Select a category</li>
               {% for cat in categories %}
-              <li ><a href="{{ siteUrlFor('recipesByCategory') }}/{{ cat.url }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>
+              <li ><a href="{{ siteUrlFor('recipesByCategory', cat.url) }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>
               {% endfor %}
             </ul>
             <!-- end dropdown-menu -->
@@ -138,7 +138,7 @@
 <!--End Navbar Container -->
 
 <div class="container">
-  <div class="row">
+  <div class="row recipe-bg">
     <!-- End Header Layout -->
     {% block body %}
     {% endblock %}
@@ -181,8 +181,6 @@
 
 </footer>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <!-- script src="{{ baseUrl() }}/assets/js/jquery-1.11.3.min.js"></script -->
-  <!-- script src="{{ baseUrl() }}/assets/bootstrap/js/bootstrap.min.js"></script -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="{{ baseUrl() }}/assets/js/imagesloaded.js"></script>
   <script src="{{ baseUrl() }}/assets/js/jquery.masonry.min.js"></script>

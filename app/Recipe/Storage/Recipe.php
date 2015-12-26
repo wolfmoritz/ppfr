@@ -9,8 +9,8 @@ class Recipe extends DomainObjectAbstract
 	/**
 	 * Get Full Recipe URL
 	 */
-	public function recipeUrl()
+	public function niceUrl()
 	{
-		return $this->recipe_id . '/' . $this->url;
+		return '/' . $this->recipe_id . '/' . $this->url;
 	}
 }

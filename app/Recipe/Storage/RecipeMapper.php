@@ -13,7 +13,7 @@ class RecipeMapper extends DataMapperAbstract
   protected $primaryKey = 'recipe_id';
   protected $modifyColumns = array('recipe_id', 'title', 'subtitle', 'url', 'servings', 'temperature', 'prep_time', 'prep_time_iso', 'cook_time', 'cook_time_iso', 'ingredients', 'instructions', 'instructions_excerpt', 'notes', 'view_count', 'main_photo', 'categories', 'created_by', 'created_date', 'updated_by', 'updated_date');
   protected $domainObjectClass = 'Recipe';
-  protected $defaultSelect = 'select SQL_CALC_FOUND_ROWS r.*, concat(u.first_name, \' \', u.last_name) user_name, concat(u.user_id, \'/\', u.first_name, \'+\', u.last_name) user_url from pp_recipe r join pp_user u on r.created_by = u.user_id';
+  protected $defaultSelect = 'select SQL_CALC_FOUND_ROWS r.*, concat(u.first_name, \' \', u.last_name) user_name, concat(u.user_id, \'/\', u.first_name, \'-\', u.last_name) user_url from pp_recipe r join pp_user u on r.created_by = u.user_id';
 
   /**
    * Get Recipes with Offset
@@ -133,7 +133,7 @@ class RecipeMapper extends DataMapperAbstract
     $this->sql = $this->defaultSelect . ' where ';
 
     // Our search expression. Searches whole words consider proper word boundaries
-    $regex = ' REGEXP CONCAT(\'([[[:blank:][:punct:]]|^)\', ?, \'([[:blank:][:punct:]]|$)\')';
+    $regex = ' REGEXP CONCAT(\'[[:<:]]\', ?, \'e?s?[[:>:]]\')';
 
     // Start search strings on each field
     $numberOfTerms = count($termsArray) - 1; // Zero indexed

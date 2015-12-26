@@ -272,21 +272,27 @@ class TwigExtension extends \Twig_Extension
    * Get Full URL to Named Route
    *
    * @param String, the named route
-   * @param Array, segments
+   * @param mixed, array of segments, or URI string
    * @return String, the site URL + route path
    */
-  public function siteUrlFor($namedroute, $segments = [])
+  public function siteUrlFor($namedRoute, $segments = null)
   {
     $app = \Slim\Slim::getInstance();
     $uri = $app->request()->getUrl();
-    $path = $app->urlFor($namedroute);
+    $route = $app->urlFor($namedRoute);
     $urlSegments = '';
 
-    if ($segments) {
+    if ($segments !== null && is_array($segments)) {
       $urlSegments = '/' . implode('/', $segments);
     }
 
-    return $uri . $path . $urlSegments;
+    if ($segments !== null && is_string($segments)) {
+      $urlSegments = $segments;
+      $urlSegments = ltrim($segments, '/');
+      $urlSegments = '/' . $urlSegments;
+    }
+
+    return $uri . $route . $urlSegments;
   }
 
   /**
