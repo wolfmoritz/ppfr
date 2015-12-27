@@ -59,7 +59,8 @@ class TwigExtension extends \Twig_Extension
           new \Twig_SimpleFunction('formatIngredients', array($this, 'formatIngredients')),
           new \Twig_SimpleFunction('topRecipes', array($this, 'topRecipes')),
           new \Twig_SimpleFunction('randomRecipes', array($this, 'randomRecipes')),
-          new \Twig_SimpleFunction('config', array($this, 'getConfig'))
+          new \Twig_SimpleFunction('config', array($this, 'getConfig')),
+          new \Twig_SimpleFunction('session', array($this, 'getSession'))
       );
   }
 
@@ -391,5 +392,26 @@ class TwigExtension extends \Twig_Extension
     $RecipeMapper = $dataMapper('RecipeMapper');
 
     return $randomRecipes = $RecipeMapper->getRandomRecipes($limit);
+  }
+
+  public function getSession($key = null)
+  {
+    static $sessionData = [];
+
+    // Cach session data to avoid round trips to the DB
+    if (!$sessionData) {
+      $app = \Slim\Slim::getInstance();
+      $SessionHandler = $app->SessionHandler;
+
+      // Get all of the session data, it can't be that much, right?
+      $sessionData = $SessionHandler->getData();
+    }
+
+    // Returns the key if provided, else all values
+    if ($key === null) {
+      return ($sessionData) ? $sessionData : null;
+    }
+
+    return isset($sessionData[$key]) ? $sessionData[$key] : null;
   }
 }
