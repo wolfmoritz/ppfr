@@ -88,3 +88,5 @@ $config['routes.case_sensitive'] = false;
 $config['auth.facebook']['app_id'] = '';
 $config['auth.facebook']['app_secret'] = '';
 $config['auth.facebook']['default_graph_version'] = 'v2.0';
+$config['auth.google']['client_id'] = '';
+$config['auth.google']['client_secret'] = '';
