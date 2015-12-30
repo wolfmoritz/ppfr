@@ -27,10 +27,11 @@ class AuthenticationController
     // Initialize response to false
     $this->app->response->headers->set('Content-Type', 'application/json');
     $returnStatus = 0;
+    $user = null;
 
     // If Facebook
     if ($provider === 'facebook') {
-      // Get the FacebookSDK and JS helper
+      // Get the FacebookSDK and JS helpers
       $fb = $this->app->FacebookSDK;
       $helper = $fb->getJavaScriptHelper();
 
@@ -57,32 +58,59 @@ class AuthenticationController
         return;
       }
 
-      // Get the user mapper and attempt to get the user by email
-      $dataMapper = $this->app->dataMapper;
-      $UserMapper = $dataMapper('UserMapper');
-      $user = $UserMapper->getUserByEmail($fbUser['email']);
+      // Assign Facebook user info to array for upsert
+      $user['first_name'] = $fbUser['first_name'];
+      $user['last_name'] = $fbUser['last_name'];
+      $user['email'] = $fbUser['email'];
+      $user['provider'] = 'facebook';
+      $user['id'] = $fbUser['id'];
 
-      // Check if the user already exists
-      if (isset($user->user_id) && $user->facebook_uid == $fbUser['id']) {
-        // Then update login date
-        $user->last_login_date = $UserMapper->now();
-        $UserMapper->update($user);
-      } else {
-        // Insert new user
-        $user = $UserMapper->make();
+      // Save
+      $user = $this->saveUser($user);
+    }
 
-        // Set values
-        $user->first_name = $fbUser['first_name'];
-        $user->last_name = $fbUser['last_name'];
-        $user->email = $fbUser['email'];
-        $user->facebook_uid = $fbUser['id'];
-        $user->active = 1;
-        $user->approved = 1;
-        $user->last_login_date = $UserMapper->now();
+    // For the Google login, we are relying on the client side javascript to get and supply the user profile details
+    if ($provider === 'google') {
+      // Get the GoogleSDK, and post data
+      $googleClient = $this->app->GoogleSDK;
+      $googleProfile = $this->app->request->params();
 
-        $UserMapper->insert($user);
+      // Make sure we have the necessary profile info
+      if (!isset($googleProfile['emails'][0]['value']) || !isset($googleProfile['name']['givenName']) || !isset($googleProfile['name']['familyName']) || !isset($googleProfile['result']['id'])) {
+        // Return failure
+        $this->app->log->error('Google returned insufficient user info:');
+        $this->app->log->error(print_r($googleProfile,true));
+        echo json_encode($returnStatus);
+        return;
       }
 
+      // Verify ID token
+      try {
+        $ticket = $googleClient->verifyIdToken($googleProfile['id_token'])->getAttributes();
+
+        // If the returned profile ID does not match post data, something fishy is going on
+        if ((int) $googleProfile['result']['id'] != (int) $ticket['payload']['sub']) {
+          throw new Exception('Google ID tokens do not match');
+        }
+      } catch (\Exception $e) {
+        $this->app->log->error('Failed to verify Google ID token');
+        $this->app->log->error(print_r($e->getMessage()));
+        echo json_encode($returnStatus);
+        return;
+      }
+
+      // Assign Google user info to array for upsert
+      $user['first_name'] = $googleProfile['name']['givenName'];
+      $user['last_name'] = $googleProfile['name']['familyName'];
+      $user['email'] = $googleProfile['emails'][0]['value'];
+      $user['provider'] = 'google';
+      $user['providerId'] = $googleProfile['result']['id'];
+
+      // Save
+      $user = $this->saveUser($user);
+    }
+
+    if ($user !== null) {
       // Define session data
       $sessionData['loggedIn'] = true;
       $sessionData['first_name'] = $user->first_name;
@@ -90,9 +118,7 @@ class AuthenticationController
       $sessionData['user_id'] = $user->user_id;
       $sessionData['role'] = $user->role;
 
-      // Set session
-      $SessionHandler = $this->app->SessionHandler;
-      $SessionHandler->setData($sessionData);
+      $this->setSession($sessionData);
 
       // Return success
       $returnStatus = 1;
@@ -100,11 +126,17 @@ class AuthenticationController
       return;
     }
 
+
     // Return default status code
     echo json_encode($returnStatus);
     return;
   }
 
+  /**
+   * Logout Session
+   *
+   * @param void
+   */
   public function logout()
   {
     // Destroy session
@@ -113,5 +145,73 @@ class AuthenticationController
 
     // Direct home
     $this->app->redirectTo('home');
+  }
+
+  /**
+   * Upsert User
+   *
+   * Updates or inserts user record
+   * @param array, user information
+   * @return mixed, user domain object on success, null on failure
+   */
+  public function saveUser($user)
+  {
+    // Get the user mapper and attempt to get the user by email
+    $dataMapper = $this->app->dataMapper;
+    $UserMapper = $dataMapper('UserMapper');
+    $user = $UserMapper->getUserByEmail($user['email']);
+
+    // Check if the user already exists
+    if (isset($user->user_id)) {
+      // Then update login date
+      $user->last_login_date = $UserMapper->now();
+      $UserMapper->update($user);
+    } else {
+      // Insert new user
+      $user = $UserMapper->make();
+
+      // Set values
+      $user->first_name = $user['first_name'];
+      $user->last_name = $user['last_name'];
+      $user->email = $user['email'];
+      $user->active = 1;
+      $user->approved = 1;
+      $user->last_login_date = $UserMapper->now();
+
+      // Set provider ID by type
+      if ($user['provider'] === 'facebook') {
+        $user->facebook_uid = $user['providerId'];
+      }
+
+      if ($user['provider'] === 'google') {
+        $user->google_uid = $user['providerId'];
+      }
+
+      $user = $UserMapper->insert($user);
+    }
+
+    return $user;
+  }
+
+  /**
+   * Set User Session
+   *
+   * @param array, user session data
+   * @return void
+   */
+  public function setSession($userData)
+  {
+      // Get session hanlder
+      $SessionHandler = $this->app->SessionHandler;
+
+      // Assign session data
+      $sessionData['loggedIn'] = $userData['loggedIn'];
+      $sessionData['first_name'] = $userData['first_name'];
+      $sessionData['last_name'] = $userData['last_name'];
+      $sessionData['user_id'] = $userData['user_id'];
+      $sessionData['role'] = $userData['role'];
+
+      // And set data
+      $SessionHandler->setData($sessionData);
   }
 }

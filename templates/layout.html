@@ -188,6 +188,15 @@
   <script src="{{ baseUrl() }}/assets/js/jquery.masonry.min.js"></script>
   <script src="{{ baseUrl() }}/assets/js/script.js"></script>
 
+  <script>
+    // Google Login
+    (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client:plusone.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+  </script>
+
 {% if production %}
   <!-- Start of StatCounter Code for Default Guide -->
   <script type="text/javascript">

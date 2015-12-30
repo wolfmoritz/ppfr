@@ -66,9 +66,9 @@ return call_user_func(
     $config['twig.extensions'][] = new \Twig_Extension_StringLoader();
 
     // Extra database options
-    $config['database']['options'][\PDO::ATTR_PERSISTENT] = true;
-    $config['database']['options'][\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
-    $config['database']['options'][\PDO::ATTR_EMULATE_PREPARES] = false;
+    $config['database']['options'][PDO::ATTR_PERSISTENT] = true;
+    $config['database']['options'][PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+    $config['database']['options'][PDO::ATTR_EMULATE_PREPARES] = false;
 
     // If in development mode
     if ($config['mode'] === 'development') {
@@ -111,6 +111,20 @@ return call_user_func(
     // Facebook Authentication
     $app->container->singleton('FacebookSDK', function() use ($app) {
       return new \Facebook\Facebook($app->config('auth.facebook'));
+    });
+
+    // Google Authentication
+    $app->container->singleton('GoogleSDK', function() use ($app) {
+      // Get Google configuration
+      $googleConfig = $app->config('auth.google');
+
+      // Create client
+      $client = new \Google_Client();
+      $client->setScopes(['openid https://www.googleapis.com/auth/plus.login profile email']);
+      $client->setClientId($googleConfig['client_id']);
+      $client->setClientSecret($googleConfig['client_secret']);
+
+      return $client;
     });
 
     // Email

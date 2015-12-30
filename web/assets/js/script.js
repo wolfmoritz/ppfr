@@ -74,7 +74,7 @@ var user = (function($) {
   var googleConfig = {
     clientid: "408301341875-h17ftskvns7uug8csuvctkc43av4v0v3.apps.googleusercontent.com",
     cookiepolicy: "single_host_origin",
-    scope: "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read",
+    scope: "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.profile.emails.read",
     callback: googleSigninCallback
   }
 
@@ -83,16 +83,16 @@ var user = (function($) {
     $.ajax({
       type: 'POST',
       url: baseUrl + '/user/login/'+service,
-      data: 1,
+      data: me,
       success: function(returnData) {
         if(returnData === 1) {
           window.location.reload();
           } else {
-            console.log('There was a registration error, please try again later.');
+            console.log('Success: There was a registration error, please try again later.');
           }
       },
       error: function(e) {
-        console.log('There was a registration error, please try again later.');
+        console.log('Error: There was a registration error, please try again later.');
         }
       });
   }
@@ -106,15 +106,15 @@ var user = (function($) {
     };
     called = true;
 
-    if (r.status.signed_in) {
+    if (r.status.signed_in && r.id_token) {
       gapi.client.load('plus','v1', function() {
-        var request = gapi.client.plus.people.get({'userId': 'me'});
-        request.execute(function(googleProfile) {
-          googleProfile.expiresIn = r.expires_in;
-          userLogin('google', googleProfile);
+      var request = gapi.client.plus.people.get({'userId': 'me'});
+      request.execute(function(googleProfile) {
+        googleProfile.id_token = r.id_token;
+        userLogin('google', googleProfile);
         });
       });
-    };
+    }
   }
 
   // Public
