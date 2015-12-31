@@ -12,14 +12,28 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Redirect for old blog pages
+    # Redirect old blog pages
     RewriteCond %{REQUEST_URI} ^(.*)/blog/about-me/?
     RewriteRule ^blog/about-me/?$ http://%{HTTP_HOST}%1/about [NC,R=301,L]
 
     # User URL's have moved from '/recipe/user/2:Peri+Moritz' to '/recipe/user/2/Peri-Moritz'
     # The %1 replacement hack references a capture group from the condition above, to include the relative path on localhost
-    RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+
-    RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
+    RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+/?\d*
+    RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)(/?\d*)$ http://%{HTTP_HOST}%1/recipe/user/$1/$2$3 [NC,R=301,L]
+
+    # If the user URL has a trailing slash after the name but does not have page number, then redirect to first
+    # user page without a trailing slash
+    RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+/[a-zA-Z+-]+/$
+    RewriteRule ^recipe/user/(\d+)/([a-zA-Z+-]+)/$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
+
+    # If a show recipe has an ID, and no slug (title), make the trailing slash optional and rewrite to
+    # the no slash route and let the app return a 301 to the route with the title
+    RewriteCond %{REQUEST_URI} ^(.*)/recipe/show/\d+/$
+    RewriteRule ^recipe/show/(\d+)/$ http://%{HTTP_HOST}%1/recipe/show/$1 [NC,R=302,L]
+
+    # If a category has a trailing slash but no page number, direct to the first category page (no trailing slash)
+    RewriteCond %{REQUEST_URI} ^(.*)/recipe/category/[a-zA-Z+-]+/$
+    RewriteRule ^recipe/category/([a-zA-Z+-]+)/$ http://%{HTTP_HOST}%1/recipe/category/$1 [NC,R=301,L]
 
     # Catch requests to the old printable.php page and direct to the current recipe page
     # The %1 capture group only references the prior RewriteCond line, so we are passing the
