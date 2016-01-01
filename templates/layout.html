@@ -126,7 +126,7 @@
               <li> <a href="#" id="google-login-link"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
               {% endif %}
               {% if session('loggedIn') %}
-              <li> <a href="#">My Account</a>
+              <li> <a href="{{ siteUrlFor('adminDashboard') }}" rel="nofollow">My Account</a>
               <li> <a href="{{ siteUrlFor('logout') }}"><span class="glyphicon glyphicon-off"></span> Sign out</a> </li>
               {% endif %}
             </ul>

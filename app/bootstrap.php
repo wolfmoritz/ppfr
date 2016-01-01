@@ -10,9 +10,6 @@
  * - Routes
  * - Then run!
  */
-namespace Recipe;
-
-use PDO;
 
 // Define the application root directory
 define('ROOT_DIR', dirname(__DIR__) . '/');
@@ -52,8 +49,8 @@ return call_user_func(
     }
 
     // Logging
-    $config['log.writer']  = new \Slim\Logger\DateTimeFileWriter(array('path' => ROOT_DIR . 'logs'));
-    $config['log.level']   = \Slim\Log::ERROR;
+    $config['log.writer']  = new Slim\Logger\DateTimeFileWriter(array('path' => ROOT_DIR . 'logs'));
+    $config['log.level']   = Slim\Log::ERROR;
     $config['log.enabled'] = true;
 
     // Template file path, this is only needed for Slim, not Twig
@@ -61,9 +58,9 @@ return call_user_func(
 
     // Twig template engine
     $config['twig.parserOptions']['cache'] = ROOT_DIR . 'twigcache';
-    $config['twig.extensions'][] = new \Slim\Views\TwigExtension();
-    $config['twig.extensions'][] = new \Recipe\Extensions\TwigExtension();
-    $config['twig.extensions'][] = new \Twig_Extension_StringLoader();
+    $config['twig.extensions'][] = new Slim\Views\TwigExtension();
+    $config['twig.extensions'][] = new Recipe\Extensions\TwigExtension();
+    $config['twig.extensions'][] = new Twig_Extension_StringLoader();
 
     // Extra database options
     $config['database']['options'][PDO::ATTR_PERSISTENT] = true;
@@ -74,19 +71,19 @@ return call_user_func(
     if ($config['mode'] === 'development') {
         // Twig
       $config['twig.parserOptions']['debug'] = true;
-      $config['twig.extensions'][] = new \Twig_Extension_Debug();
+      $config['twig.extensions'][] = new Twig_Extension_Debug();
 
       // Boost log level
-      $config['log.level'] = \Slim\Log::DEBUG;
+      $config['log.level'] = Slim\Log::DEBUG;
     }
 
     // Now create the application
-    $app = new \Slim\Slim($config);
+    $app = new Slim\Slim($config);
 
     // In development mode Whoops pretty exceptions are displayed,
     // but in production the Slim\Logger writes exceptions to file.
     $app->config('whoops.editor', 'sublime');
-    $app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
+    $app->add(new Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
 
     // Load data mapper loader
     $app->dataMapper = function($mapper) use ($app) {
@@ -105,12 +102,12 @@ return call_user_func(
 
     // Sessions
     $app->container->singleton('SessionHandler', function() use ($app) {
-      return new \WolfMoritz\Session\SessionHandler($app->db, $app->config('session'));
+      return new WolfMoritz\Session\SessionHandler($app->db, $app->config('session'));
     });
 
     // Facebook Authentication
     $app->container->singleton('FacebookSDK', function() use ($app) {
-      return new \Facebook\Facebook($app->config('auth.facebook'));
+      return new Facebook\Facebook($app->config('auth.facebook'));
     });
 
     // Google Authentication
@@ -119,12 +116,17 @@ return call_user_func(
       $googleConfig = $app->config('auth.google');
 
       // Create client
-      $client = new \Google_Client();
+      $client = new Google_Client();
       $client->setScopes(['openid https://www.googleapis.com/auth/plus.login profile email']);
       $client->setClientId($googleConfig['client_id']);
       $client->setClientSecret($googleConfig['client_secret']);
 
       return $client;
+    });
+
+    // Security
+    $app->container->singleton('security', function() use ($app) {
+        return new Recipe\Library\SecurityHandler($app);
     });
 
     // Email
@@ -134,7 +136,7 @@ return call_user_func(
 
     // Sitemap
     $app->sitemap = function() use ($app) {
-        return new \Recipe\Library\SitemapHandler($app);
+        return new Recipe\Library\SitemapHandler($app);
     };
 
     // Encryption Function
@@ -148,8 +150,8 @@ return call_user_func(
     // Image Uploader
     $app->uploader = function() use ($app) {
       return function ($key) use ($app) {
-        $storage = new \Upload\Storage\FileSystem($app->config('file.path'));
-        return new \Upload\File($key, $storage);
+        $storage = new Upload\Storage\FileSystem($app->config('file.path'));
+        return new Upload\File($key, $storage);
       };
     };
 
@@ -160,7 +162,7 @@ return call_user_func(
 
     // Twig Template Rendering
     $app->container->singleton('twig', function() use ($app) {
-      $twig = new \Slim\Views\Twig();
+      $twig = new Slim\Views\Twig();
       $twig->parserOptions = $app->config('twig.parserOptions');
       $twig->parserExtensions = $app->config('twig.extensions');
       $twig->setTemplatesDirectory(ROOT_DIR . 'templates');
@@ -186,7 +188,7 @@ return call_user_func(
     });
 
     // Add session cookie middleware for flash messages
-    $app->add(new \Slim\Middleware\SessionCookie(array(
+    $app->add(new Slim\Middleware\SessionCookie(array(
         'expires' => '20 minutes',
         'path' => '/',
         'domain' => null,

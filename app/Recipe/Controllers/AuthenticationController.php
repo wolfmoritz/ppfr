@@ -120,7 +120,7 @@ class AuthenticationController
 
       $this->setSession($sessionData);
 
-      // Return success
+      // Success, direct user to dashboard
       $returnStatus = 1;
       echo json_encode($returnStatus);
       return;

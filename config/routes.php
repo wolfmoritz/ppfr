@@ -4,6 +4,31 @@
  */
 namespace Recipe;
 
+// Authentication closure to secure admin routes
+$authenticated = function () use ($app) {
+  return function () use ($app) {
+    $security = $app->security;
+    if (!$security->authenticated()) {
+      $app->redirectTo('home');
+    }
+  };
+};
+
+// If using an admin route, set cache control to not cache pages
+$noCache = function() use ($app) {
+  return function() use ($app) {
+    // https://www.owasp.org/index.php/Testing_for_Logout_and_Browser_Cache_Management_(OWASP-AT-007)
+    $app->response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    $app->response->headers->set('Pragma', 'no-cache');
+    $app->response->headers->set('Expires', '0'); // Purposely illegal vaule
+  };
+};
+
+// Admin Dashboard
+$app->get('/user/dashboard', $noCache(), $authenticated(), function() {
+  (new Controllers\AdminIndexController())->dashboard();
+})->name('adminDashboard');
+
 // Login
 $app->post('/user/login/:provider', function($provider) use ($app) {
   (new Controllers\AuthenticationController())->login($provider);
@@ -47,10 +72,10 @@ $app->get('/blog', function() {
 // Update sitemap
 $app->get('/updatesitemap', function() use ($app) {
     // Does it matter if this is called from a browser?
-    // if (PHP_SAPI !== 'cli') {
-    //  $this->app->halt(500);
-    // }
-
+    if (PHP_SAPI !== 'cli') {
+     $app->notFound();
+    }
+    echo "Updating sitemap\n";
     $SitemapHandler = $app->sitemap;
     $SitemapHandler->make();
 });

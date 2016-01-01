@@ -86,7 +86,7 @@ var user = (function($) {
       data: me,
       success: function(returnData) {
         if(returnData === 1) {
-          window.location.reload();
+          window.location.href = 'user/dashboard';
           } else {
             console.log('Success: There was a registration error, please try again later.');
           }

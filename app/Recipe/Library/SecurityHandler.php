@@ -32,9 +32,9 @@ class SecurityHandler
    */
   public function authenticated()
   {
-    $session = $this->app->session;
+    $SessionHandler = $this->app->SessionHandler;
 
-    return $session->getData('loggedin');
+    return $SessionHandler->getData('loggedIn');
   }
 
   /**
@@ -48,19 +48,19 @@ class SecurityHandler
   public function authorized($requiredRole = null, $redirect = true)
   {
     // If the user is not logged in return false in all cases
-    if (!$this->authenticated()) 
+    if (!$this->authenticated())
     {
       return false;
     }
 
-    $session = $this->app->session;
-    $userRole = $session->getData('role'); 
+    $SessionHandler = $this->app->SessionHandler;
+    $userRole = $SessionHandler->getData('role');
 
     // Compare role levels
-    if ($requiredRole !== null 
-        and isset($this->roles[$userRole]) 
-        and isset($this->roles[$requiredRole]) 
-        and $this->roles[$userRole] >= $this->roles[$requiredRole]) 
+    if ($requiredRole !== null
+        and isset($this->roles[$userRole])
+        and isset($this->roles[$requiredRole])
+        and $this->roles[$userRole] >= $this->roles[$requiredRole])
     {
       return true;
     }
@@ -69,13 +69,13 @@ class SecurityHandler
     if ($redirect) {
       $this->app->redirect($this->app->urlFor('adminHome'));
     }
-    
+
     return false;
   }
- 
+
   /**
    * Get Role List
-   * 
+   *
    * @return Array of roles
    */
   public function getRoles()
