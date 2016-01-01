@@ -20,12 +20,12 @@ $app->get('/recipe/search', function () use ($app) {
 })->name('recipeSearch');
 
 // Show a recipe
-$app->get('(/recipe/show(/:id/?(/:slug)))', function ($id, $slug = null) {
+$app->get('(/recipe/show(/:id(/:slug)))', function ($id, $slug = null) {
   (new Controllers\IndexController())->showRecipe($id, $slug);
 })->conditions(['id' => '\d+'])->name('showRecipe');
 
 // Get recipes by category
-$app->get('/recipe/category(/:slug/?(/:page))', function ($slug = 'All', $page = 1) {
+$app->get('/recipe/category(/:slug(/:page))', function ($slug = 'All', $page = 1) {
   (new Controllers\IndexController())->getRecipesByCategory($slug, $page);
 })->name('recipesByCategory');
 
