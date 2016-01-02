@@ -113,9 +113,6 @@ recipe h4 {
 	text-decoration: none;
 	background-color: rgba(0,0,0,0.5);
 }
-img {
-	max-width: 100%;
-}
 .btn-info {
 	background-color: #24c2cb;
 }

@@ -8,7 +8,6 @@
  * - Configuration
  * - Startup to load application and dependencies
  * - Routes
- * - Then run!
  */
 
 // Define the application root directory
@@ -77,7 +76,7 @@ return call_user_func(
       $config['log.level'] = Slim\Log::DEBUG;
     }
 
-    // Now create the application
+    // Create the application
     $app = new Slim\Slim($config);
 
     // In development mode Whoops pretty exceptions are displayed,
@@ -106,23 +105,23 @@ return call_user_func(
     });
 
     // Facebook Authentication
-    $app->container->singleton('FacebookSDK', function() use ($app) {
+    $app->FacebookSDK = function() use ($app) {
       return new Facebook\Facebook($app->config('auth.facebook'));
-    });
+    };
 
     // Google Authentication
-    $app->container->singleton('GoogleSDK', function() use ($app) {
+    $app->GoogleSDK = function() use ($app) {
       // Get Google configuration
       $googleConfig = $app->config('auth.google');
 
       // Create client
-      $client = new Google_Client();
-      $client->setScopes(['openid https://www.googleapis.com/auth/plus.login profile email']);
-      $client->setClientId($googleConfig['client_id']);
-      $client->setClientSecret($googleConfig['client_secret']);
+      $googleClient = new Google_Client();
+      $googleClient->setScopes(['openid https://www.googleapis.com/auth/plus.login profile email']);
+      $googleClient->setClientId($googleConfig['client_id']);
+      $googleClient->setClientSecret($googleConfig['client_secret']);
 
-      return $client;
-    });
+      return $googleClient;
+    };
 
     // Security
     $app->container->singleton('security', function() use ($app) {
@@ -133,6 +132,11 @@ return call_user_func(
     // $app->email = function() use ($app) {
     //     return new Recipe\Library\EmailHandler($app->log, $app->config('email'));
     // };
+
+    // Pagination Extension
+    $app->PaginationHandler = function() {
+      return new Recipe\Extensions\TwigExtensionPagination();
+    };
 
     // Sitemap
     $app->sitemap = function() use ($app) {
@@ -183,8 +187,7 @@ return call_user_func(
       }
 
       // Render 404 page
-      $twig = $app->twig;
-      $twig->display('notFound.html');
+      $app->twig->display('notFound.html');
     });
 
     // Add session cookie middleware for flash messages

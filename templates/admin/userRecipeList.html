@@ -1,0 +1,32 @@
+{% extends 'admin/dashboard.html' %}
+
+{% block userDashboardContent %}
+
+<h2 class="page-header">Manage Your Recipes</h2>
+
+{% for r in recipes %}
+  {% if not r.main_photo %}
+    {% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}
+  {% else %}
+    {% set imageUrl = imageUrl(r.recipe_id, r.main_photo, 80) %}
+  {% endif %}
+<div class="media">
+  <div class="media-left media-middle">
+    <a href="{{ siteUrlFor('showRecipe', r.niceUrl, 250) }}">
+      <img class="media-object" src="{{ imageUrl }}" width="80">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ r.title }}</h4>
+    <a class="btn-link" href="admineditrecipe.html">Edit</a> | <a class="btn-link" href="admineditrecipe.html">Delete</a> |
+    Status: Published |
+    Date: {{ recipe.created_date|date('F j, Y') }} <br>
+    <a href="#" class="btn btn-link disabled">Comments: 5</a> |
+    <a href="#" class="btn btn-link disabled">Pending Comments: 4</a> | Views: {{ r.view_count|number_format }} | Rank: 1 / 2
+  </div>
+</div>
+{% else %}
+<h4>You have not yet shared any recipes!</h4>
+{% endfor %}
+{{ pagination() }}
+{% endblock %}

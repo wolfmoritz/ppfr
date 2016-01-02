@@ -24,10 +24,23 @@ $noCache = function() use ($app) {
   };
 };
 
+//
+// These routes are secured
+//
+
 // Admin Dashboard
 $app->get('/user/dashboard', $noCache(), $authenticated(), function() {
   (new Controllers\AdminIndexController())->dashboard();
 })->name('adminDashboard');
+
+// Admin Recipes by User
+$app->get('/user/dashboard/recipes(/:page)', $noCache(), $authenticated(), function($page = 1) {
+  (new Controllers\AdminIndexController())->getRecipesByUser($page);
+})->name('adminRecipesByUser');
+
+//
+// The routes below are public
+//
 
 // Login
 $app->post('/user/login/:provider', function($provider) use ($app) {

@@ -37,6 +37,8 @@ class IndexController
 
   /**
    * Get More Home Page Recipes
+   *
+   * Returns HTML fragment containing the next set of masonry images, typically via Ajax
    */
   public function getMorePhotoRecipes($pageNumber)
   {
@@ -73,6 +75,7 @@ class IndexController
     $dataMapper = $this->app->dataMapper;
     $RecipeMapper = $dataMapper('RecipeMapper');
     $CategoryMapper = $dataMapper('CategoryMapper');
+    $Paginator = $this->app->PaginationHandler;
     $twig = $this->app->twig;
 
     // Verify category and get proper name and ID
@@ -93,20 +96,19 @@ class IndexController
     }
 
     // Configure pagination object
-    $paginator = new \Recipe\Extensions\TwigExtensionPagination();
-    $paginator->setPagePath($this->app->urlFor('recipesByCategory') . '/' . $categoryResult['url']);
-    $paginator->setCurrentPageNumber($pageNumber);
+    $Paginator->setPagePath($this->app->urlFor('recipesByCategory') . '/' . $categoryResult['url']);
+    $Paginator->setCurrentPageNumber($pageNumber);
 
     // Fetch recipes
     if (strtolower($category) === 'all') {
-      $recipes = $RecipeMapper->getRecipes($paginator->getRowsPerPage(), $paginator->getOffset());
+      $recipes = $RecipeMapper->getRecipes($Paginator->getRowsPerPage(), $Paginator->getOffset());
     } else {
-      $recipes = $RecipeMapper->getRecipesByCategory($categoryResult['category_id'], $paginator->getRowsPerPage(), $paginator->getOffset());
+      $recipes = $RecipeMapper->getRecipesByCategory($categoryResult['category_id'], $Paginator->getRowsPerPage(), $Paginator->getOffset());
     }
 
     // Get count of recipes returned by query and load pagination
-    $paginator->setTotalRowsFound($RecipeMapper->foundRows());
-    $twig->parserExtensions[] = $paginator;
+    $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
+    $twig->parserExtensions[] = $Paginator;
 
     // Return the array of recipes and the category name
     $data['list'] = $recipes;
@@ -183,13 +185,13 @@ class IndexController
     $twig = $this->app->twig;
 
     // Configure pagination object
-    $paginator = new \Recipe\Extensions\TwigExtensionPagination();
-    $paginator->useQueryString = true;
-    $paginator->setPagePath($this->app->urlFor('recipeSearch') . '?terms=' . $terms);
-    $paginator->setCurrentPageNumber($pageNo);
+    $Paginator = $this->app->PaginationHandler;
+    $Paginator->useQueryString = true;
+    $Paginator->setPagePath($this->app->urlFor('recipeSearch') . '?terms=' . $terms);
+    $Paginator->setCurrentPageNumber($pageNo);
 
     // Fetch recipes
-    $recipes = $RecipeMapper->searchRecipes($terms, $paginator->getRowsPerPage(), $paginator->getOffset());
+    $recipes = $RecipeMapper->searchRecipes($terms, $Paginator->getRowsPerPage(), $Paginator->getOffset());
 
     // If we found just one row on the first page of results, just show the recipe page
     // Note, this is faster than count($recipes) === 1
@@ -200,8 +202,8 @@ class IndexController
     }
 
     // Get count of recipes returned by query and load pagination
-    $paginator->setTotalRowsFound($RecipeMapper->foundRows());
-    $twig->parserExtensions[] = $paginator;
+    $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
+    $twig->parserExtensions[] = $Paginator;
 
     // Return the array of recipes and the category name
     $data['list'] = $recipes;
@@ -234,16 +236,16 @@ class IndexController
     }
 
     // Configure pagination object
-    $paginator = new \Recipe\Extensions\TwigExtensionPagination();
-    $paginator->setPagePath($this->app->urlFor('recipesByUser') . '/' . $userResult->user_url);
-    $paginator->setCurrentPageNumber($pageNumber);
+    $Paginator = $this->app->PaginationHandler;
+    $Paginator->setPagePath($this->app->urlFor('recipesByUser') . '/' . $userResult->user_url);
+    $Paginator->setCurrentPageNumber($pageNumber);
 
     // Fetch recipes
-    $recipes = $RecipeMapper->getRecipesByUser($userResult->user_id, $paginator->getRowsPerPage(), $paginator->getOffset());
+    $recipes = $RecipeMapper->getRecipesByUser($userResult->user_id, $Paginator->getRowsPerPage(), $Paginator->getOffset());
 
     // Get count of recipes returned by query and load pagination
-    $paginator->setTotalRowsFound($RecipeMapper->foundRows());
-    $twig->parserExtensions[] = $paginator;
+    $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
+    $twig->parserExtensions[] = $Paginator;
 
     // Return the array of recipes and the user name (set in the category field)
     $data['list'] = $recipes;
