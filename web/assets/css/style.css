@@ -144,6 +144,31 @@ recipe h4 {
 	padding-left: 0;
 	padding-right: 0;
 }
+.form-control, .input-group-btn > .btn {
+    background-color: #F7F4E2; 
+    color: #DA2536;
+    border: solid #DA2536 1px;}
+
+#searchInput::-webkit-input-placeholder
+{
+  color:   RGBA(218,37,54,.7);
+}
+
+#searchInput:-moz-placeholder
+{
+  color:   RGBA(218,37,54,.7);
+}
+
+#searchInput::-moz-placeholder
+{
+  color:   RGBA(218,37,54,.7);
+}
+
+#searchInput:-ms-input-placeholder
+{
+  color:   RGBA(218,37,54,.7);
+}
+
 /*****************************/
 /******* Modified Navbar *****/
 /****************************/
@@ -151,8 +176,7 @@ recipe h4 {
 .navbar-default {
 	background-color: #ef525b;
 	border-color: transparent;
-	font-family: Raleway, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 16px;
+	font-size: 18px;
 }
 .navbar-default .navbar-brand {
 	color: #000000;
@@ -217,6 +241,15 @@ recipe h4 {
 }
 #content .item {
 	width: 50%;
+}
+     .navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
 }
 }
 /********sm*******/
