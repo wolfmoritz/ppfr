@@ -3,10 +3,10 @@
 {% block userDashboardContent %}
 <form>
   <div class="buttonControls">
-    <button type="submit" name="button" value="save">Save Draft</button>
-    <button type="submit" name="button" value="save">Publish Now</button>
-    <button type="submit" name="button" value="cancel">Cancel</button>
-    <button type="submit" name="button" class="deleteButton" value="delete">Delete Recipe</button>
+    <button type="submit" class="btn btn-default" name="button" value="save">Save Draft</button>
+    <button type="submit" class="btn btn-default" name="button" value="save">Publish Now</button>
+    <a href="{{ siteUrlFor('showRecipe', recipe.niceUrl) }}" class="btn btn-default" name="button" value="cancel">Cancel</a>
+    <button type="submit" class="btn btn-default" name="button" class="deleteButton" value="delete">Delete Recipe</button>
   </div>
     <!-- .buttonControls -->
   <hr>
@@ -66,10 +66,16 @@
   <div id="editCategories">
     <label>Categories</label>
     <ul class="list-unstyled list-inline">
+      {% for c in categories %}
       <li>
-        <input type="checkbox" name="category[8]" id="Appetizer">
-          <label for="Appetizer" title="Appetizer Category">Appetizer</label>
+        <div class="checkbox">
+          <label for="{{ c.url }}" title="{{ c.name }} Category">
+            <input type="checkbox" name="category[{{ c.category_id }}]" id="{{ c.url }}" {{ checked(c.assigned) }}>
+              {{ c.name }}
+          </label>
+        </div>
       </li>
+      {% endfor %}
     </ul>
   </div>
 </form>

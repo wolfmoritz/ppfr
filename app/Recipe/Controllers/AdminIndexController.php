@@ -79,7 +79,7 @@ class AdminIndexController
     // If a recipe ID was supplied, get that recipe. But first get a blank recipe record
     $recipe = $RecipeMapper->make();
     if ($id !== null) {
-      $recipe = $RecipeMapper->findById($id);
+      $recipe = $RecipeMapper->findById((int) $id);
     }
 
     // Verify authority to edit recipe. Admins can edit all
@@ -90,6 +90,16 @@ class AdminIndexController
 
     // Get all categories
     $categories = $CategoryMapper->find();
+    $recipeCategories = $CategoryMapper->getAssignedCategories((int) $id);
+
+    // Mark whether category has been assigned
+    foreach ($recipeCategories as $rCat) {
+      foreach ($categories as $cat) {
+        if ($rCat->category_id === $cat->category_id) {
+          $cat->assigned = true;
+        }
+      }
+    }
 
     // Fetch any saved form data from session state and merge into recipe
     $recipeFormData = $SessionHandler->getData('recipeForm');
@@ -97,6 +107,6 @@ class AdminIndexController
     // TODO: Do something with session data
 
     // Display
-    $this->app->twig->display('admin/editRecipe.html', ['recipe' => $recipe, 'title' => 'Edit Recipe']);
+    $this->app->twig->display('admin/editRecipe.html', ['recipe' => $recipe, 'categories' => $categories, 'title' => 'Edit Recipe']);
   }
 }
