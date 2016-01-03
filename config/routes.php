@@ -38,6 +38,11 @@ $app->get('/user/dashboard/recipes(/:page)', $noCache(), $authenticated(), funct
   (new Controllers\AdminIndexController())->getRecipesByUser($page);
 })->name('adminRecipesByUser');
 
+// Admin Add or Edit Recipe
+$app->get('/recipe/edit(/:id)', $noCache(), $authenticated(), function($id = null) {
+  (new Controllers\AdminIndexController())->editRecipe($id);
+})->name('adminEditRecipe');
+
 //
 // The routes below are public
 //

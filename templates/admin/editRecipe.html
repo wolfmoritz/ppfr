@@ -1,0 +1,76 @@
+{% extends 'admin/dashboard.html' %}
+
+{% block userDashboardContent %}
+<form>
+  <div class="buttonControls">
+    <button type="submit" name="button" value="save">Save Draft</button>
+    <button type="submit" name="button" value="save">Publish Now</button>
+    <button type="submit" name="button" value="cancel">Cancel</button>
+    <button type="submit" name="button" class="deleteButton" value="delete">Delete Recipe</button>
+  </div>
+    <!-- .buttonControls -->
+  <hr>
+  <div class="form-group">
+    <label for="title">Recipe Title</label>
+    <input type="text" class="form-control" name="title" maxlength="60" autocomplete="off" value="{{ recipe.title }}">
+  </div>
+
+  <div class="form-group">
+    <label for="subtitle">Recipe Sub-Title</label>
+    <input type="text" class="form-control" name="subtitle" maxlength="150" autocomplete="off" value="{{ recipe.subtitle }}">
+  </div>
+
+  <div class="form-group">
+    <label for="recipe_photo">Main Recipe Photo (Optional):</label>
+    <input type="file" id="imageUpload" class="form-control" name="{{ recipe.main_photo }}" size="40">
+  </div>
+
+  <img id="featuredImage" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" width="320">
+
+  <div class="form-group">
+    <label for="servings">Servings</label>
+    <input type="text" class="form-control" name="servings" maxlength="60" autocomplete="off" value="{{ recipe.servings }}">
+  </div>
+
+  <div class="form-group">
+    <label for="temperature">Oven Temp</label>
+    <input type="text" class="form-control" name="temperature" maxlength="60" autocomplete="off" value="{{ recipe.temperature }}">
+  </div>
+
+  <div class="form-group">
+    <label for="prep_time">Prep Time</label>
+    <input type="text" class="form-control" name="prep_time" maxlength="60" autocomplete="off" value="{{ recipe.prep_time }}">
+  </div>
+
+  <div class="form-group">
+    <label for="cook_time">Cook Time</label>
+    <input type="text" class="form-control" name="cook_time" maxlength="60" autocomplete="off" value="{{ recipe.cook_time }}">
+  </div>
+
+  <div class="form-group">
+    <label for="ingredients">Ingredients</label>
+    <textarea class="form-control" rows="20" name="ingredients">{{ recipe.ingredients }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="instructions">Preparation</label>
+    <textarea rows="20" class="form-control" name="instructions">{{ recipe.instructions }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="notes">Notes</label>
+    <textarea class="form-control" rows="10" name="notes">{{ recipe.notes }}</textarea>
+  </div>
+  <hr>
+
+  <div id="editCategories">
+    <label>Categories</label>
+    <ul class="list-unstyled list-inline">
+      <li>
+        <input type="checkbox" name="category[8]" id="Appetizer">
+          <label for="Appetizer" title="Appetizer Category">Appetizer</label>
+      </li>
+    </ul>
+  </div>
+</form>
+{% endblock %}

@@ -122,8 +122,8 @@
           <li class="dropdown"> <a href="#" class="dropdown-toggle" roll="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {% if session('loggedIn') %}{{ session('first_name') }}{% else %}My Account{% endif %} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               {% if not session('loggedIn') %}
-              <li> <a href="#" id="fb-login-link"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
-              <li> <a href="#" id="google-login-link"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
+              <li> <a href="#" id="fb-login-link" rel="nofollow"><span class="glyphicon glyphicon-thumbs-up"></span> Log in w/Facebook</a> </li>
+              <li> <a href="#" id="google-login-link" rel="nofollow"><span class="glyphicon glyphicon-plus"></span> Log in w/Google</a> </li>
               {% endif %}
               {% if session('loggedIn') %}
               <li> <a href="{{ siteUrlFor('adminDashboard') }}" rel="nofollow">My Account</a>

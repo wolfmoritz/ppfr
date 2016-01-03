@@ -287,7 +287,7 @@ class TwigExtension extends \Twig_Extension
       $urlSegments = '/' . implode('/', $segments);
     }
 
-    if ($segments !== null && is_string($segments)) {
+    if ($segments !== null) {
       $urlSegments = $segments;
       $urlSegments = ltrim($segments, '/');
       $urlSegments = '/' . $urlSegments;
