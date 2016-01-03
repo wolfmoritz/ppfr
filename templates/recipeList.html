@@ -14,12 +14,12 @@
       {% endif %}
 
       <div class="col-sm-6 col-md-4">
-              <a href="{{ siteUrlFor('showRecipe', r.niceUrl, 250) }}">  <div class="thumbnail">
+               <div class="thumbnail">
 
+<a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}"> 
+                <img src="{{ imageUrl }}" class="img img-responsive" alt="Photo of {{ r.title }}"></a>
 
-                <img src="{{ imageUrl }}" class="img img-responsive" alt="Photo of {{ r.title }}">
-
-				<div class="caption text-center"> <h5>{{ r.title }}</h5></a> </div>
+				<div class="caption text-center"> <h5><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}"> {{ r.title }}</a></h5> </div>
                   <!--end caption -->
                 </div>
                 <!--end thumbnail -->
