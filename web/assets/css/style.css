@@ -13,7 +13,7 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizelegibility;
-	background-color: #eae7d6;
+	background-color: #F7F4E2;
 	font-size: 18px;
 	color: #000;
 }
@@ -22,14 +22,15 @@ body {
 	width:100%;
 }
 #header {
-	background-color: #eae7d6;
+    background-color: #24c2cb;
+    background-image: url(../img/headerBG.png);
 }
 footer {
 	/* position: absolute;/*
 	/* bottom: 0; */
 	width: 100%;
 	background-color: #082e41;
-	color: #fff;
+	color: #F7F4E2;
 	font-size: 11px;
 	padding: 20px;
 	margin-top: 20px;
@@ -73,7 +74,7 @@ recipe h4 {
 	max-height: 188px;
 }
 .recipe-bg{
-	background: #ffffff;
+	
     margin-bottom: -20px;
     padding-bottom: 20px;
 }
@@ -112,9 +113,6 @@ recipe h4 {
 	color: rgba(234, 231, 214, 1);
 	text-decoration: none;
 	background-color: rgba(0,0,0,0.5);
-}
-img {
-	max-width: 100%;
 }
 .btn-info {
 	background-color: #24c2cb;
