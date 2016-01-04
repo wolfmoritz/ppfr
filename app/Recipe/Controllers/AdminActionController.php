@@ -58,6 +58,7 @@ class AdminActionController
     // Validate data....
 
     // Assign data
+    // Note, the url, *_iso times, and instruction excerpt fields are set in the RecipeMapper on save
     $recipe->title = isset($post['title']) ? $post['title'] : $recipe->title;
     $recipe->subtitle = isset($post['subtitle']) ? $post['subtitle'] : $recipe->subtitle;
     $recipe->servings = isset($post['servings']) ? $post['servings'] : $recipe->servings;
@@ -69,29 +70,13 @@ class AdminActionController
     $recipe->notes = isset($post['notes']) ? $post['notes'] : $recipe->notes;
     // $recipe->main_photo = isset($post['main_photo']) ? $post['main_photo'] : $recipe->main_photo;
 
-    // Note, the url, *_iso times, and instruction excerpt fields are set in the RecipeMapper on save
 
     // Save recipe
-    $RecipeMapper->save($recipe);
+    $recipe = $RecipeMapper->save($recipe);
 
-
-    // Get all categories
-    // $categories = $CategoryMapper->find();
-    // $recipeCategories = $CategoryMapper->getAssignedCategories((int) $id);
-
-    // // Mark whether category has been assigned
-    // foreach ($recipeCategories as $rCat) {
-    //   foreach ($categories as $cat) {
-    //     if ($rCat->category_id === $cat->category_id) {
-    //       $cat->assigned = true;
-    //     }
-    //   }
-    // }
-
-    // Fetch any saved form data from session state and merge into recipe
-    // $recipeFormData = $SessionHandler->getData('recipeForm');
-
-    // TODO: Do something with session data
+    // Save categories
+    $categories = isset($post['category']) ? $post['category'] : [];
+    $CategoryMapper->saveRecipeCategoryAssignments($recipe->recipe_id, $categories);
 
     // On success display updated recipe
     $this->app->redirectTo('showRecipe', ['id' => $recipe->recipe_id, 'slug' => $recipe->url]);
