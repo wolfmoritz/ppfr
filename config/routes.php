@@ -43,6 +43,11 @@ $app->get('/recipe/edit(/:id)', $noCache(), $authenticated(), function($id = nul
   (new Controllers\AdminIndexController())->editRecipe($id);
 })->name('adminEditRecipe');
 
+// Admin Save Recipe
+$app->post('/recipe/save', $noCache(), $authenticated(), function() {
+  (new Controllers\AdminActionController())->saveRecipe();
+})->name('adminSaveRecipe');
+
 //
 // The routes below are public
 //

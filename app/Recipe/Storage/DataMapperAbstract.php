@@ -208,19 +208,15 @@ abstract class DataMapperAbstract
   }
 
   /**
-   * Save Domain Object
+   * Save Domain Object (Public)
    *
-   * Inserts or updates Domain Object record
+   * Define in child class to add any manipulation before _save()
    * @param Domain Object
    * @return mixed, Domain Object on success, false otherwise
    */
   public function save(DomainObjectAbstract $domainObject)
   {
-    if(is_numeric($domainObject->{$this->primaryKey})) {
-      return $this->update($domainObject);
-    } else {
-      return $this->insert($domainObject);
-    }
+    return $this->_save($domainObject);
   }
 
   /**
@@ -282,6 +278,22 @@ abstract class DataMapperAbstract
   // ------------------------------------------
   // Protected Methods
   // ------------------------------------------
+
+  /**
+   * Save Domain Object (Protected)
+   *
+   * Inserts or updates Domain Object record
+   * @param Domain Object
+   * @return mixed, Domain Object on success, false otherwise
+   */
+  protected function _save(DomainObjectAbstract $domainObject)
+  {
+    if(is_numeric($domainObject->{$this->primaryKey})) {
+      return $this->update($domainObject);
+    } else {
+      return $this->insert($domainObject);
+    }
+  }
 
   /**
    * Update a Record (Protected)
