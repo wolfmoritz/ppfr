@@ -10,7 +10,8 @@
         "zeuxisoo/slim-whoops": "0.3.0",
         "ahmetkapikiran/slim-cli-environment": "dev-master",
         "facebook/php-sdk-v4" : "~5.0",
-        "google/apiclient": "1.0.*@beta"
+        "google/apiclient": "1.0.*@beta",
+        "vlucas/valitron": "^1.2"
     },
     "autoload": {
       "psr-4": {

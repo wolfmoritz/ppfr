@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "efb584d783729d86c5a7586418bbb89f",
-    "content-hash": "d6322795fa6a83ddeaf4a962f28bf3a0",
+    "hash": "9ca5e88024036e09d2dab793f92912f9",
+    "content-hash": "abb47c61b99fa409891ad4c4c1ef93e2",
     "packages": [
         {
             "name": "ahmetkapikiran/slim-cli-environment",
@@ -613,6 +613,52 @@
                 "templating"
             ],
             "time": "2015-11-05 12:49:06"
+        },
+        {
+            "name": "vlucas/valitron",
+            "version": "v1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/valitron.git",
+                "reference": "d2b63c611980bb804d17468bf0b3c8d4e28afbf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vlucas/valitron/zipball/d2b63c611980bb804d17468bf0b3c8d4e28afbf5",
+                "reference": "d2b63c611980bb804d17468bf0b3c8d4e28afbf5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Valitron": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Vance Lucas",
+                    "email": "vance@vancelucas.com",
+                    "homepage": "http://www.vancelucas.com"
+                }
+            ],
+            "description": "Simple, elegant, stand-alone validation library with NO dependencies",
+            "homepage": "http://github.com/vlucas/valitron",
+            "keywords": [
+                "valid",
+                "validation",
+                "validator"
+            ],
+            "time": "2015-12-15 20:10:29"
         },
         {
             "name": "wolfmoritz/session",
