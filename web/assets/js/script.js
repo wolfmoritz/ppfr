@@ -141,3 +141,13 @@ $('#fb-login-link').on('click',function(){
 $('#google-login-link').on('click',function(){
   user.googleLogin();
 });
+
+// Preview recipe main image before upload
+$('#imageUpload').on('change',function(){
+  var file = new FileReader();
+  file.readAsDataURL($(this)[0].files[0]);
+
+  file.onload = function (e) {
+    $('#featuredImage').attr('src',e.target.result).parent().slideDown();
+  };
+});
