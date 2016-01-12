@@ -151,8 +151,8 @@ class TwigExtension extends \Twig_Extension
         if (!isset($app)) {
             $app = \Slim\Slim::getInstance();
 
-            $largeUri = $app->config('file.uri');
-            $thumbUri = $app->config('file.thumb.uri');
+            $largeUri = $app->config('image')['file.uri'];
+            $thumbUri = $app->config('image')['file.thumb.uri'];
 
             $baseUrl = $app->request->getUrl() . $app->request->getRootUri() . '/';
         }

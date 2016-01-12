@@ -21,7 +21,7 @@ class AdminActionController
     /**
      * Save Recipe
      *
-     *
+     * Accepts POST data
      */
     public function saveRecipe()
     {
@@ -31,32 +31,39 @@ class AdminActionController
         $CategoryMapper = $dataMapper('CategoryMapper');
         $SessionHandler = $this->app->SessionHandler;
         $SecurityHandler = $this->app->SecurityHandler;
+        $ImageUploader = $this->app->ImageUploader;
         $Validation = $this->app->Validation;
 
         // Get user session data for reference
         $user = $SessionHandler->getData();
 
-        // Make sure this is a save request
-        if ($this->app->request->post('button') !== 'save') {
-            $this->app->redirectTo('home');
-        }
-
         // If a recipe ID was supplied, get that recipe. Otherwise get a blank recipe record
-        if ($this->app->request->post('recipe_id') !== null) {
+        if (!empty($this->app->request->post('recipe_id'))) {
             $recipe = $RecipeMapper->findById((int) $this->app->request->post('recipe_id'));
         } else {
             $recipe = $RecipeMapper->make();
         }
 
-        // Verify authority to edit recipe. Admins can edit all
-        if ((int) $user['user_id'] !== (int) $recipe->created_by && !$SecurityHandler->authorized('admin')) {
+        // Verify authority to modify recipe. Admins can edit all
+        if (is_numeric($recipe->recipe_id) && (int) $user['user_id'] !== (int) $recipe->created_by && !$SecurityHandler->authorized('admin')) {
             // Just redirect to show recipe
             $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
         }
 
+        // If this is a delete request
+        if ($this->app->request->post('button') === 'delete' && isset($recipe->recipe_id)) {
+            $RecipeMapper->delete($recipe);
+            $this->app->redirectTo('adminDashboard');
+        }
+
+        // Otherwise make sure this is a save request to continue
+        if ($this->app->request->post('button') !== 'save') {
+            $this->app->redirectTo('home');
+        }
+
         // Validate data....
         $rules = array(
-            'required' => [['recipe_id'], ['title']],
+            'required' => [['title']],
             'lengthMax' => [
                 ['title', 60],
                 ['subtitle', 150],
@@ -73,19 +80,19 @@ class AdminActionController
         // Run validation
         if (!$v->validate()) {
             // Fail! Save to session for page reload
-            $errorMessages = '<ul>';
-            $errors = $v->errors();
-            array_walk_recursive($errors, function ($a) use (&$errorMessages) {
-                $errorMessages .= "<li>$a</li>";
-            });
-            $errorMessages .= '</ul>';
-
+            $errorMessages = $this->formatErrorMessages($v->errors());
             $this->app->flash('level', 'danger');
             $this->app->flash('message', "You forgot something!<br> $errorMessages");
             $SessionHandler->setData('recipe', $this->app->request->post());
 
             // Return to edit recipe
-            $this->app->redirectTo('adminEditRecipe', ['id' => $recipe->recipe_id]);
+            if (empty($recipe->recipe_id)) {
+                $redirectEditUrlSegment = null;
+            } else {
+                $redirectEditUrlSegment = ['id' => $recipe->recipe_id];
+            }
+
+            $this->app->redirectTo('adminEditRecipe', $redirectEditUrlSegment);
             return;
         }
 
@@ -100,7 +107,6 @@ class AdminActionController
         $recipe->ingredients = $this->app->request->post('ingredients');
         $recipe->instructions = $this->app->request->post('instructions');
         $recipe->notes = $this->app->request->post('notes');
-        // $recipe->main_photo = $this->app->request->post('main_photo');
 
         // Save recipe
         $recipe = $RecipeMapper->save($recipe);
@@ -109,7 +115,54 @@ class AdminActionController
         $categories = $this->app->request->post('category') ?: [];
         $CategoryMapper->saveRecipeCategoryAssignments($recipe->recipe_id, $categories);
 
+        // If we have a recipe ID and a photo, then handle any image upload
+        if (is_numeric($recipe->recipe_id) && !empty($_FILES['main_photo']['tmp_name'])) {
+            $ImageUploader->initialize((int) $recipe->recipe_id);
+
+            if (!$ImageUploader->upload('main_photo')) {
+                // Snap! Get messages and direct back to edit recipe
+                $errorMessages = $this->formatErrorMessages($ImageUploader->getMessages());
+
+                // No need to save form data, we can pull it from the database at this point
+                $this->app->flash('level', 'danger');
+                $this->app->flash('message', "You forgot something!<br> $errorMessages");
+
+                $this->app->redirectTo('adminEditRecipe', ['id' => $recipe->recipe_id]);
+            }
+
+            // Update recipe with main_image name
+            $recipe->main_photo = $ImageUploader->imageFileName;
+            $RecipeMapper->update($recipe);
+        }
+
         // On success display updated recipe
-        $this->app->redirectTo('showRecipe', ['id' => $recipe->recipe_id, 'slug' => $recipe->url]);
+        $this->app->redirectTo('adminDashboard');
+    }
+
+    /**
+     * Format Array of Error Messages
+     *
+     * Accepts a multidimensional array of error messages,
+     * and returns a formatted HTML unordered list of error messages
+     * @param mixed, string or array of messages
+     * @return string, unordered list
+     */
+    public function formatErrorMessages($messages)
+    {
+        $messageString = null;
+
+        if (is_string($messages)) {
+            $this->formatErrorMessages([$messages]);
+        }
+
+        if (is_array($messages)) {
+            $messageString = '<ul>';
+            array_walk_recursive($messages, function ($a) use (&$messageString) {
+                $messageString .= "<li>$a</li>";
+            });
+            $messageString .= '</ul>';
+        }
+
+        return $messageString;
     }
 }

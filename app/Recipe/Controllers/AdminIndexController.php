@@ -71,7 +71,7 @@ class AdminIndexController
         $RecipeMapper = $dataMapper('RecipeMapper');
         $CategoryMapper = $dataMapper('CategoryMapper');
         $SessionHandler = $this->app->SessionHandler;
-        $SecurityHandler = $this->app->SecurityHandler;
+        $SecurityHandler = $this->app->security;
 
         // Get user session data for reference
         $sessionData = $SessionHandler->getData();

@@ -124,6 +124,7 @@ return call_user_func(
         };
 
         // Security
+        // TODO Rename references to SecurityHandler
         $app->container->singleton('security', function () use ($app) {
             return new Recipe\Library\SecurityHandler($app);
         });
@@ -152,16 +153,8 @@ return call_user_func(
         };
 
         // Image Uploader
-        $app->uploader = function () use ($app) {
-            return function ($key) use ($app) {
-                $storage = new Upload\Storage\FileSystem($app->config('file.path'));
-                return new Upload\File($key, $storage);
-            };
-        };
-
-        // Image Manipulator
-        $app->image = function () {
-            return new Intervention\Image\ImageManager();
+        $app->ImageUploader = function () use ($app) {
+            return new Recipe\Library\ImageUploader($app->config('image'), $app->log);
         };
 
         // Twig Template Rendering

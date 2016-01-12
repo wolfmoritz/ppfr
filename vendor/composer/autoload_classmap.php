@@ -2587,6 +2587,7 @@ return array(
     'Recipe\\Extensions\\TwigExtensionPagination' => $baseDir . '/app/Recipe/Extensions/TwigExtensionPagination.php',
     'Recipe\\Library\\CacheHandler' => $baseDir . '/app/Recipe/Library/CacheHandler.php',
     'Recipe\\Library\\EmailHandler' => $baseDir . '/app/Recipe/Library/EmailHandler.php',
+    'Recipe\\Library\\ImageUploader' => $baseDir . '/app/Recipe/Library/ImageUploader.php',
     'Recipe\\Library\\SecurityHandler' => $baseDir . '/app/Recipe/Library/SecurityHandler.php',
     'Recipe\\Library\\SitemapHandler' => $baseDir . '/app/Recipe/Library/SitemapHandler.php',
     'Recipe\\Library\\Toolbox' => $baseDir . '/app/Recipe/Library/Toolbox.php',
