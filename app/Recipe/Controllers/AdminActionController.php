@@ -56,14 +56,19 @@ class AdminActionController
             $this->app->redirectTo('adminDashboard');
         }
 
-        // Otherwise make sure this is a save request to continue
-        if ($this->app->request->post('button') !== 'save') {
-            $this->app->redirectTo('home');
+        // If this is a previously published recipe, use that publish date as default
+        $publishedDate = ($this->app->request->post('published_date')) ?: '';
+        $this->app->log->debug('publish date: ' . $publishedDate);
+        if ($this->app->request->post('button') === 'publish' && empty($publishedDate)) {
+            // Then default to today
+            $date = new \DateTime();
+            $publishedDate = $date->format('Y-m-d');
         }
 
         // Validate data....
         $rules = array(
             'required' => [['title']],
+            'dateFormat' => [['published_date', 'Y-m-d']],
             'lengthMax' => [
                 ['title', 60],
                 ['subtitle', 150],
@@ -107,6 +112,7 @@ class AdminActionController
         $recipe->ingredients = $this->app->request->post('ingredients');
         $recipe->instructions = $this->app->request->post('instructions');
         $recipe->notes = $this->app->request->post('notes');
+        $recipe->published_date = $publishedDate;
 
         // Save recipe
         $recipe = $RecipeMapper->save($recipe);

@@ -9,7 +9,7 @@ class RecipeMapper extends DataMapperAbstract
     protected $table = 'pp_recipe';
     protected $tableAlias = 'r';
     protected $primaryKey = 'recipe_id';
-    protected $modifyColumns = array('title', 'subtitle', 'url', 'servings', 'temperature', 'prep_time', 'prep_time_iso', 'cook_time', 'cook_time_iso', 'ingredients', 'instructions', 'instructions_excerpt', 'notes', 'view_count', 'main_photo', 'categories', 'created_by', 'created_date', 'updated_by', 'updated_date');
+    protected $modifyColumns = array('title', 'subtitle', 'url', 'servings', 'temperature', 'prep_time', 'prep_time_iso', 'cook_time', 'cook_time_iso', 'ingredients', 'instructions', 'instructions_excerpt', 'notes', 'view_count', 'main_photo', 'published_date');
     protected $domainObjectClass = 'Recipe';
     protected $defaultSelect = 'select SQL_CALC_FOUND_ROWS r.*, concat(u.first_name, \' \', u.last_name) user_name, concat(u.user_id, \'/\', u.first_name, \'-\', u.last_name) user_url from pp_recipe r join pp_user u on r.created_by = u.user_id';
 
@@ -20,11 +20,16 @@ class RecipeMapper extends DataMapperAbstract
      * Returns an array of Domain Objects (one for each record)
      * @param int, limit
      * @param int, offset
+     * @param bool, only get published recipes (true)
      * @return array
      */
-    public function getRecipes($limit = null, $offset = null)
+    public function getRecipes($limit = null, $offset = null, $publishedRecipesOnly = true)
     {
         $this->sql = $this->defaultSelect;
+
+        if ($publishedRecipesOnly) {
+            $this->sql .= ' where r.published_date <= curdate()';
+        }
 
         // Add order by
         $this->sql .= ' order by r.created_date desc';
@@ -49,16 +54,23 @@ class RecipeMapper extends DataMapperAbstract
      * Returns an array of Domain Objects (one for each record)
      * @param int, limit
      * @param int, offset
+     * @param bool, only get published recipes (true)
      * @return array
      */
-    public function getRecipesWithPhoto($limit = null, $offset = null)
+    public function getRecipesWithPhoto($limit = null, $offset = null, $publishedRecipesOnly = true)
     {
         $this->sql = $this->defaultSelect;
 
         // Add order by clause. MySQL does not have an 'order by nulls last' syntax,
         // so this 'r.main_photo is not null desc' is a trick I found on Stackoverflow to do the same
         // Changed to filter out no-photo recipes
-        $this->sql .= ' where r.main_photo is not null order by r.view_count desc';
+        $this->sql .= ' where r.main_photo is not null';
+
+        if ($publishedRecipesOnly) {
+            $this->sql .= ' and r.published_date <= curdate()';
+        }
+
+        $this->sql .= ' order by r.view_count desc';
 
         if ($limit) {
             $this->sql .= " limit ?";
@@ -79,9 +91,10 @@ class RecipeMapper extends DataMapperAbstract
      * @param mixed, int or string, category
      * @param int, limit
      * @param int, offset
+     * @param bool, only get published recipes (true)
      * @return array
      */
-    public function getRecipesByCategory($category, $limit = null, $offset = null)
+    public function getRecipesByCategory($category, $limit = null, $offset = null, $publishedRecipesOnly = true)
     {
         $this->sql = $this->defaultSelect . " join pp_recipe_category rc on {$this->tableAlias}.recipe_id = rc.recipe_id";
 
@@ -94,6 +107,10 @@ class RecipeMapper extends DataMapperAbstract
 
         $this->sql .= $where;
         $this->bindValues[] = $category;
+
+        if ($publishedRecipesOnly) {
+            $this->sql .= ' and r.published_date <= curdate()';
+        }
 
         // Add order by
         $this->sql .= ' order by r.created_date desc';
@@ -120,8 +137,12 @@ class RecipeMapper extends DataMapperAbstract
      *  - Title
      *  - Ingredients
      *  - Instructions
+     * @param string, search terms
+     * @param int, limit
+     * @param int, offset
+     * @param bool, only get published recipes (true)
      */
-    public function searchRecipes($terms, $limit, $offset)
+    public function searchRecipes($terms, $limit, $offset, $publishedRecipesOnly = true)
     {
         // Create array of search terms split by word
         $termsArray = preg_split('/\s+/', $terms);
@@ -167,6 +188,10 @@ class RecipeMapper extends DataMapperAbstract
         // Add predicates to sql statement
         $this->sql .= " {$titleSearch} or {$ingredientSearch} or {$instructionSearch}";
 
+        if ($publishedRecipesOnly) {
+            $this->sql .= ' and r.published_date <= curdate()';
+        }
+
         if ($limit) {
             $this->sql .= " limit ?";
             $this->bindValues[] = $limit;
@@ -187,12 +212,17 @@ class RecipeMapper extends DataMapperAbstract
      * @param int, user
      * @param int, limit
      * @param int, offset
+     * @param bool, only get published recipes (true)
      * @return array
      */
-    public function getRecipesByUser($userId, $limit = null, $offset = null)
+    public function getRecipesByUser($userId, $limit = null, $offset = null, $publishedRecipesOnly = true)
     {
         $this->sql = $this->defaultSelect . ' where r.created_by = ?';
         $this->bindValues[] = $userId;
+
+        if ($publishedRecipesOnly) {
+            $this->sql .= ' and r.published_date <= curdate()';
+        }
 
         // Add order by
         $this->sql .= ' order by r.created_date desc';
@@ -220,7 +250,7 @@ class RecipeMapper extends DataMapperAbstract
      */
     public function getTopRecipes($limit = 5)
     {
-        $this->sql = $this->defaultSelect . " order by r.view_count desc limit ?";
+        $this->sql = $this->defaultSelect . " where published_date <= curdate() order by r.view_count desc limit ?";
         $this->bindValues[] = $limit;
 
         return $this->find();
@@ -234,7 +264,7 @@ class RecipeMapper extends DataMapperAbstract
      */
     public function getRandomRecipes($limit = 5)
     {
-        $this->sql = $this->defaultSelect . " order by rand() limit ?";
+        $this->sql = $this->defaultSelect . " where published_date <= curdate() order by rand() limit ?";
         $this->bindValues[] = $limit;
 
         return $this->find();

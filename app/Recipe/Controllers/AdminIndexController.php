@@ -49,7 +49,7 @@ class AdminIndexController
         $Paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
-        $recipes = $RecipeMapper->getRecipesByUser($user['user_id'], $Paginator->getRowsPerPage(), $Paginator->getOffset());
+        $recipes = $RecipeMapper->getRecipesByUser($user['user_id'], $Paginator->getRowsPerPage(), $Paginator->getOffset(), false);
 
         // Get count of recipes returned by query and load pagination
         $Paginator->setTotalRowsFound($RecipeMapper->foundRows());

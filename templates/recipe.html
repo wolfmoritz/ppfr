@@ -61,7 +61,7 @@
 
 		<div class="recipeOwner">
 		Other recipes by <a href="{{ siteUrlFor('recipesByUser', recipe.user_url) }}"><span itemprop="author">{{ recipe.user_name }}</span></a><br>
-		Added on: <meta itemprop="datePublished" content="2012-06-23 12:00:00"> {{ recipe.created_date|date('F j, Y') }}<br>
+		Added on: <meta itemprop="datePublished" content="{{ recipe.published_date }}"> {{ recipe.published_date|date('F j, Y') }}<br>
 		Viewed: {{ recipe.view_count|number_format }} Times
 		</div><!-- .recipeOwner -->
 
@@ -101,8 +101,8 @@
 		</div><!-- end notes -->
 
 		<hr>
-    </div><!--end col-md-3 -->   
-    
+    </div><!--end col-md-3 -->
+
 </div>
 
    </div><!--end row -->

@@ -151,3 +151,9 @@ $('#imageUpload').on('change',function(){
     $('#featuredImage').attr('src',e.target.result).parent().slideDown();
   };
 });
+
+// Delete prompt handler.
+$('.deleteButton').on('click', function() {
+  var reply = confirm('Are you sure you want to delete?');
+  return reply;
+});
