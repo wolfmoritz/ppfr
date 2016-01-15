@@ -30,12 +30,8 @@ class AdminActionController
         $RecipeMapper = $dataMapper('RecipeMapper');
         $CategoryMapper = $dataMapper('CategoryMapper');
         $SessionHandler = $this->app->SessionHandler;
-        $SecurityHandler = $this->app->SecurityHandler;
         $ImageUploader = $this->app->ImageUploader;
         $Validation = $this->app->Validation;
-
-        // Get user session data for reference
-        $user = $SessionHandler->getData();
 
         // If a recipe ID was supplied, get that recipe. Otherwise get a blank recipe record
         if (!empty($this->app->request->post('recipe_id'))) {
@@ -45,15 +41,9 @@ class AdminActionController
         }
 
         // Verify authority to modify recipe. Admins can edit all
-        if (is_numeric($recipe->recipe_id) && (int) $user['user_id'] !== (int) $recipe->created_by && !$SecurityHandler->authorized('admin')) {
+        if (!$this->authorizedToEditRecipe($recipe)) {
             // Just redirect to show recipe
             $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
-        }
-
-        // If this is a delete request
-        if ($this->app->request->post('button') === 'delete' && isset($recipe->recipe_id)) {
-            $RecipeMapper->delete($recipe);
-            $this->app->redirectTo('adminDashboard');
         }
 
         // If this is a previously published recipe, use that publish date as default
@@ -146,6 +136,30 @@ class AdminActionController
     }
 
     /**
+     * Delete Recipe
+     *
+     * @param int, recipe_id
+     */
+    public function deleteRecipe($id)
+    {
+        // Get services
+        $dataMapper = $this->app->dataMapper;
+        $RecipeMapper = $dataMapper('RecipeMapper');
+
+        // Get recipe record
+        $recipe = $RecipeMapper->findById((int) $id);
+
+        // Verify authority to modify recipe. Admins can delete all
+        if (!$this->authorizedToEditRecipe($recipe)) {
+            // Just redirect to show recipe
+            $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
+        }
+
+        $RecipeMapper->delete($recipe);
+        $this->app->redirectTo('adminDashboard');
+    }
+
+    /**
      * Format Array of Error Messages
      *
      * Accepts a multidimensional array of error messages,
@@ -170,5 +184,32 @@ class AdminActionController
         }
 
         return $messageString;
+    }
+
+    /**
+     * Authorize Recipe Edit
+     */
+    protected function authorizedToEditRecipe(\Recipe\Storage\Recipe $recipe, array $user = null)
+    {
+        $SecurityHandler = $this->app->security;
+        $SessionHandler = $this->app->SessionHandler;
+        $user = $SessionHandler->getData();
+
+        // Make sure we are logged in and have the minimum info to validate the user
+        if (!$SecurityHandler->authenticated() || empty($user['user_id'])) {
+            return false;
+        }
+
+        // Admins can always edit
+        if ($SecurityHandler->authorized('admin')) {
+            return true;
+        }
+
+        // Final check, verify authority to modify recipe
+        if (is_numeric($recipe->recipe_id) && (int) $user['user_id'] === (int) $recipe->created_by) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -19,7 +19,7 @@
     </div>
 
     {% if recipe.recipe_id %}
-    <button type="submit" class="btn btn-danger deleteButton" name="button" value="delete">Delete Recipe</button>
+    <a href="{{ siteUrlFor('adminDeleteRecipe', recipe.recipe_id) }}" class="btn btn-danger deleteButton">Delete Recipe</a>
     {% endif %}
   </div>
     <!-- .buttonControls -->

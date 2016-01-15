@@ -44,6 +44,11 @@ $app->post('/recipe/save', $authenticated(), function () {
     (new Controllers\AdminActionController())->saveRecipe();
 })->name('adminSaveRecipe');
 
+// Admin Delete Recipe
+$app->get('/recipe/delete(/:id)', $authenticated(), function ($id) {
+    (new Controllers\AdminActionController())->deleteRecipe($id);
+})->name('adminDeleteRecipe');
+
 //
 // The routes below are public
 //
