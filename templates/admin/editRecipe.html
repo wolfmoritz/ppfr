@@ -4,11 +4,11 @@
 <form action="{{ siteUrlFor('adminSaveRecipe') }}" enctype="multipart/form-data" method="post" accept-charset="utf-8">
   <input type="hidden" name="recipe_id" value="{{ recipe.recipe_id }}">
   <div class="buttonControls">
-    <a href="{{ siteUrlFor('adminDashboard') }}" class="btn btn-default" name="button">Cancel</a>
+    <a href="{{ siteUrlFor('adminDashboard') }}" class="btn btn-default">Cancel</a>
     <button type="submit" class="btn btn-default" name="button" value="save">Save{% if not recipe.published_date %} Draft{% endif %}</button>
 
     {% if recipe.published_date %}
-    <button type="submit" class="btn btn-warning" name="button" value="unpublish">Unpublish</button>
+    <a href="{{ siteUrlFor('adminUnpublishRecipe', recipe.recipe_id) }}" class="btn btn-warning">Unpublish</a>
     {% else %}
     <div class="btn-group">
       <button type="submit" class="btn btn-success" name="button" value="publish">Publish Now</button>

@@ -40,7 +40,7 @@ class AdminActionController
             $recipe = $RecipeMapper->make();
         }
 
-        // Verify authority to modify recipe. Admins can edit all
+        // Verify authority to modify recipe
         if (!$this->authorizedToEditRecipe($recipe)) {
             // Just redirect to show recipe
             $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
@@ -48,7 +48,6 @@ class AdminActionController
 
         // If this is a previously published recipe, use that publish date as default
         $publishedDate = ($this->app->request->post('published_date')) ?: '';
-        $this->app->log->debug('publish date: ' . $publishedDate);
         if ($this->app->request->post('button') === 'publish' && empty($publishedDate)) {
             // Then default to today
             $date = new \DateTime();
@@ -102,7 +101,11 @@ class AdminActionController
         $recipe->ingredients = $this->app->request->post('ingredients');
         $recipe->instructions = $this->app->request->post('instructions');
         $recipe->notes = $this->app->request->post('notes');
-        $recipe->published_date = $publishedDate;
+
+        // Only set the publish date if not empty
+        if (!empty($publishedDate)) {
+            $recipe->published_date = $publishedDate;
+        }
 
         // Save recipe
         $recipe = $RecipeMapper->save($recipe);
@@ -133,6 +136,34 @@ class AdminActionController
 
         // On success display updated recipe
         $this->app->redirectTo('adminDashboard');
+    }
+
+    /**
+     * Unpublish Recipe
+     *
+     * @param int, recipe ID
+     */
+    public function unpublishRecipe($id)
+    {
+        // Get services
+        $dataMapper = $this->app->dataMapper;
+        $RecipeMapper = $dataMapper('RecipeMapper');
+
+        // Get the recipe to unpublish
+        $recipe = $RecipeMapper->findById((int) $id);
+
+        // Verify authority to modify recipe. Admins can edit all
+        if (!$this->authorizedToEditRecipe($recipe)) {
+            // Just redirect to show recipe
+            $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
+        }
+
+        // Unset the published date and save
+        $recipe->published_date = '';
+        $recipe = $RecipeMapper->save($recipe);
+
+        // Go back to edit recipe
+        $this->app->redirectTo('adminEditRecipe', ['id' => $recipe->recipe_id]);
     }
 
     /**
