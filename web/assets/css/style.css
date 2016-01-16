@@ -74,7 +74,7 @@ recipe h4 {
 	max-height: 188px;
 }
 .recipe-bg{
-
+	
     margin-bottom: -20px;
     padding-bottom: 20px;
 }
@@ -145,7 +145,7 @@ recipe h4 {
 	padding-right: 0;
 }
 .form-control, .input-group-btn > .btn {
-    background-color: #F7F4E2;
+    background-color: #F7F4E2; 
     color: #DA2536;
     border: solid #DA2536 1px;}
 
@@ -289,8 +289,4 @@ recipe h4 {
 #content .item {
 	width: 20%;
 }
-}
-/* Dropdown button in recipe form */
-.publish-date li {
-	padding: 3px 15px;
 }

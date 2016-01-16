@@ -1,15 +1,18 @@
-{% extends 'admin/dashboard.html' %}
+{% extends 'admin/adminLayout.html' %}
 
-{% block userDashboardContent %}
+{% block body %}
 <form action="{{ siteUrlFor('adminSaveRecipe') }}" enctype="multipart/form-data" method="post" accept-charset="utf-8">
   <input type="hidden" name="recipe_id" value="{{ recipe.recipe_id }}">
   <div class="buttonControls">
     <a href="{{ siteUrlFor('adminDashboard') }}" class="btn btn-default" name="button">Cancel</a>
     <button type="submit" class="btn btn-default" name="button" value="save">Save{% if not recipe.published_date %} Draft{% endif %}</button>
 
+    {% if recipe.published_date %}
+    <button type="submit" class="btn btn-warning" name="button" value="unpublish">Unpublish</button>
+    {% else %}
     <div class="btn-group">
-      <button type="submit" class="btn btn-{% if recipe.published_date %}default{% else %}success{% endif %}" name="button" value="publish">{% if recipe.published_date %}Published{% else %}Publish Now{% endif %}</button>
-      <button type="button" class="btn btn-{% if recipe.published_date %}default{% else %}success{% endif %} dropdown-toggle" data-toggle="dropdown">
+      <button type="submit" class="btn btn-success" name="button" value="publish">Publish Now</button>
+      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu publish-date">
@@ -17,6 +20,7 @@
         <li><input type="date" class="form-control" name="published_date" autocomplete="off" value="{{ recipe.published_date }}"></li>
       </ul>
     </div>
+    {% endif %}
 
     {% if recipe.recipe_id %}
     <a href="{{ siteUrlFor('adminDeleteRecipe', recipe.recipe_id) }}" class="btn btn-danger deleteButton">Delete Recipe</a>

@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'adminLayout.html' %}
 
 {% block body %}
 <div class="col-md-12">
@@ -38,3 +38,13 @@
   </div>
 </div>
 {% endblock %}
+
+
+
+      <div class="col-md-10">
+        <div class="row">
+          {% block body %}
+          <p class="lead">Select an option to the left to manage your information.</p>
+          {% endblock %}
+        </div><!-- End row -->
+      </div>

@@ -1,6 +1,6 @@
-{% extends 'admin/dashboard.html' %}
+{% extends 'admin/adminLayout.html' %}
 
-{% block userDashboardContent %}
+{% block body %}
 
 <h2 class="page-header">Manage Your Recipes</h2>
 
@@ -12,13 +12,13 @@
   {% endif %}
 <div class="media">
   <div class="media-left media-middle">
-    <a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}">
+    <a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="View recipe" target="_blank">
       <img class="media-object" src="{{ imageUrl }}" width="80">
     </a>
   </div>
   <div class="media-body">
     <h4 class="media-heading">{{ r.title }}</h4>
-    <a class="btn-link" href="{{ siteUrlFor('adminEditRecipe', r.recipe_id) }}">Edit</a> |
+    <a class="btn-link" href="{{ siteUrlFor('adminEditRecipe', r.recipe_id) }}" title="Edit recipe">Edit</a> |
     <a class="btn-link deleteButton" href="{{ siteUrlFor('adminDeleteRecipe', r.recipe_id) }}">Delete</a> |
     Status: Published |
     Date: {% if r.published_date %}{{ r.published_date|date('F j, Y') }}{% else %}<span class="label label-default">Not Published</span>{% endif %}<br>
