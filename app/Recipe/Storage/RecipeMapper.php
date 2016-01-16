@@ -186,7 +186,7 @@ class RecipeMapper extends DataMapperAbstract
         }
 
         // Add predicates to sql statement
-        $this->sql .= " {$titleSearch} or {$ingredientSearch} or {$instructionSearch}";
+        $this->sql .= " ({$titleSearch} or {$ingredientSearch} or {$instructionSearch})";
 
         if ($publishedRecipesOnly) {
             $this->sql .= ' and r.published_date <= curdate()';
