@@ -47,6 +47,9 @@ class SitemapHandler
 
         // Add static pages
         $today = date('Y-m-d', time());
+        $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}</loc>\n";
+        $sitemap .= "\t\t<lastmod>{$today}</lastmod>\n \t</url>\n";
+
         $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('about')}</loc>\n";
         $sitemap .= "\t\t<lastmod>{$today}</lastmod>\n \t</url>\n";
 
