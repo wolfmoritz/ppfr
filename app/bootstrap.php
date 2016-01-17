@@ -203,9 +203,6 @@ return call_user_func(
             'secure' => false,
             'httponly' => false,
             'name' => 'perisRecipeFlashData',
-            //'secret' => 'CHANGE_ME',
-            //'cipher' => MCRYPT_RIJNDAEL_256,
-            //'cipher_mode' => MCRYPT_MODE_CBC
         )));
 
         // Load routes

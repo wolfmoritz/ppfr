@@ -48,7 +48,7 @@ $config['session']['cookieName'] = 'ApplicationCookie'; // Name of the cookie
 $config['session']['checkIpAddress'] = true; // Will check the user's IP address against the one stored in the database. Make sure this is a string which is a valid IP address. FALSE by default.
 $config['session']['checkUserAgent'] = true; // Will check the user's user agent against the one stored in the database. FALSE by default.
 $config['session']['salt'] = ''; // Salt key to hash
-$config['secondsUntilExpiration'] = 15552000; // 180 days (60*60*24*180)
+$config['session']['secondsUntilExpiration'] = 15552000; // 180 days (60*60*24*180)
 
 /**
  * Email Connection
