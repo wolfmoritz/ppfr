@@ -81,12 +81,13 @@ class AdminActionController
 
             // Return to edit recipe
             if (empty($recipe->recipe_id)) {
-                $redirectEditUrlSegment = null;
+                // If new recipe without an ID yet
+                $this->app->redirectTo('adminEditRecipe');
             } else {
-                $redirectEditUrlSegment = ['id' => $recipe->recipe_id];
+                // For an existing recipe
+                $this->app->redirectTo('adminEditRecipe', ['id' => $recipe->recipe_id]);
             }
 
-            $this->app->redirectTo('adminEditRecipe', $redirectEditUrlSegment);
             return;
         }
 
