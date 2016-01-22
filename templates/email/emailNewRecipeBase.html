@@ -1,0 +1,70 @@
+{#
+  New Recipe HTML Email
+  Copy this HTML code and run through the CSS inliner tool at MailChimp: http://templates.mailchimp.com/resources/inline-css/
+  And paste into emailNewRecipe.html as an email ready HTML file.
+  Note, delete the CSS links, once the document is converted we no longer them.
+
+  IMPORTANT: I think there is a bug with the MailChimp inline tool. In nav class "navbar navbar-default" styles
+  look for "display: none;" and remove that after converting.
+#}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ recipe.title }} - Peri's Recipes</title>
+
+    {# Delete these links from converted file #}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="http://perisplaceforrecipes.com/assets/css/style.css" rel="stylesheet" type="text/css" media="screen">
+
+  </head>
+  <body>
+    <!--Begin Large Logo Container -->
+    {# Note: the header background image is included as a base64 encoded string since the css url link will not work #}
+    <div class="container-fluid" id="header" style="display:block !important;background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOkAAAB9CAYAAABHwES2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAHgNJREFUeNrsXflzE8mSTh2W5Uu+T/ABM1zmGJiJ9yZif95/fneYBwZzGTA2BtvYxqd8yZa0yuHL7XLTl1rdUnerMqLDRkjtVlV+mfllZWWltra2qA0lVbuma9d47fqLtIQhY7UrX7s+t/AZ+mvX7bjPcbZNFahau9Zr1wzG4FJjqi6dGapdvbWro3alMX58ndWuYu06rl2DtWujxc96WLtytaurdp1qkMZPLqFQA7VrR2PPk4zAM2UUY3eiAKAf72EP2onXSwBvq4zxAeZYgzSmsg+Lr0HqTW4pAD2vXYsAqVl6atcNGMEpeNzt2rXbgmfeA0g3NEjjKXvwDFq8SUnRmV0bgBJAsatcLIXadR2GsdhkQzyLPES1wTzGQ4T5JzA635pBldJtrnQqZ9HiLp8URR9BSGslgwCHeay/1K5K7epr4jMzPy4DXI1IAeF8Bs9/s3b9u3ZdA4A1SJvAWbS4C3vFJQCNQ9jfbAC36uBl+fWjJuue0Bq/HtROMgDr7wEYAQ1SD5xFizfhNbvnAFongPorIhKRIw/3qcRkjrsVj1x1eM9j+rGsF7hXzWqdC4yztEpSCNdZUfJkLIcwCC7AI8sBcydW2AWEvKyYk7VrAjxtE6FtNWJzLFnpcp2f7YP3vwTYh2wiMp6HOYTF74Icbw3Sq5zlKAbPm1X4UR7PXgQwvjcRHFWAchvPMw4FHoNh2Md4HmGMKybD0of/a8bz8vOcYszqzTB34Hvx2H6zAOkixp7D6Rn8P3vVVxTQso8G6VXOEkWQpgCCIShZGRZ9C8rvV4bAx8sBPOMhrhQ8egFGbwyJlQ6A8QyKewqP20xvu4c5rhekGXyH77hO6WqiUSKVHfz/JDzqYwD4SIM0uAnkcO1zRJ4nDRCNAJhHUIK1AMKoPJRoNyCAmr3rcYPGI0xDfMOCJuSAA8HCJWhCURmfflwH0JE7yn0GlO8rlWysT/dq16Pa9Rbg1SBtIWcJUgowFiPgQRxefQiI3+TBHxn87wHSHDxBO8gZvPwd/EwBiEcYa/79XPHuaVMSiLO4zxHeXyMjm8th/lfT3zrFe28BrEuIfDRIW8RZgvCaEwiTuqAELwMKvVnJhnF/KX98hu/LnLCTkl1tlQOI2Oj1wABXwRfdjJM5+yzhOxvOj/Qjq02477CFt6wggXQMB5DCZzVIW8BZ/Ap77SlcOVjaV9R4naskZUQ5s/huCwC+7AAahDFIohSU71gG/31Tu0bhRUt1zpPqTffAvzdh/FhmoTdWHPsL5vQuxn5Tg7Q1nKVeEI2BF+YQYr0A32nEGw/Aog/hvpJ9/aJwphF8x06AtpqwOewBkAYwN6sIRSvKHE/5mK88gMY68AsAvwwj0Im/O2UR9orswADfw7NsaZA2l7PUo+g53H9ACbMXcF8/3rIf9yqQUZhyAmCa60rzijXfoHgsN9UzHuzNruP3A4Sa5nEtYpx66khu9SsgFUMn4S1z+weKN9128NLsgRfx/nI9yaR2B2mQnMVN2Cs/oquVOece/k4Wn+3B1Qd+lDIlKnagJHbKJwUbHAWsJGgOs/BQYvi2AVAr41mF8er0ANIMxqxAP9chq8D7AuOQAfdcdLjnIXRrHt54X4O0OZzFq9wxAZQAuD9h4UtQoiwmvAMWPGujbHvKdeIhDBzF758oOZvcU/BMfUo0tOQS3Sx7uOcE9GMLUceohUcWWYGB6IU+TZLztjj28m8R1Tz3koPIhjBoeShFDlZbStIuFT7XKi4UBmcRsLmFj3Y7RjrIvfi7DCt8gJ9HdXryGczNIfnMMEZUpuhqgX+R/NcEdyNXMIHxXoI+3DG9r2QKo6sw8E+Ap5sYZydPvYf730c+4iJMkKbJWOjtBAiP8JBnEZrMMDmLJGrcQLqIv1+AIbPyjqIAUpkjXPjM5jt1ehjnPoTzfP8PCYuIzCV6g2QUHXhxUMLrhzDnPP5cMLLu4EiObfIZ7xDGphF+PyPnxOKu8t6XTo7LD0jz+FJDUJQ9Fy7k5l36qYGF3ghwlgwSCG5yjL8rn81gkiq4Ln2OnxtIZ/FznaJZCdRoss88J4+UqKOEcU0jYslCf3tNhvKIjIIDtyiv6AA6jszmkEO4hbDWSXbwXLcV3fAN0hzi8lEMxCYU87wB4Eio8ibmnOVTHc/SDYW5UECZBthyUJyiR08wgPfnHULYfngXVtbPlDxZUZJp5pxDweFzVTI2JEg9rleMOHWVWFPC5lG894vLd9gAqG25rBtIB6GQsgtgGV/Or+Rwv2tQrNd4hk4Kp1FUMziLV5G61iFY2R6H9614mNx+JRGRtvleswlMFqnCxm4BejpMRhWV6LVEKOcKfZCdOX7LP91avywBdH3wqqfkvtzyCdHekdX9szYWfxSeIo/Eyl/kP+OZMoH9EDF4EWHHRIhcqRWcxU12QRFGMIl5i/G6gb+95KBM64hqHsBLfrP47vJdk9xcuUpXeymFbRTOPDwPL7M8xtzegSE5dvnMEt77017UrMXE3oQl+A4wlXwCswBFHIEH3cf9DhCH34SLf5YwzuJVsbbBSdhIzdDPyzMj8N5vyHqJpQuG7q2NdZ9NaLKolVKsA8yctf0Nnv0+uRetsB5+xLx9tAJpFiHYCP79GSS43oTSAK4hMnaUyFrTsQLgR1DAr+S+xhd1ztIoWDfgBacQvWRNIfZjGIgdkxGU3rZl/F5QjMgIDM1ayOPbDpLxAVIio9zzMebpAYB66eJUvgM/uypIeYIfmjzHVw+hYK8CgH7FE8hC+xZZ71lUCwbCTma0grP4kQo4KCfkrgOwGUVJ7gFwq4onH4I33sPYZxQAz+I7rWmMNSwpDyBNY942oWMl6NAZokdxSg8AXKe8CEec46ScrMC/3LXgRX8o4aBUwUiCJ4/Q0AyGLYVvXTp84ZkmJzOayVkalUt4/3UyegeJkkyTkQ2/xM9eGJ9LfIaQ3JIwuawxFmq4K2vVacyVRKEqsI8B1IeYPw59F11o0xac2RYpwDOLLLnYSUnhdQfwQF642ii41FHCkxmNSgm85Cu84igmnqnEEwCwiHEvKAZIvOge6a78YRhQyXH0Ydwlv3IISpLB64cW4H4BoA4AqK8cMFOFR/3nDJsswsEp3FwNm6Tj3JlySQWMVRlTD0IsJy8qyYyPMZykAYSdZQxgM3aSSCULh61z8Jp5JCQ+gMuuK++fgNFd1JgKnJMWTTmNKVCkXRjOCwDPTo4VoA56AGpJItwsFGE5IEsjYLT6w3IU3ibFc5vUkBL2j+Pag8EJ+zAgNo6vyVh7Y4NxG8ryAeOdBpVYoxgfThRhTlo05Wwk39Kl5AWqHuZxAQAdBEd97UBLGJvpLB6il4xOdClYjywZVTCSobUTfs9NPPi2xR8VLlqm+G2Tkiy11VIUD/TvZBTqh71x4Aj8ZgBgnUAE8xohcUUni0IdezXU3UCom6pTp88A1HnM4wN4VLsItJKGYglH7AXY5pCtGsMDcYfyW2TfnfsMHjJjw2XHAeRVcqn4j6BIB3O7xBOP4Q2EMbkmPROH28/BTTMIt6bh1SsaT6GI2hFwlIyyzDGfUedLUJUC6EueHBRMjYG5Hvc/NkkHttqPbBQxhatsoSTSU+fExJ/iIl1knKRlTggwSJ7Be/XCqzbzyIodzNcGxn5XYylwSWNsT5Ww9znGupv8l8lKbuadkmcouIFUjZvf4EHMD1CA1TYXB2QB8l1YnLwJ3HmFO8VRpvHzs0UEUUS485R+ZPs4fJls4rNJr1d1/VdLsJzUbn10IwDDuAVDew4nOOUFpGoMvgC+o1at5ID6cVNI+AtCWX7vLBk9gKZh8Q9iOkkcGQzDU0onBJFhUyTCxm0J4e8vFPKReKbwqUj64KmwJOzzVE+BNdnqNk9KLUJqa2vLqzUZA/jUdVW24MuKh5TKo238exIc9yn539bWauGs7n3FaHFU8AfGpITvVrbgsfOY3HdNiiDmMLHvNaYCkx44pMsGcykVl1zBNzLqBhg/cqYM06hNr+GRbIaW7t3TZPSN7YEHucBrJ4qXliWB8wRMWB8ZbRvF4uUwFisWlIHpwj0A/HUTEjr61PJgpYC5k3Y1WYer0SNEpR3rRxj+D8DSP90gsz4swhpi8Rl4Sr7RYwB118RFpSY1zqKCi8PYfXwnqQW+TtadKdj6clHBr2Sk2cMs01NPLdfrpI0Jz+1dzOt7D5FQ2gXETpcUS/CmiEFEp+tKjsdzuGsnnfAoo/gi7+G2+aH/BYvwPeYTJily1Uv+B9/9dwyyhMJ2kzkDa7kYskd9gPHe0DjzLZxruQVDvNKkxJQVeE+FCzfqps/BuZ4hMXQH3mYSnuV7Aiexk4xj/JaUUHjW4TOfEY7Oh5xM0qeWNybTAOgnal7RTRVU8RTGXnqGFVU3HYQcw0u8QPh7g4IpNYyCVC34psiOEs5fJ+fWnGtN4I1yzmoqgQDqBYikWUA+4PvfhKFdIvetmk2VdMD3O0DYV05IsogswlPzJuoVRAwpst72p8pXcMebIT2remp5kkROz2ZqdQ08n+nUI3LvWewl3LyDHMpriuDurHQI95SuBv0JDYlOLL7vO7zOXOI+ORcVbMCAXQvZmyZJZmyig37wcL66fdw3g/liI/CSIlqxlQ5RUZLCjaouICV4r0WAj5XlnkvI+RVADmOMkshL3QDIRulJnYaPx/8h7i3HQlK7gTQp1rzsAaRERk+bCzK2kjnJKhlF2kGPfYGu9uZJ2hxUEZYy1eCNHSXoMtOIeXIvj5Ra2QwAGuk+UGGB9JiMrW5JkooL1z6DR2WlGgN3cgPqVMDzoJ5anhQxd33cJGMzPC/7/S/+ze8bJuddJd3gsmXyd+xkYkAqFj1pvNRLm5gi+A0rAWchp11CaV6eGQ8h5E0SLzU3IT+w8ax/A7hdAKq5AXkfXj9B1BOLhuFhgzQJilL2EOp2IXKQw3yPFKDOuQD1UglRw8oJyBEX/BpXtkzgGoEhjXpobN46mXGIdFYw9gTOKUAdggfl5NAritG+22zIIJ1JoCe1knlY8APF00oV0gMAlci+awKHpx1kdIEIIjwM+9TyZsoxnl22SBYQ8toJzwPXTt/H+HOZ3SwZG0JiJWGCVJQgSbWkpwqvyUG5ZT+plHedm5RrARZ9Du+3azp+2OBYNfPU8lbIGoyheEU3oyKJvCcYez8N3xMf7opFi/tywKWFJx2GZT6EwszB0tudXSkpfo4sbpJzG5p6q4Vkt8a/6UfVE0cwT6HUKQrn1PJWyHcymhB0kHHagpMwzejEvPVTTCuxwgZpktbsqoqX+wYPJe0zvrmAoQSrzskNXsu7Z8OrqnWEnD3w0L9BAdlL/A/9qDs9I/9r1X0RngO1u8eMA+j4dV4C48w5VxE9g67PaZBa89LYWjCLUJcVhFP7kwCZLHd88QAuDil5meCjksTws0SVgrI9AQg5WpGsphq2qqeWe5WhOt/fCm66rlCOcRudnke0I1VEFRjVEY8euK1AKl2/e2IO0LIS6p4rfG/Kx6SvI/yVLn/1LFNlkQiZBli3oYjnNl5ZTi13kwzC8GGXhEwUZFX5vnP085EnWbz2gq726LqAV71BMesF1eh+Ui9yAwP0RTEMOTKOGqwqYI7qutV/kdGRwawQZfKXFU2D117DvVdc7pNCaKueWv53g0kf86nlqxSPZnEFRCL8/Lw8U89p8SOIGJbiAtJmWJQTJDR6YdVLCMVOcV1A0dJkf2J1FOTEJalkB4KM8t3kSgFkn+DtGKy8y2OZ7Bu2RenU8lbLIcbuJkA3Tj8fomwnDOpBsj6zpa1AmsfAjUJJO0D6Dyl+bT1ljEZhgdN1XG5U4CM82BtEF3L/PRu+qEoUTi1vpXzF92A9+xVG69jjZ9kY3ooLSIMOd9lbSqezIkJcTp0/RCjlta1nVBbWZafEBRk75TsUHpdSftoBVd5jJ0WAZdfFM96C57PyKvWeWr5BwZ1a3lL9BUcfAE+tpxZXquH22gWkOXDPMTKO7VNLuaS74IrH+1056bhF0gEF4JA8iLacKlizFj+rLpEGP899qn+JRI4RCfvU8lZJGoa0QMbJZV5zG5MUg35QQYS7bMXuQon2yTjkVhV+/RePinw9AmFIDhNfBF8LwuNUlXHxkyCLy6nlzRZZXpknYxP4S4/fuUjKidpJ9aSsLLLB+YjsjxpPQbl2XUJlTgRsUmtbWAhA+fu8p/iHhO0iaejiEOZu0SP4mAqcRf2LNZIcuktGocIXB05VdQBoAYM7D9665QNUkq3LBADQR2Sc3KwBGi+P+hoJJdmS5mWNOPL7SRsJdydMIO8h70fA98LijQLs6wBFvWEZf/628hwV8K6vVH87jE4AlBMJH7TOx1LYqC4jjOWMLy9rvSXnhGU1ySA1e+EZWLDvZHStUzONXQByAa9dIrRlQPktAp8zPUcawB3Fcyx7DGXyCHHlM1riLVuIhm5hXjl7/jmukVEjIP0Cb9ilvDZIzhu95QzNHQCi0UHrdOHLnNTiRe8NDwDdwXu1JEPYOHMCiYsdZmG4P1EMG7Y3mjgSzzWgeEh+7QKeki81y3hCwVqzP8koUuf7cmZ5H+BlkE7h/3dswukuAFSaWmlJrgi9klWI2CxHNaN2N0y5R0aBO/OOFxZGZBoXh+DqBuhuAJRD7lWtw1q8YoZ+LBMOw8hn4CDKcE7nuI6Vq6ElnrifDL2tgNQqU10BANmTciuR3xACyQL4Otm3NNGixY5GzZleO0Q0dkFG9RlHc2P4mQZY+X179YI27iD9Ds/IIW0P2RfoSxsTzgQ/wvu+aoBq8SH74LtqqeU6ua9sMFg5sSqb1c/xGdfEZjrmA1ZVgJYm572dZby3A5/TxwNq8atzC3R1Wec2ue8rFlDy6oFsrBgAFRt3cpjpBAwag022kclmaCvpRYj7CZbP7SgILVrs9KgDtOkDGSfcsz49IO+HZZWQD1kDbWMvO0QWTb3jnjgS6QcAUxg4s5fswwCuKP83h8H9qPVOS50iZaPSyIAL9WUlgeBl18nfMmOOjAZy1SSBVEA3DVL+N10tkPgFvNTcGuQ2QpBdrXda6hBeGfgdFGoDgGSPyks8E2S0xCnBS+4A1L6WH5ME0hQsHA8QZ9AWPX6G64/fU0yOHNASOacgPPW1YuzzAOyIEv6W8P+sm/v16FuSQCqhAtdrciaNl14+e/hMJ8KVFa13WuoQzuf8oXBIO8fA+sVVeANwIDmA+gRhsfRrti30ySZs4Eog9LweyqVgnN52s0LnGKBuivgReFoiJRXkPx7g33KM5ZmFfm0qVIvfw9V5PbiGFS57SkYxRBnXYTaBg3cKi/YQnPOC3FtkbIFLaJBqqUf2wDlHyei8uGJDq3rhNc8sgJwio4OmrLhIG9lqOqGDJ8cPMkClUbKb8ABmtN5pqVOWyagJH6efl/U41L3uwkGr8J5y0FYPPDPfL5dO8OAxUBfwxXkNa8zl/ccJDP+1NIdifVJyIoMWkd0FuWd2R8BxeXvdDED9z/El6YQPoByWxFm1O+CpKRd+qkVLvcJ8U/pyTSqvy7GT5i2dquTgROR8IE52PgVA/wF2O3gOtkivMXjc0ZAzbO80ILUEKAwmTiI9gSfNQe9+RTj8iay3xTGHvQke+g189qcGCOk2GsgNWKgzDOa1Nvv+WsIVpktf4TmZS3L2l1u3cPLH3PtYGg3cAi3jA4+XyKZDSbtxsBIGoxNWbB6DxFm6A61nWhqUVXBL1i0uGSwAtMeI3Ph3Lh+cg7N4RR6q3do1UXJOeqO3luCFvSfXgnMTc87OqtvXeuA58wiBN8ljmaDOZmrREqxID68JRGjsPWfhQdfhYdtq07cWLVEU9qZcgC9dHDjc/Zt8Jis1SLVoCV4498HZWi7A5xzIUSM30yDVoiUc6QZAGy411UsQWrQEL8xD8xRQLbj2pFoaVcamtreMifDSSzGom2mQamlEmt7eMiYyQAEeTqxBqqURaXp7yzo8fBd4YZ6M0xQqMB4lePvLEEG6oUGqJQoi7S25BY309bmNn05APVeAycK1rlyE3gEAfa8TQFmEmP0AZRnh5iEFc+ZQvZjKkP9DyDRItQQqvQAT793lxftZAO0ewr0Vj9xM2lsSwuF+eMMTG++aAiiH8N4y/t4WQmm/wvc7oMZORu9HhEEapFqiIKzQantL7lIg7S3lhL1621tWFD6XQ2hcImPL1wiAcARPvBZA2JoHt95tEKCB89F2BmmrOUuSRKprJslob8mAVdtb9pO/9pYleMxZgJM9KxcJfAhobnjupwH+9wBprsFQtZ8CbmqXtG6BfjjLMcX0cNkIyRwF294yDYBPwphuA/xHQeg8/chKT5BRBL+MZ+qD597xeW/+LDcXeKE9qbeJiCpnSaJ8BhDzZGzHEpCeISRdo6vtLYcAFLW95QnmbRDclufrFTWe9U0BgOMwFlnowwKAn4KRGQS/jgwfTRpI0zHhLEmURttbsofloogZeE7pG9QB8Px/e8s6+F4azzEMvZB+t9sIx8VYs77cgAFZsImqsriHnAOTVijSGaKyY4B8Q4P0ZynAIseFsyRV/La3rMDDMThWkRN4jdd/am/pwVv2k3HyvHz+BMD8ZtILnt+7+OyGTTjNesXLShklnOf7nSrecwT36sTrJQpuzTe2ILXiLC9D5CzPAuIsSZdlGLQMgLdqAtYgACrjx3P3iIzm0BIeS3vVETKqlvpgJEvQW/6sNJjuw33VJnOn+DvbDhRHGtNdOCR7bikA5UhgkaxrcnvgkYsI9zvwt3fbDaQZDICcYBU3zpJ0kTD1VzLaW+6agNOpAPeOCaCEefhvMlpjljDPhzDKeRu9rWLO5HIrbu+B1yc886XDd5K/t+tw3wH8/67ynQsI4/epgVreuICUQTIGXpiDRXtBjfUlCpKzaDFkE3NVAKhEYbsxdkNkNILutNDHcQCV3/sdgMvQz/1shaMe4OcRWZ/ybidSkniIMNhOGMDzeO8IchxWm7cHEUmocoirG9/pKKkgzcHiDiiWbYHq3+UeFmfR8rNH89rechGeRvIKY5iTAxhLWbMWUJ9iropkX4nU6SGy6gPg5FmdhI3MEsJeDmH5nKE3Frqw6uBlTxTHUEkaSK04y7mHxE0zOYuWn0XaW16HZ2Tv8xZgHQY4zvC+VQDgEJ/5jN8rPpN/XkA6i5/r5G1JTpbubkGXfkPE8FnRRS8GvOJnMKMOUjvO8iesqZyGLEXNHS3gLFqsxUt7y2uY43N4q214G9nelsN8Fj1SG1n6yTuEsP3w8CXydjSmangW8J2mEcpP4Jmlg30oVCjqIO20eb3DgqNQiziLFnuv4aW95WsAZhYhsV0IvQKwO4nsxDlwCC1nGzC8krPYhtEZB8cew3fYh57JmaMVC7pV94nfUQepylnyNoPWas6ixZnPeW1vuYsxn7OYa/7cDczLEtkXlKwjonoAL2k2rlKBdkDu59a6iSSFUkgMSVHGGCKEDiWsP8W1ST68bdRBytboHX7P4BILGSXOosVevLa3FC8loJ6xoDojAMQbG7rSBQP9lqyXPGZDMLxVMlrDhCJRB6lYqTSSN5dKlixqnEWLtdTb3pKVfgOfmcLnVD1lfXiMe+2YdEWqfspklBxu4Z5S4L9GMTssOuogFSs1BA7TE3HOosVa/LS3rGA+N0F5psio/OGf9wA4tappCN54DwY8owB4Ft57LW6DF5eWnsxXniGMseOaN8g445EcOMs3JChGLf4/SM6i5aqH8+u9LmGAn2L+VE43Df6ZxetvoB/SvVDePwpDsUwx3CARp767wlmeglNYrZWOIBTqtrmH7LB4awPCMDhLu0tQ7S1L4LdPlRBWKMwTMvaqniBpc2jyonsU05rrODbHFs7yl01IKpxlxMaiDytcdpyMAgfhLF/ixlkiLkG3E2FPycnE/9CPskHCXP5Gxrmg64rHnABP/RjXAYxzB3vhLH+BZ6hhjHCWObpaZTRERg+dalI4SwxAuh/CfdmQ8hrrc9yfdfk2chcpRb9nMKenGqStk7bnLBGWwNtbWghni1+SsVVxAl6Vo6VJGOVYG94knQXTtpwlwhJKOxEb2YdXfQPD8ARG+iP5rJnVIA1P2o6ztGGo6yQ7mPsNzPFu3AcxyaeqtQ1nibgnPWjB363CEHdSAloEtcPRh4nnLBGVTuQLWsXx+W8XydiHrEEaA0ksZ9F81HHOB+M+kO3YwX4HXHUaHHVX46lunWlZe8s6ZY+MA6Q0SGMmwllmMAa6RtebtLy9ZZ1yCFrTFeecw/8JMAD0cZ/9kN43tAAAAABJRU5ErkJggg==');">
+      <a href="{{ siteUrlFor('home') }}"><img src="{{ baseUrl() }}/assets/img/ppfrLogo.png" class="img-responsive center-block" alt="Peri's Place For Recipes"></a>
+    </div>
+    <!--End Large Logo Container -->
+
+    <!--Begin Navbar -->
+    <div id="nav-container">
+      <nav class="navbar navbar-default">
+        <div class="container">
+            <ul class="nav navbar-nav">
+              <li style="display:inline-block;"> <a href="{{ siteUrlFor('home') }}">Home</a></li>
+              <li style="display:inline-block;"> <a href="{{ siteUrlFor('about') }}">About Me</a></li>
+              <li style="display:inline-block;"> <a href="{{ siteUrlFor('blog') }}">Blog</a></li>
+            </ul>
+        </div><!-- /.container -->
+      </nav>
+    </div>
+    <!--End Navbar Container -->
+
+    <div class="container">
+      <div class="row recipe-bg">
+        <!-- End Header Layout -->
+        <div class="col-xs-12" style="text-align:center;">
+          <div style="display:inline-block;">
+            <h1>A New Recipe Has Been Added</h1>
+            <h4>By {{ recipe.user_name }}</h4>
+          </div>
+          <hr>
+          <h2 class="page-header"><a href="{{ siteUrlFor('showRecipe', recipe.niceUrl()) }}">{{ recipe.title }}</a></h2>
+          <h2><small>{{ recipe.subtitle }}</small></h2>
+          <div>
+            <a href="{{ siteUrlFor('showRecipe', recipe.niceUrl()) }}">
+              <img src="{{ imageUrl(recipe.recipe_id, recipe.main_photo, 340) }}" class="img-responsive img-shadow" alt="Photo of {{ recipe.title }}" style="display:inline-block;" width="340">
+            </a>
+          </div>
+          <div style="display:inline-block;">
+            <div >
+              Added on: {{ recipe.published_date|date('F j, Y') }}<br>
+            </div>
+          </div>
+        </div>
+      </div><!--end row -->
+    </div><!-- End container -->
+  </body>
+</html>

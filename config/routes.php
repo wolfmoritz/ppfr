@@ -54,6 +54,11 @@ $app->get('/recipe/delete(/:id)', $authenticated(), function ($id) {
     (new Controllers\AdminActionController())->deleteRecipe($id);
 })->name('adminDeleteRecipe');
 
+// Test view recipe HTML email
+$app->get('(/recipe/email(/:id(/:slug)))', $authenticated, function ($id, $slug = null) {
+    (new Controllers\IndexController())->emailRecipe($id, $slug);
+})->conditions(['id' => '\d+']);
+
 //
 // The routes below are public
 //

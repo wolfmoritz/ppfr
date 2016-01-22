@@ -34,10 +34,12 @@ class AdminActionController
         $Validation = $this->app->Validation;
 
         // If a recipe ID was supplied, get that recipe. Otherwise get a blank recipe record
+        $newRecipe = false;
         if (!empty($this->app->request->post('recipe_id'))) {
             $recipe = $RecipeMapper->findById((int) $this->app->request->post('recipe_id'));
         } else {
             $recipe = $RecipeMapper->make();
+            $newRecipe = true;
         }
 
         // Verify authority to modify recipe
@@ -133,6 +135,23 @@ class AdminActionController
             // Update recipe with main_image name
             $recipe->main_photo = $ImageUploader->imageFileName;
             $RecipeMapper->update($recipe);
+        }
+
+        // Send email for new recipes
+        if ($newRecipe) {
+            // Render the email body
+            $emailHTMLMessage = $this->app->twig->render('email/emailNewRecipe.html', ['recipe' => $recipe]);
+
+            // Get email handler and send
+            $email = $this->app->email;
+            $email->from('sender@perisplaceforrecipes.com', 'Peri\'s Place for Recipes');
+            // TODO: Do away with hardcoded emails
+            $email->to('wolfmoritz@yahoo.com, peareye@yahoo.com');
+            $email->subject('A new recipe has been added to Peri\s Place for Recipes');
+            $email->message($emailHTMLMessage);
+            $recipeLink = $this->app->urlFor('showRecipe', ['id' => $recipe->recipe_id, 'slug' => $recipe->url]);
+            $email->setAltMessage("A new recipe has been added: \n\n $recipeLink");
+            $email->sendEmail();
         }
 
         // On success display updated recipe

@@ -58,6 +58,7 @@ $config['email']['smtp_host'] = 'localhost';
 $config['email']['smtp_port'] = 25;
 $config['email']['smtp_user'] = '';
 $config['email']['smtp_pass'] = '';
+$config['email']['mailtype'] = 'html';
 
 /**
  * File Uploads Config

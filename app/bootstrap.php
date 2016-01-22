@@ -130,9 +130,9 @@ return call_user_func(
         });
 
         // Email
-        // $app->email = function() use ($app) {
-        //     return new Recipe\Library\EmailHandler($app->log, $app->config('email'));
-        // };
+        $app->email = function () use ($app) {
+            return new Recipe\Library\EmailHandler($app->config('email'), $app->log);
+        };
 
         // Pagination Extension
         $app->PaginationHandler = function () {
