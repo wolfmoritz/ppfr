@@ -146,8 +146,8 @@ class AdminActionController
             $email = $this->app->email;
             $email->from('sender@perisplaceforrecipes.com', "Peri's Place for Recipes");
             // TODO: Do away with hardcoded emails
-            $email->to('wolfmoritz@yahoo.com, peareye@yahoo.com');
-            $email->subject('A new recipe has been added to Peri\s Place for Recipes');
+            $email->to($this->app->config('admin')['email']);
+            $email->subject("A new recipe has been added to Peri's Place for Recipes");
             $email->message($emailHTMLMessage);
             $recipeLink = $this->app->urlFor('showRecipe', ['id' => $recipe->recipe_id, 'slug' => $recipe->url]);
             $email->setAltMessage("A new recipe has been added: \n\n $recipeLink");

@@ -5,14 +5,12 @@
  * DO NOT CHANGE THIS FILE
  *
  * Copy this config.default.php file to config.prod.php and define all
- * required production configuration settings.
+ * required production configuration settings on the production server.
  *
- * Define all development settings in config.dev.php. The config.dev.php file
- * is loaded after config.prod.php so it overrides any production settings.
+ * Define all development settings in config.dev.php on the development server.
+ * The config.dev.php file is loaded after config.prod.php so it overrides any production settings.
  *
- * Since configuration settings have sensitive information and do not change often,
- * try to avoid checking config files into your version control system. Manually
- * Move these files to the correct environment when configuration settings change.
+ * Do not commit config.prod.php or config.dev.php to version control.
  */
 
 /**
@@ -61,6 +59,11 @@ $config['email']['smtp_pass'] = '';
 $config['email']['mailtype'] = 'html';
 
 /**
+ * Default Admin Emails
+ */
+$config['admin']['email'] = '';
+
+/**
  * File Uploads Config
  *
  * MimeType List => http://www.webmaster-toolkit.com/mime-types.shtml
@@ -71,8 +74,6 @@ $config['image']['file.uri'] = 'files/originals/';
 $config['image']['file.thumb.uri'] = 'files/thumbnails/';
 $config['image']['file.mimetypes'] = ['image/jpeg', 'image/pjpeg', 'image/png']; // Be sure to update /Thumbs.php with any new allowed extensions.
 $config['image']['file.upload.max.size'] = '6M'; // Use "B", "K", M", or "G"
-// $config['image']['file.max.width'] = 1024;
-// $config['image']['file.usable.max.size'] = 2000; // Kb
 
 /**
  * Pagination Options
