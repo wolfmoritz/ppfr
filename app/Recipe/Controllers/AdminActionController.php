@@ -144,7 +144,7 @@ class AdminActionController
 
             // Get email handler and send
             $email = $this->app->email;
-            $email->from('sender@perisplaceforrecipes.com', 'Peri\'s Place for Recipes');
+            $email->from('sender@perisplaceforrecipes.com', "Peri's Place for Recipes");
             // TODO: Do away with hardcoded emails
             $email->to('wolfmoritz@yahoo.com, peareye@yahoo.com');
             $email->subject('A new recipe has been added to Peri\s Place for Recipes');

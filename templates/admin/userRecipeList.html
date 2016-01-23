@@ -20,7 +20,7 @@
     <h4 class="media-heading">{{ r.title }}</h4>
     <a class="btn-link" href="{{ siteUrlFor('adminEditRecipe', r.recipe_id) }}" title="Edit recipe">Edit</a> |
     <a class="btn-link deleteButton" href="{{ siteUrlFor('adminDeleteRecipe', r.recipe_id) }}">Delete</a> |
-    Status: {% if r.published_date %}<span class="label label-success">Published</span>{% else %}<span class="label label-default">Not Published</span>{% endif %} |
+    Status: {% if r.published_date and date(r.published_date) <= date() %}<span class="label label-success">Published</span>{% else %}<span class="label label-default">Not Published</span>{% endif %} |
     Date: {% if r.published_date %}{{ r.published_date|date('F j, Y') }}{% endif %}<br>
     <a href="#" class="btn btn-link disabled">Comments: 5</a> |
     <a href="#" class="btn btn-link disabled">Pending Comments: 4</a> | Views: {{ r.view_count|number_format }} | Rank: 1 / 2

@@ -2,3 +2,8 @@
 .publish-date li {
 	padding: 3px 15px;
 }
+.alert-message {
+	position: fixed;
+    top: 10px;
+    width: 100%
+}
