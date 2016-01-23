@@ -84,6 +84,9 @@ return call_user_func(
         // $app->config('whoops.editor', 'sublime');
         // $app->add(new Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
 
+        // Set UTF-8 Header
+        $app->response->headers->set('Content-Type', 'text/html; charset=utf-8');
+
         // Load data mapper loader
         $app->dataMapper = function ($mapper) use ($app) {
             return function ($mapper) use ($app) {
