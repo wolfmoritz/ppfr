@@ -33,7 +33,6 @@ class AdminActionController
         $ImageUploader = $this->app->ImageUploader;
         $Validation = $this->app->Validation;
 
-        //
         // If a recipe ID was supplied, get that recipe. Otherwise get a blank recipe record
         $newRecipe = false;
         if (!empty($this->app->request->post('recipe_id'))) {
