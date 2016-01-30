@@ -92,7 +92,7 @@
         <ul class="nav navbar-nav">
           <li{% if uriSegment(1) == '' %} class="active"{% endif %}> <a href="{{ siteUrlFor('home') }}">Home</a></li>
           <li{% if uriSegment(1) == 'about' %} class="active"{% endif %}> <a href="{{ siteUrlFor('about') }}">About Me</a></li>
-          <li{% if uriSegment(1) == 'blog' %} class="active"{% endif %}> <a href="{{ siteUrlFor('blog') }}">Blog</a></li>
+          <li{% if uriSegment(1) == 'blog' %} class="active"{% endif %}> <a href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
           <li class="dropdown hidden-xs"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
             <ul class="dropdown-menu">
               <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
@@ -139,16 +139,6 @@
 <!--End Navbar Container -->
 
 <div class="container">
-  {% if flash() %}{# Displays flash message alerts #}
-  <div class="row alert-message">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="alert alert-{{ flash('level')|default('warning') }} alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <p>{{ flash('message')|raw }}</p>
-      </div>
-    </div>
-  </div>
-  {% endif %}
   <div class="row recipe-bg">
     <!-- End Header Layout -->
     {% block body %}
@@ -172,7 +162,7 @@
         <ul class="list-unstyled">
           <li><a href="{{ baseUrl() }}">Home</a></li>
           <li><a href="{{ siteUrlFor('about') }}">About Us</a></li>
-          <li><a href="{{ siteUrlFor('blog') }}">Blog</a></li>
+          <li><a href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
         </ul>
       </div>
       <!-- end col-sm-2 -->

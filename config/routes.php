@@ -55,7 +55,7 @@ $app->get('/recipe/delete(/:id)', $authenticated(), function ($id) {
 })->name('adminDeleteRecipe');
 
 // Test view recipe HTML email
-$app->get('(/recipe/email(/:id(/:slug)))', $authenticated, function ($id, $slug = null) {
+$app->get('/recipe/email(/:id(/:slug))', $authenticated, function ($id, $slug = null) {
     (new Controllers\IndexController())->emailRecipe($id, $slug);
 })->conditions(['id' => '\d+']);
 
@@ -98,17 +98,22 @@ $app->get('/about', function () {
     (new Controllers\IndexController())->about();
 })->name('about');
 
-// Blog page
-$app->get('/blog', function () {
-    (new Controllers\IndexController())->blogPost();
-})->name('blog');
+// Default blog posts list page
+$app->get('/blog/', function () {
+    (new Controllers\BlogController())->getBlogPosts();
+})->name('blogPosts');
+
+// Blog post
+$app->get('/blog(/:id(/:url))', function ($id, $url = null) {
+    (new Controllers\BlogController())->showPost($id, $url);
+})->conditions(['id' => '\d+'])->name('showBlogPost');
 
 // Update sitemap
 $app->get('/updatesitemap', function () use ($app) {
-    // Does it matter if this is called from a browser?
     if (PHP_SAPI !== 'cli') {
         $app->notFound();
     }
+
     echo "Updating sitemap\n";
     $SitemapHandler = $app->sitemap;
     $SitemapHandler->make();
@@ -123,17 +128,3 @@ $app->get('/getmorephotorecipes/:pageno', function ($pageno = 1) {
 $app->get('/', function () {
     (new Controllers\IndexController())->home();
 })->name('home');
-
-// Example code to remember for admin pages!
-// If using an admin route, set cache control to not cache pages
-// $noCache = function() use ($app) {
-//   return function() use ($app) {
-//     // https://www.owasp.org/index.php/Testing_for_Logout_and_Browser_Cache_Management_(OWASP-AT-007)
-//     $app->response->headers->set('Cache-Control', 'no-cache, must-revalidate');
-//     $app->response->headers->set('Pragma', 'no-cache');
-//     $app->response->headers->set('Expires', '0'); // Purposely illegal vaule
-//   };
-// };
-
-// All admin routes
-// +$app->group('/db-admin', $noCache(), function () use ($app, $authenticated) {});

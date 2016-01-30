@@ -61,6 +61,7 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFunction('randomRecipes', array($this, 'randomRecipes')),
             new \Twig_SimpleFunction('config', array($this, 'getConfig')),
             new \Twig_SimpleFunction('session', array($this, 'getSession')),
+            new \Twig_SimpleFunction('blogPostNav', array($this, 'getBlogPostNav'), array('is_safe' => array('html'))),
         );
     }
 
@@ -325,5 +326,18 @@ class TwigExtension extends \Twig_Extension
         }
 
         return isset($sessionData[$key]) ? $sessionData[$key] : null;
+    }
+
+    /**
+     * Get Blog Posts Nav
+     *
+     */
+    public function getBlogPostNav()
+    {
+        $app = \Slim\Slim::getInstance();
+        $dataMapper = $app->dataMapper;
+        $BlogMapper = $dataMapper('BlogMapper');
+
+        return $BlogMapper->find();
     }
 }

@@ -1,0 +1,18 @@
+{% extends 'blogLayout.html' %}
+
+{% block blogBody %}
+
+          {% for p in posts %}
+          <div>
+            <h1><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">{{ p.title }}</a></h1>
+            <p>{{ p.content_excerpt }} ...</p>
+            <h5>{{ p.published_date|date('F j, Y') }}</h5>
+          </div>
+          <hr>
+          {% else %}
+          <h3>No Posts Found</h3>
+          {% endfor %}
+
+          {{ pagination() }}
+
+{% endblock %}

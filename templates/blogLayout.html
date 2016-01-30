@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="col-md-10">
+  	{% block blogBody %}
+  	{% endblock %}
+    </div>
+    <!--end col-md-10 left column -->
+
+    <div class="col-md-2 hidden-xs hidden-sm">
+
+      <div class="sidenav">
+        <h5 class="page-header">Other Posts</h5>
+        <ul class="list-unstyled">
+          {% for post in blogPostNav() %}
+          <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
+          {% endfor %}
+        </ul>
+     </div>
+
+      <div class="sidenav">
+        <h5 class="page-header">Random Recipe</h5>
+        <ul class="list-unstyled">
+          {% for r in randomRecipes(5) %}
+          <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+    <!--end col-me-2 right column -->
+{% endblock %}

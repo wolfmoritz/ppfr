@@ -139,6 +139,10 @@ class AdminActionController
 
         // Send email for new recipes
         if ($newRecipe) {
+            // Set user_name from session as new recipes will not have that available in the record
+            $user = $SessionHandler->getData();
+            $recipe->user_name = $user['first_name'] . ' ' . $user['last_name'];
+
             // Render the email body
             $emailHTMLMessage = $this->app->twig->render('email/emailNewRecipe.html', ['recipe' => $recipe]);
 

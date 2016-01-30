@@ -7,7 +7,7 @@ namespace Recipe\Storage;
 class Recipe extends DomainObjectAbstract
 {
     /**
-     * Get Full Recipe URL
+     * Get Nice Recipe URL
      */
     public function niceUrl()
     {
