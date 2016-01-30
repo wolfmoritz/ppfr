@@ -338,6 +338,16 @@ class TwigExtension extends \Twig_Extension
         $dataMapper = $app->dataMapper;
         $BlogMapper = $dataMapper('BlogMapper');
 
-        return $BlogMapper->find();
+        // Get posts
+        $posts = $BlogMapper->getPosts();
+
+        // Nest array by month
+        $priorPosts = [];
+        foreach ($posts as $post) {
+            $date = new \DateTime($post->published_date);
+            $priorPosts[$date->format('Y-m')][] = $post;
+        }
+
+        return $priorPosts;
     }
 }

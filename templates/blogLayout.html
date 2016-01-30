@@ -11,12 +11,20 @@
 
       <div class="sidenav">
         <h5 class="page-header">Other Posts</h5>
-        <ul class="list-unstyled">
-          {% for post in blogPostNav() %}
-          <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
-          {% endfor %}
-        </ul>
-     </div>
+
+        {% for month, posts in blogPostNav() %}
+        <div>
+          <a class="" data-toggle="collapse" href="#collapseMonth-{{ month }}">{{ month|date('F Y') }}</a>
+          <div id="collapseMonth-{{ month }}" class="collapse">
+            <ul class="list-unstyled">
+              {% for post in posts %}
+              <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
+              {% endfor %}
+          </ul>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
 
       <div class="sidenav">
         <h5 class="page-header">Random Recipe</h5>
