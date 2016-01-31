@@ -42,11 +42,13 @@
           <!-- <li><a href="#">Manage Comments <span class="badge">1</span></a></li> -->
         </ul>
 
-        <!-- <h4 class="page-header">Blog</h4>
+        {% if role('admin') %}
+        <h4 class="page-header">Blog</h4>
         <ul class="list-unstyled">
-          <li><a href="#">All Posts</a></li>
+          <li><a href="{{ siteUrlFor('adminBlogPosts') }}">All Posts</a></li>
           <li><a href="#">Add Post</a></li>
-        </ul> -->
+        </ul>
+        {% endif %}
 
         <!-- <h4 class="page-header">About Me</h4>
         <ul class="list-unstyled">

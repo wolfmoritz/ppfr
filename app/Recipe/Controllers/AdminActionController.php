@@ -30,6 +30,7 @@ class AdminActionController
         $RecipeMapper = $dataMapper('RecipeMapper');
         $CategoryMapper = $dataMapper('CategoryMapper');
         $SessionHandler = $this->app->SessionHandler;
+        $Security = $this->app->security;
         $ImageUploader = $this->app->ImageUploader;
         $Validation = $this->app->Validation;
 
@@ -43,7 +44,7 @@ class AdminActionController
         }
 
         // Verify authority to modify recipe
-        if (!$this->authorizedToEditRecipe($recipe)) {
+        if (!$Security->authorizedToEditRecipe($recipe)) {
             // Just redirect to show recipe
             $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
         }
@@ -138,7 +139,7 @@ class AdminActionController
         }
 
         // Send email for new recipes
-        if ($newRecipe) {
+        if ($newRecipe && !empty($recipe->published_date) && $this->app->getMode() === 'production') {
             // Set user_name from session as new recipes will not have that available in the record
             $user = $SessionHandler->getData();
             $recipe->user_name = $user['first_name'] . ' ' . $user['last_name'];
@@ -172,12 +173,13 @@ class AdminActionController
         // Get services
         $dataMapper = $this->app->dataMapper;
         $RecipeMapper = $dataMapper('RecipeMapper');
+        $Security = $this->app->security;
 
         // Get the recipe to unpublish
         $recipe = $RecipeMapper->findById((int) $id);
 
         // Verify authority to modify recipe. Admins can edit all
-        if (!$this->authorizedToEditRecipe($recipe)) {
+        if (!$Security->authorizedToEditRecipe($recipe)) {
             // Just redirect to show recipe
             $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
         }
@@ -198,6 +200,7 @@ class AdminActionController
     public function deleteRecipe($id)
     {
         // Get services
+        $Security = $this->app->security;
         $dataMapper = $this->app->dataMapper;
         $RecipeMapper = $dataMapper('RecipeMapper');
 
@@ -205,7 +208,7 @@ class AdminActionController
         $recipe = $RecipeMapper->findById((int) $id);
 
         // Verify authority to modify recipe. Admins can delete all
-        if (!$this->authorizedToEditRecipe($recipe)) {
+        if (!$Security->authorizedToEditRecipe($recipe)) {
             // Just redirect to show recipe
             $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
         }
@@ -239,32 +242,5 @@ class AdminActionController
         }
 
         return $messageString;
-    }
-
-    /**
-     * Authorize Recipe Edit
-     */
-    protected function authorizedToEditRecipe(\Recipe\Storage\Recipe $recipe, array $user = null)
-    {
-        $SecurityHandler = $this->app->security;
-        $SessionHandler = $this->app->SessionHandler;
-        $user = $SessionHandler->getData();
-
-        // Make sure we are logged in and have the minimum info to validate the user
-        if (!$SecurityHandler->authenticated() || empty($user['user_id'])) {
-            return false;
-        }
-
-        // Admins can always edit
-        if ($SecurityHandler->authorized('admin')) {
-            return true;
-        }
-
-        // Final check, verify authority to modify recipe
-        if (is_numeric($recipe->recipe_id) && (int) $user['user_id'] === (int) $recipe->created_by) {
-            return true;
-        }
-
-        return false;
     }
 }

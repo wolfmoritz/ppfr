@@ -130,6 +130,7 @@ class IndexController
         $dataMapper = $this->app->dataMapper;
         $RecipeMapper = $dataMapper('RecipeMapper');
         $CategoryMapper = $dataMapper('CategoryMapper');
+        $Security = $this->app->SecurityHandler;
 
         // If $id is not an integer or at least numeric, throw 404
         if (!is_integer((int) $id)) {
@@ -143,6 +144,15 @@ class IndexController
         if (!$recipe) {
             $this->app->notFound();
             return;
+        }
+
+        // Authorization check
+        if (!$recipe->published_date) {
+            // Ok, recipe is not published, but let author or admin continue
+            if (!$Security->authorizedToEditRecipe($recipe)) {
+                $this->app->notFound();
+                return;
+            }
         }
 
         // If there was no slug provided, then 301 redirect back here with the slug

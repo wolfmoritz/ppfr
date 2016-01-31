@@ -84,10 +84,9 @@ class AdminIndexController
         }
 
         // Verify authority to edit recipe. Admins can edit all
-        if ((int) $sessionData['user_id'] !== (int) $recipe->created_by && !$SecurityHandler->authorized('admin')) {
+        if (!$SecurityHandler->authorizedToEditRecipe($recipe)) {
             // Just redirect to show recipe
             $this->app->redirectTo('showRecipe', ['id' => $id, 'slug' => $recipe->niceUrl()]);
-            return;
         }
 
         // Get categories and assigned categories

@@ -2,8 +2,6 @@
 
 {% block body %}
 
-<h2 class="page-header">Manage Your Recipes</h2>
-
 {% for r in recipes %}
   {% if not r.main_photo %}
     {% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}

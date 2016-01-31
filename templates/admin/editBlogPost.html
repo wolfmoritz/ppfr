@@ -1,0 +1,41 @@
+{% extends 'admin/adminLayout.html' %}
+
+{% block body %}
+<form action="{{ siteUrlFor('adminSaveBlogPost') }}" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+  <input type="hidden" name="blog_id" value="{{ blog.blog_id }}">
+  <div class="buttonControls">
+    <a href="{{ siteUrlFor('adminBlogPosts') }}" class="btn btn-default">Cancel</a>
+    <button type="submit" class="btn btn-default" name="button" value="save">Save{% if not blog.published_date %} Draft{% endif %}</button>
+
+    {% if blog.published_date %}
+    <a href="{{ siteUrlFor('adminUnpublishBlogPost', blog.blog_id) }}" class="btn btn-warning">Unpublish</a>
+    {% else %}
+    <div class="btn-group">
+      <button type="submit" class="btn btn-success" name="button" value="publish">Publish Now</button>
+      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu publish-date">
+        <li>Publish Later</li>
+        <li><input type="date" class="form-control" name="published_date" autocomplete="off" value="{{ blog.published_date }}"></li>
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if blog.blog_id %}
+    <a href="{{ siteUrlFor('adminDeleteBlogPost', blog.blog_id) }}" class="btn btn-danger deleteButton">Delete Post</a>
+    {% endif %}
+  </div>
+    <!-- .buttonControls -->
+  <hr>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" name="title" maxlength="60" autocomplete="off" value="{{ blog.title }}">
+  </div>
+
+  <div class="form-group">
+    <label for="ingredients">Content</label>
+    <textarea class="form-control" rows="20" name="content">{{ blog.content }}</textarea>
+  </div>
+</form>
+{% endblock %}

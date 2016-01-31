@@ -4,6 +4,6 @@
 
       <h1 class="page-header">{{ post.title }}</h1>
       <h4>{{post.user_name }} <small>{{ p.published_date|date('F j, Y') }}</small></h4>
-      {{ post.content }}
+      {{ post.content|raw }}
 
 {% endblock %}

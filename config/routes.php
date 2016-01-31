@@ -20,44 +20,82 @@ $authenticated = function () use ($app) {
     };
 };
 
+// Authorization Closure
+$authorized = function ($role) use ($app) {
+    return function () use ($app, $role) {
+        $SecurityHandler = $app->security;
+        if (!$SecurityHandler->authorized($role)) {
+            $app->redirectTo('home');
+        }
+    };
+};
+
 //
-// These routes are secured
+// These admin routes are secured
 //
 
-// Admin Dashboard
-$app->get('/user/dashboard', $authenticated(), function () {
-    (new Controllers\AdminIndexController())->dashboard();
-})->name('adminDashboard');
+$app->group('/cook', $authenticated(), function () use ($app, $authorized) {
 
-// Admin Recipes by User
-$app->get('/user/dashboard/recipes(/:page)', $authenticated(), function ($page = 1) {
-    (new Controllers\AdminIndexController())->getRecipesByUser($page);
-})->name('adminRecipesByUser');
+    // Dashboard
+    $app->get('/', function () {
+        (new Controllers\AdminIndexController())->dashboard();
+    })->name('adminDashboard');
 
-// Admin Add or Edit Recipe
-$app->get('/recipe/edit(/:id)', $authenticated(), function ($id = null) {
-    (new Controllers\AdminIndexController())->editRecipe($id);
-})->name('adminEditRecipe');
+    // Recipes by User
+    $app->get('/recipes(/:page)', function ($page = 1) {
+        (new Controllers\AdminIndexController())->getRecipesByUser($page);
+    })->name('adminRecipesByUser');
 
-// Admin Save Recipe
-$app->post('/recipe/save', $authenticated(), function () {
-    (new Controllers\AdminActionController())->saveRecipe();
-})->name('adminSaveRecipe');
+    // Add or Edit Recipe
+    $app->get('/recipe/edit(/:id)', function ($id = null) {
+        (new Controllers\AdminIndexController())->editRecipe($id);
+    })->name('adminEditRecipe');
 
-// Admin Unpublish Recipe
-$app->get('/recipe/unpublish(/:id)', $authenticated(), function ($id) {
-    (new Controllers\AdminActionController())->unpublishRecipe($id);
-})->name('adminUnpublishRecipe');
+    // Save Recipe
+    $app->post('/recipe/save', function () {
+        (new Controllers\AdminActionController())->saveRecipe();
+    })->name('adminSaveRecipe');
 
-// Admin Delete Recipe
-$app->get('/recipe/delete(/:id)', $authenticated(), function ($id) {
-    (new Controllers\AdminActionController())->deleteRecipe($id);
-})->name('adminDeleteRecipe');
+    // Unpublish Recipe
+    $app->get('/recipe/unpublish(/:id)', function ($id) {
+        (new Controllers\AdminActionController())->unpublishRecipe($id);
+    })->name('adminUnpublishRecipe');
 
-// Test view recipe HTML email
-$app->get('/recipe/email(/:id(/:slug))', $authenticated, function ($id, $slug = null) {
-    (new Controllers\IndexController())->emailRecipe($id, $slug);
-})->conditions(['id' => '\d+']);
+    // Delete Recipe
+    $app->get('/recipe/delete(/:id)', function ($id) {
+        (new Controllers\AdminActionController())->deleteRecipe($id);
+    })->name('adminDeleteRecipe');
+
+    // Test view recipe HTML email
+    $app->get('/recipe/email(/:id(/:slug))', function ($id, $slug = null) {
+        (new Controllers\IndexController())->emailRecipe($id, $slug);
+    })->conditions(['id' => '\d+']);
+
+    // List blog posts
+    $app->get('/blog/', $authorized('admin'), function () {
+        (new Controllers\BlogController())->getAdminBlogPosts();
+    })->name('adminBlogPosts');
+
+    // Edit blog posts
+    $app->get('/blog/edit(/:id)', $authorized('admin'), function ($id = null) {
+        (new Controllers\BlogController())->editPost($id);
+    })->name('adminEditBlogPost');
+
+    // Save blog post
+    $app->post('/blog/save', $authorized('admin'), function () {
+        (new Controllers\BlogActionController())->saveBlogPost();
+    })->name('adminSaveBlogPost');
+
+    // Unpublish blog post
+    $app->get('/blog/unpublish(/:id)', $authorized('admin'), function ($id) {
+        (new Controllers\BlogActionController())->unpublishBlogPost($id);
+    })->name('adminUnpublishBlogPost');
+
+    // Delete blog post
+    $app->get('/blog/delete(/:id)', $authorized('admin'), function ($id) {
+        (new Controllers\BlogActionController())->deleteBlogPost($id);
+    })->name('adminDeleteBlogPost');
+});
 
 //
 // The routes below are public

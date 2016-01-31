@@ -1,0 +1,36 @@
+{% extends 'admin/adminLayout.html' %}
+
+{% block body %}
+
+{% for p in posts %}
+    <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}" title="View blog post" target="_blank">{{ p.title }}</a></h3>
+        </div>
+        <!--end panel-heading -->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div>
+                {{ p.content_excerpt }} &hellip;
+              </div>
+            <a class="btn-link" href="{{ siteUrlFor('adminEditBlogPost', p.blog_id) }}" title="Edit Blog Post">Edit</a> |
+            <a class="btn-link deleteButton" href="{{ siteUrlFor('adminDeleteBlogPost', p.blog_id) }}" class="deleteButton" title="Delete blog post">Delete</a> |
+            Status: {% if p.published_date and date(p.published_date) <= date() %}<span class="label label-success">Published</span>{% else %}<span class="label label-default">Not Published</span>{% endif %} |
+            Date: {% if p.published_date %}{{ p.published_date|date('F j, Y') }}{% endif %}<br>
+
+<!-- | <a href="adminseecomments.html">Comments: 5</a> | <a href="adminreviewcomment.html">Pending Comments: 0</a> -->               </div>
+            <!--End col-md-10 panel-body -->
+          </div>
+          <!--End panel-body row -->
+
+        </div>
+        <!--end panel-body -->
+      </div>
+{% else %}
+<h4>There are no posts.</h4>
+{% endfor %}
+
+{{ pagination() }}
+
+{% endblock %}

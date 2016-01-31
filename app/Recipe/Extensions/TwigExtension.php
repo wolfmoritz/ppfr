@@ -61,6 +61,7 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFunction('randomRecipes', array($this, 'randomRecipes')),
             new \Twig_SimpleFunction('config', array($this, 'getConfig')),
             new \Twig_SimpleFunction('session', array($this, 'getSession')),
+            new \Twig_SimpleFunction('role', array($this, 'authorizedRole')),
             new \Twig_SimpleFunction('blogPostNav', array($this, 'getBlogPostNav'), array('is_safe' => array('html'))),
         );
     }
@@ -329,6 +330,20 @@ class TwigExtension extends \Twig_Extension
     }
 
     /**
+     * Verify Role Level
+     *
+     * Compares supplied role against user role
+     * @return Boolean
+     */
+    public function authorizedRole($role = null)
+    {
+        $app = \Slim\Slim::getInstance();
+        $security = $app->security;
+
+        return $security->authorized($role, false);
+    }
+
+    /**
      * Get Blog Posts Nav
      *
      */
@@ -344,8 +359,7 @@ class TwigExtension extends \Twig_Extension
         // Nest array by month
         $priorPosts = [];
         foreach ($posts as $post) {
-            $date = new \DateTime($post->published_date);
-            $priorPosts[$date->format('Y-m')][] = $post;
+            $priorPosts[(new \DateTime($post->published_date))->format('Y-m')][] = $post;
         }
 
         return $priorPosts;

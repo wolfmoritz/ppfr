@@ -9,7 +9,7 @@ class BlogMapper extends DataMapperAbstract
     protected $table = 'blog';
     protected $tableAlias = 'b';
     protected $primaryKey = 'blog_id';
-    protected $modifyColumns = array('title', 'url', 'content', 'content_excerpt');
+    protected $modifyColumns = array('title', 'url', 'content', 'content_excerpt', 'published_date');
     protected $domainObjectClass = 'Blog';
     protected $defaultSelect = 'select SQL_CALC_FOUND_ROWS b.*, concat(us.first_name, \' \', us.last_name) user_name, concat(us.user_id, \'/\', us.first_name, \'+\', us.last_name) user_url from blog b join pp_user us on b.created_by = us.user_id';
 
@@ -32,7 +32,11 @@ class BlogMapper extends DataMapperAbstract
         }
 
         // Add order by
-        $this->sql .= ' order by b.published_date desc';
+        if ($publishedPostsOnly) {
+            $this->sql .= ' order by b.published_date desc';
+        } else {
+            $this->sql .= ' order by b.published_date is null desc, b.published_date desc';
+        }
 
         if ($limit) {
             $this->sql .= " limit ?";
