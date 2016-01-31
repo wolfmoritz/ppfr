@@ -134,7 +134,7 @@ class BlogController
         }
 
         // Verify authority to edit post
-        if ((int) $sessionData['user_id'] !== (int) $blog->created_by) {
+        if (is_numeric($blog->blog_id) && (int) $sessionData['user_id'] !== (int) $blog->created_by) {
             // Just redirect to show post
             $this->app->redirectTo('showBlogPost', ['id' => $blog->blog_id, 'url' => $blog->niceUrl()]);
         }
