@@ -96,7 +96,7 @@ class SecurityHandler
         }
 
         // Final check, verify authority to modify recipe
-        if (is_numeric($recipe->recipe_id) && (int) $user['user_id'] === (int) $recipe->created_by) {
+        if (empty($recipe->recipe_id) || is_numeric($recipe->recipe_id) && (int) $user['user_id'] === (int) $recipe->created_by) {
             return true;
         }
 

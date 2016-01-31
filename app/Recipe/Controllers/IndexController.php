@@ -130,7 +130,7 @@ class IndexController
         $dataMapper = $this->app->dataMapper;
         $RecipeMapper = $dataMapper('RecipeMapper');
         $CategoryMapper = $dataMapper('CategoryMapper');
-        $Security = $this->app->SecurityHandler;
+        $Security = $this->app->security;
 
         // If $id is not an integer or at least numeric, throw 404
         if (!is_integer((int) $id)) {
