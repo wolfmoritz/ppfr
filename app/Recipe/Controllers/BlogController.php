@@ -29,24 +29,35 @@ class BlogController
         // Get data mappers
         $dataMapper = $this->app->dataMapper;
         $BlogMapper = $dataMapper('BlogMapper');
+        $Security = $this->app->security;
+        $SessionHandler = $this->app->SessionHandler;
 
         // Fetch post
-        $post = $BlogMapper->findById((int) $id);
+        $blog = $BlogMapper->findById((int) $id);
 
         // If no post found then 404
-        if (!$post) {
+        if (!$blog) {
             $this->app->notFound();
             return;
         }
 
+        // Authorization check
+        if (!$blog->published_date) {
+            // Ok, blog post is not published, but let author or admin continue
+            $user = $SessionHandler->getData();
+            if (!$Security->authorized('admin') || (int) $blog->created_by !== (int) $user['user_id']) {
+                $this->app->notFound();
+            }
+        }
+
         // If there was no url provided, then 301 redirect back here with the url segment
         if ($url === null) {
-            $this->app->redirect($this->app->urlFor('show') . $blog->niceUrl(), 301);
+            $this->app->redirect($this->app->urlFor('showBlogPost') . $blog->niceUrl(), 301);
             return;
         }
 
         $twig = $this->app->twig;
-        $twig->display('blog.html', ['post' => $post, 'title' => $post->title]);
+        $twig->display('blog.html', ['blog' => $blog, 'title' => $blog->title]);
     }
 
     /**

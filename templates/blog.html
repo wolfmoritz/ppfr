@@ -2,8 +2,8 @@
 
 {% block blogBody %}
 
-      <h1 class="page-header">{{ post.title }}</h1>
-      <h4>{{post.user_name }} <small>{{ p.published_date|date('F j, Y') }}</small></h4>
-      {{ post.content|raw }}
+      <h1 class="page-header">{{ blog.title }}</h1>
+      <h4>{{blog.user_name }} <small>{{ p.published_date|date('F j, Y') }}</small></h4>
+      {{ blog.content|raw }}
 
 {% endblock %}
