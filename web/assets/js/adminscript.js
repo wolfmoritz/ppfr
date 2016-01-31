@@ -16,12 +16,14 @@ $('.deleteButton').on('click', function() {
 
 
 // Text editor
-$('.wysiwyg-basic').summernote({
+$('.wysiwyg').summernote({
   height: 500,
   disableDragAndDrop: true,
   toolbar: [
+  	['style', ['style']],
     ['font', ['bold', 'italic', 'clear']],
-    ['para', ['ul', 'ol']],
+    ['para', ['ul', 'ol','paragraph']],
+    ['table', ['table']],
     ['insert', ['link', 'video', 'hr']],
     ['view', ['fullscreen', 'codeview']],
     ['help', ['help']]
@@ -36,15 +38,3 @@ $('.wysiwyg-basic').summernote({
   }
 });
 
-$('.wysiwyg-full').summernote({
-  height: 500,
-  disableDragAndDrop: true,
-  onpaste: function() {
-    var $editor = $(this);
-    // Pause to let new text actually paste
-    setTimeout(function () {
-      var text = $editor.code();
-      $editor.code('').html('<p>'+$(text).text()+'</p>');
-    }, 10);
-  }
-});
