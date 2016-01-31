@@ -14,7 +14,6 @@ $('.deleteButton').on('click', function() {
   return reply;
 });
 
-
 // Text editor
 $('.wysiwyg').summernote({
   height: 500,
