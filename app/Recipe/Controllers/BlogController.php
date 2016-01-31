@@ -51,9 +51,8 @@ class BlogController
         }
 
         // If there was no url provided, then 301 redirect back here with the url segment
-        if ($url === null) {
-            $this->app->redirect($this->app->urlFor('showBlogPost') . $blog->niceUrl(), 301);
-            return;
+        if ($url !== $blog->url) {
+            $this->app->redirect($this->app->urlFor('showBlogPost', ['id' => $blog->blog_id, 'url' => $blog->url]), 301);
         }
 
         $twig = $this->app->twig;
