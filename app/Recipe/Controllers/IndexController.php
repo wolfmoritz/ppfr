@@ -156,7 +156,7 @@ class IndexController
         }
 
         // If there was no slug provided, then 301 redirect back here with the slug
-        if ($slug === null) {
+        if ($slug !== $recipe->url) {
             $this->app->redirect($this->app->urlFor('showRecipe') . $recipe->niceUrl(), 301);
             return;
         }

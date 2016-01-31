@@ -117,9 +117,14 @@ $app->get('/recipe/search', function () use ($app) {
 })->name('recipeSearch');
 
 // Show a recipe
-$app->get('(/recipe/show(/:id(/:slug)))', function ($id, $slug = null) {
+$app->get('(/recipe(/:id(/:slug)))', function ($id, $slug = null) {
     (new Controllers\IndexController())->showRecipe($id, $slug);
 })->conditions(['id' => '\d+'])->name('showRecipe');
+
+// Show a recipe - fall through if missing url segment and the ID has a trailing slash
+$app->get('(/recipe/show(/:id)/)', function ($id) {
+    (new Controllers\IndexController())->showRecipe($id);
+})->conditions(['id' => '\d+']);
 
 // Get recipes by category
 $app->get('/recipe/category(/:slug(/:page))', function ($slug = 'All', $page = 1) {

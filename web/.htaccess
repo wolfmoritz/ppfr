@@ -26,10 +26,9 @@ Options -Indexes
     RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+/[a-zA-Z+-]+/$
     RewriteRule ^recipe/user/(\d+)/([a-zA-Z+-]+)/$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
 
-    # If a show recipe has an ID, and no slug (title), make the trailing slash optional and rewrite to
-    # the no slash route and let the app return a 301 to the route with the title
-    RewriteCond %{REQUEST_URI} ^(.*)/recipe/show/\d+/$
-    RewriteRule ^recipe/show/(\d+)/$ http://%{HTTP_HOST}%1/recipe/show/$1 [NC,R=302,L]
+    # Handle old "recipe/show/" recipe urls
+    RewriteCond %{REQUEST_URI} ^(.*)/recipe/show/\d+
+    RewriteRule ^recipe/show/(\d+)/([a-zA-Z+-]+)$ http://%{HTTP_HOST}%1/recipe/$1/$2 [NC,R=301,L]
 
     # If a category has a trailing slash but no page number, direct to the first category page (no trailing slash)
     RewriteCond %{REQUEST_URI} ^(.*)/recipe/category/[a-zA-Z+-]+/$
