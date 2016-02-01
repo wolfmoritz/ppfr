@@ -39,7 +39,12 @@ class Toolbox
         $text = preg_replace('/^[\s]/', '', $text); // Remove leading space from excerpt
         $text = preg_replace('/[\s]$/', '', $text); // Remove trailing space from excerpt
 
-        // Truncate to character limit
+        // If we are already within the limit, just return the text
+        if (mb_strlen($text) <= $characters) {
+            return $text;
+        }
+
+        // Truncate to character limit if longer than requested
         $text = substr($text, 0, $characters);
 
         // We don't want the string cut mid-word, so search for the last space and trim there
