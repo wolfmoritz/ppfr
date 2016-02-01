@@ -39,6 +39,7 @@ class SitemapHandler
         // Get handlers
         $dataMapper = $this->app->dataMapper;
         $RecipeMapper = $dataMapper('RecipeMapper');
+        $BlogMapper = $dataMapper('BlogMapper');
         $log = $this->app->log;
         $log->alert('Updating sitemap');
 
@@ -53,9 +54,6 @@ class SitemapHandler
         $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('about')}</loc>\n";
         $sitemap .= "\t\t<lastmod>{$today}</lastmod>\n \t</url>\n";
 
-        $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('blog')}</loc>\n";
-        $sitemap .= "\t\t<lastmod>{$today}</lastmod>\n \t</url>\n";
-
         // Track the most recent update date
         $lastUpdated = strtotime('-2 days'); // Something  before the last update
 
@@ -66,6 +64,16 @@ class SitemapHandler
             $lastUpdated = max($lastUpdated, $updated);
             $modifiedDate = date('Y-m-d', $updated);
             $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('showRecipe', ['id' => $page->recipe_id, 'slug' => $page->url])}</loc>\n";
+            $sitemap .= "\t\t<lastmod>{$modifiedDate}</lastmod>\n \t</url>\n";
+        }
+
+        // Get all blog pages
+        $posts = $BlogMapper->getPosts();
+        foreach ($posts as $post) {
+            $updated = strtotime($post->updated_date);
+            $lastUpdated = max($lastUpdated, $updated);
+            $modifiedDate = date('Y-m-d', $updated);
+            $sitemap .= "\t<url>\n\t\t<loc>{$this->baseUrl}{$this->app->router->urlFor('showBlogPost', ['id' => $post->blog_id, 'url' => $post->url])}</loc>\n";
             $sitemap .= "\t\t<lastmod>{$modifiedDate}</lastmod>\n \t</url>\n";
         }
 
