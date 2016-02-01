@@ -64,12 +64,44 @@ class IndexController
     }
 
     /**
-     * Get Recipes by Category, including 'All'
+     * Get All Recipes
+     *
+     **/
+    public function getAllRecipes()
+    {
+        // Get mapper and twig template engine
+        $dataMapper = $this->app->dataMapper;
+        $RecipeMapper = $dataMapper('RecipeMapper');
+        $Paginator = $this->app->PaginationHandler;
+        $twig = $this->app->twig;
+
+        // Get the page number
+        $pageNumber = $this->app->request->get('page') ?: 1;
+
+        // Configure pagination object
+        $Paginator->useQueryString = true;
+        $Paginator->setPagePath($this->app->urlFor('recipesAll'));
+        $Paginator->setCurrentPageNumber($pageNumber);
+
+        // Fetch recipes
+        $recipes = $RecipeMapper->getRecipes($Paginator->getRowsPerPage(), $Paginator->getOffset());
+
+        // Get count of recipes returned by query and load pagination
+        $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
+        $twig->parserExtensions[] = $Paginator;
+
+        // Return the array of recipes and the category name
+        $data['list'] = $recipes;
+
+        $twig->display('recipeList.html', ['recipes' => $data, 'title' => 'All Recipes']);
+    }
+
+    /**
+     * Get Recipes by Category
      *
      * @param mixed, category slug or ID
-     * @param int, page number
      **/
-    public function getRecipesByCategory($category, $pageNumber)
+    public function getRecipesByCategory($category)
     {
         // Get mapper and twig template engine
         $dataMapper = $this->app->dataMapper;
@@ -78,33 +110,26 @@ class IndexController
         $Paginator = $this->app->PaginationHandler;
         $twig = $this->app->twig;
 
+        // Get the page number
+        $pageNumber = $this->app->request->get('page') ?: 1;
+
         // Verify category and get proper name and ID
-        if (strtolower($category) !== 'all') {
-            $categoryResult = $CategoryMapper->getCategory($category);
+        $categoryResult = $CategoryMapper->getCategory($category);
 
-            // If no valid category was found then return 404
-            if (!$categoryResult) {
-                $this->app->notFound();
-            }
-
-            $categoryResult = (Array) $categoryResult[0];
-        } else {
-            // Create the array we will need for "all" recipes
-            $categoryResult['url'] = 'all';
-            $categoryResult['name'] = 'All';
-            $categoryResult['category_id'] = 'all';
+        // If no valid category was found then return 404
+        if (!$categoryResult) {
+            $this->app->notFound();
         }
 
+        $categoryResult = (Array) $categoryResult[0];
+
         // Configure pagination object
-        $Paginator->setPagePath($this->app->urlFor('recipesByCategory') . '/' . $categoryResult['url']);
+        $Paginator->useQueryString = true;
+        $Paginator->setPagePath($this->app->urlFor('recipesByCategory', ['category' => $categoryResult['url']]));
         $Paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
-        if (strtolower($category) === 'all') {
-            $recipes = $RecipeMapper->getRecipes($Paginator->getRowsPerPage(), $Paginator->getOffset());
-        } else {
-            $recipes = $RecipeMapper->getRecipesByCategory($categoryResult['category_id'], $Paginator->getRowsPerPage(), $Paginator->getOffset());
-        }
+        $recipes = $RecipeMapper->getRecipesByCategory($categoryResult['category_id'], $Paginator->getRowsPerPage(), $Paginator->getOffset());
 
         // Get count of recipes returned by query and load pagination
         $Paginator->setTotalRowsFound($RecipeMapper->foundRows());

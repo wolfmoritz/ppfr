@@ -28,11 +28,7 @@ Options -Indexes
 
     # Handle old "recipe/show/" recipe urls
     RewriteCond %{REQUEST_URI} ^(.*)/recipe/show/\d+
-    RewriteRule ^recipe/show/(\d+)/([a-zA-Z+-]+)$ http://%{HTTP_HOST}%1/recipe/$1/$2 [NC,R=301,L]
-
-    # If a category has a trailing slash but no page number, direct to the first category page (no trailing slash)
-    RewriteCond %{REQUEST_URI} ^(.*)/recipe/category/[a-zA-Z+-]+/$
-    RewriteRule ^recipe/category/([a-zA-Z+-]+)/$ http://%{HTTP_HOST}%1/recipe/category/$1 [NC,R=301,L]
+    RewriteRule ^recipe/show/(\d+)/([a-zA-Z+-]+)?$ http://%{HTTP_HOST}%1/recipe/$1/$2 [NC,R=301,L]
 
     # Catch requests to the old printable.php page and direct to the current recipe page
     # The %1 capture group only references the prior RewriteCond line, so we are passing the

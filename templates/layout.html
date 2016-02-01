@@ -95,7 +95,7 @@
           <li{% if uriSegment(1) == 'blog' %} class="active"{% endif %}> <a href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
           <li class="dropdown hidden-xs"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <strong class="caret"></strong></a>
             <ul class="dropdown-menu">
-              <li><a href="{{ siteUrlFor('recipesByCategory') }}/All" title="View all recipes">All</a></li>
+              <li><a href="{{ siteUrlFor('recipesAll') }}" title="View all recipes">All</a></li>
               <li class="dropdown-header">Select a category</li>
               {% for cat in categories %}
               <li ><a href="{{ siteUrlFor('recipesByCategory', cat.url) }}" title="View recipes for {{ cat.name }}">{{ cat.name }}</a></li>

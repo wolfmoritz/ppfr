@@ -111,35 +111,44 @@ $app->get('/user/logout', function () use ($app) {
     (new Controllers\AuthenticationController())->logout();
 })->name('logout');
 
+// -------------------------- Recipe Routes --------------------------
+
+// Get all recipes
+$app->get('/recipe/', function () {
+    (new Controllers\IndexController())->getAllRecipes();
+})->name('recipesAll');
+
+// Show a recipe
+$app->get('/recipe(/:id(/:slug))', function ($id, $slug = null) {
+    (new Controllers\IndexController())->showRecipe($id, $slug);
+})->conditions(['id' => '\d+'])->name('showRecipe');
+
+// Show a recipe - fall through if missing url segment and the ID has a trailing slash
+$app->get('/recipe(/:id)/', function ($id) {
+    (new Controllers\IndexController())->showRecipe($id);
+})->conditions(['id' => '\d+']);
+
 // Search recipes
 $app->get('/recipe/search', function () use ($app) {
     (new Controllers\IndexController())->searchRecipes();
 })->name('recipeSearch');
 
-// Show a recipe
-$app->get('(/recipe(/:id(/:slug)))', function ($id, $slug = null) {
-    (new Controllers\IndexController())->showRecipe($id, $slug);
-})->conditions(['id' => '\d+'])->name('showRecipe');
-
-// Show a recipe - fall through if missing url segment and the ID has a trailing slash
-$app->get('(/recipe/show(/:id)/)', function ($id) {
-    (new Controllers\IndexController())->showRecipe($id);
-})->conditions(['id' => '\d+']);
-
 // Get recipes by category
-$app->get('/recipe/category(/:slug(/:page))', function ($slug = 'All', $page = 1) {
-    (new Controllers\IndexController())->getRecipesByCategory($slug, $page);
-})->name('recipesByCategory');
+$app->get('/recipe/category(/:category)', function ($category = null) {
+    (new Controllers\IndexController())->getRecipesByCategory($category);
+})->conditions(['category' => '[a-zA-Z-]+'])->name('recipesByCategory');
+
+// Get recipes by category - fall through for trailing slash
+$app->get('/recipe/category(/:category)/', function ($category = null) {
+    (new Controllers\IndexController())->getRecipesByCategory($category);
+})->conditions(['category' => '[a-zA-Z-]+']);
 
 // Get recipes by user. The username segment is a throwaway as far as the route is concerned
 $app->get('/recipe/user(/:id(/:username(/:page)))', function ($id, $username = null, $page = 1) {
     (new Controllers\IndexController())->getRecipesByUser($id, $page);
 })->name('recipesByUser');
 
-// About page
-$app->get('/about', function () {
-    (new Controllers\IndexController())->about();
-})->name('about');
+// -------------------------- Blog Routes --------------------------
 
 // Default blog posts list page
 $app->get('/blog/', function () {
@@ -156,6 +165,13 @@ $app->get('/blog(/:id)/', function ($id) {
     (new Controllers\BlogController())->showPost($id);
 })->conditions(['id' => '\d+']);
 
+// -------------------------- Misc Routes --------------------------
+
+// About page
+$app->get('/about', function () {
+    (new Controllers\IndexController())->about();
+})->name('about');
+
 // Update sitemap
 $app->get('/updatesitemap', function () use ($app) {
     if (PHP_SAPI !== 'cli') {
@@ -167,10 +183,14 @@ $app->get('/updatesitemap', function () use ($app) {
     $SitemapHandler->make();
 });
 
+// -------------------------- API Routes --------------------------
+
 // Get more home page recipes (Ajax request)
 $app->get('/getmorephotorecipes/:pageno', function ($pageno = 1) {
     (new Controllers\IndexController())->getMorePhotoRecipes($pageno);
 });
+
+// -------------------------- Home Route --------------------------
 
 // Home page (last route, the default)
 $app->get('/', function () {
