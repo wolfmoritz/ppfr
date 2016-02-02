@@ -10,6 +10,7 @@ Options -Indexes
 </Files>
 
 RewriteEngine On
+# Need to modify rules below to use base
 #RewriteBase /recipes2/
 
 # Redirect old blog pages
