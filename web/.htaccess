@@ -9,51 +9,55 @@ Options -Indexes
   Header set X-Robots-Tag "noindex"
 </Files>
 
-<IfModule mod_rewrite.c>
-    RewriteEngine On
+RewriteEngine On
 
-    # Redirect old blog pages
-    RewriteCond %{REQUEST_URI} ^(.*)/blog/about-me/?
-    RewriteRule ^blog/about-me/?$ http://%{HTTP_HOST}%1/about [NC,R=301,L]
+# Redirect old blog pages
+RewriteCond %{REQUEST_URI} ^(.*)/blog/about-me/?
+RewriteRule ^blog/about-me/?$ http://%{HTTP_HOST}%1/about [NC,R=301,L]
 
-    # User URL's have moved from '/recipe/user/2:Peri+Moritz' to '/recipe/user/2/Peri-Moritz'
-    # The %1 replacement hack references a capture group from the condition above, to include the relative path on localhost
-    RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+/?\d*
-    RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)(/?\d*)$ http://%{HTTP_HOST}%1/recipe/user/$1/$2$3 [NC,R=301,L]
+# User URL's have moved from '/recipe/user/2:Peri+Moritz' to '/recipe/user/2/Peri-Moritz'
+# The %1 replacement hack references a capture group from the condition above, to include the relative path on localhost
+RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+/?\d*
+RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)(/?\d*)$ http://%{HTTP_HOST}%1/recipe/user/$1/$2$3 [NC,R=301,L]
 
-    # If the user URL has a trailing slash after the name but does not have page number, then redirect to first
-    # user page without a trailing slash
-    RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+/[a-zA-Z+-]+/$
-    RewriteRule ^recipe/user/(\d+)/([a-zA-Z+-]+)/$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
+# If the user URL has a trailing slash after the name but does not have page number, then redirect to first
+# user page without a trailing slash
+RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+/[a-zA-Z+-]+/$
+RewriteRule ^recipe/user/(\d+)/([a-zA-Z+-]+)/$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
 
-    # Handle old "recipe/show/" recipe urls
-    RewriteCond %{REQUEST_URI} ^(.*)/recipe/show/\d+
-    RewriteRule ^recipe/show/(\d+)/([a-zA-Z+-]+)?$ http://%{HTTP_HOST}%1/recipe/$1/$2 [NC,R=301,L]
+# Handle old "recipe/show/" recipe urls
+RewriteCond %{REQUEST_URI} ^(.*)/recipe/show/\d+
+RewriteRule ^recipe/show/(\d+)/([a-zA-Z+-]+)?$ http://%{HTTP_HOST}%1/recipe/$1/$2 [NC,R=301,L]
 
-    # Catch requests to the old printable.php page and direct to the current recipe page
-    # The %1 capture group only references the prior RewriteCond line, so we are passing the
-    # first capture group into the second RewriteCond condition, and those captures into the redirect rule
-    # See: http://stackoverflow.com/a/17793597/452133
-    RewriteCond %{REQUEST_URI} ^(.*)/printable\.php
-    RewriteCond %1/##%{QUERY_STRING} (.*)##id=(\d+)
-    RewriteRule ^printable.php$ http://%{HTTP_HOST}%1recipe/show/%2? [NC,R=301,L]
+# Catch requests to the old printable.php page and direct to the current recipe page
+# The %1 capture group only references the prior RewriteCond line, so we are passing the
+# first capture group into the second RewriteCond condition, and those captures into the redirect rule
+# See: http://stackoverflow.com/a/17793597/452133
+RewriteCond %{REQUEST_URI} ^(.*)/printable\.php
+RewriteCond %1/##%{QUERY_STRING} (.*)##id=(\d+)
+RewriteRule ^printable.php$ http://%{HTTP_HOST}%1recipe/%2? [NC,R=301,L]
 
-    # If a thumbnail is not found then invoke thumbnail maker
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^files/thumbnails/.*\.(jpe?g|png) thumb.php [L,NC]
+# Catch requests to the old recipe.php page and direct to the current recipe page
+RewriteCond %{REQUEST_URI} ^(.*)/recipe\.php
+RewriteCond %1/##%{QUERY_STRING} (.*)##id=(\d+)
+RewriteRule ^recipe.php$ http://%{HTTP_HOST}%1recipe/%2? [NC,R=301,L]
 
-    # Redirect from www subdomain to preferred domain (no-www)
-    RewriteCond %{HTTP_HOST} !^localhost$ [NC]
-    RewriteCond %{HTTP_HOST} ^www [NC]
-    RewriteRule ^(.*)$ http://perisplaceforrecipes.com/$1 [L,R=301]
+# If a thumbnail is not found then invoke thumbnail maker
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^files/thumbnails/.*\.(jpe?g|png) thumb.php [L,NC]
 
-    # Final check to see if the user is attempting to access a valid file,
-    # such as an image or css document, if this isn't true this sends the
-    # request to index.php.
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php/$1 [L]
-</IfModule>
+# Redirect from www subdomain to preferred domain (no-www)
+RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+RewriteCond %{HTTP_HOST} ^www [NC]
+RewriteRule ^(.*)$ http://perisplaceforrecipes.com/$1 [L,R=301]
+
+# Final check to see if the user is attempting to access a valid file,
+# such as an image or css document, if this isn't true this sends the
+# request to index.php.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
 
 # Caching
 <IfModule mod_expires.c>
