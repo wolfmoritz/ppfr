@@ -10,6 +10,7 @@ Options -Indexes
 </Files>
 
 RewriteEngine On
+#RewriteBase /recipes2/
 
 # Redirect old blog pages
 RewriteCond %{REQUEST_URI} ^(.*)/blog/about-me/?
