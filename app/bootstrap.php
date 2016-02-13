@@ -91,7 +91,7 @@ return call_user_func(
         // Fixes bug? in Slim environment when index.php is in the path for some reason
         $env = $app->environment;
         if (strpos($env['SCRIPT_NAME'], 'index.php') !== false) {
-            $env['SCRIPT_NAME'] = dirname($env['SCRIPT_NAME']);
+            $env['SCRIPT_NAME'] = rtrim(dirname($env['SCRIPT_NAME']), '/');
         }
 
         // Load data mapper loader
