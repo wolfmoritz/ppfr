@@ -87,6 +87,13 @@ return call_user_func(
         // Set UTF-8 Header
         $app->response->headers->set('Content-Type', 'text/html; charset=utf-8');
 
+        // Modify Slim Environment to remove the index.php from the SCRIPT_NAME
+        // Fixes bug? in Slim environment when index.php is in the path for some reason
+        $env = $app->environment;
+        if (strpos($env['SCRIPT_NAME'], 'index.php') !== false) {
+            $env['SCRIPT_NAME'] = dirname($env['SCRIPT_NAME']);
+        }
+
         // Load data mapper loader
         $app->dataMapper = function ($mapper) use ($app) {
             return function ($mapper) use ($app) {
