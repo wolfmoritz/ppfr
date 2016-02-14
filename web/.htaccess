@@ -10,7 +10,7 @@ Options -Indexes
 </Files>
 
 RewriteEngine On
-# Need to modify rules below to use base
+# Need to modify rules below to use RewriteBase, and then comment it out for production
 #RewriteBase /recipes2/
 
 # Redirect old blog pages
@@ -28,8 +28,8 @@ RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+/[a-zA-Z+-]+/$
 RewriteRule ^recipe/user/(\d+)/([a-zA-Z+-]+)/$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
 
 # Handle old "recipe/show/" recipe urls
-RewriteCond %{REQUEST_URI} ^(.*)/recipe/show/\d+/?[a-zA-Z0-9+-]?/?
-RewriteRule ^recipe/show/(\d+)/?([a-zA-Z0-9+-]+)?/?$ http://%{HTTP_HOST}%1/recipe/$1/$2 [NC,R=301,L]
+RewriteCond %{REQUEST_URI} ^(.*)(/index.php)?/recipe/show/\d+/?[a-zA-Z0-9+-]?/?
+RewriteRule recipe/show/(\d+)/?([a-zA-Z0-9+-]+)?/?$ http://%{HTTP_HOST}%1/recipe/$1/$2 [NC,R=301,L]
 
 # Catch requests to the old printable.php page and direct to the current recipe page
 # The %1 capture group only references the prior RewriteCond line, so we are passing the
