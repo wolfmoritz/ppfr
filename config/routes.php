@@ -119,12 +119,12 @@ $app->get('/recipe/', function () {
 })->name('recipesAll');
 
 // Show a recipe
-$app->get('/recipe(/:id(/:slug))', function ($id, $slug = null) {
+$app->get('/recipe/show(/:id(/:slug))', function ($id, $slug = null) {
     (new Controllers\IndexController())->showRecipe($id, $slug);
 })->conditions(['id' => '\d+'])->name('showRecipe');
 
 // Show a recipe - fall through if missing url segment and the ID has a trailing slash
-$app->get('/recipe(/:id)/', function ($id) {
+$app->get('/recipe/show(/:id)/', function ($id) {
     (new Controllers\IndexController())->showRecipe($id);
 })->conditions(['id' => '\d+']);
 
