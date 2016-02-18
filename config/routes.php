@@ -174,7 +174,7 @@ $app->get('/about', function () {
 
 // Update sitemap
 $app->get('/updatesitemap', function () use ($app) {
-    if (PHP_SAPI !== 'cli') {
+    if (strpos(PHP_SAPI, 'cli') === false) {
         $app->notFound();
     }
 
