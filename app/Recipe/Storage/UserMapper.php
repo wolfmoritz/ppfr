@@ -11,7 +11,7 @@ class UserMapper extends DataMapperAbstract
     protected $primaryKey = 'user_id';
     protected $modifyColumns = array('email', 'first_name', 'last_name', 'role', 'facebook_uid', 'google_uid', 'active', 'approved', 'last_login_date');
     protected $domainObjectClass = 'User';
-    protected $defaultSelect = 'select us.*, concat(us.first_name, \' \', us.last_name) user_name, concat(us.user_id, \'/\', us.first_name, \'+\', us.last_name) user_url from pp_user us';
+    protected $defaultSelect = 'select us.*, concat(us.first_name, \' \', us.last_name) user_name, concat(us.first_name, \'-\', us.last_name) user_url from pp_user us';
 
     /**
      * Get User by ID

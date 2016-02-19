@@ -287,15 +287,18 @@ class IndexController
      * Get Recipes by User
      *
      * @param int, user ID
-     * @param int, page number
      **/
-    public function getRecipesByUser($userId, $pageNumber)
+    public function getRecipesByUser($userId)
     {
-        // Get mapper and twig template engine
+        // Get dependencies
         $dataMapper = $this->app->dataMapper;
         $RecipeMapper = $dataMapper('RecipeMapper');
         $UserMapper = $dataMapper('UserMapper');
+        $Paginator = $this->app->PaginationHandler;
         $twig = $this->app->twig;
+
+        // Get the page number
+        $pageNumber = $this->app->request->get('page') ?: 1;
 
         // Verify user and get proper name and ID
         $userResult = $UserMapper->getUser($userId);
@@ -306,8 +309,8 @@ class IndexController
         }
 
         // Configure pagination object
-        $Paginator = $this->app->PaginationHandler;
-        $Paginator->setPagePath($this->app->urlFor('recipesByUser') . '/' . $userResult->user_url);
+        $Paginator->useQueryString = true;
+        $Paginator->setPagePath($this->app->urlFor('recipesByUser', ['id' => $userResult->user_id, 'username' => $userResult->user_url]));
         $Paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes

@@ -144,9 +144,14 @@ $app->get('/recipe/category(/:category)/', function ($category = null) {
 })->conditions(['category' => '[a-zA-Z-]+']);
 
 // Get recipes by user. The username segment is a throwaway as far as the route is concerned
-$app->get('/recipe/user(/:id(/:username(/:page)))', function ($id, $username = null, $page = 1) {
-    (new Controllers\IndexController())->getRecipesByUser($id, $page);
+$app->get('/recipe/user(/:id(/:username))', function ($id, $username = null) {
+    (new Controllers\IndexController())->getRecipesByUser($id);
 })->name('recipesByUser');
+
+// Get recipes by user - fall through for trailing slash
+$app->get('/recipe/user(/:id(/:username))/', function ($id, $username = null) {
+    (new Controllers\IndexController())->getRecipesByUser($id);
+});
 
 // -------------------------- Blog Routes --------------------------
 

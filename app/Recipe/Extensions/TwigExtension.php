@@ -193,21 +193,19 @@ class TwigExtension extends \Twig_Extension
     public function siteUrlFor($namedRoute, $segments = null)
     {
         $app = \Slim\Slim::getInstance();
-        $uri = $app->request()->getUrl();
+        $domain = $app->request()->getUrl();
         $route = $app->urlFor($namedRoute);
         $urlSegments = '';
 
-        if ($segments !== null && is_array($segments)) {
+        if (is_array($segments)) {
             $urlSegments = '/' . implode('/', $segments);
-        }
-
-        if ($segments !== null) {
+        } elseif ($segments !== null) {
             $urlSegments = $segments;
             $urlSegments = ltrim($segments, '/');
             $urlSegments = '/' . $urlSegments;
         }
 
-        return $uri . $route . $urlSegments;
+        return $domain . $route . $urlSegments;
     }
 
     /**
