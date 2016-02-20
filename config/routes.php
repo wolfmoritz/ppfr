@@ -177,6 +177,16 @@ $app->get('/about', function () {
     (new Controllers\IndexController())->about();
 })->name('about');
 
+// Contact page
+$app->get('/contact', function () {
+    (new Controllers\ContactController())->contactForm();
+})->name('contact');
+
+// Contact submit page
+$app->post('/contactsubmit', function () {
+    (new Controllers\ContactController())->contactSubmit();
+})->name('contactSubmit');
+
 // Update sitemap
 $app->get('/updatesitemap', function () use ($app) {
     if (strpos(PHP_SAPI, 'cli') === false) {
