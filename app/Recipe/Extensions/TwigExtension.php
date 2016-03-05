@@ -62,6 +62,7 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFunction('config', array($this, 'getConfig')),
             new \Twig_SimpleFunction('session', array($this, 'getSession')),
             new \Twig_SimpleFunction('role', array($this, 'authorizedRole')),
+            new \Twig_SimpleFunction('authorizedToEditRecipe', array($this, 'authorizedToEditRecipe')),
             new \Twig_SimpleFunction('blogPostNav', array($this, 'getBlogPostNav'), array('is_safe' => array('html'))),
         );
     }
@@ -331,6 +332,7 @@ class TwigExtension extends \Twig_Extension
      * Verify Role Level
      *
      * Compares supplied role against user role
+     * @param string $role Role name
      * @return Boolean
      */
     public function authorizedRole($role = null)
@@ -339,6 +341,20 @@ class TwigExtension extends \Twig_Extension
         $security = $app->security;
 
         return $security->authorized($role, false);
+    }
+
+    /**
+     * Verify User is Authorized to Edit Recipe
+     *
+     * @param object $recipe Recipe object
+     * @return Boolean
+     */
+    public function authorizedToEditRecipe($recipe)
+    {
+        $app = \Slim\Slim::getInstance();
+        $security = $app->security;
+
+        return $security->authorizedToEditRecipe($recipe);
     }
 
     /**
