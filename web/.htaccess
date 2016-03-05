@@ -21,8 +21,8 @@ RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+/?
 RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)/?$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
 
 # For those temporary new urls's without 'show' (reverted)
-RewriteCond %{REQUEST_URI} ^(.*)/recipe/\d+/[a-zA-Z+-]+
-RewriteRule ^recipe/(\d+)/([a-zA-Z+-]+)$ http://%{HTTP_HOST}%1/recipe/show/$1/$2 [NC,R=301,L]
+RewriteCond %{REQUEST_URI} ^(.*)/recipe/\d+/?.*
+RewriteRule ^recipe/(\d+)/?(.*)$ http://%{HTTP_HOST}%1/recipe/show/$1/$2 [NC,R=301,L]
 
 # Catch requests to the old printable.php page and direct to the current recipe page
 # The %1 capture group only references the prior RewriteCond line, so we are passing the
