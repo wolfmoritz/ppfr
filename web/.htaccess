@@ -53,6 +53,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
 
+# To clean up URL's with index.php in the request path
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php(/[^\s\?]+)? [NC]
+RewriteRule ^ %1%2 [R=301,L]
+
 # Caching
 <IfModule mod_expires.c>
     ExpiresActive On
