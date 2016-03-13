@@ -95,6 +95,10 @@ $app->group('/cook', $authenticated(), function () use ($app, $authorized) {
     $app->get('/blog/delete(/:id)', $authorized('admin'), function ($id) {
         (new Controllers\BlogActionController())->deleteBlogPost($id);
     })->name('adminDeleteBlogPost');
+
+    $app->get('/users/', $authorized('admin'), function () {
+        (new Controllers\UserController())->allUsers();
+    })->name('adminAllUsers');
 });
 
 //
