@@ -91,6 +91,7 @@ class TwigExtension extends \Twig_Extension
 
         return array(
             'host' => $app->request->getHost(),
+            'basePath' => $app->request->getRootUri(),
         );
     }
 
