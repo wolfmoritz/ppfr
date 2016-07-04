@@ -88,7 +88,7 @@ var user = (function($) {
         if(returnData === 1) {
           window.location.replace(baseUrl+'/cook/');
           } else {
-            console.log('Success: There was a registration error, please try again later.');
+            console.log('Failure: There was a registration error, please try again later.');
           }
       },
       error: function(e) {
