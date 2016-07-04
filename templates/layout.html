@@ -51,7 +51,8 @@
       FB.init({
         appId      : {{ config('auth.facebook')['app_id'] }},
         cookie     : true,
-        xfbml      : true
+        xfbml      : true,
+        version    : 'v2.6'
       });
     };
     (function(d){
