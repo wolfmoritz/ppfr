@@ -17,6 +17,14 @@ body {
 	font-size: 18px;
 	color: #000;
 }
+.sticky-footer{
+    display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.site-content{
+    flex: 1;
+}
 #wrap{
 	display:table;
 	width:100%;
