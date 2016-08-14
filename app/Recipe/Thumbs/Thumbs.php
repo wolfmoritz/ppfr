@@ -4,7 +4,7 @@
  *
  * *** This script is not part of the regular application flow. ***
  *
- * If a thumbnail is not found the web/.htacces passes the request to
+ * If a thumbnail is not found the public/.htacces passes the request to
  * this script which then makes the new thumbnail on the fly. The next time the same thumbnail is
  * requested, the web server can return the existing thumbnail.
  *

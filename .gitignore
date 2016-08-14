@@ -12,7 +12,7 @@ config/config.prod.php
 *_notes/
 
 # Uploaded files
-web/files/
+public/files/
 
 # Log files
 logs/*.log
@@ -29,7 +29,7 @@ default.html
 
 # Sandbox file
 templates/peri.html
-web/peri1.html
+public/peri1.html
 
 # Vendor Git
 vendor/.git

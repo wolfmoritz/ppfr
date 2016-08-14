@@ -28,7 +28,7 @@ class SitemapHandler
         $this->baseUrl = $this->app->config('baseurl');
 
         // Set the full file path
-        $this->sitemapFilePath = ROOT_DIR . 'web/' . $this->sitemapFileName;
+        $this->sitemapFilePath = ROOT_DIR . 'public/' . $this->sitemapFileName;
     }
 
     /**
