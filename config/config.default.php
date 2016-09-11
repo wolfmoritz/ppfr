@@ -49,16 +49,6 @@ $config['session']['salt'] = ''; // Salt key to hash
 $config['session']['secondsUntilExpiration'] = 15552000; // 180 days (60*60*24*180)
 
 /**
- * Email Connection
- */
-$config['email']['protocol'] = 'smtp';
-$config['email']['smtp_host'] = 'localhost';
-$config['email']['smtp_port'] = 25;
-$config['email']['smtp_user'] = '';
-$config['email']['smtp_pass'] = '';
-$config['email']['mailtype'] = 'html';
-
-/**
  * Default Admin Emails
  */
 $config['admin']['email'] = '';

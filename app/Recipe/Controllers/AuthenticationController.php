@@ -94,7 +94,7 @@ class AuthenticationController
                 }
             } catch (\Exception $e) {
                 $this->app->log->error('Failed to verify Google ID token');
-                $this->app->log->error(print_r($e->getMessage()));
+                $this->app->log->error(print_r($e->getMessage(), true));
                 echo json_encode($returnStatus);
                 return;
             }
