@@ -139,24 +139,31 @@ class AdminActionController
         }
 
         // Send email for new recipes
-        if ($newRecipe && !empty($recipe->published_date) && $this->app->getMode() === 'production') {
+        if ($newRecipe && !empty($recipe->published_date) && count($this->app->config('admin')['email']) > 0) {
+            // Get email message and sender classes
+            $mailBody = $this->app->mailMessage;
+            $sendMail = $this->app->sendMailMessage;
+
             // Set user_name from session as new recipes will not have that available in the record
             $user = $SessionHandler->getData();
             $recipe->user_name = $user['first_name'] . ' ' . $user['last_name'];
 
             // Render the email body
             $emailHTMLMessage = $this->app->twig->render('email/emailNewRecipe.html', ['recipe' => $recipe]);
-
-            // Get email handler and send
-            $email = $this->app->email;
-            $email->from('sender@perisplaceforrecipes.com', "Peri's Place for Recipes");
-            // TODO: Do away with hardcoded emails
-            $email->to($this->app->config('admin')['email']);
-            $email->subject("A new recipe has been added to Peri's Place for Recipes");
-            $email->message($emailHTMLMessage);
             $recipeLink = $this->app->urlFor('showRecipe', ['id' => $recipe->recipe_id, 'slug' => $recipe->url]);
-            $email->setAltMessage("A new recipe has been added: \n\n $recipeLink");
-            $email->sendEmail();
+            $mailBody
+                ->setFrom("Peri's Place for Recipes <sender@perisplaceforrecipes.com>")
+                ->setSubject("A new recipe has been added to Peri's Place for Recipes")
+                ->setBody("A new recipe has been added: \n\n $recipeLink")
+                ->setHtmlBody($emailHTMLMessage);
+
+            // Add "To" addresses from config array
+            foreach ($this->app->config('admin')['email'] as $email) {
+                $mailBody->addTo($email);
+            }
+
+            // Send message
+            $sendMail->send($mailBody);
         }
 
         // On success display updated recipe

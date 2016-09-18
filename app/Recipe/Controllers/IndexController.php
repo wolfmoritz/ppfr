@@ -198,7 +198,9 @@ class IndexController
     }
 
     /**
-     * Test New Recipe HTML Email
+     * View New Recipe HTML Email for Testing
+     *
+     * Does not actually email recipe
      *
      * @param int, recipe id
      * @param string, recipe slug

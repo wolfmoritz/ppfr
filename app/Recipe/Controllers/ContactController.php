@@ -33,29 +33,32 @@ class ContactController
     public function contactSubmit()
     {
         // Get dependencies
-        $email = $this->app->email;
         $twig = $this->app->twig;
+        $mailBody = $this->app->mailMessage;
+        $sendMail = $this->app->sendMailMessage;
 
-        // Check honeypot
-        if (!empty($this->app->request->post('altemail'))) {
+        // Check honeypot. Also check that we have an admin email in config
+        if (!empty($this->app->request->post('altemail')) || count($this->app->config('admin')['email']) === 0) {
             $twig->display('contactThankYou.html', ['title' => 'Thank You']);
         }
 
-        $email->from('sender@perisplaceforrecipes.com', "Peri's Place for Recipes");
-        // TODO: Do away with hardcoded emails
-
-        // Construct message body
+        // Construct message
         $message = "From: {$this->app->request->post('name')}\n";
         $message .= "Email: {$this->app->request->post('email')}\n\n";
-        $message .= "From: {$this->app->request->post('message')}\n";
+        $message .= "{$this->app->request->post('message')}\n";
 
-        $email->setNewline("\r\n");
-        $email->mailtype = 'text';
-        $email->to($this->app->config('admin')['email']);
-        $email->subject("Message");
-        $email->message($message);
-        $email->sendEmail();
+        $mailBody
+            ->setFrom("Peri's Place for Recipes <sender@perisplaceforrecipes.com>")
+            ->setSubject("A message has been submitted to Peri's Place for Recipes")
+            ->setBody($message);
 
+        // Add "To" addresses from the config array
+        foreach ($this->app->config('admin')['email'] as $email) {
+            $mailBody->addTo($email);
+        }
+
+        // Send message
+        $sendMail->send($mailBody);
         $twig->display('contactThankYou.html', ['title' => 'Thank You']);
     }
 }

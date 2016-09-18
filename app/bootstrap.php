@@ -154,10 +154,15 @@ return call_user_func(
             return new Recipe\Library\SecurityHandler($app);
         });
 
-        // Email
-        $app->email = function () use ($app) {
-            return new Recipe\Library\EmailHandler($app->config('email'), $app->log);
+        // Mail message
+        $app->mailMessage = function () {
+            return new Nette\Mail\Message;
         };
+
+        // Send mail message
+        $app->container->singleton('sendMailMessage', function () {
+            return new Nette\Mail\SendmailMailer();
+        });
 
         // Pagination Extension
         $app->PaginationHandler = function () {

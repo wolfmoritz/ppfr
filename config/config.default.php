@@ -50,8 +50,10 @@ $config['session']['secondsUntilExpiration'] = 15552000; // 180 days (60*60*24*1
 
 /**
  * Default Admin Emails
+ *
+ * Array of email addresses for "To" line
  */
-$config['admin']['email'] = '';
+$config['admin']['email'] = [];
 
 /**
  * File Uploads Config
