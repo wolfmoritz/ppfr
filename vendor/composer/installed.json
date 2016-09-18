@@ -276,119 +276,6 @@
         ]
     },
     {
-        "name": "filp/whoops",
-        "version": "1.1.10",
-        "version_normalized": "1.1.10.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/filp/whoops.git",
-            "reference": "72538eeb70bbfb11964412a3d098d109efd012f7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/filp/whoops/zipball/72538eeb70bbfb11964412a3d098d109efd012f7",
-            "reference": "72538eeb70bbfb11964412a3d098d109efd012f7",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "mockery/mockery": "0.9.*"
-        },
-        "time": "2015-06-29 05:42:04",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.2-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Whoops": "src/"
-            },
-            "classmap": [
-                "src/deprecated"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Filipe Dobreira",
-                "homepage": "https://github.com/filp",
-                "role": "Developer"
-            }
-        ],
-        "description": "php error handling for cool kids",
-        "homepage": "https://github.com/filp/whoops",
-        "keywords": [
-            "error",
-            "exception",
-            "handling",
-            "library",
-            "silex-provider",
-            "whoops",
-            "zf2"
-        ]
-    },
-    {
-        "name": "zeuxisoo/slim-whoops",
-        "version": "0.3.0",
-        "version_normalized": "0.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zeuxisoo/php-slim-whoops.git",
-            "reference": "da0250b0d1211bd90c5ab7e8cf7c3925e8376095"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zeuxisoo/php-slim-whoops/zipball/da0250b0d1211bd90c5ab7e8cf7c3925e8376095",
-            "reference": "da0250b0d1211bd90c5ab7e8cf7c3925e8376095",
-            "shasum": ""
-        },
-        "require": {
-            "filp/whoops": "1.*",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "filp/whoops": "1.*",
-            "phpunit/phpunit": "3.7.*@dev",
-            "slim/slim": "2.*"
-        },
-        "time": "2014-11-06 06:47:24",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Zeuxisoo\\Whoops\\Provider\\Slim\\WhoopsMiddleware": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Zeuxis Lo",
-                "email": "seekstudio@gmail.com",
-                "homepage": "http://www.chair.im/",
-                "role": "Developer"
-            }
-        ],
-        "description": "PHP whoops error on slim framework",
-        "homepage": "https://github.com/zeuxisoo/php-slim-whoops/",
-        "keywords": [
-            "error",
-            "exception",
-            "slim",
-            "whoops"
-        ]
-    },
-    {
         "name": "guzzlehttp/psr7",
         "version": "1.3.1",
         "version_normalized": "1.3.1.0",
@@ -776,5 +663,131 @@
             "sdk"
         ],
         "abandoned": "facebook/graph-sdk"
+    },
+    {
+        "name": "nette/utils",
+        "version": "v2.4.0",
+        "version_normalized": "2.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/utils.git",
+            "reference": "c455ade9f24a1f99aa81772516764045296b8ca0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/utils/zipball/c455ade9f24a1f99aa81772516764045296b8ca0",
+            "reference": "c455ade9f24a1f99aa81772516764045296b8ca0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6.0"
+        },
+        "conflict": {
+            "nette/nette": "<2.2"
+        },
+        "require-dev": {
+            "nette/tester": "~2.0",
+            "tracy/tracy": "^2.3"
+        },
+        "suggest": {
+            "ext-gd": "to use Image",
+            "ext-iconv": "to use Strings::webalize() and toAscii()",
+            "ext-intl": "for script transliteration in Strings::webalize() and toAscii()",
+            "ext-mbstring": "to use Strings::lower() etc..."
+        },
+        "time": "2016-06-17 13:15:10",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause",
+            "GPL-2.0",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "David Grudl",
+                "homepage": "https://davidgrudl.com"
+            },
+            {
+                "name": "Nette Community",
+                "homepage": "https://nette.org/contributors"
+            }
+        ],
+        "description": "Nette Utility Classes",
+        "homepage": "https://nette.org"
+    },
+    {
+        "name": "nette/mail",
+        "version": "v2.4.1",
+        "version_normalized": "2.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/mail.git",
+            "reference": "135fac5b1d71cde9d0a0c9cad61a18d2704c3e47"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/mail/zipball/135fac5b1d71cde9d0a0c9cad61a18d2704c3e47",
+            "reference": "135fac5b1d71cde9d0a0c9cad61a18d2704c3e47",
+            "shasum": ""
+        },
+        "require": {
+            "ext-iconv": "*",
+            "nette/utils": "~2.4",
+            "php": ">=5.6.0"
+        },
+        "conflict": {
+            "nette/nette": "<2.2"
+        },
+        "require-dev": {
+            "nette/di": "~2.4",
+            "nette/tester": "~2.0",
+            "tracy/tracy": "^2.4"
+        },
+        "suggest": {
+            "ext-fileinfo": "to detect type of attached files"
+        },
+        "time": "2016-07-31 12:06:47",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause",
+            "GPL-2.0",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "David Grudl",
+                "homepage": "https://davidgrudl.com"
+            },
+            {
+                "name": "Nette Community",
+                "homepage": "https://nette.org/contributors"
+            }
+        ],
+        "description": "Nette Mail: Sending E-mails",
+        "homepage": "https://nette.org"
     }
 ]

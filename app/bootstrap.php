@@ -79,11 +79,6 @@ return call_user_func(
         // Create the application
         $app = new Slim\Slim($config);
 
-        // In development mode Whoops pretty exceptions are displayed,
-        // but in production the Slim\Logger writes exceptions to file.
-        // $app->config('whoops.editor', 'sublime');
-        // $app->add(new Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
-
         // Set UTF-8 Header
         $app->response->headers->set('Content-Type', 'text/html; charset=utf-8');
 

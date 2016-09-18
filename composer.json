@@ -7,11 +7,11 @@
         "codeguy/upload": "*",
         "intervention/image": "2.*",
         "wolfmoritz/session": "~1",
-        "zeuxisoo/slim-whoops": "0.3.0",
         "ahmetkapikiran/slim-cli-environment": "dev-master",
         "facebook/php-sdk-v4" : "~5.0",
         "google/apiclient": "1.0.*@beta",
-        "vlucas/valitron": "^1.2"
+        "vlucas/valitron": "^1.2",
+        "nette/mail": "^2.4"
     },
     "autoload": {
       "psr-4": {
