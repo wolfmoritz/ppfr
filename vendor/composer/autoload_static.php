@@ -29,6 +29,10 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         array (
             'Psr\\Http\\Message\\' => 17,
         ),
+        'J' => 
+        array (
+            'Jaybizzle\\CrawlerDetect\\' => 24,
+        ),
         'I' => 
         array (
             'Intervention\\Image\\' => 19,
@@ -63,6 +67,10 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Jaybizzle\\CrawlerDetect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -2681,6 +2689,11 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'Jaybizzle\\CrawlerDetect\\CrawlerDetect' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/CrawlerDetect.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\AbstractProvider' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/AbstractProvider.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Crawlers' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Crawlers.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Exclusions' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Exclusions.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Headers' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Headers.php',
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Bridges\\MailDI\\MailExtension' => __DIR__ . '/..' . '/nette/mail/src/Bridges/MailDI/MailExtension.php',
         'Nette\\DeprecatedException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
@@ -2745,13 +2758,11 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         'Recipe\\Controllers\\BlogActionController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/BlogActionController.php',
         'Recipe\\Controllers\\BlogController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/BlogController.php',
         'Recipe\\Controllers\\ContactController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/ContactController.php',
-        'Recipe\\Controllers\\IndexActionController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/IndexActionController.php',
         'Recipe\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/IndexController.php',
         'Recipe\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/UserController.php',
         'Recipe\\Extensions\\TwigExtension' => __DIR__ . '/../..' . '/app/Recipe/Extensions/TwigExtension.php',
         'Recipe\\Extensions\\TwigExtensionPagination' => __DIR__ . '/../..' . '/app/Recipe/Extensions/TwigExtensionPagination.php',
         'Recipe\\Library\\CacheHandler' => __DIR__ . '/../..' . '/app/Recipe/Library/CacheHandler.php',
-        'Recipe\\Library\\EmailHandler' => __DIR__ . '/../..' . '/app/Recipe/Library/EmailHandler.php',
         'Recipe\\Library\\ImageUploader' => __DIR__ . '/../..' . '/app/Recipe/Library/ImageUploader.php',
         'Recipe\\Library\\SecurityHandler' => __DIR__ . '/../..' . '/app/Recipe/Library/SecurityHandler.php',
         'Recipe\\Library\\SitemapHandler' => __DIR__ . '/../..' . '/app/Recipe/Library/SitemapHandler.php',

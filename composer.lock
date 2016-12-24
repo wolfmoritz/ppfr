@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8b9c242e5fa1e3d8072dea0f2c73fbaf",
-    "content-hash": "3c51d9a76e4e6eadafe362fec606e7ec",
+    "hash": "90d4b63ed397fc21b211b4bdfb206a89",
+    "content-hash": "390950fa2dcfcf56d9cba25a48909caa",
     "packages": [
         {
             "name": "ahmetkapikiran/slim-cli-environment",
@@ -311,6 +311,54 @@
                 "watermark"
             ],
             "time": "2016-09-01 17:04:03"
+        },
+        {
+            "name": "jaybizzle/crawler-detect",
+            "version": "v1.2.26",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+                "reference": "34d45b1dd0db13b55894af493df823741d22d59a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/34d45b1dd0db13b55894af493df823741d22d59a",
+                "reference": "34d45b1dd0db13b55894af493df823741d22d59a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\CrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "email": "m@rkbee.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+            "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+            "keywords": [
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "php crawler detect"
+            ],
+            "time": "2016-12-15 21:48:05"
         },
         {
             "name": "nette/mail",

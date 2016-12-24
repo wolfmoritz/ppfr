@@ -208,6 +208,11 @@ return call_user_func(
             };
         };
 
+        // Crawler Detect
+        $app->crawlerDetect = function () {
+            return new Jaybizzle\CrawlerDetect\CrawlerDetect;
+        };
+
         // Register 404 page
         $app->notFound(function () use ($app) {
             // Log URL for not found request

@@ -151,11 +151,12 @@ class IndexController
      */
     public function showRecipe($id, $slug = null)
     {
-        // Get data mappers
+        // Get dependencies
         $dataMapper = $this->app->dataMapper;
         $RecipeMapper = $dataMapper('RecipeMapper');
         $CategoryMapper = $dataMapper('CategoryMapper');
         $Security = $this->app->security;
+        $CrawlerDetect = $this->app->crawlerDetect;
 
         // If $id is not an integer or at least numeric, throw 404
         if (!is_integer((int) $id)) {
@@ -190,8 +191,15 @@ class IndexController
         $recipe->categories = $CategoryMapper->getAssignedCategories($recipe->recipe_id);
 
         // Increment view counter
-        $RecipeMapper->incrementRecipeViewCount($recipe->recipe_id);
-        $recipe->view_count++;
+        if(!$CrawlerDetect->isCrawler()) {
+            // Not a crawler, increment view count
+            $RecipeMapper->incrementRecipeViewCount($recipe->recipe_id);
+            $recipe->view_count++;
+        } else {
+            // Document crawler
+            $agentInfo = $request->getResourceUri() . ' ' . isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'No Agent';
+            $this->app->log->info('Bot detected: ' . $agentInfo);
+        }
 
         $twig = $this->app->twig;
         $twig->display('recipe.html', ['recipe' => $recipe, 'title' => $recipe->title]);
