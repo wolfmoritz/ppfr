@@ -195,10 +195,6 @@ class IndexController
             // Not a crawler, increment view count
             $RecipeMapper->incrementRecipeViewCount($recipe->recipe_id);
             $recipe->view_count++;
-        } else {
-            // Document crawler
-            $agentInfo = $request->getResourceUri() . ' ' . isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'No Agent';
-            $this->app->log->info('Bot detected: ' . $agentInfo);
         }
 
         $twig = $this->app->twig;
