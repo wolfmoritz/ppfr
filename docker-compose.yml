@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  web:
+    build: ./docker/web
+    image: ppfr
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www/ppfr
+    depends_on:
+      - db
+    tty: true
+
+  db:
+    image: mariadb:10.3.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/.mysql-data/ppfr:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=ppfr
+      - MYSQL_USER=ppfr
+      - MYSQL_PASSWORD=ppfr
