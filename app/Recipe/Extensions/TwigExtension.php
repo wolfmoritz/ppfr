@@ -170,6 +170,14 @@ class TwigExtension extends \Twig_Extension
                 return "{$largeUri}{$id}/files/{$filename}";
             }
 
+            // Test if "_large" variant exists and return the full size version
+            $fileInfo = pathinfo($filename);
+            $largeImageFile = "{$largeUri}{$id}/files/{$fileInfo['filename']}_large.{$fileInfo['extension']}";
+            if (file_exists($largeImageFile)) {
+                return $baseUrl . $largeImageFile;
+            }
+
+            // Otherwise return default
             return "{$baseUrl}{$largeUri}{$id}/files/{$filename}";
         }
 
