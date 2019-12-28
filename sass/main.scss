@@ -1,0 +1,54 @@
+@import 'vendor/vendor';
+@import 'typography';
+
+
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    @include margin(0);
+    @include padding(0);
+}
+html, body {
+    
+}
+html {
+    font-family: 'Atlata';
+    line-height: 1.5;
+}
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.grid-container {
+    width: 90vw;
+    max-width: 1200px;
+    @include margin(auto);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1em;
+    @include padding(1em);
+}
+.recipe-card {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 2px rgba(black, .5);
+    background-color: #fff;
+    overflow: hidden;
+}
+.img-container {
+    height: 250px;
+    object-fit: cover;
+}
+
+
+.title-container {
+    @include margin(auto null null);
+    @include padding(1em);
+}
+.content-wrapper {
+   
+}

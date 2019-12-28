@@ -1,71 +1,40 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} 
 
 {% block body %}
 
-    <div class="col-md-10">
-      <h2 class="page-header">{{ recipes.category.name }} Recipes</h2>
-      <!--Begin Recipe List Panels -->
-      <div id="recipeList"  class="row">
-      {% for r in recipes.list %}
-      {% if not r.main_photo %}
-      	{% set imageUrl = baseUrl() ~'/assets/img/fillerImg.jpg' %}
-      {% else %}
-      	{% set imageUrl = imageUrl(r.recipe_id, r.main_photo, 250,188) %}
-      {% endif %}
+<div class="container">
+<h2>{{ recipes.category.name }} Recipes</h2>
+</div>
 
-      <div class="col-sm-6 col-md-4">
-               <div class="thumbnail">
-
-<a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}">
-                <img src="{{ imageUrl }}" class="img img-responsive" alt="Photo of {{ r.title }}"></a>
-
-				<div class="caption text-center"> <h5><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}"> {{ r.title }}</a></h5> </div>
-                  <!--end caption -->
-                </div>
-                <!--end thumbnail -->
-              </div>
-              <!--end col-sm-6 col-md-4 -->
-
-
-      {% else %}
-        <h3>No Recipes Found</h3>
-      {% endfor %}
-
-
-    </div><!--End row -->
-     {{ pagination() }}
+<div class="grid-container">
+  {% for r in recipes.list %} 
+  {% if not r.main_photo %} {% set imageUrl = baseUrl() ~'/assets/img/empty.png' %} 
+  {% else %} 
+  {% set imageUrl = imageUrl(r.recipe_id, r.main_photo) %} 
+  {% endif %} 
+  
+    <div class="recipe-card">
+      <div class="img-container">
+        <a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}">
+          <img
+            src="{{ imageUrl }}"
+            class="img img-responsive"
+            alt="Photo of {{ r.title }}"
+        /></a>
+      </div>
+      <div class="title-container">
+        <a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}"> {{ r.title }}</a>
+      </div>
     </div>
-    <!--end col-md-10 left column -->
+ 
+{% else %}
+<h3>No Recipes Found</h3>
+</div>
+{% endfor %} 
+<div class="container">
+  {{ pagination() }}
+</div>
 
-    <div class="col-md-2 hidden-xs hidden-sm">
-      <div class="sidenav">
-        <h5 class="page-header">Top Five Recipes</h5>
-        <ul class="list-unstyled">
-          {% for r in topRecipes(5) %}
-          <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="sidenav">
-        <h5 class="page-header">Random Recipe</h5>
-        <ul class="list-unstyled">
-          {% for r in randomRecipes(5) %}
-          <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% if production %}
-      <div class="sidenav">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:160px;height:600px"
-             data-ad-client="ca-pub-6388989287678352"
-             data-ad-slot="1745555829"></ins>
-        <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-      {% endif %}
-    </div>
-    <!--end col-me-2 right column -->
+
+
 {% endblock %}
