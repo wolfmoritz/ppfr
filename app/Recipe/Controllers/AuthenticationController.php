@@ -6,7 +6,23 @@ namespace Recipe\Controllers;
  */
 class AuthenticationController
 {
+    /**
+     * Slim App
+     * @var object
+     */
     private $app;
+
+    /**
+     * Login Token Key Name
+     * @var string
+     */
+    private $loginTokenKey = 'loginToken';
+
+    /**
+     * Login Token Key Expires Name
+     * @var string
+     */
+    private $loginTokenExpiresKey = 'loginTokenExpires';
 
     /**
      * Constructor
@@ -16,119 +32,140 @@ class AuthenticationController
         $this->app = \Slim\Slim::getInstance();
     }
 
-    public function login($provider)
+    /**
+     * Show Login Form
+     */
+    public function showLoginForm()
     {
-        // Make sure this is an ajax request
-        if (!$this->app->request->isAjax()) {
+        $twig = $this->app->twig;
+        $twig->display('login.html');
+    }
+
+    /**
+     * Request Login Token
+     *
+     * Validates email and sends login link to user
+     */
+    public function requestLoginToken()
+    {
+        // Get dependencies
+        $session = $this->app->SessionHandler;
+        $security = $this->app->security;
+        $userMapper = ($this->app->dataMapper)('UserMapper');
+
+        // Get and clean provided email
+        $providedEmail = strtolower(trim($this->app->request->post('email')));
+
+        // Check honeypot
+        if ('alt@example.com' !== $honeypotEmail = $this->app->request->post('alt-email')) {
+            // Send note to admin and make them go away
+            $now = date('Y-m-d H:i:s');
+            $this->sendEmail(
+                $this->app->config('admin')['email'],
+                'PPFR Login Honeypot Caught a Fly',
+                "Provided login email $providedEmail submitted $now.\nHidden honepot email should be alt@example.com but was set to $honeypotEmail."
+            );
+
+            // Log attempt
+            $this->app->log->alert('Login honeypot triggered: ' . $honeypotEmail);
+
+            // Go to home page
             $this->app->redirectTo('home');
-            return;
         }
 
-        // Initialize response to false
-        $this->app->response->headers->set('Content-Type', 'application/json');
-        $returnStatus = 0;
-        $user = null;
+        // Find requested user
+        $user = $userMapper->getUserByEmail($providedEmail);
 
-        // If Facebook
-        if ($provider === 'facebook') {
-            // Get the FacebookSDK and JS helpers
-            $fb = $this->app->FacebookSDK;
-            $helper = $fb->getJavaScriptHelper();
+        // Double check on email and login
+        if ($user && $user->email === $providedEmail) {
+            // Get and set token, and user ID
+            $token = $security->generateLoginToken();
+            $session->setData([
+                $this->loginTokenKey => $token,
+                $this->loginTokenExpiresKey => time() + 120,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'user_id' => $user->user_id,
+                'email' => $user->email,
+                'role' => $user->role
+            ]);
 
-            // Get the access token
-            try {
-                $accessToken = $helper->getAccessToken();
-            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                // Log message and return failure
-                $this->app->log->error('Error getting FB Access Token: ' . $e->getMessage());
-                echo json_encode($returnStatus);
-                return;
-            }
+            // Get request details to create login link and email to user
+            $loginLink = $this->app->request()->getUrl();
+            $loginLink .= $this->app->urlFor('login', ['token' => $token]);
 
-            // Get FB user profile
-            $me = $fb->get('/me?fields=id,first_name,last_name,email', $accessToken);
-            $fbUser = $me->getDecodedBody();
+            // Send message
+            $this->sendEmail(
+                $providedEmail,
+                'Peri\'s Place For Recipes Login',
+                "Click to login  $loginLink"
+            );
+        } else {
+            // If we find not a match send note to admin
+            $now = date('Y-m-d H:i:s');
+            $this->sendEmail(
+                $this->app->config('admin')['email'],
+                'PPFR Invalid Login',
+                "Attempted login using $providedEmail submitted $now."
+            );
 
-            // Make sure we have the necessary info
-            if (!isset($fbUser['email']) || !isset($fbUser['first_name']) || !isset($fbUser['last_name']) || !isset($fbUser['id'])) {
-                // Return failure
-                $this->app->log->error('Facebook returned insufficient user info:');
-                $this->app->log->error(print_r($fbUser, true));
-                echo json_encode($returnStatus);
-                return;
-            }
+            // Log attempt
+            $this->app->log->alert('Invalid Login: ' . $providedEmail);
 
-            // Assign Facebook user info to array for upsert
-            $user['first_name'] = $fbUser['first_name'];
-            $user['last_name'] = $fbUser['last_name'];
-            $user['email'] = $fbUser['email'];
-            $user['provider'] = 'facebook';
-            $user['id'] = $fbUser['id'];
-
-            // Save
-            $user = $this->saveUser($user);
+            // Go to home page
+            $this->app->redirectTo('home');
         }
 
-        // For the Google login, we are relying on the client side javascript to get and supply the user profile details
-        if ($provider === 'google') {
-            // Get the GoogleSDK, and post data
-            $googleClient = $this->app->GoogleSDK;
-            $googleProfile = $this->app->request->params();
+        // Redirect to home page
+        $this->app->redirectTo('home');
+    }
 
-            // Make sure we have the necessary profile info
-            if (!isset($googleProfile['emails'][0]['value']) || !isset($googleProfile['name']['givenName']) || !isset($googleProfile['name']['familyName']) || !isset($googleProfile['result']['id'])) {
-                // Return failure
-                $this->app->log->error('Google returned insufficient user info:');
-                $this->app->log->error(print_r($googleProfile, true));
-                echo json_encode($returnStatus);
-                return;
-            }
+    /**
+     * Login
+     *
+     * Validate login token and start session
+     * @param string $token Token from link in user email
+     */
+    public function login($token)
+    {
+        // Get dependencies
+        $session = $this->app->SessionHandler;
+        $userMapper = ($this->app->dataMapper)('UserMapper');
+        $savedToken = $session->getData($this->loginTokenKey);
+        $tokenExpires = $session->getData($this->loginTokenExpiresKey);
+        $user_id = $session->getData('user_id');
 
-            // Verify ID token
-            try {
-                $ticket = $googleClient->verifyIdToken($googleProfile['id_token'])->getAttributes();
+        // Check whether token matches, and if within expires time
+        if ($token === $savedToken && time() < $tokenExpires) {
+            // Successful, set session
+            $session->setData('loggedIn', true);
 
-                // If the returned profile ID does not match post data, something fishy is going on
-                if ((int) $googleProfile['result']['id'] != (int) $ticket['payload']['sub']) {
-                    throw new Exception('Google ID tokens do not match');
-                }
-            } catch (\Exception $e) {
-                $this->app->log->error('Failed to verify Google ID token');
-                $this->app->log->error(print_r($e->getMessage(), true));
-                echo json_encode($returnStatus);
-                return;
-            }
+            // Delete token and expires time from session
+            $session->unsetData($this->loginTokenKey);
+            $session->unsetData($this->loginTokenExpiresKey);
 
-            // Assign Google user info to array for upsert
-            $user['first_name'] = $googleProfile['name']['givenName'];
-            $user['last_name'] = $googleProfile['name']['familyName'];
-            $user['email'] = $googleProfile['emails'][0]['value'];
-            $user['provider'] = 'google';
-            $user['providerId'] = $googleProfile['result']['id'];
+            // Update last login date and time
+            $user = $userMapper->make();
+            $user->user_id = $user_id;
+            $user->last_login_date = $userMapper->now();
+            $userMapper->save($user);
 
-            // Save
-            $user = $this->saveUser($user);
+            // Go to admin dashboard
+            return $this->app->redirectTo('adminDashboard');
         }
 
-        if ($user !== null) {
-            // Define session data
-            $sessionData['loggedIn'] = true;
-            $sessionData['first_name'] = $user->first_name;
-            $sessionData['last_name'] = $user->last_name;
-            $sessionData['user_id'] = $user->user_id;
-            $sessionData['role'] = $user->role;
+        // Not valid, log and show 404
+        $message = "Provided: $token\nSaved: " . ($savedToken ?? 'none') . "\nTime: " . time() . ' Expires: ' . ($tokenExpires ?? 'none');
+        $now = date('Y-m-d H:i:s');
+        $this->sendEmail(
+            $this->app->config('admin')['email'],
+            'PPFR Invalid Login Token Submitted',
+            "$message\nSubmitted $now."
+        );
 
-            $this->setSession($sessionData);
+        $this->app->log->info('Invalid login token, supplied: ' . $message);
 
-            // Success, direct user to dashboard
-            $returnStatus = 1;
-            echo json_encode($returnStatus);
-            return;
-        }
-
-        // Return default status code
-        echo json_encode($returnStatus);
-        return;
+        return $this->app->notFound();
     }
 
     /**
@@ -147,70 +184,32 @@ class AuthenticationController
     }
 
     /**
-     * Upsert User
+     * Send Email
      *
-     * Updates or inserts user record
-     * @param array, user information
-     * @return mixed, user domain object on success, null on failure
-     */
-    public function saveUser($user)
-    {
-        // Get the user mapper and attempt to get the user by email
-        $dataMapper = $this->app->dataMapper;
-        $UserMapper = $dataMapper('UserMapper');
-        $user = $UserMapper->getUserByEmail($user['email']);
-
-        // Check if the user already exists
-        if (isset($user->user_id)) {
-            // Then update login date
-            $user->last_login_date = $UserMapper->now();
-            $UserMapper->update($user);
-        } else {
-            // Insert new user
-            $user = $UserMapper->make();
-
-            // Set values
-            $user->first_name = $user['first_name'];
-            $user->last_name = $user['last_name'];
-            $user->email = $user['email'];
-            $user->active = 1;
-            $user->approved = 1;
-            $user->last_login_date = $UserMapper->now();
-
-            // Set provider ID by type
-            if ($user['provider'] === 'facebook') {
-                $user->facebook_uid = $user['providerId'];
-            }
-
-            if ($user['provider'] === 'google') {
-                $user->google_uid = $user['providerId'];
-            }
-
-            $user = $UserMapper->insert($user);
-        }
-
-        return $user;
-    }
-
-    /**
-     * Set User Session
-     *
-     * @param array, user session data
+     * Send authentication email
+     * @param string|array  $recipient Single recipient email or array of recipient emails
+     * @param string        $subject
+     * @param string        $message
      * @return void
      */
-    public function setSession($userData)
+    protected function sendEmail($recipient, string $subject, string $message)
     {
-        // Get session hanlder
-        $SessionHandler = $this->app->SessionHandler;
+        // Get dependencies
+        $email = $this->app->emailHandler;
 
-        // Assign session data
-        $sessionData['loggedIn'] = $userData['loggedIn'];
-        $sessionData['first_name'] = $userData['first_name'];
-        $sessionData['last_name'] = $userData['last_name'];
-        $sessionData['user_id'] = $userData['user_id'];
-        $sessionData['role'] = $userData['role'];
+        if (is_string($recipient)) {
+            $emailTo[] = $recipient;
+        } elseif (is_array($recipient)){
+            $emailTo = $recipient;
+        }
 
-        // And set data
-        $SessionHandler->setData($sessionData);
+        // Set email to addresses
+        foreach ($emailTo as $emailAddress) {
+            $email->setTo($emailAddress, '');
+        }
+
+        $email->setSubject($subject)
+            ->setMessage($message)
+            ->send();
     }
 }

@@ -1,53 +1,5 @@
 [
     {
-        "name": "slim/slim",
-        "version": "2.6.2",
-        "version_normalized": "2.6.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/slimphp/Slim.git",
-            "reference": "20a02782f76830b67ae56a5c08eb1f563c351a37"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/slimphp/Slim/zipball/20a02782f76830b67ae56a5c08eb1f563c351a37",
-            "reference": "20a02782f76830b67ae56a5c08eb1f563c351a37",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "suggest": {
-            "ext-mcrypt": "Required for HTTP cookie encryption"
-        },
-        "time": "2015-03-08 18:41:17",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Slim": "."
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Josh Lockhart",
-                "email": "info@joshlockhart.com",
-                "homepage": "http://www.joshlockhart.com/"
-            }
-        ],
-        "description": "Slim Framework, a PHP micro framework",
-        "homepage": "http://github.com/codeguy/Slim",
-        "keywords": [
-            "microframework",
-            "rest",
-            "router"
-        ]
-    },
-    {
         "name": "ahmetkapikiran/slim-cli-environment",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -67,7 +19,7 @@
             "php": ">=5.3.0",
             "slim/slim": ">=2.0.0"
         },
-        "time": "2014-10-29 20:44:43",
+        "time": "2014-10-29T20:44:43+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -90,12 +42,12 @@
         "version_normalized": "1.3.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/codeguy/Upload.git",
+            "url": "https://github.com/brandonsavage/Upload.git",
             "reference": "6a9e5e1fb58d65346d0e557db2d46fb25efd3e37"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/codeguy/Upload/zipball/6a9e5e1fb58d65346d0e557db2d46fb25efd3e37",
+            "url": "https://api.github.com/repos/brandonsavage/Upload/zipball/6a9e5e1fb58d65346d0e557db2d46fb25efd3e37",
             "reference": "6a9e5e1fb58d65346d0e557db2d46fb25efd3e37",
             "shasum": ""
         },
@@ -106,7 +58,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2013-07-07 17:01:41",
+        "time": "2013-07-07T17:01:41+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -134,177 +86,40 @@
         ]
     },
     {
-        "name": "google/apiclient",
-        "version": "1.0.6-beta",
-        "version_normalized": "1.0.6.0-beta",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/google/google-api-php-client.git",
-            "reference": "a41a9dc0662e36420030eaab802dbb1f85459479"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/google/google-api-php-client/zipball/a41a9dc0662e36420030eaab802dbb1f85459479",
-            "reference": "a41a9dc0662e36420030eaab802dbb1f85459479",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2014-09-30 19:33:59",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "include-path": [
-            "src/"
-        ],
-        "license": [
-            "Apache-2.0"
-        ],
-        "description": "Client library for Google APIs",
-        "homepage": "http://developers.google.com/api-client-library/php",
-        "keywords": [
-            "google"
-        ]
-    },
-    {
-        "name": "slim/logger",
-        "version": "0.1.0",
-        "version_normalized": "0.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/codeguy/Slim-Logger.git",
-            "reference": "ad3a2e62236f5d37056de9a4586659edc8164937"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/codeguy/Slim-Logger/zipball/ad3a2e62236f5d37056de9a4586659edc8164937",
-            "reference": "ad3a2e62236f5d37056de9a4586659edc8164937",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "slim/slim": ">=2.4.0"
-        },
-        "time": "2014-07-16 20:11:26",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Slim\\Logger\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Josh Lockhart",
-                "email": "info@joshlockhart.com",
-                "homepage": "http://www.joshlockhart.com/"
-            }
-        ],
-        "description": "Slim Framework logger"
-    },
-    {
-        "name": "slim/views",
-        "version": "0.1.3",
-        "version_normalized": "0.1.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/slimphp/Slim-Views.git",
-            "reference": "8561c785e55a39df6cb6f95c3aba3281a60ed5b0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/slimphp/Slim-Views/zipball/8561c785e55a39df6cb6f95c3aba3281a60ed5b0",
-            "reference": "8561c785e55a39df6cb6f95c3aba3281a60ed5b0",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "slim/slim": ">=2.4.0"
-        },
-        "suggest": {
-            "smarty/smarty": "Smarty templating system",
-            "twig/twig": "Twig templating system"
-        },
-        "time": "2014-12-09 23:48:51",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Slim\\Views\\": "./"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Josh Lockhart",
-                "email": "info@joshlockhart.com",
-                "homepage": "http://www.joshlockhart.com/"
-            },
-            {
-                "name": "Andrew Smith",
-                "email": "a.smith@silentworks.co.uk",
-                "homepage": "http://thoughts.silentworks.co.uk/"
-            }
-        ],
-        "description": "Smarty and Twig View Parser package for the Slim Framework",
-        "homepage": "http://github.com/codeguy/Slim-Views",
-        "keywords": [
-            "extensions",
-            "slimphp",
-            "templating"
-        ]
-    },
-    {
         "name": "guzzlehttp/psr7",
-        "version": "1.3.1",
-        "version_normalized": "1.3.1.0",
+        "version": "1.6.1",
+        "version_normalized": "1.6.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/psr7.git",
-            "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b"
+            "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
-            "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
+            "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
             "shasum": ""
         },
         "require": {
             "php": ">=5.4.0",
-            "psr/http-message": "~1.0"
+            "psr/http-message": "~1.0",
+            "ralouphie/getallheaders": "^2.0.5 || ^3.0.0"
         },
         "provide": {
             "psr/http-message-implementation": "1.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "~4.0"
+            "ext-zlib": "*",
+            "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
         },
-        "time": "2016-06-24 23:00:38",
+        "suggest": {
+            "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
+        },
+        "time": "2019-07-01T23:21:34+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.4-dev"
+                "dev-master": "1.6-dev"
             }
         },
         "installation-source": "dist",
@@ -325,40 +140,235 @@
                 "name": "Michael Dowling",
                 "email": "mtdowling@gmail.com",
                 "homepage": "https://github.com/mtdowling"
+            },
+            {
+                "name": "Tobias Schultze",
+                "homepage": "https://github.com/Tobion"
             }
         ],
-        "description": "PSR-7 message implementation",
+        "description": "PSR-7 message implementation that also provides common utility methods",
         "keywords": [
             "http",
             "message",
+            "psr-7",
+            "request",
+            "response",
             "stream",
-            "uri"
+            "uri",
+            "url"
         ]
     },
     {
-        "name": "wolfmoritz/session",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
+        "name": "intervention/image",
+        "version": "2.5.1",
+        "version_normalized": "2.5.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/wolfmoritz/session.git",
-            "reference": "f139a83b03ff38d2a439ee9432c035e6d8f75f60"
+            "url": "https://github.com/Intervention/image.git",
+            "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/wolfmoritz/session/zipball/f139a83b03ff38d2a439ee9432c035e6d8f75f60",
-            "reference": "f139a83b03ff38d2a439ee9432c035e6d8f75f60",
+            "url": "https://api.github.com/repos/Intervention/image/zipball/abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+            "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+            "shasum": ""
+        },
+        "require": {
+            "ext-fileinfo": "*",
+            "guzzlehttp/psr7": "~1.1",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9.2",
+            "phpunit/phpunit": "^4.8 || ^5.7"
+        },
+        "suggest": {
+            "ext-gd": "to use GD library based image processing.",
+            "ext-imagick": "to use Imagick based image processing.",
+            "intervention/imagecache": "Caching extension for the Intervention Image library"
+        },
+        "time": "2019-11-02T09:15:47+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Intervention\\Image\\ImageServiceProvider"
+                ],
+                "aliases": {
+                    "Image": "Intervention\\Image\\Facades\\Image"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Intervention\\Image\\": "src/Intervention/Image"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Oliver Vogel",
+                "email": "oliver@olivervogel.com",
+                "homepage": "http://olivervogel.com/"
+            }
+        ],
+        "description": "Image handling and manipulation library with support for Laravel integration",
+        "homepage": "http://image.intervention.io/",
+        "keywords": [
+            "gd",
+            "image",
+            "imagick",
+            "laravel",
+            "thumbnail",
+            "watermark"
+        ]
+    },
+    {
+        "name": "jaybizzle/crawler-detect",
+        "version": "v1.2.90",
+        "version_normalized": "1.2.90.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+            "reference": "35f963386e6a189697fe4b14dc91fb42b17fda4b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/35f963386e6a189697fe4b14dc91fb42b17fda4b",
+            "reference": "35f963386e6a189697fe4b14dc91fb42b17fda4b",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-06-21 22:09:54",
+        "require-dev": {
+            "phpunit/phpunit": "^4.8|^5.5|^6.5",
+            "satooshi/php-coveralls": "1.*"
+        },
+        "time": "2019-12-08T20:03:27+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "WolfMoritz\\Session\\": "src\\Session"
+                "Jaybizzle\\CrawlerDetect\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mark Beech",
+                "email": "m@rkbee.ch",
+                "role": "Developer"
+            }
+        ],
+        "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+        "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+        "keywords": [
+            "crawler",
+            "crawler detect",
+            "crawler detector",
+            "crawlerdetect",
+            "php crawler detect"
+        ]
+    },
+    {
+        "name": "phpmailer/phpmailer",
+        "version": "v6.1.4",
+        "version_normalized": "6.1.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPMailer/PHPMailer.git",
+            "reference": "c5e61d0729507049cec9673aa1a679f9adefd683"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c5e61d0729507049cec9673aa1a679f9adefd683",
+            "reference": "c5e61d0729507049cec9673aa1a679f9adefd683",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-filter": "*",
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "doctrine/annotations": "^1.2",
+            "friendsofphp/php-cs-fixer": "^2.2",
+            "phpunit/phpunit": "^4.8 || ^5.7"
+        },
+        "suggest": {
+            "ext-mbstring": "Needed to send email in multibyte encoding charset",
+            "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+            "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+            "psr/log": "For optional PSR-3 debug logging",
+            "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+            "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
+        },
+        "time": "2019-12-10T11:17:38+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PHPMailer\\PHPMailer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1-only"
+        ],
+        "authors": [
+            {
+                "name": "Marcus Bointon",
+                "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
+            },
+            {
+                "name": "Andy Prevost",
+                "email": "codeworxtech@users.sourceforge.net"
+            },
+            {
+                "name": "Brent R. Matzelle"
+            }
+        ],
+        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "pitoncms/session",
+        "version": "1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PitonCMS/Session.git",
+            "reference": "ba54ab5f8623c7822c382e106964fa8de12e9c1f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PitonCMS/Session/zipball/ba54ab5f8623c7822c382e106964fa8de12e9c1f",
+            "reference": "ba54ab5f8623c7822c382e106964fa8de12e9c1f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "time": "2018-12-21T12:24:01+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Piton\\Session\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -372,120 +382,13 @@
             }
         ],
         "description": "Manage session state without native PHP sessions",
-        "homepage": "https://github.com/wolfmoritz/session",
+        "homepage": "https://github.com/pitoncms/session",
         "keywords": [
-            "session"
-        ]
-    },
-    {
-        "name": "vlucas/valitron",
-        "version": "v1.2.5",
-        "version_normalized": "1.2.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/vlucas/valitron.git",
-            "reference": "bb181072f427c1ba2ec8b433a0c35b60e99e207e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/valitron/zipball/bb181072f427c1ba2ec8b433a0c35b60e99e207e",
-            "reference": "bb181072f427c1ba2ec8b433a0c35b60e99e207e",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2016-03-15 21:14:19",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Valitron": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD"
-        ],
-        "authors": [
-            {
-                "name": "Vance Lucas",
-                "email": "vance@vancelucas.com",
-                "homepage": "http://www.vancelucas.com"
-            }
-        ],
-        "description": "Simple, elegant, stand-alone validation library with NO dependencies",
-        "homepage": "http://github.com/vlucas/valitron",
-        "keywords": [
-            "valid",
-            "validation",
-            "validator"
-        ]
-    },
-    {
-        "name": "twig/twig",
-        "version": "1.x-dev",
-        "version_normalized": "1.9999999.9999999.9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/twigphp/Twig.git",
-            "reference": "c418d07c64bdf004635973f978c806a53a32b320"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/c418d07c64bdf004635973f978c806a53a32b320",
-            "reference": "c418d07c64bdf004635973f978c806a53a32b320",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.7"
-        },
-        "require-dev": {
-            "symfony/debug": "~2.7",
-            "symfony/phpunit-bridge": "~2.7"
-        },
-        "time": "2016-09-01 17:55:16",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.24-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Twig_": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Armin Ronacher",
-                "email": "armin.ronacher@active-4.com",
-                "role": "Project Founder"
-            },
-            {
-                "name": "Twig Team",
-                "homepage": "http://twig.sensiolabs.org/contributors",
-                "role": "Contributors"
-            }
-        ],
-        "description": "Twig, the flexible, fast, and secure template language for PHP",
-        "homepage": "http://twig.sensiolabs.org",
-        "keywords": [
-            "templating"
+            "piton",
+            "pitoncms",
+            "session",
+            "sessions",
+            "sessionstate"
         ]
     },
     {
@@ -506,7 +409,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-08-06 14:39:51",
+        "time": "2016-08-06T14:39:51+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -541,45 +444,72 @@
         ]
     },
     {
-        "name": "intervention/image",
-        "version": "2.3.8",
-        "version_normalized": "2.3.8.0",
+        "name": "ralouphie/getallheaders",
+        "version": "3.0.3",
+        "version_normalized": "3.0.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/Intervention/image.git",
-            "reference": "4064a980324f6c3bfa2bd981dfb247afa705ec3c"
+            "url": "https://github.com/ralouphie/getallheaders.git",
+            "reference": "120b605dfeb996808c31b6477290a714d356e822"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Intervention/image/zipball/4064a980324f6c3bfa2bd981dfb247afa705ec3c",
-            "reference": "4064a980324f6c3bfa2bd981dfb247afa705ec3c",
+            "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
+            "reference": "120b605dfeb996808c31b6477290a714d356e822",
             "shasum": ""
         },
         "require": {
-            "ext-fileinfo": "*",
-            "guzzlehttp/psr7": "~1.1",
-            "php": ">=5.4.0"
+            "php": ">=5.6"
         },
         "require-dev": {
-            "mockery/mockery": "~0.9.2",
-            "phpunit/phpunit": "3.*"
+            "php-coveralls/php-coveralls": "^2.1",
+            "phpunit/phpunit": "^5 || ^6.5"
         },
-        "suggest": {
-            "ext-gd": "to use GD library based image processing.",
-            "ext-imagick": "to use Imagick based image processing.",
-            "intervention/imagecache": "Caching extension for the Intervention Image library"
-        },
-        "time": "2016-09-01 17:04:03",
+        "time": "2019-03-08T08:55:37+00:00",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.3-dev"
-            }
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/getallheaders.php"
+            ]
         },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ralph Khattar",
+                "email": "ralph.khattar@gmail.com"
+            }
+        ],
+        "description": "A polyfill for getallheaders."
+    },
+    {
+        "name": "slim/logger",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/codeguy/Slim-Logger.git",
+            "reference": "ad3a2e62236f5d37056de9a4586659edc8164937"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/codeguy/Slim-Logger/zipball/ad3a2e62236f5d37056de9a4586659edc8164937",
+            "reference": "ad3a2e62236f5d37056de9a4586659edc8164937",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "slim/slim": ">=2.4.0"
+        },
+        "time": "2014-07-16T20:11:26+00:00",
+        "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Intervention\\Image\\": "src/Intervention/Image"
+                "Slim\\Logger\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -588,235 +518,41 @@
         ],
         "authors": [
             {
-                "name": "Oliver Vogel",
-                "email": "oliver@olivervogel.net",
-                "homepage": "http://olivervogel.net/"
+                "name": "Josh Lockhart",
+                "email": "info@joshlockhart.com",
+                "homepage": "http://www.joshlockhart.com/"
             }
         ],
-        "description": "Image handling and manipulation library with support for Laravel integration",
-        "homepage": "http://image.intervention.io/",
-        "keywords": [
-            "gd",
-            "image",
-            "imagick",
-            "laravel",
-            "thumbnail",
-            "watermark"
-        ]
+        "description": "Slim Framework logger"
     },
     {
-        "name": "facebook/php-sdk-v4",
-        "version": "5.3.1",
-        "version_normalized": "5.3.1.0",
+        "name": "slim/slim",
+        "version": "2.6.3",
+        "version_normalized": "2.6.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/facebook/php-graph-sdk.git",
-            "reference": "7ed1ecdae6a5b2f8b8f60e132d06594b39b16fb1"
+            "url": "https://github.com/slimphp/Slim.git",
+            "reference": "9224ed81ac1c412881e8d762755e3d76ebf580c0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/7ed1ecdae6a5b2f8b8f60e132d06594b39b16fb1",
-            "reference": "7ed1ecdae6a5b2f8b8f60e132d06594b39b16fb1",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.4|^7.0"
-        },
-        "require-dev": {
-            "guzzlehttp/guzzle": "~5.0",
-            "mockery/mockery": "~0.8",
-            "phpunit/phpunit": "~4.0"
-        },
-        "suggest": {
-            "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
-        },
-        "time": "2016-08-09 11:32:26",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Facebook\\": "src/Facebook/"
-            },
-            "files": [
-                "src/Facebook/polyfills.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Facebook Platform"
-        ],
-        "authors": [
-            {
-                "name": "Facebook",
-                "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
-            }
-        ],
-        "description": "Facebook SDK for PHP",
-        "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
-        "keywords": [
-            "facebook",
-            "sdk"
-        ],
-        "abandoned": "facebook/graph-sdk"
-    },
-    {
-        "name": "nette/utils",
-        "version": "v2.4.0",
-        "version_normalized": "2.4.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/nette/utils.git",
-            "reference": "c455ade9f24a1f99aa81772516764045296b8ca0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/nette/utils/zipball/c455ade9f24a1f99aa81772516764045296b8ca0",
-            "reference": "c455ade9f24a1f99aa81772516764045296b8ca0",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.6.0"
-        },
-        "conflict": {
-            "nette/nette": "<2.2"
-        },
-        "require-dev": {
-            "nette/tester": "~2.0",
-            "tracy/tracy": "^2.3"
-        },
-        "suggest": {
-            "ext-gd": "to use Image",
-            "ext-iconv": "to use Strings::webalize() and toAscii()",
-            "ext-intl": "for script transliteration in Strings::webalize() and toAscii()",
-            "ext-mbstring": "to use Strings::lower() etc..."
-        },
-        "time": "2016-06-17 13:15:10",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause",
-            "GPL-2.0",
-            "GPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "David Grudl",
-                "homepage": "https://davidgrudl.com"
-            },
-            {
-                "name": "Nette Community",
-                "homepage": "https://nette.org/contributors"
-            }
-        ],
-        "description": "Nette Utility Classes",
-        "homepage": "https://nette.org"
-    },
-    {
-        "name": "nette/mail",
-        "version": "v2.4.1",
-        "version_normalized": "2.4.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/nette/mail.git",
-            "reference": "135fac5b1d71cde9d0a0c9cad61a18d2704c3e47"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/nette/mail/zipball/135fac5b1d71cde9d0a0c9cad61a18d2704c3e47",
-            "reference": "135fac5b1d71cde9d0a0c9cad61a18d2704c3e47",
-            "shasum": ""
-        },
-        "require": {
-            "ext-iconv": "*",
-            "nette/utils": "~2.4",
-            "php": ">=5.6.0"
-        },
-        "conflict": {
-            "nette/nette": "<2.2"
-        },
-        "require-dev": {
-            "nette/di": "~2.4",
-            "nette/tester": "~2.0",
-            "tracy/tracy": "^2.4"
-        },
-        "suggest": {
-            "ext-fileinfo": "to detect type of attached files"
-        },
-        "time": "2016-07-31 12:06:47",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause",
-            "GPL-2.0",
-            "GPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "David Grudl",
-                "homepage": "https://davidgrudl.com"
-            },
-            {
-                "name": "Nette Community",
-                "homepage": "https://nette.org/contributors"
-            }
-        ],
-        "description": "Nette Mail: Sending E-mails",
-        "homepage": "https://nette.org"
-    },
-    {
-        "name": "jaybizzle/crawler-detect",
-        "version": "v1.2.26",
-        "version_normalized": "1.2.26.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/JayBizzle/Crawler-Detect.git",
-            "reference": "34d45b1dd0db13b55894af493df823741d22d59a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/34d45b1dd0db13b55894af493df823741d22d59a",
-            "reference": "34d45b1dd0db13b55894af493df823741d22d59a",
+            "url": "https://api.github.com/repos/slimphp/Slim/zipball/9224ed81ac1c412881e8d762755e3d76ebf580c0",
+            "reference": "9224ed81ac1c412881e8d762755e3d76ebf580c0",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "require-dev": {
-            "phpunit/phpunit": "*"
+        "suggest": {
+            "ext-mcrypt": "Required for HTTP cookie encryption",
+            "phpseclib/mcrypt_compat": "Polyfil for mcrypt extension"
         },
-        "time": "2016-12-15 21:48:05",
+        "time": "2017-01-07T12:21:41+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
-            "psr-4": {
-                "Jaybizzle\\CrawlerDetect\\": "src/"
+            "psr-0": {
+                "Slim": "."
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -825,19 +561,249 @@
         ],
         "authors": [
             {
-                "name": "Mark Beech",
-                "email": "m@rkbee.ch",
-                "role": "Developer"
+                "name": "Josh Lockhart",
+                "email": "info@joshlockhart.com",
+                "homepage": "http://www.joshlockhart.com/"
             }
         ],
-        "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
-        "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+        "description": "Slim Framework, a PHP micro framework",
+        "homepage": "http://github.com/codeguy/Slim",
         "keywords": [
-            "crawler",
-            "crawler detect",
-            "crawler detector",
-            "crawlerdetect",
-            "php crawler detect"
+            "microframework",
+            "rest",
+            "router"
+        ]
+    },
+    {
+        "name": "slim/views",
+        "version": "0.1.3",
+        "version_normalized": "0.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/slimphp/Slim-Views.git",
+            "reference": "8561c785e55a39df6cb6f95c3aba3281a60ed5b0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/slimphp/Slim-Views/zipball/8561c785e55a39df6cb6f95c3aba3281a60ed5b0",
+            "reference": "8561c785e55a39df6cb6f95c3aba3281a60ed5b0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "slim/slim": ">=2.4.0"
+        },
+        "suggest": {
+            "smarty/smarty": "Smarty templating system",
+            "twig/twig": "Twig templating system"
+        },
+        "time": "2014-12-09T23:48:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Slim\\Views\\": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Josh Lockhart",
+                "email": "info@joshlockhart.com",
+                "homepage": "http://www.joshlockhart.com/"
+            },
+            {
+                "name": "Andrew Smith",
+                "email": "a.smith@silentworks.co.uk",
+                "homepage": "http://thoughts.silentworks.co.uk/"
+            }
+        ],
+        "description": "Smarty and Twig View Parser package for the Slim Framework",
+        "homepage": "http://github.com/codeguy/Slim-Views",
+        "keywords": [
+            "extensions",
+            "slimphp",
+            "templating"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-ctype",
+        "version": "v1.13.1",
+        "version_normalized": "1.13.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-ctype.git",
+            "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+            "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-ctype": "For best performance"
+        },
+        "time": "2019-11-27T13:56:44+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.13-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Ctype\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Gert de Pagter",
+                "email": "BackEndTea@gmail.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for ctype functions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "ctype",
+            "polyfill",
+            "portable"
+        ]
+    },
+    {
+        "name": "twig/twig",
+        "version": "1.x-dev",
+        "version_normalized": "1.9999999.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twigphp/Twig.git",
+            "reference": "82362775bb3b37f886f3f51d5ce75da9723f4a6d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/82362775bb3b37f886f3f51d5ce75da9723f4a6d",
+            "reference": "82362775bb3b37f886f3f51d5ce75da9723f4a6d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.0",
+            "symfony/polyfill-ctype": "^1.8"
+        },
+        "require-dev": {
+            "psr/container": "^1.0",
+            "symfony/phpunit-bridge": "^4.4|^5.0"
+        },
+        "time": "2019-12-27T07:28:59+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.42-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            },
+            "psr-4": {
+                "Twig\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Twig Team",
+                "role": "Contributors"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com",
+                "role": "Project Founder"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "https://twig.symfony.com",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
+        "name": "vlucas/valitron",
+        "version": "v1.4.7",
+        "version_normalized": "1.4.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vlucas/valitron.git",
+            "reference": "a03072bed1679660200766d134507a30193eaf6d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vlucas/valitron/zipball/a03072bed1679660200766d134507a30193eaf6d",
+            "reference": "a03072bed1679660200766d134507a30193eaf6d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35 || ^5.5 || ^6.5"
+        },
+        "suggest": {
+            "ext-mbstring": "It can support the multiple bytes string length."
+        },
+        "time": "2019-08-29T19:49:43+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Valitron\\": "src/Valitron"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Vance Lucas",
+                "email": "vance@vancelucas.com",
+                "homepage": "http://www.vancelucas.com"
+            }
+        ],
+        "description": "Simple, elegant, stand-alone validation library with NO dependencies",
+        "homepage": "http://github.com/vlucas/valitron",
+        "keywords": [
+            "valid",
+            "validation",
+            "validator"
         ]
     }
 ]

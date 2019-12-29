@@ -79,10 +79,20 @@ $config['pagination']['numberOfLinks'] = 2;
 $config['routes.case_sensitive'] = false;
 
 /**
- * Social Authentication Options
+ * Email
+ *
+ * from:     Send-from email address
+ * protocol: 'mail' (default) or 'smtp'
+ *
+ * These settings below only apply for SMTP connections
+ * smtpHost: SMTP server name
+ * smtpUser: User name
+ * smtpPass: Password
+ * smtpPort: Port to use, likely 465
  */
-$config['auth.facebook']['app_id'] = '';
-$config['auth.facebook']['app_secret'] = '';
-$config['auth.facebook']['default_graph_version'] = 'v2.6';
-$config['auth.google']['client_id'] = '';
-$config['auth.google']['client_secret'] = '';
+$config['email']['from'] = 'pitoncms@localhost.com';
+$config['email']['protocol'] = 'mail';
+$config['email']['smtpHost'] = '';
+$config['email']['smtpUser'] = '';
+$config['email']['smtpPass'] = '';
+$config['email']['smtpPort'] = '';

@@ -28,13 +28,9 @@ return call_user_func(
         // Load Default Configuration Settings
         require_once ROOT_DIR . 'config/config.default.php';
 
-        // Load production and development configration settings, in that order, if available
-        if (file_exists(ROOT_DIR . 'config/config.prod.php')) {
-            include_once ROOT_DIR . 'config/config.prod.php';
-        }
-
-        if (file_exists(ROOT_DIR . 'config/config.dev.php')) {
-            include_once ROOT_DIR . 'config/config.dev.php';
+        // Load local configration settings
+        if (file_exists(ROOT_DIR . 'config/config.local.php')) {
+            include_once ROOT_DIR . 'config/config.local.php';
         }
 
         // Set error reporting level
@@ -109,44 +105,8 @@ return call_user_func(
 
         // Sessions
         $app->container->singleton('SessionHandler', function () use ($app) {
-            return new WolfMoritz\Session\SessionHandler($app->db, $app->config('session'));
+            return new Piton\Session\SessionHandler($app->db, $app->config('session'));
         });
-
-        // Middleware?
-        // Authentication to secure admin routes
-        // $app->authenticated = function () use ($app) {
-        //     // return function () use ($app) {
-        //     $security = $app->security;
-        //     if (!$security->authenticated()) {
-        //         $app->redirectTo('home');
-        //     }
-
-        //     // Do not cache authenticated pages, no backbutton
-        //     // https://www.owasp.org/index.php/Testing_for_Logout_and_Browser_Cache_Management_(OWASP-AT-007)
-        //     $app->response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
-        //     $app->response->headers->set('Pragma', 'no-cache');
-        //     $app->response->headers->set('Expires', '0'); // Purposely illegal vaule
-        //     // };
-        // };
-
-        // Facebook Authentication
-        $app->FacebookSDK = function () use ($app) {
-            return new Facebook\Facebook($app->config('auth.facebook'));
-        };
-
-        // Google Authentication
-        $app->GoogleSDK = function () use ($app) {
-            // Get Google configuration
-            $googleConfig = $app->config('auth.google');
-
-            // Create client
-            $googleClient = new Google_Client();
-            $googleClient->setScopes(['openid https://www.googleapis.com/auth/plus.login profile email']);
-            $googleClient->setClientId($googleConfig['client_id']);
-            $googleClient->setClientSecret($googleConfig['client_secret']);
-
-            return $googleClient;
-        };
 
         // Security
         // TODO Rename references to SecurityHandler
@@ -154,15 +114,14 @@ return call_user_func(
             return new Recipe\Library\SecurityHandler($app);
         });
 
-        // Mail message
-        $app->mailMessage = function () {
-            return new Nette\Mail\Message;
+        // Emails
+        $app->emailHandler = function () use ($app) {
+            return new Recipe\Library\Email(
+                new PHPMailer\PHPMailer\PHPMailer(true),
+                $app->log,
+                $app->config('email')
+            );
         };
-
-        // Send mail message
-        $app->container->singleton('sendMailMessage', function () {
-            return new Nette\Mail\SendmailMailer();
-        });
 
         // Pagination Extension
         $app->PaginationHandler = function () {
