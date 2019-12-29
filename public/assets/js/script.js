@@ -41,7 +41,7 @@ $(document).on("scroll", function() {
   if ($('#header').is(':visible')) {
     if ($(document).scrollTop() > 125) {
       $('nav.navbar').addClass('navbar-fixed-top');
-      $('body').css('padding-top','58px');
+      $('body').css('padding-top','0px');
     } else {
       $('nav.navbar').removeClass('navbar-fixed-top');
       $('body').css('padding-top','inherit');
@@ -52,17 +52,17 @@ $(document).on("scroll", function() {
 // If the page is loaded on mobile, just set fixed navbar immediately
 if (!$('#header').is(':visible')) {
   $('nav.navbar').addClass('navbar-fixed-top');
-  $('body').css('padding-top','58px');
+  $('body').css('padding-top','0px');
 }
 
 // Bind resize event to set or remove mobile XS nav fixed
 $(window).resize(function(){
   if (!$('#header').is(':visible')) {
     $('nav.navbar').addClass('navbar-fixed-top');
-    $('body').css('padding-top','58px');
+    $('body').css('padding-top','0px');
   } else if ($(document).scrollTop() > 125) {
     $('nav.navbar').addClass('navbar-fixed-top');
-    $('body').css('padding-top','58px');
+    $('body').css('padding-top','0px');
   } else if ($(document).scrollTop() < 125) {
     $('nav.navbar').removeClass('navbar-fixed-top');
     $('body').css('padding-top','inherit');

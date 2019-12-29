@@ -1,26 +1,61 @@
 @import 'vendor/vendor';
 @import 'typography';
-
-
-
-*, *::before, *::after {
+@import 'recipeLayout';
+ 
+ 
+ 
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     @include margin(0);
     @include padding(0);
 }
-html, body {
-    
-}
-html {
-    font-family: 'Atlata';
+ 
+html,
+body {}
+ 
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    font-family: 'Alata', sans-serif;
     line-height: 1.5;
+    min-height: 100vh;
+    width: 100vw;
 }
+ 
+footer {
+    margin-top: auto;
+    background: #efefef;
+}
+ 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+ 
 img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
 }
+ 
+.flex-container {
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+.flex-container div {
+    @include padding(1em);
+}
+ 
 .grid-container {
     width: 90vw;
     max-width: 1200px;
@@ -30,6 +65,7 @@ img {
     gap: 1em;
     @include padding(1em);
 }
+ 
 .recipe-card {
     display: flex;
     flex-flow: column nowrap;
@@ -39,16 +75,18 @@ img {
     background-color: #fff;
     overflow: hidden;
 }
+ 
 .img-container {
     height: 250px;
     object-fit: cover;
 }
-
-
-.title-container {
-    @include margin(auto null null);
-    @include padding(1em);
+ 
+.content-container {
+    width: 85vw;
+    max-width: 1200px;
+    @include margin(0 auto);
 }
-.content-wrapper {
-   
+ 
+.footer {
+    grid-area: footer;
 }
