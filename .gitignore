@@ -6,12 +6,6 @@ config/config.local.php
 migrate.php
 *-old/
 
-# Production config
-config/config.prod.php
-
-# Ignore Dreamweaver files
-*_notes/
-
 # Uploaded files
 public/files/
 

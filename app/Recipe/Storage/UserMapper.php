@@ -9,7 +9,7 @@ class UserMapper extends DataMapperAbstract
     protected $table = 'pp_user';
     protected $tableAlias = 'us';
     protected $primaryKey = 'user_id';
-    protected $modifyColumns = array('email', 'first_name', 'last_name', 'role', 'facebook_uid', 'google_uid', 'active', 'approved', 'last_login_date');
+    protected $modifyColumns = ['last_login_date'];
     protected $domainObjectClass = 'User';
     protected $defaultSelect = 'select us.*, concat(us.first_name, \' \', us.last_name) user_name, concat(us.first_name, \'-\', us.last_name) user_url from pp_user us';
 
@@ -30,9 +30,6 @@ class UserMapper extends DataMapperAbstract
     public function getUserByEmail($email)
     {
         $this->sql = $this->defaultSelect . ' where email = ?';
-
-        // Clean up email
-        $email = $this->cleanEmailAddress($email);
         $this->bindValues[] = $email;
 
         // Fetch and return user
@@ -41,11 +38,5 @@ class UserMapper extends DataMapperAbstract
         $this->clear();
 
         return $result;
-    }
-
-    public function cleanEmailAddress($email)
-    {
-        // Trim and lowercase email string
-        return strtolower(trim($email));
     }
 }

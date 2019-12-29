@@ -102,4 +102,15 @@ class SecurityHandler
 
         return false;
     }
+
+    /**
+     * Generate Login Token Hash
+     *
+     * Generates login token
+     * @return string
+     */
+    public function generateLoginToken()
+    {
+        return hash('sha256', microtime() . bin2hex(random_bytes(32)));
+    }
 }

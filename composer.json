@@ -6,13 +6,11 @@
         "slim/logger": "0.1.*",
         "codeguy/upload": "*",
         "intervention/image": "2.*",
-        "wolfmoritz/session": "~1",
+        "pitoncms/session": "^1",
         "ahmetkapikiran/slim-cli-environment": "dev-master",
-        "facebook/php-sdk-v4" : "~5.0",
-        "google/apiclient": "1.0.*@beta",
         "vlucas/valitron": "^1.2",
-        "nette/mail": "^2.4",
-        "jaybizzle/crawler-detect": "1.*"
+        "jaybizzle/crawler-detect": "1.*",
+        "phpmailer/phpmailer": "^6.1"
     },
     "autoload": {
       "psr-4": {
