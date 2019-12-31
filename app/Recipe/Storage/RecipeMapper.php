@@ -18,9 +18,9 @@ class RecipeMapper extends DataMapperAbstract
      *
      * Define limit and offset to limit result set.
      * Returns an array of Domain Objects (one for each record)
-     * @param int, limit
-     * @param int, offset
-     * @param bool, only get published recipes (true)
+     * @param int limit
+     * @param int offset
+     * @param bool only get published recipes (true)
      * @return array
      */
     public function getRecipes($limit = null, $offset = null, $publishedRecipesOnly = true)

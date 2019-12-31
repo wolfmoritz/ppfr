@@ -16,7 +16,7 @@ $authenticated = function () use ($app) {
         // https://www.owasp.org/index.php/Testing_for_Logout_and_Browser_Cache_Management_(OWASP-AT-007)
         $app->response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
         $app->response->headers->set('Pragma', 'no-cache');
-        $app->response->headers->set('Expires', '0'); // Purposely illegal vaule
+        $app->response->headers->set('Expires', '0'); // Purposely illegal value
     };
 };
 
@@ -41,8 +41,13 @@ $app->group('/cook', $authenticated(), function () use ($app, $authorized) {
         (new AdminIndexController())->dashboard();
     })->name('adminDashboard');
 
-    // Recipes by User
-    $app->get('/recipes(/:page)', function ($page = 1) {
+    // All Recipes
+    $app->get('/recipes/all(/:page)', $authorized('admin'), function ($page = 1) {
+        (new AdminIndexController())->getAllRecipes($page);
+    })->name('adminAllRecipes');
+
+    // Recipes for Current User
+    $app->get('/recipes/my(/:page)', function ($page = 1) {
         (new AdminIndexController())->getRecipesByUser($page);
     })->name('adminRecipesByUser');
 

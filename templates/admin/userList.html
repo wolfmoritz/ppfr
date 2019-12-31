@@ -11,7 +11,7 @@
     <tbody>
       {% for u in users %}
       <tr>
-        <td>{{ u.user_id }}</td><td>{{ u.first_name }}</td><td>{{ u.last_name }}</td><td>{{ u.email }}</td><td>{{ u.last_login_date|date('m-d-Y') }}</td><td>{{ u.created_date|date('m-d-Y') }}</td>
+        <td>{{ u.user_id }}</td><td>{{ u.first_name }}</td><td>{{ u.last_name }}</td><td>{{ u.email }}</td><td>{{ u.last_login_date|date('m-d-Y H:m:s') }}</td><td>{{ u.created_date|date('m-d-Y') }}</td>
       </tr>
       {% endfor %}
     </tbody>
