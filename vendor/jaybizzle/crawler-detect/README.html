@@ -1,0 +1,67 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <p align="center"><a href="https://crawlerdetect.io/" target="_blank"><img src="https://cloud.githubusercontent.com/assets/340752/23082173/1bd1a396-f550-11e6-8aba-4d3c75edea2f.png" width="321" height="219" /></a><br><br>
+<a href="https://crawlerdetect.io/" target="_blank">crawlerdetect.io</a>
+<br><br>
+</p>
+
+<p align="center">
+<a href="https://travis-ci.org/JayBizzle/Crawler-Detect"><img src="https://img.shields.io/travis/JayBizzle/Crawler-Detect/master.svg?style=flat-square" /></a>
+<a href="https://packagist.org/packages/jaybizzle/crawler-detect"><img src="https://img.shields.io/packagist/dm/JayBizzle/Crawler-Detect.svg?style=flat-square" /></a>
+<a href="https://scrutinizer-ci.com/g/JayBizzle/Crawler-Detect/?branch=master"><img src="https://img.shields.io/scrutinizer/g/JayBizzle/Crawler-Detect.svg?style=flat-square" /></a>
+<a href="https://github.com/JayBizzle/Crawler-Detect"><img src="https://img.shields.io/badge/license-MIT-ff69b4.svg?style=flat-square" /></a>
+<a href="https://packagist.org/packages/jaybizzle/crawler-detect"><img src="https://img.shields.io/packagist/v/jaybizzle/Crawler-Detect.svg?style=flat-square" /></a>
+<a href="https://styleci.io/repos/32755917"><img src="https://styleci.io/repos/32755917/shield" /></a>
+<a href="https://coveralls.io/github/JayBizzle/Crawler-Detect"><img src="https://img.shields.io/coveralls/JayBizzle/Crawler-Detect/master.svg?style=flat-square" /></a>
+</p>
+
+<h2 id="about-crawlerdetect">About CrawlerDetect</h2>
+<p>CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent and http_from header. Currently able to detect 1,000&#39;s of bots/spiders/crawlers.</p>
+<h3 id="installation">Installation</h3>
+<p>Run <code>composer require jaybizzle/crawler-detect 1.*</code> or add <code>&quot;jaybizzle/crawler-detect&quot; :&quot;1.*&quot;</code> to your <code>composer.json</code>.</p>
+<h3 id="usage">Usage</h3>
+<pre><code class="lang-PHP">use Jaybizzle\CrawlerDetect\CrawlerDetect;
+
+$CrawlerDetect = new CrawlerDetect;
+
+// Check the user agent of the current &#39;visitor&#39;
+if($CrawlerDetect-&gt;isCrawler()) {
+    // true if crawler user agent detected
+}
+
+// Pass a user agent as a string
+if($CrawlerDetect-&gt;isCrawler(&#39;Mozilla/5.0 (compatible; Sosospider/2.0; +http://help.soso.com/webspider.htm)&#39;)) {
+    // true if crawler user agent detected
+}
+
+// Output the name of the bot that matched (if any)
+echo $CrawlerDetect-&gt;getMatches();
+</code></pre>
+<h3 id="contributing">Contributing</h3>
+<p>If you find a bot/spider/crawler user agent that CrawlerDetect fails to detect, please submit a pull request with the regex pattern added to the <code>$data</code> array in <code>Fixtures/Crawlers.php</code> and add the failing user agent to <code>tests/crawlers.txt</code>.</p>
+<p>Failing that, just create an issue with the user agent you have found, and we&#39;ll take it from there :)</p>
+<h3 id="laravel-package">Laravel Package</h3>
+<p>If you would like to use this with Laravel 4/5, please see <a href="https://github.com/JayBizzle/Laravel-Crawler-Detect">Laravel-Crawler-Detect</a></p>
+<h3 id="symfony-bundle">Symfony Bundle</h3>
+<p>To use this library with Symfony 2/3/4, check out the <a href="https://github.com/nicolasmure/CrawlerDetectBundle">CrawlerDetectBundle</a>.</p>
+<h3 id="yii2-extension">YII2 Extension</h3>
+<p>To use this library with the YII2 framework, check out <a href="https://github.com/AlikDex/yii2-crawler-detect">yii2-crawler-detect</a>.</p>
+<h3 id="es6-library">ES6 Library</h3>
+<p>To use this library with NodeJS or any ES6 application based, check out <a href="https://github.com/JefferyHus/es6-crawler-detect">es6-crawler-detect</a>.</p>
+<h3 id="python-library">Python Library</h3>
+<p>To use this library in a Python project, check out <a href="https://github.com/moskrc/CrawlerDetect">crawlerdetect</a>.</p>
+<h3 id="-net-library">.NET Library</h3>
+<p>To use this library in a .net standard (including .net core) based project, check out <a href="https://github.com/gplumb/NetCrawlerDetect">NetCrawlerDetect</a>.</p>
+<h3 id="nette-extension">Nette Extension</h3>
+<p>To use this library with the Nette framework, checkout <a href="https://github.com/JanGalek/Crawler-Detect">NetteCrawlerDetect</a>.</p>
+<h3 id="ruby-gem">Ruby Gem</h3>
+<p>To use this library with Ruby on Rails or any Ruby-based application, check out <a href="https://github.com/loadkpi/crawler_detect">crawler_detect</a> gem.</p>
+<p><em>Parts of this class are based on the brilliant <a href="https://github.com/serbanghita/Mobile-Detect">MobileDetect</a></em></p>
+<p><a href="https://github.com/JayBizzle/Crawler-Detect"><img src="https://ga-beacon.appspot.com/UA-72430465-1/Crawler-Detect/readme?pixel" alt="Analytics"></a></p>
+
+      </body>
+    </html>

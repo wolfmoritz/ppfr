@@ -1,0 +1,118 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="slim-views">Slim Views</h1>
+<p>This repository contains custom View classes for the template frameworks listed below. 
+You can use any of these custom View classes by either requiring the appropriate class in your 
+Slim Framework bootstrap file and initialize your Slim application using an instance of 
+the selected View class or using Composer (the recommended way).</p>
+<p>Slim Views only officially support the following views listed below.</p>
+<ul>
+<li>Smarty</li>
+<li>Twig</li>
+</ul>
+<h2 id="how-to-install">How to Install</h2>
+<h4 id="using-composer">using <a href="http://getcomposer.org/">Composer</a></h4>
+<p>Install in your project by running the following composer command:</p>
+<pre><code class="lang-bash">$ php composer require slim/views
+</code></pre>
+<h2 id="smarty">Smarty</h2>
+<h3 id="how-to-use">How to use</h3>
+<pre><code class="lang-php">&lt;?php
+require &#39;vendor/autoload.php&#39;;
+
+$app = new \Slim\Slim(array(
+    &#39;view&#39; =&gt; new \Slim\Views\Smarty()
+));
+</code></pre>
+<p>To use Smarty options do the following:</p>
+<pre><code class="lang-php">$view = $app-&gt;view();
+$view-&gt;parserDirectory = dirname(__FILE__) . &#39;smarty&#39;;
+$view-&gt;parserCompileDirectory = dirname(__FILE__) . &#39;/compiled&#39;;
+$view-&gt;parserCacheDirectory = dirname(__FILE__) . &#39;/cache&#39;;
+</code></pre>
+<h2 id="twig">Twig</h2>
+<h3 id="how-to-use">How to use</h3>
+<pre><code class="lang-php">&lt;?php
+require &#39;vendor/autoload.php&#39;;
+
+$app = new \Slim\Slim(array(
+    &#39;view&#39; =&gt; new \Slim\Views\Twig()
+));
+</code></pre>
+<p>To use Twig options do the following:</p>
+<pre><code class="lang-php">$view = $app-&gt;view();
+$view-&gt;parserOptions = array(
+    &#39;debug&#39; =&gt; true,
+    &#39;cache&#39; =&gt; dirname(__FILE__) . &#39;/cache&#39;
+);
+</code></pre>
+<p>In addition to all of this we also have a few helper functions which are included for both view parsers.
+In order to start using these you can add them to their respective view parser as stated below:</p>
+<h4 id="twig">Twig</h4>
+<pre><code class="lang-php">$view-&gt;parserExtensions = array(
+    new \Slim\Views\TwigExtension(),
+);
+</code></pre>
+<h4 id="smarty">Smarty</h4>
+<pre><code class="lang-php">$view-&gt;parserExtensions = array(
+    dirname(__FILE__) . &#39;/vendor/slim/views/Slim/Views/SmartyPlugins&#39;,
+);
+</code></pre>
+<p>These helpers are listed below.</p>
+<ul>
+<li>urlFor</li>
+<li>siteUrl</li>
+<li>baseUrl</li>
+<li>currentUrl</li>
+</ul>
+<h4 id="urlfor">urlFor</h4>
+<p><strong>Twig</strong></p>
+<p>Inside your Twig template you would write:</p>
+<pre><code>{{ urlFor(&#39;hello&#39;, {&quot;name&quot;: &quot;Josh&quot;, &quot;age&quot;: &quot;19&quot;}) }}
+</code></pre><p>You can easily pass variables that are objects or arrays by doing:</p>
+<pre><code>&lt;a href=&quot;{{ urlFor(&#39;hello&#39;, {&quot;name&quot;: person.name, &quot;age&quot;: person.age}) }}&quot;&gt;Hello {{ name }}&lt;/a&gt;
+</code></pre><p>If you need to specify the appname for the getInstance method in the urlFor functions, set it as the third parameter of the function
+in your template:</p>
+<pre><code>&lt;a href=&quot;{{ urlFor(&#39;hello&#39;, {&quot;name&quot;: person.name, &quot;age&quot;: person.age}, &#39;admin&#39;) }}&quot;&gt;Hello {{ name }}&lt;/a&gt;
+</code></pre><p><strong>Smarty</strong></p>
+<p>Inside your Smarty template you would write:</p>
+<pre><code>{urlFor name=&quot;hello&quot; options=&quot;name.Josh|age.26&quot;}
+</code></pre><p>or with the new array syntax:</p>
+<pre><code>{urlFor name=&quot;hello&quot; options=[&quot;name&quot; =&gt; &quot;Josh&quot;, &quot;age&quot; =&gt; &quot;26&quot;]}
+</code></pre><p>You can easily pass variables that are arrays as normal or using the (.):</p>
+<pre><code>&lt;a href=&quot;{urlFor name=&quot;hello&quot; options=&quot;name.{$person.name}|age.{$person.age}&quot;}&quot;&gt;Hello {$name}&lt;/a&gt;
+</code></pre><p>If you need to specify the appname for the getInstance method in the urlFor functions, set the appname parameter in your function:</p>
+<pre><code>&lt;a href=&quot;{urlFor name=&quot;hello&quot; appname=&quot;admin&quot; options=&quot;name.{$person.name}|age.{$person.age}&quot;}&quot;&gt;Hello {$name}&lt;/a&gt;
+</code></pre><h4 id="siteurl">siteUrl</h4>
+<p><strong>Twig</strong></p>
+<p>Inside your Twig template you would write:</p>
+<pre><code>{{ siteUrl(&#39;/about/me&#39;) }}
+</code></pre><p><strong>Smarty</strong></p>
+<p>Inside your Smarty template you would write:</p>
+<pre><code>{siteUrl url=&#39;/about/me&#39;}
+</code></pre><h4 id="baseurl">baseUrl</h4>
+<p><strong>Twig</strong></p>
+<p>Inside your Twig template you would write:</p>
+<pre><code>{{ baseUrl() }}
+</code></pre><p><strong>Smarty</strong></p>
+<p>Inside your Smarty template you would write:</p>
+<pre><code>{baseUrl}
+</code></pre><h4 id="currenturl">currentUrl</h4>
+<p><strong>Twig</strong></p>
+<p>Inside your Twig template you would write:</p>
+<pre><code>{{ currentUrl() }}
+</code></pre><p><strong>Smarty</strong></p>
+<p>Inside your Smarty template you would write:</p>
+<pre><code>{currentUrl}
+</code></pre><h2 id="authors">Authors</h2>
+<p><a href="https://github.com/codeguy">Josh Lockhart</a></p>
+<p><a href="https://github.com/silentworks">Andrew Smith</a></p>
+<h2 id="license">License</h2>
+<p>MIT Public License</p>
+
+      </body>
+    </html>
