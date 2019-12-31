@@ -1,17 +1,58 @@
+.feature {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    min-height: 475px;
+    border-radius: 10px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+.feature img{
+    position: absolute;
+    height: 475px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    object-fit: cover;
+    z-index: 0;
+}
+.feature .title-container {
+    position: absolute;
+    z-index: 2;
+    color: white;
+    text-shadow: 0 2px 2px rgba(black, .5);
+    background: rgba(black, .5);
+    @include padding(4rem);
+    border-radius: 10px;
+    Width: 50vw;
+    text-align: center;
+}
+.feature .title-container h1 {
+    font-size:2.75rem; 
+}
+.feature .title-container p {
+    font-size: 2rem;
+}
+
 .title-container {
     @include margin(auto null null);
     @include padding(1em null null);
 }
 
 .wrapper {
+    @include margin(1em null);
+    background: pink;
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-auto-rows: auto;
     grid-template-areas:
-        "recipe-image recipe-image"
-        "main-content social"
         "main-content meta"
         "main-content notes"
+        "main-content social"
         "main-content categories"
         "main-content owner"
         "main-content .";
@@ -41,17 +82,17 @@
     grid-template-columns: auto 1fr;
     column-gap: 1em;
     align-content: flex-start;
-    @include padding(1em null);
+ 
     grid-area: meta;
-    background: lightblue;
+    background: yellow;
 }
 .recipe-notes {
     grid-area: notes;
     display: grid;
     align-content: flex-start;
     font-size: .9rem;
-    background: pink;
     @include padding(1em null);
+    background: thistle;
 }
 .socialContainer {
     display: grid;
@@ -59,7 +100,7 @@
    grid-template-columns: repeat(auto-fit, minmax(0px, 50px));
     align-content: flex-start;
     grid-area: social;
-    background: lightseagreen;
+    background: brown;
 }
 
 .recipe-categories {
@@ -67,20 +108,18 @@
     display: grid;
     @include padding(1em null);
     align-content: flex-start;
-    background: lightyellow;
+    background: lime;
 }
-
-
 
 .recipe-owner {
     grid-area: owner;
     display: grid;
     @include padding(1em null);
-   
+   background: violet;
     align-content: flex-start;
-    background: lightsteelblue;
 }
-
+ 
 .main-content {
     grid-area: main-content;
+    background: coral;
 }

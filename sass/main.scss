@@ -13,20 +13,26 @@
 }
  
 html,
-body {}
+body {
+    background-color: #ededed;
+}
  
 body {
     display: flex;
     flex-flow: column nowrap;
-    font-family: 'Alata', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     line-height: 1.5;
     min-height: 100vh;
     width: 100vw;
+    color: #333;
+    letter-spacing: .5px;
 }
- 
+.container {
+
+}
 footer {
     margin-top: auto;
-    background: #efefef;
+  
 }
  
 h1,
@@ -36,8 +42,7 @@ h4,
 h5,
 h6 {
     line-height: 1;
-    margin: 0;
-    padding: 0;
+  
 }
  
 img {
@@ -82,11 +87,13 @@ img {
 }
  
 .content-container {
-    width: 85vw;
-    max-width: 1200px;
+    width: 95vw;
+    max-width: 1600px;
     @include margin(0 auto);
+    background: #fff;
+    @include padding(1em);
 }
  
 .footer {
     grid-area: footer;
-}
+} 
