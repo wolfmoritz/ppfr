@@ -1,0 +1,11 @@
+	<div class="socialContainer">
+		<div class="facebook-container">
+			<div class="fb-like" data-width="25px" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+		</div>
+
+		{% if recipe.main_photo %}
+		<div class="pinterest-container">
+			<a data-pin-do="buttonPin" data-pin-count="beside" href="https://www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}"></a>
+		</div>
+		{% endif %}
+    </div><!-- .end socialContainer -->

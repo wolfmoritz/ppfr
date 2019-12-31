@@ -37,8 +37,10 @@
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=251905954939842&autoLogAppEvents=1"></script>
 
-<!--Begin Large Logo Container 
+<!--Begin Large Logo Container
 <div class="container-fluid" id="header">
   <a href="{{ siteUrlFor('home') }}"><img src="{{ request.basePath }}/assets/img/ppfrLogo.png" class="img-responsive center-block" alt="Peri's Place For Recipes"></a>
 </div>
@@ -62,7 +64,7 @@
      <li class="nav-link {% if uriSegment(1) == '' %} active{% endif %}"> <a href="{{ siteUrlFor('home') }}">Home <span class="sr-only">(current)</span></a></li>
      <li class="nav-link {% if uriSegment(1) == 'about' %} active{% endif %}"> <a href="{{ siteUrlFor('about') }}">About Me</a></li>
      <li class="nav-link {% if uriSegment(1) == 'blog' %} active{% endif %}"> <a href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
-     
+
      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Categories
@@ -79,7 +81,7 @@
     </ul>
     <form action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" autocomplete="off" name="terms" value="{{ recipes.searchTerms }}">
-      
+
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
@@ -90,39 +92,24 @@
 
 <main class="content-container">
   {% block body %}
-    
+
     {% endblock %}
 </main>
 
-  
-    
+
+
 <footer>
   <div class="container flex-container">
-    <div class=""> <h6>Coded by </h6><a href="http://moritzmedia.com">Moritz Media Solutions LLC</a></div>
-   <div class=""> <h6>Copyright &copy; 2012 - {{ 'now'|date('Y') }}<br> Peri&apos;s Place For Recipes</h6>   </div>
-        
-    </div>
-         
+    <div class=""><h6>Coded by </h6><a href="http://moritzmedia.com">Moritz Media Solutions LLC</a></div>
+    <div class=""><h6>Copyright &copy; 2012 - {{ 'now'|date('Y') }}<br> Peri&apos;s Place For Recipes</h6></div>
+  </div>
 </footer>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
-  
-  <script src="{{ request.basePath }}/assets/js/imagesloaded.js"></script>
-  <script src="{{ request.basePath }}/assets/js/jquery.masonry.min.js"></script>
-  <script src="{{ request.basePath }}/assets/js/script.js"></script> 
-
-  <script>
-    // Google Login
-    (function() {
-       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-       po.src = 'https://apis.google.com/js/client:plusone.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-     })();
-  </script>
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
 
 {% if production %}
   <!-- Default Statcounter code for Perisplaceforrecipes.com -->
@@ -151,17 +138,6 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-  </script>
-
-  <script type="text/javascript">
-  // Pinterest
-  (function(d){
-      var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
-      p.type = 'text/javascript';
-      p.async = true;
-      p.src = '//assets.pinterest.com/js/pinit.js';
-      f.parentNode.insertBefore(p, f);
-  }(document));
   </script>
 {% endif %}
 </body>

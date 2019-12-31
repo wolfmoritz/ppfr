@@ -91,21 +91,7 @@
 		</div><!-- .recipeOwner -->
 	</div>
 
-	<div class="socialContainer">
-
-		<div class="socialButtonBox">
-			<div class="fb-like" data-href="{{ currentUrl() }}" data-layout="button_count" data-action="like"
-				data-show-faces="false" data-share="true"></div>
-		</div><!-- .end socialButtonBox -->
-		{% if recipe.main_photo %}
-
-		<div class="socialButtonBox">
-			<a href="//www.pinterest.com/pin/create/button/?url={{ currentUrl()|url_encode }}&media={{ imageUrl(recipe.recipe_id, recipe.main_photo)|url_encode }}&description={{ recipe.subtitle|url_encode }}"
-				data-pin-do="buttonPin" data-pin-config="beside"><img
-					src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
-		</div>
-		{% endif %}
-	</div><!-- .end socialContainer -->
+	{% include "_social.html" %}
 </div>
 
 
