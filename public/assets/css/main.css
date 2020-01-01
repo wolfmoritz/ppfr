@@ -1,6 +1,367 @@
+@charset "UTF-8";
 /* stylelint-disable order/properties-alphabetical-order */
 /* stylelint-enable */
 @import url("https://fonts.googleapis.com/css?family=Open Sans&display=swap");
+:root {
+  --font-family: system-ui, sans-serif;
+  --font-family--heading: var(--font-family);
+  --font-weight--thin: 100;
+  --font-weight--extra-light: 200;
+  --font-weight--light: 300;
+  --font-weight--normal: 400;
+  --font-weight--medium: 500;
+  --font-weight--semi-bold: 600;
+  --font-weight--bold: 700;
+  --font-weight--extra-bold: 800;
+  --font-weight--black: 900;
+  --line-height: 1.5;
+  --line-height--heading: 1.2;
+  --border-radius: 0.1875rem;
+  --spacing: 1.5rem;
+  --spacing--small: 0.75rem;
+  --border-width: 0.0625rem;
+  --border: var(--border-width) solid currentColor;
+  --focus-outline-width: 0.1875rem;
+  --focus-outline-offset: 0.125rem;
+  --focus-outline: var(--focus-outline-width) solid #1565c0;
+  --duration: 150ms;
+  --timing: ease;
+}
+
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  appearance: none;
+  background-color: #1565c0;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: var(--font-family-base);
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 600;
+  line-height: 1;
+  padding: var(--spacing--small) var(--spacing);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration) var(--timing);
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+button:hover,
+[type=button]:hover,
+[type=reset]:hover,
+[type=submit]:hover {
+  background-color: #3b83d5;
+}
+button:focus,
+[type=button]:focus,
+[type=reset]:focus,
+[type=submit]:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+button:disabled,
+[type=button]:disabled,
+[type=reset]:disabled,
+[type=submit]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+:root {
+  --form-box-shadow: inset 0 --border-width 0.1875rem rgba(#000, 0.06);
+  --form-box-shadow-focus: var(--form-box-shadow), 0 0 0.3125rem #1565c0;
+}
+
+fieldset {
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: var(--spacing--small);
+  padding: 0;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--spacing--small);
+}
+
+input,
+select,
+textarea {
+  display: block;
+  font-family: var(--font-family);
+  font-size: 1rem;
+}
+
+[type=color],
+[type=date],
+[type=datetime],
+[type=datetime-local],
+[type=email],
+[type=month],
+[type=number],
+[type=password],
+[type=search],
+[type=tel],
+[type=text],
+[type=time],
+[type=url],
+[type=week],
+input:not([type]),
+textarea {
+  appearance: none;
+  background-color: transparent;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--form-box-shadow);
+  box-sizing: border-box;
+  margin-bottom: var(--spacing--small);
+  padding: calc(var(--spacing) / 3);
+  transition: border-color var(--duration) var(--timing);
+  width: 100%;
+}
+[type=color]:focus,
+[type=date]:focus,
+[type=datetime]:focus,
+[type=datetime-local]:focus,
+[type=email]:focus,
+[type=month]:focus,
+[type=number]:focus,
+[type=password]:focus,
+[type=search]:focus,
+[type=tel]:focus,
+[type=text]:focus,
+[type=time]:focus,
+[type=url]:focus,
+[type=week]:focus,
+input:not([type]):focus,
+textarea:focus {
+  box-shadow: var(--form-box-shadow-focus);
+}
+[type=color]:disabled,
+[type=date]:disabled,
+[type=datetime]:disabled,
+[type=datetime-local]:disabled,
+[type=email]:disabled,
+[type=month]:disabled,
+[type=number]:disabled,
+[type=password]:disabled,
+[type=search]:disabled,
+[type=tel]:disabled,
+[type=text]:disabled,
+[type=time]:disabled,
+[type=url]:disabled,
+[type=week]:disabled,
+input:not([type]):disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+[type=color]:disabled:hover,
+[type=date]:disabled:hover,
+[type=datetime]:disabled:hover,
+[type=datetime-local]:disabled:hover,
+[type=email]:disabled:hover,
+[type=month]:disabled:hover,
+[type=number]:disabled:hover,
+[type=password]:disabled:hover,
+[type=search]:disabled:hover,
+[type=tel]:disabled:hover,
+[type=text]:disabled:hover,
+[type=time]:disabled:hover,
+[type=url]:disabled:hover,
+[type=week]:disabled:hover,
+input:not([type]):disabled:hover,
+textarea:disabled:hover {
+  border: var(--border);
+}
+[type=color]::placeholder,
+[type=date]::placeholder,
+[type=datetime]::placeholder,
+[type=datetime-local]::placeholder,
+[type=email]::placeholder,
+[type=month]::placeholder,
+[type=number]::placeholder,
+[type=password]::placeholder,
+[type=search]::placeholder,
+[type=tel]::placeholder,
+[type=text]::placeholder,
+[type=time]::placeholder,
+[type=url]::placeholder,
+[type=week]::placeholder,
+input:not([type])::placeholder,
+textarea::placeholder {
+  color: #333;
+  opacity: 0.25;
+}
+
+[type=search] {
+  -webkit-appearance: textfield;
+}
+
+textarea {
+  resize: vertical;
+}
+
+[type=checkbox],
+[type=radio] {
+  display: inline;
+  margin-right: var(--spacing--small);
+}
+
+[type=file] {
+  margin-bottom: var(--spacing--small);
+  width: 100%;
+}
+
+select {
+  margin-bottom: var(--spacing--small);
+  width: 100%;
+}
+
+[type=checkbox]:focus,
+[type=radio]:focus,
+[type=file]:focus,
+select:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+html {
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: 600;
+  margin: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img,
+picture {
+  margin: 0;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  margin: var(--spacing) 0;
+  table-layout: fixed;
+  text-align: left;
+  width: 100%;
+}
+
+thead {
+  line-height: var(--line-height--heading);
+  vertical-align: bottom;
+}
+
+tbody {
+  vertical-align: top;
+}
+
+tr {
+  border-bottom: var(--border);
+}
+
+th {
+  font-weight: 600;
+}
+
+th,
+td {
+  padding: var(--spacing--small) var(--spacing--small) var(--spacing--small) 0;
+}
+
+html {
+  color: #333;
+  font-family: var(--font-family);
+  font-size: 100%;
+  line-height: var(--line-height);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family--heading);
+  font-size: 1.25rem;
+  line-height: var(--line-height--heading);
+  margin: 0 0 var(--spacing--small);
+}
+
+p {
+  margin: 0 0 var(--spacing--small);
+}
+
+a {
+  color: #1565c0;
+  text-decoration-skip-ink: auto;
+  transition: color var(--duration) var(--timing);
+}
+a:hover {
+  color: #3b83d5;
+}
+a:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+hr {
+  border-bottom: var(--border);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  margin: var(--spacing) 0;
+}
+
 :root {
   font-size: 12px;
 }
@@ -23,13 +384,214 @@ h2 {
   font-size: 3rem;
 }
 
+h3 {
+  font-size: 2.5rem;
+}
+
 h4 {
   margin-top: 1em;
-  margin-bottom: 1em;
 }
 
 p {
   font-size: 1rem;
+}
+
+/* 
+$content-width will be the max width of the content within the navigation bar. 
+$breakpoint determines at which width the media query breakpoint will take effect.
+*/
+nav {
+  float: right;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  float: left;
+  position: relative;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0 20px;
+  line-height: 70px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  /*
+  The full path of this code is nav ul li a:not(:only-child):after. This means that the code will apply to any a tag in our nav list that is NOT an only child, aka any dropdown. The :after means it comes after the output of the tag. I’ve decided that to specify any nav item as a dropdown, it will be followed by a unicode arrow – ▾ (#9662).
+  */
+}
+
+nav ul li a:hover {
+  background: #f2f2f2;
+  color: #fb5958;
+}
+
+nav ul li a:not(:only-child):after {
+  padding-left: 4px;
+  content: " ▾";
+}
+
+nav ul li ul li {
+  min-width: 190px;
+}
+
+nav ul li ul li a {
+  padding: 15px;
+  line-height: 20px;
+}
+
+.nav-dropdown {
+  position: absolute;
+  z-index: 1;
+  /* Guarantees that the dropdown will display on top of any content. */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #000;
+  height: 70px;
+  width: 70px;
+}
+
+@media only screen and (max-width: 800px) {
+  .nav-mobile {
+    display: block;
+  }
+
+  nav {
+    width: 100%;
+    padding: 70px 0 15px;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  nav ul li {
+    float: none;
+  }
+
+  nav ul li a {
+    padding: 15px;
+    line-height: 20px;
+  }
+
+  nav ul li ul li a {
+    padding-left: 30px;
+  }
+}
+#nav-toggle {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+}
+
+#nav-toggle span,
+#nav-toggle span:before,
+#nav-toggle span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 5px;
+  width: 35px;
+  background: #fff;
+  position: absolute;
+  display: block;
+  content: "";
+  transition: all 300ms ease-in-out;
+}
+
+#nav-toggle span:before {
+  top: -10px;
+}
+
+#nav-toggle span:after {
+  bottom: -10px;
+}
+
+#nav-toggle.active span {
+  background-color: transparent;
+}
+
+#nav-toggle.active span:before, #nav-toggle.active span:after {
+  top: 0;
+}
+
+#nav-toggle.active span:before {
+  transform: rotate(45deg);
+}
+
+#nav-toggle.active span:after {
+  transform: rotate(-45deg);
+}
+
+@media screen and (min-width: 800px) {
+  .nav-list {
+    display: block !important;
+  }
+}
+/* 
+.navigation – the outer wrapper for the navbar. Specifies the height and color, and will stretch the full width of the viewport.
+*/
+.navigation {
+  height: 70px;
+  background: #000;
+  color: #fff;
+}
+
+/*
+.nav-container – the inner wrapper for the navbar. Defines how far the actual content should stretch.
+*/
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  float: left;
+  line-height: 70px;
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+
+.brand a,
+.brand a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+footer {
+  margin-top: auto;
+  background: #000;
+  color: #fff;
+}
+
+.recipe-card {
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  overflow: hidden;
 }
 
 .feature {
@@ -74,46 +636,37 @@ p {
   font-size: 2rem;
 }
 
-.title-container {
-  margin-top: auto;
-  padding-top: 1em;
-}
-
 .wrapper {
   margin-top: 1em;
   margin-bottom: 1em;
-  background: pink;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-auto-rows: auto;
-  grid-template-areas: "main-content meta" "main-content notes" "main-content social" "main-content categories" "main-content owner" "main-content .";
-}
-
-.recipe-image {
-  grid-area: recipe-image;
-  overflow: hidden;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-}
-
-.recipe-image img {
-  background-position: center center;
-  max-height: 475px;
-  object-fit: cover;
+  grid-template-rows: minmax(50px, auto);
+  grid-template-areas: "main-content social" "main-content meta" "main-content notes" "main-content categories" "main-content owner" "main-content .";
 }
 
 .main-content {
-  grid-area: content;
-  padding: 1em 1.5em;
+  grid-area: main-content;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+}
+
+.span {
+  grid-column: 1/-1;
+}
+
+.socialContainer {
+  display: flex;
+  flex-flow: column wrap;
+  grid-area: social;
 }
 
 .recipe-meta {
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: 1em;
+  column-gap: 0.5em;
   align-content: flex-start;
   grid-area: meta;
-  background: yellow;
 }
 
 .recipe-notes {
@@ -123,40 +676,18 @@ p {
   font-size: 0.9rem;
   padding-top: 1em;
   padding-bottom: 1em;
-  background: thistle;
-}
-
-.socialContainer {
-  display: grid;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  grid-template-columns: repeat(auto-fit, minmax(0px, 50px));
-  align-content: flex-start;
-  grid-area: social;
-  background: brown;
 }
 
 .recipe-categories {
   grid-area: categories;
   display: grid;
-  padding-top: 1em;
-  padding-bottom: 1em;
   align-content: flex-start;
-  background: lime;
 }
 
 .recipe-owner {
   grid-area: owner;
   display: grid;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  background: violet;
   align-content: flex-start;
-}
-
-.main-content {
-  grid-area: main-content;
-  background: coral;
 }
 
 *,
@@ -167,37 +698,26 @@ p {
   padding: 0;
 }
 
-html,
 body {
-  background-color: #ededed;
-}
-
-body {
-  display: flex;
-  flex-flow: column nowrap;
   font-family: "Open Sans", sans-serif;
   line-height: 1.5;
-  min-height: 100vh;
-  width: 100vw;
+  min-height: 100%;
+  width: 100%;
   color: #333;
   letter-spacing: 0.5px;
-}
-
-footer {
-  margin-top: auto;
 }
 
 h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
   line-height: 1;
 }
 
 img {
   width: 100%;
+  height: 100%;
 }
 
 .flex-container {
@@ -222,16 +742,6 @@ img {
   padding: 1em;
 }
 
-.recipe-card {
-  display: flex;
-  flex-flow: column nowrap;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-  background-color: #fff;
-  overflow: hidden;
-}
-
 .img-container {
   height: 250px;
   object-fit: cover;
@@ -243,10 +753,6 @@ img {
   margin: 0 auto;
   background: #fff;
   padding: 1em;
-}
-
-.footer {
-  grid-area: footer;
 }
 
 /*# sourceMappingURL=main.css.map */

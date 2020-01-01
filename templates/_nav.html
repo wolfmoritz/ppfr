@@ -1,0 +1,42 @@
+<section class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+      <a href="{{ siteUrlFor('home') }}">PPFR </a>
+    </div>
+    <nav>
+      <div class="nav-mobile">
+        <a id="nav-toggle" href="#!"><span></span></a>
+      </div>
+      <ul class="nav-list">
+        <!-- Setting the links to #! will ensure that no action takes place on click. -->
+        <li class="{% if uriSegment(1) == '' %} active{% endif %}"><a href="{{ siteUrlFor('home') }}">Home </a></li>
+        <li class="{% if uriSegment(1) == 'about' %} active{% endif %}"><a href="{{ siteUrlFor('about') }}">About Me</a>
+        </li>
+        <li class="{% if uriSegment(1) == 'blog' %} active{% endif %}"><a href="{{ siteUrlFor('blogPosts') }}">Blog</a>
+        </li>
+        <li><a href="#!">Categories</a>
+          <ul class="nav-dropdown">
+            <li> <a class="dropdown-item" href="{{ siteUrlFor('recipesAll') }}" title="View all recipes">All</a></li>
+            {% for cat in categories %}
+            <li>
+              <a class="dropdown-item" href="{{ siteUrlFor('recipesByCategory', cat.url) }}"
+                title="View recipes for {{ cat.name }}">{{ cat.name }}</a>
+            </li>
+            {% endfor %}
+
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+  <div class="search">
+    <form action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8"
+      class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput"
+        autocomplete="off" name="terms" value="{{ recipes.searchTerms }}">
+
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</section>

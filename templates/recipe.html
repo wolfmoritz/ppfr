@@ -1,27 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="title-container">
-	<h2 class="page-header">{{ recipe.title }}</h2>
-	<p>{{ recipe.subtitle }}</p>
-</div>
-
-
-<div class="wrapper">
-
-	<div class="recipe-image">
-		{% if recipe.main_photo %}
-		<!-- Begin recipe.main_photo -->
-		<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}"
-			alt="Photo of {{ recipe.title }}">
-				<!-- End .recipe.main_photo -->
+<div class="feature">
+	{% if recipe.main_photo %}
+	<!-- Begin recipe.main_photo -->
+	<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" alt="Photo of {{ recipe.title }}">
+	<!-- End .recipe.main_photo -->
 	{% endif %}
+	<div class="title-container">
+		<h2 class="page-header">{{ recipe.title }}</h2>
+		<p>{{ recipe.subtitle }}</p>
 	</div>
 
-
-
-
+</div>
+<div class="wrapper">
+	{% include "_social.html" %}
 	<div class="recipe-meta">
+		<h4 class="span">Quick Info</h4>
 		<!-- Begin recipe-meta -->
 		{% if recipe.servings %}
 		<div>Servings:</div>
@@ -76,27 +71,26 @@
 	</div>
 
 
-	<div class="recipe-owner">
-		<div class="recipeOwner">
-			<div>
-				Other recipes by <a href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
-						itemprop="author">{{ recipe.user_name }}</span></a>
-			</div>
-			<div>
-				Added on:
-				<meta itemprop="datePublished" content="{{ recipe.published_date }}">
-				{{ recipe.published_date|date('F j, Y') }}
-			</div>
-		<div>	Viewed: {{ recipe.view_count|number_format }} Times</di>
+
+	
+</div>
+<div class="recipe-owner">
+	<div class="recipeOwner">
+		<div>
+			Other recipes by <a href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
+					itemprop="author">{{ recipe.user_name }}</span></a>
+		</div>
+		<div>
+			Added on:
+			<meta itemprop="datePublished" content="{{ recipe.published_date }}">
+			{{ recipe.published_date|date('F j, Y') }}
+		</div>
+		<div> Viewed: {{ recipe.view_count|number_format }} Times</di>
 		</div><!-- .recipeOwner -->
 	</div>
-
-	{% include "_social.html" %}
 </div>
-
-
-<div class="admin-buttons">
-	{% if authorizedToEditRecipe(recipe) %} | <a class="btn-link"
-		href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}" role="button">Edit</a>{% endif %}
-</div>
-{% endblock %}
+	<div class="admin-buttons">
+		{% if authorizedToEditRecipe(recipe) %} | <a class="btn-link"
+			href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}" role="button">Edit</a>{% endif %}
+	</div>
+	{% endblock %}
