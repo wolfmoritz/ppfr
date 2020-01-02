@@ -1,22 +1,20 @@
-{% extends 'layout.html' %} 
+{% extends 'layout.html' %}
 
 {% block body %}
 
 <div class="container">
-<h2>{{ recipes.category.name }} Recipes</h2>
+  <h2>{{ recipes.category.name }} Recipes</h2>
 </div>
 
 <div class="grid-container">
-  {% for r in recipes.list %} 
+  {% for r in recipes.list %}
   {% include '_recipeCard.html' %}
-{% else %}
-<h3>No Recipes Found</h3>
+  {% else %}
+  <h3>No Recipes Found</h3>
 </div>
-{% endfor %} 
+{% endfor %}
 <div class="container">
   {{ pagination() }}
 </div>
-
-
 
 {% endblock %}
