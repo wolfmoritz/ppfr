@@ -1,0 +1,70 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    @include margin(0);
+    @include padding(0);
+}
+
+ 
+body {
+    // display: flex;
+    // flex-flow: column nowrap;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5;
+    min-height: 100%;
+    width: 100%;
+    color: #333;
+    letter-spacing: .5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5{
+    line-height: 1; 
+}
+ 
+img {
+    width: 100%;
+    height: 100%;
+}
+ 
+.flex-container {
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+.flex-container div {
+    @include padding(1em);
+}
+ 
+.grid-container {
+    width: 90vw;
+    max-width: 1200px;
+    @include margin(auto);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1em;
+    @include padding(1em);
+}
+ 
+
+ 
+.img-container {
+    height: 250px;
+    object-fit: cover;
+}
+ 
+.content-container {
+    width: 95vw;
+    max-width: 1600px;
+    @include margin(0 auto);
+    background: #fff;
+    @include padding(1em);
+}
+ 

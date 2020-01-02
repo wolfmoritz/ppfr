@@ -28,3 +28,6 @@ public/peri1.html
 
 # Vendor Git
 vendor/.git
+
+# Prepros
+prepros-6.config
