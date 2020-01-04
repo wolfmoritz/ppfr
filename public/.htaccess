@@ -9,33 +9,16 @@ Options -Indexes
   Header set X-Robots-Tag "noindex"
 </Files>
 
+# Additional Headers
+Header set Strict-Transport-Security "max-age=631138519; includeSubDomains"
+Header set Content-Security-Policy "default-src 'self' www.peareye.com peareye.com *.googleapis.com *.facebook.net *.facebook.com *.bootstrapcdn.com *.jquery.com *.jsdelivr.net *.pinterest.com *.gstatic.com *.statcounter.com *.google-analytics.com"
+Header set X-Frame-Options DENY
+Header set X-Content-Type-Options nosniff
+Header set Referrer-Policy no-referrer-when-downgrade
+Header set Feature-Policy 'self'
+Header set X-XSS-Protection "1; mode=block"
+
 RewriteEngine On
-
-# Redirect old blog pages
-RewriteCond %{REQUEST_URI} ^(.*)/blog/about-me/?
-RewriteRule ^blog/about-me/?$ http://%{HTTP_HOST}%1/about [NC,R=301,L]
-
-# User URL's have moved from '/recipe/user/2:Peri+Moritz' to '/recipe/user/2/Peri-Moritz'
-# The %1 replacement hack references a capture group from the condition above, to include the relative path on localhost
-RewriteCond %{REQUEST_URI} ^(.*)/recipe/user/\d+:[a-zA-Z+-]+/?
-RewriteRule ^recipe/user/(\d+):([a-zA-Z+-]+)/?$ http://%{HTTP_HOST}%1/recipe/user/$1/$2 [NC,R=301,L]
-
-# For those temporary new urls's without 'show' (reverted)
-RewriteCond %{REQUEST_URI} ^(.*)/recipe/\d+/?.*
-RewriteRule ^recipe/(\d+)/?(.*)$ http://%{HTTP_HOST}%1/recipe/show/$1/$2 [NC,R=301,L]
-
-# Catch requests to the old printable.php page and direct to the current recipe page
-# The %1 capture group only references the prior RewriteCond line, so we are passing the
-# first capture group into the second RewriteCond condition, and those captures into the redirect rule
-# See: http://stackoverflow.com/a/17793597/452133
-RewriteCond %{REQUEST_URI} ^(.*)/printable\.php
-RewriteCond %1/##%{QUERY_STRING} (.*)##id=(\d+)
-RewriteRule ^printable.php$ http://%{HTTP_HOST}%1recipe/%2? [NC,R=301,L]
-
-# Catch requests to the old recipe.php page and direct to the current recipe page
-RewriteCond %{REQUEST_URI} ^(.*)/recipe\.php
-RewriteCond %1/##%{QUERY_STRING} (.*)##id=(\d+)
-RewriteRule ^recipe.php$ http://%{HTTP_HOST}%1recipe/%2? [NC,R=301,L]
 
 # If a thumbnail is not found then invoke thumbnail maker
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -53,9 +36,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php [L]
 
-# To clean up URL's with index.php in the request path
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php(/[^\s\?]+)? [NC]
-RewriteRule ^ %1%2 [R=301,L]
+# To clean up URL's with index.php in the request path that appeared in results
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php(/[^\s\?]+)? [NC]
+#RewriteRule ^ %1%2 [R=301,L]
 
 # Caching
 <IfModule mod_expires.c>
