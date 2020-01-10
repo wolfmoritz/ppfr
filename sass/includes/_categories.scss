@@ -1,0 +1,22 @@
+#categories {
+ .categories-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .categories-item {
+  background: $clr-accent-light;
+
+  @include margin(.25em .5em);
+  @include padding(.25em .5em);
+  border-radius: $border-radius;
+
+  a {
+   color: $white;
+   text-decoration: none;
+
+  }
+ }
+}

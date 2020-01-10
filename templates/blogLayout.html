@@ -1,40 +1,46 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <div class="col-md-10">
-  	{% block blogBody %}
-  	{% endblock %}
-    </div>
-    <!--end col-md-10 left column -->
+<section id="blog">
+  <div class="section-inner">
+      {% block blogBody %}
+     
+  
+  
+    	{% endblock %}
+  </div>
+  </section>
+   
 
-    <div class="col-md-2 hidden-xs hidden-sm">
+   
 
-      <div class="sidenav">
-        <h5 class="page-header">Other Posts</h5>
-
-        {% for month, posts in blogPostNav() %}
-        <div>
-          <a class="" data-toggle="collapse" href="#collapseMonth-{{ month }}">{{ month|date('F Y') }}</a>
-          <div id="collapseMonth-{{ month }}" class="collapse">
-            <ul class="list-unstyled">
-              {% for post in posts %}
-              <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
-              {% endfor %}
-          </ul>
+      <aside>
+        <div class="aside__item">
+          <h5 class="page-header">Other Posts</h5>
+  
+          {% for month, posts in blogPostNav() %}
+          <div>
+            <a class="" data-toggle="collapse" href="#collapseMonth-{{ month }}">{{ month|date('F Y') }}</a>
+            <div id="collapseMonth-{{ month }}" class="collapse">
+              <ul class="list-unstyled">
+                {% for post in posts %}
+                <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+            </div>
           </div>
-        </div>
-        {% endfor %}
-      </div>
-
-      <div class="sidenav">
-        <h5 class="page-header">Random Recipe</h5>
-        <ul class="list-unstyled">
-          {% for r in randomRecipes(5) %}
-          <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
           {% endfor %}
-        </ul>
-      </div>
+        </div>
+  
+        <div class="aside__item">
+          <h5 class="page-header">Random Recipe</h5>
+          <ul class="list-unstyled">
+            {% for r in randomRecipes(4) %}
+            <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </aside>
 
-    </div>
-    <!--end col-me-2 right column -->
+  
 {% endblock %}

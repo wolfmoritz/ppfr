@@ -1,0 +1,47 @@
+// Recipe Cards
+
+.recipe-card {
+ background: $clr-background;
+ display: flex;
+ flex-flow: column nowrap;
+ border-radius: $border-radius;
+ box-shadow: $box-shadow;
+ overflow: hidden;
+
+ .img-container {
+  width: 100%;
+  height: 200px;
+  min-height: 200px;
+  overflow: hidden;
+
+  img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+  }
+ }
+
+ .title-container {
+  @include padding(1em .5em .5em);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: flex-end;
+
+  .recipe-title {
+   white-space: nowrap;
+   overflow: hidden;
+   @include ellipsis;
+   color: $clr-text;
+   text-decoration: none;
+   align-self: flex-start;
+   font-weight: $ff-l;
+
+   &:hover {
+    color: $clr-accent-light;
+    font-weight: $ff-n;
+   }
+  }
+ }
+}

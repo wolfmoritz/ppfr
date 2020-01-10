@@ -1,9 +1,38 @@
-{% extends 'layout.html' %} {% block body %}
+{% extends 'layout.html' %}
 
-<div class="grid-container">
-  {% include '_masonry.html' %}
-</div>
-
-<div class="btn" id="more-recipes-button">Load More</div>
+{% block body %}
+{% include "_feature.html" %} 
+</section>
+<section id="recent">
+  <div class="section-inner">
+      <h2>Recent</h2>
+      {% include '_recipeCards.html' %}
+      <div class="btn span" id="more-recipes-button">See More</div>
+    </div>
+  </div>
+  </section>
+  
+  <section id="popular">
+   <div class="section-inner">
+      <h2>Popular</h2>
+      {% include '_recipeCards.html' %}
+      <div class="btn span" id="more-recipes-button">See More</div>
+   </div>
+  </section>
+  <section id="random">
+  <div class="section-inner">
+      <h2>Random</h2>
+      {% include '_recipeCards.html' %}
+      <div class="btn span" id="more-recipes-button">See More</div>
+  </div>
+  </section>
+  <section id="blog">
+    <div class="section-inner">
+      <p>Recent 4 Blog Posts</p>
+    </section>
+    <section id="categories">
+    <div class="section-inner">  {% include '_categories.html' %}</div>
+    </div>
+  </section>
 
 {% endblock %}

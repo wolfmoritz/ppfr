@@ -1,0 +1,123 @@
+// Global
+
+*,
+*::before,
+*::after {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+}
+
+body,
+html {
+ background: $clr-background;
+}
+
+body {
+ font-family: $ff-sans;
+ font-weight: 400;
+ min-height: 100vh;
+ width: 100%;
+
+ display: flex;
+ flex-flow: column nowrap;
+}
+
+img {
+ width: 100%;
+ height: auto;
+ display: block;
+}
+
+p {
+ color: $clr-text;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+ font-family: $ff-serif;
+ font-weight: $ff-b;
+ color: $clr-accent-light;
+ @include margin(.5em null);
+}
+
+h1 {
+ font-size: 2.5rem;
+}
+
+h2 {
+ font-size: 2rem;
+}
+h3{
+ font-size: 1.5rem;
+}
+h4{
+ font-size: 1.25rem;
+}
+h5 {
+ font-size: .8rem;
+ font-family: $ff-sans;
+ font-weight: $ff-l;
+}
+.large-logo{
+
+  top: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background: $clr-primary;
+ img{
+   width: 300px;
+ }
+}
+
+// Default elements
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: 600;
+  margin: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+// widgets
+
+.btn {
+  background: $clr-primary;
+  @include padding(.75em 1.5em);
+  @include margin(.5em null null);
+  
+  border-radius: $border-radius;
+  border: solid 1px rgba($clr-accent-dark, .5);
+  display: inline-block;
+ 
+  &:hover {
+   background: $clr-accent-light;
+   color: $clr-background;
+   border: solid 1px rgba($clr-text, .5);
+   cursor: pointer;
+  }
+ }
+ // Utilities
+
+ .span {
+   grid-column: 1 / -1;
+ }
+ 
