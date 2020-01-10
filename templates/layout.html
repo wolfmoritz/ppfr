@@ -10,54 +10,22 @@
 
   <title>{% if title %}{{ title }} - {% endif %}Peri&apos;s Recipes{% if currentPageNumber > 1 %} - Page {{ currentPageNumber }}{% endif %}</title>
 
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ request.basePath }}/apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ request.basePath }}/apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ request.basePath }}/apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ request.basePath }}/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ request.basePath }}/apple-touch-icon-60x60.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ request.basePath }}/apple-touch-icon-120x120.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ request.basePath }}/apple-touch-icon-76x76.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ request.basePath }}/apple-touch-icon-152x152.png" />
-  <link rel="icon" type="image/png" href="{{ request.basePath }}/favicon-196x196.png" sizes="196x196" />
-  <link rel="icon" type="image/png" href="{{ request.basePath }}/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/png" href="{{ request.basePath }}/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="{{ request.basePath }}/favicon-16x16.png" sizes="16x16" />
-  <link rel="icon" type="image/png" href="{{ request.basePath }}/favicon-128.png" sizes="128x128" />
-  <link rel="icon" type="image/png" href="{{ request.basePath }}/favicon.ico" />
-  <meta name="application-name" content="&nbsp;"/>
-  <meta name="msapplication-TileColor" content="#FFFFFF" />
-  <meta name="msapplication-TileImage" content="{{ request.basePath }}/mstile-144x144.png" />
-  <meta name="msapplication-square70x70logo" content="{{ request.basePath }}/mstile-70x70.png" />
-  <meta name="msapplication-square150x150logo" content="{{ request.basePath }}/mstile-150x150.png" />
-  <meta name="msapplication-wide310x150logo" content="{{ request.basePath }}/mstile-310x150.png" />
-  <meta name="msapplication-square310x310logo" content="{{ request.basePath }}/mstile-310x310.png" />
-
-
+  <link rel="stylesheet" href="{{ request.basePath  }}/assets/fonts/css/all.min.css">
   <link href="{{ request.basePath }}/assets/css/main.css" rel="stylesheet" type="text/css" media="screen">
+
 </head>
 
 <body>
   <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=251905954939842&autoLogAppEvents=1"></script>
+<div class="large-logo">
+<img src="{{ request.basePath }}/assets/img/ppfrLogo.png" alt="">
 
-<!--Begin Large Logo Container
-<div class="container-fluid" id="header">
-  <a href="{{ siteUrlFor('home') }}"><img src="{{ request.basePath }}/assets/img/ppfrLogo.png" class="img-responsive center-block" alt="Peri's Place For Recipes"></a>
 </div>
--->
-
-<!--End Large Logo Container -->
-
-{% include "_nav.html" %}
-
-
-<main class="content-container">
-  {% block body %}
-
-    {% endblock %}
-</main>
-
-
+{% include "_nav.html" %} 
+ {% block body %}    
+ 
+ {% endblock %}
 
 {% include "_footer.html" %}
 

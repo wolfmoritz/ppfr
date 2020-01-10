@@ -1,7 +1,7 @@
-{# Masonry tile include #}
+<div class="grid-container">
+{% for r in recipes %}
 
-  {% for r in recipes %}
+  {% include '_recipeCard.html' %}
 
-{% include '_recipeCard.html' %}
-
-  {% endfor %}
+{% endfor %}
+</div>

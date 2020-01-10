@@ -1,10 +1,10 @@
 
 
- <ul class="">
+ <ul class="categories-list">
 
    {% for cat in categories %}
-   <li>
-     <a class="" href="{{ siteUrlFor('recipesByCategory', cat.url) }}"
+   <li class="categories-item">
+     <a  href="{{ siteUrlFor('recipesByCategory', cat.url) }}"
        title="View recipes for {{ cat.name }}">{{ cat.name }}</a>
    </li>
    {% endfor %}

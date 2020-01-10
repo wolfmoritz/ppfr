@@ -1,0 +1,44 @@
+.feature__container {
+  width: 100%;
+  height: 450px;
+  position: relative;
+  background: linear-gradient($clr-accent-light, $clr-primary);
+
+  img { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+  }
+
+  .feature__content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    @include margin(0 auto);
+    @include padding(1em);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($clr-text, .25);
+    text-align: center;
+  }
+  .feature__title{
+    color: $clr-background;
+    text-shadow: $text-shadow;
+    font-size: 2.4rem;
+    @include margin(null null .5em);
+  }
+  .feature__subtitle{
+    color: $clr-background;
+    text-shadow: $text-shadow;
+    font-size: 1.4rem;
+    @include margin(null null .5em);
+  }
+}

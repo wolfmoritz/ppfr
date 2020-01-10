@@ -1,0 +1,54 @@
+// Layout
+
+section {
+ background: $white;
+ // @include padding(null null 2em);
+}
+section:last-child {
+ @include margin(null null 3em);
+}
+.section-inner {
+ width: 90%;
+ max-width: $max-width;
+ @include margin(0 auto);
+ @include padding(1em null null);
+}
+
+.grid-container {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+ gap: 1em;
+}
+
+.sidebar {
+ background: $clr-background;
+ display: flex;
+ flex-flow: column nowrap;
+ .categories-item {
+  background: $clr-primary;
+  @include margin(.5em null null);
+  @include padding(.5em);
+  border-radius: $border-radius;
+  border: solid 1px rgba($clr-accent-dark, .5);
+  &:hover{
+   color: $clr-accent-light;
+   background: $clr-background;
+   border: solid 1px rgba($clr-accent-light, .5);
+  }
+  a{ 
+   color: $clr-text;
+   text-decoration: none;
+   line-height: 1.4;
+  
+  }
+
+ }
+}
+.two-col {
+ width: 90%;
+ max-width: $max-width;
+ @include margin(0 auto);
+ display: grid;
+ grid-template-columns: 4fr 1fr;
+
+}

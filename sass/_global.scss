@@ -1,70 +1,123 @@
+// Global
+
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    @include margin(0);
-    @include padding(0);
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
 }
 
- 
+body,
+html {
+ background: $clr-background;
+}
+
 body {
-    // display: flex;
-    // flex-flow: column nowrap;
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.5;
-    min-height: 100%;
-    width: 100%;
-    color: #333;
-    letter-spacing: .5px;
+ font-family: $ff-sans;
+ font-weight: 400;
+ min-height: 100vh;
+ width: 100%;
+
+ display: flex;
+ flex-flow: column nowrap;
+}
+
+img {
+ width: 100%;
+ height: auto;
+ display: block;
+}
+
+p {
+ color: $clr-text;
 }
 
 h1,
 h2,
 h3,
 h4,
-h5{
-    line-height: 1; 
+h5,
+h6 {
+ font-family: $ff-serif;
+ font-weight: $ff-b;
+ color: $clr-accent-light;
+ @include margin(.5em null);
 }
- 
-img {
-    width: 100%;
-    height: 100%;
-}
- 
-.flex-container {
-    text-align: center;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-}
- 
-.flex-container div {
-    @include padding(1em);
-}
- 
-.grid-container {
-    width: 90vw;
-    max-width: 1200px;
-    @include margin(auto);
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1em;
-    @include padding(1em);
-}
- 
 
- 
-.img-container {
-    height: 250px;
-    object-fit: cover;
+h1 {
+ font-size: 2.5rem;
 }
- 
-.content-container {
-    width: 95vw;
-    max-width: 1600px;
-    @include margin(0 auto);
-    background: #fff;
-    @include padding(1em);
+
+h2 {
+ font-size: 2rem;
 }
+h3{
+ font-size: 1.5rem;
+}
+h4{
+ font-size: 1.25rem;
+}
+h5 {
+ font-size: .8rem;
+ font-family: $ff-sans;
+ font-weight: $ff-l;
+}
+.large-logo{
+
+  top: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background: $clr-primary;
+ img{
+   width: 300px;
+ }
+}
+
+// Default elements
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: 600;
+  margin: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+// widgets
+
+.btn {
+  background: $clr-primary;
+  @include padding(.75em 1.5em);
+  @include margin(.5em null null);
+  
+  border-radius: $border-radius;
+  border: solid 1px rgba($clr-accent-dark, .5);
+  display: inline-block;
+ 
+  &:hover {
+   background: $clr-accent-light;
+   color: $clr-background;
+   border: solid 1px rgba($clr-text, .5);
+   cursor: pointer;
+  }
+ }
+ // Utilities
+
+ .span {
+   grid-column: 1 / -1;
+ }
  

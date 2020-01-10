@@ -1,96 +1,114 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="feature">
-	{% if recipe.main_photo %}
-	<!-- Begin recipe.main_photo -->
-	<img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" alt="Photo of {{ recipe.title }}">
-	<!-- End .recipe.main_photo -->
-	{% endif %}
-	<div class="title-container">
-		<h2 class="page-header">{{ recipe.title }}</h2>
-		<p>{{ recipe.subtitle }}</p>
-	</div>
 
+{% include "_feature.html" %}
+<div class="two-col">
+	<div class="left-col">
+		{% include "_social.html" %}
+
+		<section id="recipeIngredients">
+			<div class="section-inner">
+				<h4 class="span">Ingredients</h4>
+				<div class="ingredients">
+					{{ recipe.ingredients|raw }}
+				</div>
+		</section>
+
+		<section id="recipeDirections">
+			<div class="section-inner">
+				<h4>Preparation</h4>
+				<div class="recipetext" itemprop="recipeInstructions">
+					{{ recipe.instructions|raw }}
+				</div>
+		</section>
+
+
+	</div>
+	<div class="right-col">
+		<section id="recipeMeta">
+			<div class="section-inner">
+
+				<div class="recipeMeta">
+					<h4 class="span">Quick Info</h4>
+
+					<!-- Begin recipe-meta -->
+
+					{% if recipe.servings %}
+					<div>Servings:</div>
+					<div itemprop="recipeYield">{{ recipe.servings|raw }}</div>
+					{% endif %}
+
+					{% if recipe.temperature %}
+					<div>Oven Temp:</div>
+					<div>{{ recipe.temperature|raw }}</div>
+					{% endif %}
+
+					{% if recipe.prep_time %}
+					Prep Time: <span itemprop="prepTime"
+						content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time|raw }}</span>{% endif %}
+					{% if recipe.cook_time %}
+					Cook Time: <span itemprop="cookTime"
+						content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time|raw }}</span>{% endif %}
+					<!-- .recipe-meta -->
+				</div>
+			</div>
+		</section>
+		<section id="recipeRecipeNotes">
+			<div class="section-inner">
+				{% if recipe.notes %}
+
+				<h4>Notes</h4>
+				<div class="recipetext" itemprop="description">
+					{{ recipe.notes|raw }}
+				</div><!-- end notes -->
+
+				{% endif %}
+			</div>
+		</section>
+		<section id="recipeRecipeCategories">
+			<div class="section-inner">
+				<h4>Recipe Categories</h4>
+				<div itemprop="recipeCategory">
+					{% for c in recipe.categories %}<div class=""><a href="{{ siteUrlFor('recipesByCategory', c.url) }}"
+							title="View recipes for {{ c.name }}">{{ c.name }}</a></div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+		<section id="recipeRecipeStats">
+			<div class="section-inner">
+
+				<div class="recipeOwner">
+					<div>
+						Other recipes by <a
+							href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
+								itemprop="author">{{ recipe.user_name }}</span></a>
+					</div>
+					<div>
+						Added on:
+						<meta itemprop="datePublished" content="{{ recipe.published_date }}">
+						{{ recipe.published_date|date('F j, Y') }}
+					</div>
+					<div> Viewed: {{ recipe.view_count|number_format }} Times</di>
+					</div><!-- .recipeOwner -->
+				</div>
+
+				<div class="admin-buttons">
+					{% if authorizedToEditRecipe(recipe) %} | <a class="btn-link"
+						href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}"
+						role="button">Edit</a>{% endif %}
+				</div>
+			</div>
+		</section>
+	</div>
 </div>
-<div class="wrapper">
-	{% include "_social.html" %}
-	<div class="recipe-meta">
-		<h4 class="span">Quick Info</h4>
-		<!-- Begin recipe-meta -->
-		{% if recipe.servings %}
-		<div>Servings:</div>
-		<div><span itemprop="recipeYield">{{ recipe.servings|raw }}</span></div>{% endif %}
-		{% if recipe.temperature %}
-		<div>Oven Temp:</div>
-		<div>{{ recipe.temperature|raw }}</div>{% endif %}
-		{% if recipe.prep_time %}
-		Prep Time: <span itemprop="prepTime"
-			content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time|raw }}</span>{% endif %}
-		{% if recipe.cook_time %}
-		Cook Time: <span itemprop="cookTime"
-			content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time|raw }}</span>{% endif %}
-		<!-- .recipe-meta -->
-	</div>
-
-	<div class="main-content">
-		<h4>Ingredients</h4>
-		<div class="ingredients">
-			{{ recipe.ingredients|raw }}
-		</div>
-		<!--end ingredients -->
-
-		<h4>Preparation</h4>
-		<div class="recipetext" itemprop="recipeInstructions">
-			{{ recipe.instructions|raw }}
-		</div>
-		<!--end preparation -->
-
-	</div>
-
-	<div class="recipe-notes">
-		{% if recipe.notes %}
-		<span class="">
-			<h4>Notes</h4>
-			<div class="recipetext" itemprop="description">
-				{{ recipe.notes|raw }}
-			</div><!-- end notes -->
-		</span>
-		{% endif %}
-	</div>
-
-	<div class="recipe-categories">
-		<h4>Recipe Categories</h4>
-		<div itemprop="recipeCategory">
-			{% for c in recipe.categories %}<div class=""><a href="{{ siteUrlFor('recipesByCategory', c.url) }}"
-					title="View recipes for {{ c.name }}">{{ c.name }}</a></div>
-
-			{% endfor %}
-		</div>
-		<!--end recipe categories -->
-	</div>
 
 
 
-	
-</div>
-<div class="recipe-owner">
-	<div class="recipeOwner">
-		<div>
-			Other recipes by <a href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
-					itemprop="author">{{ recipe.user_name }}</span></a>
-		</div>
-		<div>
-			Added on:
-			<meta itemprop="datePublished" content="{{ recipe.published_date }}">
-			{{ recipe.published_date|date('F j, Y') }}
-		</div>
-		<div> Viewed: {{ recipe.view_count|number_format }} Times</di>
-		</div><!-- .recipeOwner -->
-	</div>
-</div>
-	<div class="admin-buttons">
-		{% if authorizedToEditRecipe(recipe) %} | <a class="btn-link"
-			href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}" role="button">Edit</a>{% endif %}
-	</div>
-	{% endblock %}
+
+
+
+
+{% endblock %}

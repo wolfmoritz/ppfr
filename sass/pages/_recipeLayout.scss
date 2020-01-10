@@ -1,101 +1,39 @@
-.feature {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    min-height: 475px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#recipeMeta {
+background: $clr-primary;
+
+.section-inner{
+ display: flex;
+ flex-flow: column nowrap;
+ @include padding(.5em null);
 }
 
-.feature img {
-    position: absolute;
-    height: 475px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    object-fit: cover;
-    z-index: 0;
+.recipeMeta {
+ display: grid;
+ grid-template-columns: auto 1fr;
+ grid-column-gap:  1em;
+ grid-row-gap: 5px;
 }
+}
+#recipeIngredients, #recipeDirections {
 
-.feature .title-container {
-    position: absolute;
-    z-index: 2;
-    color: white;
-    text-shadow: 0 2px 2px rgba(black, .5);
-    background: rgba(black, .5);
-    @include padding(4rem);
-    border-radius: 10px;
-    Width: 50vw;
-    text-align: center;
-}
-
-.feature .title-container h1 {
-    font-size: 2.75rem;
-}
-
-.feature .title-container p {
-    font-size: 2rem;
-}
-
-.wrapper {
-    @include margin(1em null);
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: minmax(50px, auto);
-    // grid-auto-rows: minmax(50px, auto);
-    grid-template-areas:
-        "main-content social"
-        "main-content meta"
-        "main-content notes"
-        "main-content categories"
-        "main-content owner"
-        "main-content .";
-}
-
-.main-content {
-    grid-area: main-content;
-    @include padding(null 1.5em);
-}
-
-.span {
-    grid-column: 1 / -1;
-}
-.socialContainer {
-    display: flex;
-    flex-flow: column wrap;
-    grid-area: social;
-}
-.recipe-meta {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: .5em;
-    align-content: flex-start;
-    grid-area: meta;
-}
-
-.recipe-notes {
-    grid-area: notes;
-    display: grid;
-    align-content: flex-start;
-    font-size: .9rem;
-    @include padding(1em null);
-}
+ul, ol{
 
 
-
-.recipe-categories {
-    grid-area: categories;
-    display: grid;
-    // @include padding(1em null);
-    align-content: flex-start;
+}
+li{
+ @include padding(2px null);
+ line-height: 1.5;
+ @media screen and (min-width: $breakpoint-desktop){
+  line-height: 1.5;
+ }
 }
 
-.recipe-owner {
-    grid-area: owner;
-    display: grid;
-    // @include padding(1em null);
-    align-content: flex-start;
+}
+.socialContainer{
+ display: flex;
+ justify-content: flex-start;
+@include padding(.5em null);
+div{
+ @include margin(null 1em null null);
+}
 }

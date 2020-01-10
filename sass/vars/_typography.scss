@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Open Sans&display=swap');
 
 
 // These values are the minimum and maximum viewport sizes to apply the font scaling
-$min_width: 400;
-$max_width: 1000;
+$min_width: 767;
+$max_width: 900;
 // These values represent the range of fon-tsize to apply
 // These values effect the base font-size, headings and other elements will scale proportionally
-$min_font: 12;
+$min_font: 14;
 $max_font: 16; 
 
 // Looking for a mixin? Try: https://codepen.io/MadeByMike/pen/vNrvdZ
@@ -22,19 +21,4 @@ $max_font: 16;
    :root { 
      font-size: #{$max_font}px;
    }
-}
-h1 {
-font-size: 3.5rem;
-}
-h2 {
-font-size: 3rem;
-}
-h3 {
-font-size: 2.5rem;
-}
-h4 {
-  @include margin(1em null null);
-}
-p {
-  font-size: 1rem;
 }
