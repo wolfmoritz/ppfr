@@ -1,10 +1,12 @@
 <?php
 namespace Recipe\Storage;
 
+use \Piton\ORM\DomainObject;
+
 /**
  * Blog Domain Object
  */
-class Blog extends DomainObjectAbstract
+class Blog extends DomainObject
 {
     /**
      * Get Nice Blog URL

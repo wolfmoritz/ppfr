@@ -35,6 +35,7 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         array (
             'Psr\\Http\\Message\\' => 17,
             'Piton\\Session\\' => 14,
+            'Piton\\ORM\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'J' => 
@@ -84,6 +85,10 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         array (
             0 => __DIR__ . '/..' . '/pitoncms/session/src',
         ),
+        'Piton\\ORM\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pitoncms/orm/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
@@ -119,10 +124,6 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         ),
         'S' => 
         array (
-            'Slim\\Extras' => 
-            array (
-                0 => __DIR__ . '/..' . '/ahmetkapikiran/slim-cli-environment',
-            ),
             'Slim' => 
             array (
                 0 => __DIR__ . '/..' . '/slim/slim',
@@ -290,6 +291,8 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
         'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
         'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
+        'Piton\\ORM\\DataMapperAbstract' => __DIR__ . '/..' . '/pitoncms/orm/src/DataMapperAbstract.php',
+        'Piton\\ORM\\DomainObject' => __DIR__ . '/..' . '/pitoncms/orm/src/DomainObject.php',
         'Piton\\Session\\SessionHandler' => __DIR__ . '/..' . '/pitoncms/session/src/SessionHandler.php',
         'Psr\\Http\\Message\\MessageInterface' => __DIR__ . '/..' . '/psr/http-message/src/MessageInterface.php',
         'Psr\\Http\\Message\\RequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/RequestInterface.php',
@@ -301,6 +304,7 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         'Recipe\\Controllers\\AdminActionController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/AdminActionController.php',
         'Recipe\\Controllers\\AdminIndexController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/AdminIndexController.php',
         'Recipe\\Controllers\\AuthenticationController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/AuthenticationController.php',
+        'Recipe\\Controllers\\BaseController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/BaseController.php',
         'Recipe\\Controllers\\BlogActionController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/BlogActionController.php',
         'Recipe\\Controllers\\BlogController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/BlogController.php',
         'Recipe\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Recipe/Controllers/IndexController.php',
@@ -315,13 +319,9 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         'Recipe\\Library\\Toolbox' => __DIR__ . '/../..' . '/app/Recipe/Library/Toolbox.php',
         'Recipe\\Storage\\Blog' => __DIR__ . '/../..' . '/app/Recipe/Storage/Blog.php',
         'Recipe\\Storage\\BlogMapper' => __DIR__ . '/../..' . '/app/Recipe/Storage/BlogMapper.php',
-        'Recipe\\Storage\\Category' => __DIR__ . '/../..' . '/app/Recipe/Storage/Category.php',
         'Recipe\\Storage\\CategoryMapper' => __DIR__ . '/../..' . '/app/Recipe/Storage/CategoryMapper.php',
-        'Recipe\\Storage\\DataMapperAbstract' => __DIR__ . '/../..' . '/app/Recipe/Storage/DataMapperAbstract.php',
-        'Recipe\\Storage\\DomainObjectAbstract' => __DIR__ . '/../..' . '/app/Recipe/Storage/DomainObjectAbstract.php',
         'Recipe\\Storage\\Recipe' => __DIR__ . '/../..' . '/app/Recipe/Storage/Recipe.php',
         'Recipe\\Storage\\RecipeMapper' => __DIR__ . '/../..' . '/app/Recipe/Storage/RecipeMapper.php',
-        'Recipe\\Storage\\User' => __DIR__ . '/../..' . '/app/Recipe/Storage/User.php',
         'Recipe\\Storage\\UserMapper' => __DIR__ . '/../..' . '/app/Recipe/Storage/UserMapper.php',
         'SlimFlashTest' => __DIR__ . '/..' . '/slim/slim/tests/Middleware/FlashTest.php',
         'SlimHttpUtilTest' => __DIR__ . '/..' . '/slim/slim/tests/Http/UtilTest.php',
@@ -329,7 +329,6 @@ class ComposerStaticInit1fe7eeb08a82e6e5ba7b6d8968890fb6
         'Slim\\Environment' => __DIR__ . '/..' . '/slim/slim/Slim/Environment.php',
         'Slim\\Exception\\Pass' => __DIR__ . '/..' . '/slim/slim/Slim/Exception/Pass.php',
         'Slim\\Exception\\Stop' => __DIR__ . '/..' . '/slim/slim/Slim/Exception/Stop.php',
-        'Slim\\Extras\\Environment' => __DIR__ . '/..' . '/ahmetkapikiran/slim-cli-environment/Slim/Extras/Environment.php',
         'Slim\\Helper\\Set' => __DIR__ . '/..' . '/slim/slim/Slim/Helper/Set.php',
         'Slim\\Http\\Cookies' => __DIR__ . '/..' . '/slim/slim/Slim/Http/Cookies.php',
         'Slim\\Http\\Headers' => __DIR__ . '/..' . '/slim/slim/Slim/Http/Headers.php',

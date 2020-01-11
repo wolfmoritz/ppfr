@@ -16,7 +16,7 @@ $authenticated = function () use ($app) {
         // https://www.owasp.org/index.php/Testing_for_Logout_and_Browser_Cache_Management_(OWASP-AT-007)
         $app->response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
         $app->response->headers->set('Pragma', 'no-cache');
-        $app->response->headers->set('Expires', '0'); // Purposely illegal vaule
+        $app->response->headers->set('Expires', '0'); // Purposely illegal value
     };
 };
 
@@ -34,15 +34,20 @@ $authorized = function ($role) use ($app) {
 // These admin routes are secured
 //
 
-$app->group('/cook', $authenticated(), function () use ($app, $authorized) {
+$app->group('/admin', $authenticated(), function () use ($app, $authorized) {
 
     // Dashboard
     $app->get('/', function () {
         (new AdminIndexController())->dashboard();
     })->name('adminDashboard');
 
-    // Recipes by User
-    $app->get('/recipes(/:page)', function ($page = 1) {
+    // All Recipes
+    $app->get('/recipes/all(/:page)', $authorized('admin'), function ($page = 1) {
+        (new AdminIndexController())->getAllRecipes($page);
+    })->name('adminAllRecipes');
+
+    // Recipes for Current User
+    $app->get('/recipes/my(/:page)', function ($page = 1) {
         (new AdminIndexController())->getRecipesByUser($page);
     })->name('adminRecipesByUser');
 
@@ -65,11 +70,6 @@ $app->group('/cook', $authenticated(), function () use ($app, $authorized) {
     $app->get('/recipe/delete(/:id)', function ($id) {
         (new AdminActionController())->deleteRecipe($id);
     })->name('adminDeleteRecipe');
-
-    // Test view recipe HTML email
-    $app->get('/recipe/email(/:id(/:slug))', function ($id, $slug = null) {
-        (new IndexController())->emailRecipe($id, $slug);
-    })->conditions(['id' => '\d+']);
 
     // List blog posts
     $app->get('/blog/', $authorized('admin'), function () {
@@ -104,7 +104,6 @@ $app->group('/cook', $authenticated(), function () use ($app, $authorized) {
 //
 // The routes below are public
 //
-
 
 // Login page with form to submit email
 $app->get('/letmein', function () {
@@ -201,13 +200,6 @@ $app->get('/updatesitemap', function () use ($app) {
     echo "Updating sitemap\n";
     $SitemapHandler = $app->sitemap;
     $SitemapHandler->make();
-});
-
-// -------------------------- API Routes --------------------------
-
-// Get more home page recipes (Ajax request)
-$app->get('/getmorephotorecipes/:pageno', function ($pageno = 1) {
-    (new IndexController())->getMorePhotoRecipes($pageno);
 });
 
 // -------------------------- Home Route --------------------------

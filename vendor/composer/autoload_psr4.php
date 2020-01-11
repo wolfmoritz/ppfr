@@ -14,6 +14,7 @@ return array(
     'Recipe\\' => array($baseDir . '/app/Recipe'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Piton\\Session\\' => array($vendorDir . '/pitoncms/session/src'),
+    'Piton\\ORM\\' => array($vendorDir . '/pitoncms/orm/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),

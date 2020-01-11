@@ -1,6 +1,8 @@
 <?php
 namespace Recipe\Storage;
 
+use Piton\ORM\DataMapperAbstract;
+
 /**
  * User Mapper
  */
@@ -10,7 +12,7 @@ class UserMapper extends DataMapperAbstract
     protected $tableAlias = 'us';
     protected $primaryKey = 'user_id';
     protected $modifyColumns = ['last_login_date'];
-    protected $domainObjectClass = 'User';
+    protected $domainObjectClass = __NAMESPACE__ . '\User';
     protected $defaultSelect = 'select us.*, concat(us.first_name, \' \', us.last_name) user_name, concat(us.first_name, \'-\', us.last_name) user_url from pp_user us';
 
     /**

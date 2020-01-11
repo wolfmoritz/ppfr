@@ -21,10 +21,44 @@ class AdminIndexController
     /**
      * Get Home Page
      */
-    public function dashboard($param = 1)
+    public function dashboard()
     {
-        // For now, default to recipes by user
-        $this->getRecipesByUser($param);
+        // Get user role
+        $SessionHandler = $this->app->SessionHandler;
+        $userRole = $SessionHandler->getData('role');
+
+        if (isset($userRole) && $userRole === 'admin') {
+            $this->getAllRecipes();
+        } else {
+            $this->getRecipesByUser();
+        }
+    }
+
+    /**
+     * List All Recipes
+     *
+     * Does not filter on user session
+     */
+    public function getAllRecipes($pageNumber = 1)
+    {
+        // Get mapper and twig template engine
+        $dataMapper = $this->app->dataMapper;
+        $RecipeMapper = $dataMapper('RecipeMapper');
+        $twig = $this->app->twig;
+
+        // Configure pagination object
+        $Paginator = $this->app->PaginationHandler;
+        $Paginator->setPagePath($this->app->urlFor('adminAllRecipes'));
+        $Paginator->setCurrentPageNumber($pageNumber);
+
+        // Fetch recipes
+        $recipes = $RecipeMapper->getRecipes($Paginator->getRowsPerPage(), $Paginator->getOffset(), false);
+
+        // Get count of recipes returned by query and load pagination
+        $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
+        $twig->parserExtensions[] = $Paginator;
+
+        $twig->display('admin/userRecipeList.html', ['recipes' => $recipes]);
     }
 
     /**
@@ -40,7 +74,7 @@ class AdminIndexController
         $SessionHandler = $this->app->SessionHandler;
         $twig = $this->app->twig;
 
-        // Verify user and get proper name and ID
+        // Get user from session
         $user = $SessionHandler->getData();
 
         // Configure pagination object
@@ -55,7 +89,7 @@ class AdminIndexController
         $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
         $twig->parserExtensions[] = $Paginator;
 
-        $twig->display('admin/userRecipeList.html', ['recipes' => $recipes, 'title' => $user['first_name']]);
+        $twig->display('admin/userRecipeList.html', ['recipes' => $recipes]);
     }
 
     /**

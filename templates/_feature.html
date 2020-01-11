@@ -1,24 +1,20 @@
 <section id="feature" class="span">
   <div class="feature__container">
 
- {% if recipe.main_photo %}
-	<!-- Begin recipe.main_photo -->
-  <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" 
-  alt="Photo of {{ recipe.title }}">
- <!-- End .recipe.main_photo -->
+    {% if recipe.main_photo %}
+	  <!-- Begin recipe.main_photo -->
+    <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}"
+    alt="Photo of {{ recipe.title }}">
+    <!-- End recipe.main_photo -->
+    {% endif %}
 
- <div class="feature__content">
-  <h2 class="feature__title">{{ recipe.title }}</h2>
-  <p class="feature__subtitle">{{ recipe.subtitle }}</p>
- </div>
- 
- {% else %}
- {# <img src="{{ request.basePath }}/files/originals/201/files/56ef4ccf393ec.jpg" alt="Seared Code &amp; Udon Noodles"> #}
- <div class="feature__content">
-  <h2 class="feature__title">{{ recipe.title }}</h2>
-  <p class="feature__subtitle">{{ recipe.subtitle }}</p>
-<div class="btn">See Recipe</div>
-</div>
-  {% endif %}
-</div>
+    <div class="feature__content">
+      <h2 class="feature__title">{{ recipe.title }}</h2>
+      <p class="feature__subtitle">{{ recipe.subtitle }}</p>
+      {% if onHome %}
+      <div class="btn"><a href="{{ siteUrlFor('showRecipe', recipe.niceUrl) }}">See Recipe</a></div>
+      {% endif %}
+    </div>
+
+  </div>
 </section>
