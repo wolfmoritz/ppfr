@@ -1,31 +1,29 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="two-col">
-  <div class="left-col">
-    <section id="recipeList">
-      <div class="section-inner">
-        <h2>{{ recipes.category.name }} Recipes</h2>
-        <div class="grid-container">
-          {% for r in recipes.list %}
-          {% include '_recipeCard.html' %}
-          {% else %}
+	<div class="two-col">
+		<div class="left-col">
+			<section id="recipeList">
+				<div class="section-inner">
+					<h2>{{ recipes.category.name }} Recipes</h2>
+					<div class="grid-container">
 
-          <h3>No Recipes Found</h3>
+						{% for r in recipes %}
+							{% include '_recipeCard.html' %}
+						{% else %}
+							<h3>No Recipes Found</h3>
+            {% endfor %}
 
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-    {{ pagination() }}
-  </div>
-  <div class="right-col">
-   
-      <div class="section-inner">
-        {% include '_categories.html' %}
-      </div>
-    </div>
-
-</div>
+					</div>
+				</div>
+			</section>
+			{{ pagination() }}
+		</div>
+		<div class="right-col">
+			<div class="section-inner">
+				{% include '_categories.html' %}
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
