@@ -6,30 +6,49 @@
  background: $light-grey;
  @include margin(1em null);
  @include padding(.5em null);
- .disabled{
-  a{
+
+ .disabled {
+  a {
    background: transparent;
    color: $clr-text;
    font-size: 1.3rem;
-   cursor: default;
-   &:hover{
+
+   // cursor: default;
+   &:hover {
     color: $clr-text;
     background: transparent;
    }
   }
- 
+
  }
+
  a {
   @include padding(.5em .5em);
   @include margin(null .25em);
   border-radius: $border-radius;
   background: $bright-green;
   text-decoration: none;
-  color: $white;
- &:hover{
-  color: $clr-text;
-  background: $clr-primary;
+  color: $green;
+  cursor: pointer;
+
+
+  &:hover {
+   color: $clr-text;
+   background: $clr-primary;
+   cursor: pointer;
+  }
  }
+
+ .active {
+  a {
+   font-weight: $ff-b;
+   color: $white;
+   cursor: default;
+   &:hover{
+    color: $white;
+    background: $bright-green;
+   }
+  }
  }
 
 }
