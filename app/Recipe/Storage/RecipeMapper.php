@@ -306,25 +306,22 @@ class RecipeMapper extends DataMapperAbstract
     /**
      * Increment Recipe View Count
      *
-     * @param
+     * @param int $recipeID Recipe ID
      */
-    public function incrementRecipeViewCount($recipeId)
+    public function incrementRecipeViewCount(int $recipeId)
     {
         $this->sql = 'update pp_recipe set view_count = view_count + 1 where recipe_id = ?;';
         $this->bindValues[] = $recipeId;
 
-        $outcome = $this->execute();
-        $this->clear();
-
-        return $outcome;
+        return $this->execute();
     }
 
     /**
      * Save Recipe
      *
      * Adds pre-save manipulation prior to calling _save
-     * @param Domain Object
-     * @return mixed Domain Object on success, false otherwise
+     * @param  object DomainObject
+     * @return mixed  Domain Object on success, false otherwise
      */
     public function save(DomainObject $domainObject)
     {

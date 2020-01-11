@@ -3,8 +3,8 @@
 
 {% block body %}
 {% import '_recipeCards.html' as cards %}
+{% include "_feature.html" with {'recipe': recipes.featuredRecipe, 'onHome': true} %}
 
-{% include "_feature.html" %}
 <section id="recent">
   <div class="section-inner">
     <h2>Recent</h2>

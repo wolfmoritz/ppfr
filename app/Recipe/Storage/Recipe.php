@@ -1,7 +1,7 @@
 <?php
 namespace Recipe\Storage;
 
-use \Piton\ORM\DomainObject;
+use Piton\ORM\DomainObject;
 
 /**
  * Recipe Domain Object

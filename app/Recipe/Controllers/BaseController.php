@@ -13,12 +13,6 @@ class BaseController
     protected $app;
 
     /**
-     * Twig View
-     * @var object
-     */
-    protected $render;
-
-    /**
      * Data Mapper Closure
      * @var closure
      */
@@ -36,7 +30,6 @@ class BaseController
     public function __construct()
     {
         $this->app = \Slim\Slim::getInstance();
-        $this->twig = $this->app->twig;
         $this->dataMapper = $this->app->dataMapper;
     }
 
@@ -50,13 +43,36 @@ class BaseController
      */
     protected function render(string $template, ?array $data)
     {
-        $this->twig->display($template, $data);
+        $this->app->twig->display($template, $data);
+    }
+
+    /**
+     * Redirect
+     *
+     * @param string $url
+     * @param int    $code Default 302 Temporary
+     */
+    public function redirect(string $url, int $code = 302)
+    {
+        return $this->app->redirect($url, $code);
+    }
+
+    /**
+     * Not Found
+     *
+     * Renders not found template and returns 404 error
+     * @param void
+     * @return void
+     */
+    public function notFound()
+    {
+        return $this->app->notFound();
     }
 
     /**
      * Get App Config Setting
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
     protected function getConfig(string $name)

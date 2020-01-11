@@ -1,7 +1,7 @@
 <?php
 namespace Recipe\Storage;
 
-use \Piton\ORM\DataMapperAbstract;
+use Piton\ORM\DataMapperAbstract;
 
 /**
  * Category Mapper
@@ -10,21 +10,21 @@ class CategoryMapper extends DataMapperAbstract
 {
   protected $table = 'pp_category';
   protected $primaryKey = 'category_id';
-  protected $tableAlias = 'c';
   protected $modifyColumns = [];
-  protected $domainObjectClass = __NAMESPACE__ . '\Category';
   protected $defaultSelect = 'select * from pp_category';
 
   /**
    * Get All Categories
    *
-   * Returns an array of categories
-   * @return Array
+   * Returns an array of all categories
+   * @param  void
+   * @return array
    */
   public function getAllCategories()
   {
     // Use default select statement unless other SQL has been supplied
-    $this->sql = $this->defaultSelect . ' order by name';
+    $this->makeSelect();
+    $this->sql .=  ' order by name';
 
     return $this->find();
   }
@@ -38,20 +38,21 @@ class CategoryMapper extends DataMapperAbstract
    */
   public function getCategory($slug)
   {
-    $this->sql = $this->defaultSelect . ' where url = ?';
+    $this->makeSelect();
+    $this->sql .= ' and url = ?';
     $this->bindValues[] = $slug;
 
     return $this->find();
   }
 
   /**
-   * Get Assigned Categories
+   * Get Assigned Categories by Recipe ID
    *
    * Returns all categories assigned to a recipe
-   * @param int, recipe_id
-   * @return mixed, array of categories on success, null if not found
+   * @param  int   $recipeId Recipe ID
+   * @return mixed           Array of categories on success, null if not found
    */
-  public function getAssignedCategories($recipeId)
+  public function getAssignedCategories(int $recipeId)
   {
     $this->sql = 'select c.* from pp_category c join pp_recipe_category rc on c.category_id = rc.category_id where rc.recipe_id = ?;';
     $this->bindValues[] = $recipeId;

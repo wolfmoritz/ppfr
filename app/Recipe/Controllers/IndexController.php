@@ -9,7 +9,10 @@ namespace Recipe\Controllers;
 class IndexController extends BaseController
 {
     /**
-     * Get Home Page
+     * Display Home Page
+     *
+     * @param void
+     * @return void
      */
     public function home()
     {
@@ -24,11 +27,11 @@ class IndexController extends BaseController
         $data['randomRecipes'] = $recipeMapper->getRandomRecipes($this->getConfig('home')['randomRecipes']);
         $data['blogPosts'] = $blogMapper->getPosts($this->getConfig('home')['recentBlogPosts']);
 
-        return $this->render('home.html', ['recipes' => $data]);
+        $this->render('home.html', ['recipes' => $data]);
     }
 
     /**
-     * Get All Recipes
+     * Show All Recipes
      *
      **/
     public function getAllRecipes()
@@ -82,7 +85,7 @@ class IndexController extends BaseController
 
         // If no valid category was found then return 404
         if (!$categoryResult) {
-            $this->app->notFound();
+            $this->notFound();
         }
 
         $categoryResult = (Array) $categoryResult[0];
@@ -107,62 +110,48 @@ class IndexController extends BaseController
     }
 
     /**
-     * Show a Single Recipe
+     * Display a Single Recipe
      *
-     * @param int, recipe id
-     * @param string, recipe slug
+     * @param int    $id    Recipe ID
+     * @param string $slug  Recipe url slug
      * @return void
      */
     public function showRecipe($id, $slug = null)
     {
         // Get dependencies
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $CategoryMapper = $dataMapper('CategoryMapper');
-        $Security = $this->app->security;
-        $CrawlerDetect = $this->app->crawlerDetect;
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
+        $categoryMapper = ($this->dataMapper)('CategoryMapper');
+        $crawlerDetect = $this->app->crawlerDetect;
 
         // If $id is not an integer or at least numeric, throw 404
         if (!is_integer((int) $id)) {
-            $this->app->notFound();
+            return $this->notFound();
         }
 
         // Fetch recipe
-        $recipe = $RecipeMapper->findById((int) $id);
+        $recipe = $recipeMapper->findById((int) $id);
 
-        // If no recipe found then 404
+        // If no recipe found then return 404
         if (!$recipe) {
-            $this->app->notFound();
-            return;
+            return $this->notFound();
         }
 
-        // Authorization check
-        if (!$recipe->published_date) {
-            // Ok, recipe is not published, but let author or admin continue
-            if (!$Security->authorizedToEditRecipe($recipe)) {
-                $this->app->notFound();
-                return;
-            }
-        }
-
-        // If there was no slug provided, then 301 redirect back here with the slug
+        // If no slug was provided, then 301 redirect back to here with the slug
         if ($slug !== $recipe->url) {
-            $this->app->redirect($this->app->urlFor('showRecipe') . $recipe->niceUrl(), 301);
-            return;
+            return $this->redirect($this->app->urlFor('showRecipe') . $recipe->niceUrl(), 301);
         }
 
-        // Get categories
-        $recipe->categories = $CategoryMapper->getAssignedCategories($recipe->recipe_id);
+        // Get categories for this recipe
+        $recipe->categories = $categoryMapper->getAssignedCategories($recipe->recipe_id);
 
         // Increment view counter
-        if (!$CrawlerDetect->isCrawler()) {
+        if (!$crawlerDetect->isCrawler()) {
             // Not a crawler, increment view count
-            $RecipeMapper->incrementRecipeViewCount($recipe->recipe_id);
+            $recipeMapper->incrementRecipeViewCount($recipe->recipe_id);
             $recipe->view_count++;
         }
 
-        $twig = $this->app->twig;
-        $twig->display('recipe.html', ['recipe' => $recipe, 'title' => $recipe->title]);
+        $this->render('recipe.html', ['recipe' => $recipe, 'title' => $recipe->title]);
     }
 
     /**
@@ -238,7 +227,7 @@ class IndexController extends BaseController
 
         // If no valid user was found then return 404
         if (!$userResult) {
-            $this->app->notFound();
+            $this->notFound();
         }
 
         // Configure pagination object
