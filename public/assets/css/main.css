@@ -409,6 +409,8 @@ footer {
   background: #339966;
   color: #1c1c1c;
   margin-top: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 footer h6 {
   color: #1c1c1c;
@@ -507,6 +509,41 @@ footer a:hover {
   border: solid 1px rgba(28, 28, 28, 0.25);
 }
 
+.pagination {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  background: #dee0e6;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.pagination .disabled a {
+  background: transparent;
+  color: #1c1c1c;
+  font-size: 1.3rem;
+  cursor: default;
+}
+.pagination .disabled a:hover {
+  color: #1c1c1c;
+  background: transparent;
+}
+.pagination a {
+  padding: 0.5em;
+  margin-right: 0.25em;
+  margin-left: 0.25em;
+  border-radius: 7px;
+  background: #339966;
+  text-decoration: none;
+  color: #f6f6f6;
+}
+.pagination a:hover {
+  color: #1c1c1c;
+  background: #91c499;
+}
+
 section:last-of-type {
   margin-bottom: 3em;
 }
@@ -569,40 +606,43 @@ section:last-of-type {
   margin-bottom: 1em;
 }
 
-#outofloop #recipeMeta .section-inner {
+#recipeMeta .section-inner {
   display: flex;
   flex-flow: column nowrap;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
-#outofloop #recipeMeta .recipeMeta {
+#recipeMeta .recipeMeta {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: 1em;
   grid-row-gap: 5px;
 }
-#outofloop #recipeIngredients li,
-#outofloop #recipeDirections li {
+
+#recipeIngredients li,
+#recipeDirections li {
   padding-top: 2px;
   padding-bottom: 2px;
   line-height: 1.5;
 }
 @media screen and (min-width: 900px) {
-  #outofloop #recipeIngredients li,
-#outofloop #recipeDirections li {
+  #recipeIngredients li,
+#recipeDirections li {
     line-height: 1.5;
   }
 }
-#outofloop .socialContainer {
+
+.socialContainer {
   display: flex;
   justify-content: center;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
-#outofloop .socialContainer div {
+.socialContainer div {
   margin-right: 1em;
 }
-#outofloop .recipetext p {
+
+.recipetext p {
   line-height: 1.3;
   font-size: 1.1rem;
   margin-bottom: 0.5em;
