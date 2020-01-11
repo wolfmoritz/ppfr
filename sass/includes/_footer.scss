@@ -4,6 +4,7 @@ footer {
  background: $clr-accent-light;
  color: $black;
  @include margin(auto null null);
+ @include padding(2em null);
 h6{
  color: $black;
  font-family: $ff-sans;

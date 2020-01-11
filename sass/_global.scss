@@ -4,8 +4,8 @@
 *::before,
 *::after {
  box-sizing: border-box;
- margin: 0;
- padding: 0;
+@include margin(0);
+ @include padding(0);
 }
 
 body,
@@ -80,21 +80,24 @@ h5 {
 ul,
 ol {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  @include margin(0);
+  @include padding(0);
 }
 
 dl {
-  margin: 0;
+  @include margin(0);
+
 }
 
 dt {
   font-weight: 600;
-  margin: 0;
+  @include margin(0);
+ 
 }
 
 dd {
-  margin: 0;
+  @include margin(0);
+ 
 }
 
 // widgets
