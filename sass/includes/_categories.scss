@@ -1,5 +1,6 @@
 #categories {
  background: $light-grey;
+ @include padding(1em null);
 }
 .categories-list {
  width: 100%;
