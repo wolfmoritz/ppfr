@@ -1,0 +1,14 @@
+.pagination {
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: center;
+ align-items: center;
+ background: $light-grey;
+ @include margin(1em null);
+
+ a {
+  @include padding(1em .5em);
+  text-decoration: none;
+  color: $clr-text;
+ }
+}
