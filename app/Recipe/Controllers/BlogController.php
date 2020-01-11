@@ -8,16 +8,6 @@ namespace Recipe\Controllers;
  */
 class BlogController extends BaseController
 {
-    private $app;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->app = \Slim\Slim::getInstance();
-    }
-
     /**
      * Show a Single Post
      *

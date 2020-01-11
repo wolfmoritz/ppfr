@@ -1,11 +1,14 @@
 {% extends 'layout.html' %}
 
+
 {% block body %}
+{% import '_recipeCards.html' as cards %}
+
 {% include "_feature.html" %}
 <section id="recent">
   <div class="section-inner">
     <h2>Recent</h2>
-    {% include '_recipeCards.html' %}
+    {{ cards.recipeCards(recipes.latestRecipes) }}
     <div class="btn span" id="more-recipes-button">See More</div>
   </div>
   </div>
@@ -14,26 +17,26 @@
 <section id="popular">
   <div class="section-inner">
     <h2>Popular</h2>
-    {% include '_recipeCards.html' %}
+    {{ cards.recipeCards(recipes.popularRecipes) }}
     <div class="btn span" id="more-recipes-button">See More</div>
   </div>
 </section>
 <section id="random">
   <div class="section-inner">
     <h2>Random</h2>
-    {% include '_recipeCards.html' %}
+    {{ cards.recipeCards(recipes.randomRecipes) }}
   </div>
 </section>
 <section id="blog">
   <div class="section-inner">
     <h2>Blog</h2>
-    {% for p in posts %}
+    {% for p in recipes.blogPosts %}
 
     <article>
-      <h2 class="span"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">{{ p.title }}</a></h2>
+      <h2 class="span"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl) }}">{{ p.title }}</a></h2>
       <p>
         {{ p.content_excerpt }}
-        <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">read more&hellip;</a></small>
+        <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl) }}">read more&hellip;</a></small>
       </p>
       <h5>{{ p.published_date|date('F j, Y') }}</h5>
     </article>
@@ -47,8 +50,8 @@
 
 </section>
 <section id="categories">
-  <div class="section-inner"> 
-    
+  <div class="section-inner">
+
     {% include '_categories.html' %}
   </div>
   </div>
