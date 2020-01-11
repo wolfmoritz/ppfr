@@ -26,11 +26,11 @@ return call_user_func(
 
         // Define additional config settings needed for the application
         // Load Default Configuration Settings
-        require_once ROOT_DIR . 'config/config.default.php';
+        require ROOT_DIR . 'config/config.default.php';
 
         // Load local configration settings
         if (file_exists(ROOT_DIR . 'config/config.local.php')) {
-            include_once ROOT_DIR . 'config/config.local.php';
+            require ROOT_DIR . 'config/config.local.php';
         }
 
         // Set error reporting level
@@ -92,7 +92,8 @@ return call_user_func(
         $app->dataMapper = function ($mapper) use ($app) {
             return function ($mapper) use ($app) {
                 $fqn = 'Recipe\\Storage\\' . $mapper;
-                return new $fqn($app->db, $app->SessionHandler, $app->log);
+                $sessionUserId = $app->SessionHandler->getData('user_id');
+                return new $fqn($app->db, ['sessionUserId' => $sessionUserId, 'logger' => $app->log]);
             };
         };
 

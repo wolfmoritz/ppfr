@@ -1,7 +1,7 @@
 <?php
 namespace Recipe\Storage;
 
-use \PDO;
+use \Piton\ORM\DataMapperAbstract;
 
 /**
  * Category Mapper
@@ -12,7 +12,7 @@ class CategoryMapper extends DataMapperAbstract
   protected $primaryKey = 'category_id';
   protected $tableAlias = 'c';
   protected $modifyColumns = [];
-  protected $domainObjectClass = 'Category';
+  protected $domainObjectClass = __NAMESPACE__ . '\Category';
   protected $defaultSelect = 'select * from pp_category';
 
   /**

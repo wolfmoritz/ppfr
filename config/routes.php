@@ -34,7 +34,7 @@ $authorized = function ($role) use ($app) {
 // These admin routes are secured
 //
 
-$app->group('/cook', $authenticated(), function () use ($app, $authorized) {
+$app->group('/admin', $authenticated(), function () use ($app, $authorized) {
 
     // Dashboard
     $app->get('/', function () {
@@ -71,11 +71,6 @@ $app->group('/cook', $authenticated(), function () use ($app, $authorized) {
         (new AdminActionController())->deleteRecipe($id);
     })->name('adminDeleteRecipe');
 
-    // Test view recipe HTML email
-    $app->get('/recipe/email(/:id(/:slug))', function ($id, $slug = null) {
-        (new IndexController())->emailRecipe($id, $slug);
-    })->conditions(['id' => '\d+']);
-
     // List blog posts
     $app->get('/blog/', $authorized('admin'), function () {
         (new BlogController())->getAdminBlogPosts();
@@ -109,7 +104,6 @@ $app->group('/cook', $authenticated(), function () use ($app, $authorized) {
 //
 // The routes below are public
 //
-
 
 // Login page with form to submit email
 $app->get('/letmein', function () {
@@ -206,13 +200,6 @@ $app->get('/updatesitemap', function () use ($app) {
     echo "Updating sitemap\n";
     $SitemapHandler = $app->sitemap;
     $SitemapHandler->make();
-});
-
-// -------------------------- API Routes --------------------------
-
-// Get more home page recipes (Ajax request)
-$app->get('/getmorephotorecipes/:pageno', function ($pageno = 1) {
-    (new IndexController())->getMorePhotoRecipes($pageno);
 });
 
 // -------------------------- Home Route --------------------------

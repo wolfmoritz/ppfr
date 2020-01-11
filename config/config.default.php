@@ -74,6 +74,14 @@ $config['pagination']['rowsPerPage'] = 21;
 $config['pagination']['numberOfLinks'] = 2;
 
 /**
+ * Recipe Query Counts
+ */
+$config['home']['recentRecipes'] = 10;
+$config['home']['popularRecipes'] = 10;
+$config['home']['randomRecipes'] = 10;
+$config['home']['recentBlogPosts'] = 10;
+
+/**
  * Routing Options
  */
 $config['routes.case_sensitive'] = false;

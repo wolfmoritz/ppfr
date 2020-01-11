@@ -2,12 +2,12 @@
     "require": {
         "slim/slim": "2.*",
         "slim/views": "0.1.*",
-        "twig/twig": ">=1.8,<2.0-dev",
+        "twig/twig": ">=1.8,<2.0",
         "slim/logger": "0.1.*",
         "codeguy/upload": "*",
         "intervention/image": "2.*",
         "pitoncms/session": "^1",
-        "ahmetkapikiran/slim-cli-environment": "dev-master",
+        "pitoncms/orm": "^0.2.1",
         "vlucas/valitron": "^1.2",
         "jaybizzle/crawler-detect": "1.*",
         "phpmailer/phpmailer": "^6.1"
@@ -18,7 +18,6 @@
       }
     },
     "config": {
-      "preferred-install": "dist",
       "optimize-autoloader": true
     }
 }

@@ -1,24 +1,18 @@
 <section id="feature">
   <div class="feature__container">
 
- {% if recipe.main_photo %}
-	<!-- Begin recipe.main_photo -->
-  <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" 
-  alt="Photo of {{ recipe.title }}">
- <!-- End .recipe.main_photo -->
+    {% if recipes.featuredRecipe.main_photo %}
+	  <!-- Begin recipe.featuredRecipe.main_photo -->
+    <img itemprop="image" src="{{ imageUrl(recipes.featuredRecipe.recipe_id, recipes.featuredRecipe.main_photo) }}"
+    alt="Photo of {{ recipes.featuredRecipe.title }}">
+    <!-- End .recipes.main_photo -->
+    {% endif %}
 
- <div class="feature__content">
-  <h2 class="feature__title">{{ recipe.title }}</h2>
-  <p class="feature__subtitle">{{ recipe.subtitle }}</p>
- </div>
- 
- {% else %}
- {# <img src="{{ request.basePath }}/files/originals/201/files/56ef4ccf393ec.jpg" alt="Seared Code &amp; Udon Noodles"> #}
- <div class="feature__content">
-  <h2 class="feature__title">{{ recipe.title }}</h2>
-  <p class="feature__subtitle">{{ recipe.subtitle }}</p>
-<div class="btn">See Recipe</div>
-</div>
-  {% endif %}
-</div>
+    <div class="feature__content">
+      <h2 class="feature__title">{{ recipes.featuredRecipe.title }}</h2>
+      <p class="feature__subtitle">{{ recipes.featuredRecipe.subtitle }}</p>
+      <div class="btn"><a href="{{ siteUrlFor('showRecipe', recipes.featuredRecipe.niceUrl) }}">See Recipe</a></div>
+    </div>
+
+  </div>
 </section>

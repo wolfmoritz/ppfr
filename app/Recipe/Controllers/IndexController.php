@@ -4,63 +4,27 @@ namespace Recipe\Controllers;
 /**
  * Index Controller
  *
- * Renders public facing pages
+ * Runs public facing page requests
  */
-class IndexController
+class IndexController extends BaseController
 {
-    private $app;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->app = \Slim\Slim::getInstance();
-    }
-
     /**
      * Get Home Page
      */
     public function home()
     {
         // Get data mappers and twig
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $twig = $this->app->twig;
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
+        $blogMapper = ($this->dataMapper)('BlogMapper');
 
-        // Get rows per page from config and run query
-        $rowsPerPage = $this->app->config('pagination')['rowsPerPage'];
-        $recipes = $RecipeMapper->getRecipesWithPhoto($rowsPerPage);
+        // Get home page recipes and blog posts
+        $data['featuredRecipe'] = $recipeMapper->getLatestRecipe();
+        $data['latestRecipes'] = $recipeMapper->getRecipes($this->getConfig('home')['recentRecipes']);
+        $data['popularRecipes'] = $recipeMapper->getTopRecipes($this->getConfig('home')['popularRecipes']);
+        $data['randomRecipes'] = $recipeMapper->getRandomRecipes($this->getConfig('home')['randomRecipes']);
+        $data['blogPosts'] = $blogMapper->getPosts($this->getConfig('home')['recentBlogPosts']);
 
-        $twig->display('home.html', ['recipes' => $recipes]);
-    }
-
-    /**
-     * Get More Home Page Recipes
-     *
-     * Returns HTML fragment containing the next set of masonry images, typically via Ajax
-     */
-    public function getMorePhotoRecipes($pageNumber)
-    {
-        // Check input for numeric and abort if not
-        if (!is_numeric($pageNumber)) {
-            return;
-        }
-
-        // Cast to int
-        $pageNumber = (int) $pageNumber;
-
-        // Get data mappers and twig
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $twig = $this->app->twig;
-
-        // Get rows per page from config and run query
-        $rowsPerPage = $this->app->config('pagination')['rowsPerPage'];
-        $offset = $rowsPerPage * $pageNumber;
-        $recipes = $RecipeMapper->getRecipesWithPhoto($rowsPerPage, $offset);
-
-        $twig->display('_masonry.html', ['recipes' => $recipes]);
+        return $this->render('home.html', ['recipes' => $data]);
     }
 
     /**
@@ -191,7 +155,7 @@ class IndexController
         $recipe->categories = $CategoryMapper->getAssignedCategories($recipe->recipe_id);
 
         // Increment view counter
-        if(!$CrawlerDetect->isCrawler()) {
+        if (!$CrawlerDetect->isCrawler()) {
             // Not a crawler, increment view count
             $RecipeMapper->incrementRecipeViewCount($recipe->recipe_id);
             $recipe->view_count++;
@@ -199,43 +163,6 @@ class IndexController
 
         $twig = $this->app->twig;
         $twig->display('recipe.html', ['recipe' => $recipe, 'title' => $recipe->title]);
-    }
-
-    /**
-     * View New Recipe HTML Email for Testing
-     *
-     * Does not actually email recipe
-     *
-     * @param int, recipe id
-     * @param string, recipe slug
-     * @return void
-     */
-    public function emailRecipe($id, $slug = null)
-    {
-        // Get data mappers
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $CategoryMapper = $dataMapper('CategoryMapper');
-
-        // If $id is not an integer or at least numeric, throw 404
-        if (!is_integer((int) $id)) {
-            $this->app->notFound();
-        }
-
-        // Fetch recipe
-        $recipe = $RecipeMapper->findById((int) $id);
-
-        // If no recipe found then 404
-        if (!$recipe) {
-            $this->app->notFound();
-            return;
-        }
-
-        // Get categories
-        $recipe->categories = $CategoryMapper->getAssignedCategories($recipe->recipe_id);
-
-        $twig = $this->app->twig;
-        $twig->display('email/emailNewRecipeBase.html', ['recipe' => $recipe]);
     }
 
     /**

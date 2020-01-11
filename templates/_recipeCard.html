@@ -1,8 +1,9 @@
-{% if not r.main_photo %} {% set imageUrl = baseUrl() ~'/assets/img/empty.png' %} 
-  {% else %} 
-  {% set imageUrl = imageUrl(r.recipe_id, r.main_photo) %} 
-  {% endif %} 
-  
+{% if not r.main_photo %}
+  {% set imageUrl = baseUrl() ~'/assets/img/empty.png' %}
+{% else %}
+  {% set imageUrl = imageUrl(r.recipe_id, r.main_photo) %}
+{% endif %}
+
     <div class="recipe-card">
       <div class="img-container">
         <a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}">
@@ -16,4 +17,3 @@
         <a class="recipe-title" href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.title }}"> {{ r.title }}</a>
       </div>
     </div>
- 

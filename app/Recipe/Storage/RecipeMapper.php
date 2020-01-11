@@ -1,29 +1,42 @@
 <?php
 namespace Recipe\Storage;
 
+use Piton\ORM\DataMapperAbstract;
+use Piton\ORM\DomainObject;
+
 /**
  * Recipe Mapper
  */
 class RecipeMapper extends DataMapperAbstract
 {
     protected $table = 'pp_recipe';
-    protected $tableAlias = 'r';
     protected $primaryKey = 'recipe_id';
-    protected $modifyColumns = array('title', 'subtitle', 'url', 'servings', 'temperature', 'prep_time', 'prep_time_iso', 'cook_time', 'cook_time_iso', 'ingredients', 'instructions', 'instructions_excerpt', 'notes', 'view_count', 'main_photo', 'published_date');
-    protected $domainObjectClass = 'Recipe';
+    protected $modifyColumns = ['title', 'subtitle', 'url', 'servings', 'temperature', 'prep_time', 'prep_time_iso', 'cook_time', 'cook_time_iso', 'ingredients', 'instructions', 'instructions_excerpt', 'notes', 'view_count', 'main_photo', 'published_date'];
+    protected $domainObjectClass = __NAMESPACE__ . '\Recipe';
     protected $defaultSelect = 'select SQL_CALC_FOUND_ROWS r.*, concat(u.first_name, \' \', u.last_name) user_name, concat(u.first_name, \'-\', u.last_name) user_url from pp_recipe r join pp_user u on r.created_by = u.user_id';
 
     /**
-     * Get Recipes with Offset
+     * Get Latest Recipe
      *
-     * Define limit and offset to limit result set.
+     * Get last added published recipe
+     * @param  void
+     * @return object DomainObject
+     */
+    public function getLatestRecipe()
+    {
+        return $this->getRecipes(1)[0];
+    }
+
+    /**
+     * Get Recipes in Reverse Date Order
+     *
      * Returns an array of Domain Objects (one for each record)
-     * @param int limit
-     * @param int offset
-     * @param bool only get published recipes (true)
+     * @param  int  $limit
+     * @param  int  $offset
+     * @param  bool $publishedRecipesOnly Only get published recipes (true)
      * @return array
      */
-    public function getRecipes($limit = null, $offset = null, $publishedRecipesOnly = true)
+    public function getRecipes(int $limit= null, int $offset = null, bool $publishedRecipesOnly = true)
     {
         $this->sql = $this->defaultSelect;
 
@@ -96,7 +109,7 @@ class RecipeMapper extends DataMapperAbstract
      */
     public function getRecipesByCategory($category, $limit = null, $offset = null, $publishedRecipesOnly = true)
     {
-        $this->sql = $this->defaultSelect . " join pp_recipe_category rc on {$this->tableAlias}.recipe_id = rc.recipe_id";
+        $this->sql = $this->defaultSelect . " join pp_recipe_category rc on r.recipe_id = rc.recipe_id";
 
         // Was a category slug or ID passed in?
         if (is_numeric($category)) {
@@ -243,23 +256,43 @@ class RecipeMapper extends DataMapperAbstract
     }
 
     /**
-     * Get top recipes by view count
+     * Get Top Recipes by View Count
      *
-     * @param int, limit
+     * Returns an array of Domain Objects (one for each record)
+     * @param  int  $limit
+     * @param  int  $offset
+     * @param  bool $publishedRecipesOnly Only get published recipes (true)
      * @return array
      */
-    public function getTopRecipes($limit = 5)
+    public function getTopRecipes($limit = null, $offset = null, $publishedRecipesOnly = true)
     {
-        $this->sql = $this->defaultSelect . " where published_date <= curdate() order by r.view_count desc limit ?";
-        $this->bindValues[] = $limit;
+        $this->sql = $this->defaultSelect;
+
+        if ($publishedRecipesOnly) {
+            $this->sql .= ' where r.published_date <= curdate()';
+        }
+
+        // Add order by
+        $this->sql .= ' order by r.view_count desc';
+
+        if ($limit) {
+            $this->sql .= " limit ?";
+            $this->bindValues[] = $limit;
+        }
+
+        if ($offset) {
+            $this->sql .= " offset ?";
+            $this->bindValues[] = $offset;
+        }
 
         return $this->find();
     }
 
     /**
-     * Get a random recipe
+     * Get Random Recipes
      *
-     * @param int, limit
+     * Returns an array of Domain Objects (one for each record)
+     * @param  int  $limit
      * @return array
      */
     public function getRandomRecipes($limit = 5)
@@ -291,30 +324,30 @@ class RecipeMapper extends DataMapperAbstract
      *
      * Adds pre-save manipulation prior to calling _save
      * @param Domain Object
-     * @return mixed, Domain Object on success, false otherwise
+     * @return mixed Domain Object on success, false otherwise
      */
-    public function save(DomainObjectAbstract $recipe)
+    public function save(DomainObject $domainObject)
     {
         // Get dependencies
         $app = \Slim\Slim::getInstance();
         $Toolbox = $app->Toolbox;
 
         // Set URL safe recipe title
-        $recipe->url = $Toolbox->cleanUrl($recipe->title);
+        $domainObject->url = $Toolbox->cleanUrl($domainObject->title);
 
         // Set prep time duration in ISO8601 format
-        if ($time = $Toolbox->stringToSeconds($recipe->prep_time)) {
-            $recipe->prep_time_iso = $Toolbox->timeToIso8601Duration($time);
+        if ($time = $Toolbox->stringToSeconds($domainObject->prep_time)) {
+            $domainObject->prep_time_iso = $Toolbox->timeToIso8601Duration($time);
         }
 
         // Set cook time duration in ISO8601 format
-        if ($time = $Toolbox->stringToSeconds($recipe->cook_time)) {
-            $recipe->cook_time_iso = $Toolbox->timeToIso8601Duration($time);
+        if ($time = $Toolbox->stringToSeconds($domainObject->cook_time)) {
+            $domainObject->cook_time_iso = $Toolbox->timeToIso8601Duration($time);
         }
 
         // Set instructions excerpt
-        $recipe->instructions_excerpt = $Toolbox->truncateHtmlText($recipe->instructions);
+        $domainObject->instructions_excerpt = $Toolbox->truncateHtmlText($domainObject->instructions);
 
-        return $this->_save($recipe);
+        return parent::save($domainObject);
     }
 }

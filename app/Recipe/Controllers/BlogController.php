@@ -6,7 +6,7 @@ namespace Recipe\Controllers;
  *
  * Manages Blog Pages
  */
-class BlogController
+class BlogController extends BaseController
 {
     private $app;
 
