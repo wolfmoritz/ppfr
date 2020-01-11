@@ -1,22 +1,27 @@
 #categories {
- .categories-list {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
- }
+ background: $light-grey;
+}
+.categories-list {
+ width: 100%;
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: flex-start;
 
- .categories-item {
+ a {
+  color: $white;
+  text-decoration: none;
   background: $clr-accent-light;
-
-  @include margin(.25em .5em);
+  border: solid 1px $clr-accent-light;
   @include padding(.25em .5em);
+  @include margin(.25em);
   border-radius: $border-radius;
+  // box-shadow: $box-shadow;
 
-  a {
-   color: $white;
-   text-decoration: none;
-
+  &:hover {
+   color: $clr-text;
+   background: $clr-primary;
+   border: solid 1px rgba($black, .25);
   }
+
  }
 }

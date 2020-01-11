@@ -5,7 +5,7 @@
 {% include "_feature.html" %}
 <div class="two-col">
 	<div class="left-col">
-		{% include "_social.html" %}
+	
 
 		<section id="recipeIngredients">
 			<div class="section-inner">
@@ -26,6 +26,7 @@
 
 	</div>
 	<div class="right-col">
+		{% include "_social.html" %}
 		<section id="recipeMeta">
 			<div class="section-inner">
 
@@ -66,43 +67,48 @@
 				{% endif %}
 			</div>
 		</section>
-		<section id="recipeRecipeCategories">
+
 			<div class="section-inner">
 				<h4>Recipe Categories</h4>
 				<div itemprop="recipeCategory">
-					{% for c in recipe.categories %}<div class=""><a href="{{ siteUrlFor('recipesByCategory', c.url) }}"
-							title="View recipes for {{ c.name }}">{{ c.name }}</a></div>
-
-					{% endfor %}
+					<ul class="categories-list">
+						{% for c in recipe.categories %}
+						<li class="categories-item">
+							<a href="{{ siteUrlFor('recipesByCategory', c.url) }}"
+								title="View recipes for {{ c.name }}">{{ c.name }}</a>
+						</li>
+						{% endfor %}
+					</ul>
 				</div>
 			</div>
-		</section>
-		<section id="recipeRecipeStats">
-			<div class="section-inner">
 
-				<div class="recipeOwner">
-					<div>
-						Other recipes by <a
-							href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
-								itemprop="author">{{ recipe.user_name }}</span></a>
-					</div>
-					<div>
-						Added on:
-						<meta itemprop="datePublished" content="{{ recipe.published_date }}">
-						{{ recipe.published_date|date('F j, Y') }}
-					</div>
-					<div> Viewed: {{ recipe.view_count|number_format }} Times</di>
-					</div><!-- .recipeOwner -->
-				</div>
+	<section id="recipeRecipeStats">
+		<div class="section-inner">
 
-				<div class="admin-buttons">
-					{% if authorizedToEditRecipe(recipe) %} | <a class="btn-link"
-						href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}"
-						role="button">Edit</a>{% endif %}
+			<div class="recipeOwner">
+				<div>
+					Other recipes by <a
+						href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
+							itemprop="author">{{ recipe.user_name }}</span></a>
 				</div>
+				<div>
+					Added on:
+					<meta itemprop="datePublished" content="{{ recipe.published_date }}">
+					{{ recipe.published_date|date('F j, Y') }}
+				</div>
+				<div> Viewed: {{ recipe.view_count|number_format }} Times</di>
+				</div><!-- .recipeOwner -->
 			</div>
-		</section>
-	</div>
+
+			<div class="admin-buttons">
+				{% if authorizedToEditRecipe(recipe) %} | <a class="btn-link"
+					href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}"
+					role="button">Edit</a>{% endif %}
+			</div>
+		</div>
+	</section>
+
+</div>
 </div>
 
 

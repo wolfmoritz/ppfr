@@ -1,0 +1,35 @@
+.pagination {
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: center;
+ align-items: center;
+ background: $light-grey;
+ @include margin(1em null);
+ @include padding(.5em null);
+ .disabled{
+  a{
+   background: transparent;
+   color: $clr-text;
+   font-size: 1.3rem;
+   cursor: default;
+   &:hover{
+    color: $clr-text;
+    background: transparent;
+   }
+  }
+ 
+ }
+ a {
+  @include padding(.5em .5em);
+  @include margin(null .25em);
+  border-radius: $border-radius;
+  background: $bright-green;
+  text-decoration: none;
+  color: $white;
+ &:hover{
+  color: $clr-text;
+  background: $clr-primary;
+ }
+ }
+
+}

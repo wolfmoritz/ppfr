@@ -1,31 +1,29 @@
 {# Pagiation Include #}
 
-<nav>
-  <ul class="pagination">
+
+  <div class="pagination"  >
   	{% for p in links %}
   	{% if loop.first %}{# Always start with the "Previous" link #}
-    <li>
-      <a href="{{ p.href }}" aria-label="Previous" title="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
+   
+      <a href="{{ p.href }}" aria-label="Previous" title="Previous" > <span aria-hidden="true">&laquo;</span></a>
+    
     {% endif %}
 
     {% if p.link == 'ellipsis' %}{# Include if the link is set to be some sort ellipsis #}
-    <li class="disabled"><a>&hellip;</a></li>
+    <div class="disabled"><a>&hellip;</a></div>
     {% endif %}
 
     {% if not loop.first and not loop.last and p.link != 'ellipsis' %}{# For all other working links #}
-    <li {% if currentPage == p.link %}class="active"{% endif %}><a href="{{ p.href }}">{{ p.link }}</a></li>
+    <div {% if currentPage == p.link %}class="active"{% endif %}><a href="{{ p.href }}" >{{ p.link }}</a></div>
     {% endif %}
 
     {% if loop.last %}{# Always end with the "Next" link #}
-    <li>
-      <a href="{{ p.href }}" aria-label="Next" title="Next">
+   
+      <a href="{{ p.href }}" aria-label="Next" title="Next" >
         <span aria-hidden="true">&raquo;</span>
       </a>
-    </li>
+    
     {% endif %}
     {% endfor %}
-  </ul>
-</nav>
+  </div>
+

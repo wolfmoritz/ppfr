@@ -4,34 +4,54 @@
 {% include "_feature.html" %}
 <section id="recent">
   <div class="section-inner">
-      <h2>Recent</h2>
-      {% include '_recipeCards.html' %}
-      <div class="btn span" id="more-recipes-button">See More</div>
-    </div>
+    <h2>Recent</h2>
+    {% include '_recipeCards.html' %}
+    <div class="btn span" id="more-recipes-button">See More</div>
   </div>
-  </section>
+  </div>
+</section>
 
-  <section id="popular">
-   <div class="section-inner">
-      <h2>Popular</h2>
-      {% include '_recipeCards.html' %}
-      <div class="btn span" id="more-recipes-button">See More</div>
-   </div>
-  </section>
-  <section id="random">
+<section id="popular">
   <div class="section-inner">
-      <h2>Random</h2>
-      {% include '_recipeCards.html' %}
-      <div class="btn span" id="more-recipes-button">See More</div>
+    <h2>Popular</h2>
+    {% include '_recipeCards.html' %}
+    <div class="btn span" id="more-recipes-button">See More</div>
   </div>
-  </section>
-  <section id="blog">
-    <div class="section-inner">
-      <p>Recent 4 Blog Posts</p>
-    </section>
-    <section id="categories">
-    <div class="section-inner">  {% include '_categories.html' %}</div>
-    </div>
-  </section>
+</section>
+<section id="random">
+  <div class="section-inner">
+    <h2>Random</h2>
+    {% include '_recipeCards.html' %}
+  </div>
+</section>
+<section id="blog">
+  <div class="section-inner">
+    <h2>Blog</h2>
+    {% for p in posts %}
+
+    <article>
+      <h2 class="span"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">{{ p.title }}</a></h2>
+      <p>
+        {{ p.content_excerpt }}
+        <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">read more&hellip;</a></small>
+      </p>
+      <h5>{{ p.published_date|date('F j, Y') }}</h5>
+    </article>
+
+
+    {% else %}
+    <h3>No Posts Found</h3>
+    {% endfor %}
+
+
+
+</section>
+<section id="categories">
+  <div class="section-inner"> 
+    
+    {% include '_categories.html' %}
+  </div>
+  </div>
+</section>
 
 {% endblock %}

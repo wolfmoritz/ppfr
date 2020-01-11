@@ -1,39 +1,51 @@
-#recipeMeta {
-background: $clr-primary;
-
-.section-inner{
- display: flex;
- flex-flow: column nowrap;
- @include padding(.5em null);
-}
-
-.recipeMeta {
- display: grid;
- grid-template-columns: auto 1fr;
- grid-column-gap:  1em;
- grid-row-gap: 5px;
-}
-}
-#recipeIngredients, #recipeDirections {
-
-ul, ol{
-
+#outofloop {
 
 }
-li{
- @include padding(2px null);
- line-height: 1.5;
- @media screen and (min-width: $breakpoint-desktop){
-  line-height: 1.5;
+ #recipeMeta {
+ 
+ 
+  .section-inner {
+   display: flex;
+   flex-flow: column nowrap;
+   @include padding(.5em null);
+  }
+ 
+  .recipeMeta {
+   display: grid;
+   grid-template-columns: auto 1fr;
+   grid-column-gap: 1em;
+   grid-row-gap: 5px;
+  }
  }
-}
-
-}
-.socialContainer{
- display: flex;
- justify-content: flex-start;
-@include padding(.5em null);
-div{
- @include margin(null 1em null null);
-}
-}
+ 
+ #recipeIngredients,
+ #recipeDirections {
+ 
+  li {
+   @include padding(2px null);
+   line-height: 1.5;
+ 
+   @media screen and (min-width: $breakpoint-desktop) {
+    line-height: 1.5;
+   }
+  }
+ 
+ }
+ 
+ .socialContainer {
+  display: flex;
+  justify-content: center;
+  @include padding(.5em null);
+ 
+  div {
+   @include margin(null 1em null null);
+  }
+ }
+ 
+ .recipetext {
+  p {
+   line-height: 1.3;
+   font-size: 1.1rem;
+   @include margin(null null .5em);
+  }
+ }
