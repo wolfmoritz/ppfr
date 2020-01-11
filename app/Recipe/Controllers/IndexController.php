@@ -64,6 +64,39 @@ class IndexController extends BaseController
     }
 
     /**
+     * Display Top Recipes by View Count Desc
+     *
+     * @param  void
+     * @return void
+     */
+    public function topRecipes()
+    {
+        // Get dependencies
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
+        $paginator = $this->getPaginator();
+
+        // Get the requested page number
+        $pageNumber = $this->app->request->get('page') ?: 1;
+
+        // Configure pagination object
+        $paginator->useQueryString = true;
+        $paginator->setPagePath($this->app->urlFor('recipesTop'));
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        // Fetch top recipes
+        $data = $recipeMapper->getTopRecipes($paginator->getRowsPerPage(), $paginator->getOffset());
+
+        // Get count of recipes returned by query and load pagination
+        $paginator->setTotalRowsFound($recipeMapper->foundRows());
+        $this->loadTwigExtension($paginator);
+
+        // Set heading
+        $data['category']['name'] = 'Popular';
+
+        $this->render('recipeList.html', ['recipes' => $data, 'title' => 'Popular Recipes']);
+    }
+
+    /**
      * Get Recipes by Category
      *
      * @param mixed, category slug or ID

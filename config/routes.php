@@ -147,6 +147,11 @@ $app->get('/recipe/search', function () use ($app) {
     (new IndexController())->searchRecipes();
 })->name('recipeSearch');
 
+// Top recipes
+$app->get('/recipe/top', function () use ($app) {
+    (new IndexController())->topRecipes();
+})->name('recipesTop');
+
 // Get recipes by category
 $app->get('/recipe/category(/:category)', function ($category = null) {
     (new IndexController())->getRecipesByCategory($category);

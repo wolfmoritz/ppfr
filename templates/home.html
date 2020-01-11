@@ -9,7 +9,9 @@
   <div class="section-inner">
     <h2>Recent</h2>
     {{ cards.recipeCards(recipes.latestRecipes) }}
-    <div class="btn span" id="more-recipes-button">See More</div>
+    <div class="btn span" id="more-recipes-button">
+      <a href="{{ siteUrlFor('recipesAll') }}">See More</a>
+    </div>
   </div>
   </div>
 </section>
@@ -18,7 +20,9 @@
   <div class="section-inner">
     <h2>Popular</h2>
     {{ cards.recipeCards(recipes.popularRecipes) }}
-    <div class="btn span" id="more-recipes-button">See More</div>
+    <div class="btn span" id="more-recipes-button">
+      <a href="{{ siteUrlFor('recipesTop') }}">See More</a>
+    </div>
   </div>
 </section>
 <section id="random">
