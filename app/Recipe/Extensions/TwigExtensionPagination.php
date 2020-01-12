@@ -7,27 +7,23 @@ namespace Recipe\Extensions;
 class TwigExtensionPagination extends \Twig_Extension
 {
     protected $environment;
-    protected $baseUrl;
+    protected $domain;
     protected $pageUrl;
-    public $useQueryString = false;
     public $queryStringParam = 'page';
     protected $currentPageNumber;
-    protected $rowsPerPage;
-    protected $numberOfLinks;
-    protected $totalRowsFound;
+    protected $resultsPerPage;
+    protected $numberOfAdjacentLinks;
+    protected $totalResultsFound;
 
     /**
      * Constructor
+     *
+     * @param  array $config Configuration options array
+     * @return void
      */
-    public function __construct()
+    public function __construct(array $config)
     {
-        $this->setParams();
-    }
-
-    // Identifer
-    public function getName()
-    {
-        return 'moritzPaginator';
+        $this->setConfig($config);
     }
 
     // Initialize
@@ -52,49 +48,37 @@ class TwigExtensionPagination extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('pagination', array($this, 'pagination'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('pagination', [$this, 'pagination'], ['is_safe' => ['html']]),
         );
     }
 
     /**
-     * Set Pagination Params
+     * Set Page Path
      *
-     * Gets and sets config params from $config['pagination'], and other basic setup tasks
+     * Submit relative path, plus any query string parameters
+     * @param  string $pagePath    Relative path to resource
+     * @param  array  $queryParams Array of query strings and values
+     * @return void
      */
-    public function setParams()
+    public function setPagePath(string $pagePath, array $queryParams = null)
     {
-        $app = \Slim\Slim::getInstance();
-        $params = $app->config('pagination');
-        $this->rowsPerPage = $params['rowsPerPage'];
-        $this->numberOfLinks = $params['numberOfLinks'];
+        $this->pageUrl = $this->domain . $pagePath . '?';
 
-        // And set the base URL while we are it
-        $this->baseUrl = $app->request()->getUrl();
-    }
-
-    /**
-     * Set Base Page Path
-     *
-     * The application will determine the schema, domain, and use this path to set URL
-     * @param string, path to resource
-     */
-    public function setPagePath($pagePath)
-    {
-        // Are we using query strings?
-        if ($this->useQueryString) {
-            $this->pageUrl = $this->baseUrl . $pagePath . '?' . $this->queryStringParam . '=';
-        } else {
-            $this->pageUrl = $this->baseUrl . $pagePath . '/';
+        if ($queryParams) {
+            $this->pageUrl .= http_build_query($queryParams) . '&';
         }
+
+        $this->pageUrl .= $this->queryStringParam . '=';
     }
 
     /**
      * Set Current Page Number
      *
      * Set the current page number
-     * @param int, page number
+     * @param  int $pageNumber Current page number
+     * @return void
      */
-    public function setCurrentPageNumber($pageNumber)
+    public function setCurrentPageNumber(int $pageNumber)
     {
         $this->currentPageNumber = ($pageNumber) ? $pageNumber : 1;
     }
@@ -113,52 +97,55 @@ class TwigExtensionPagination extends \Twig_Extension
     /**
      * Get Offset
      *
-     * Based on the $config['pagination']['rowsPerPage'] config value
+     * Based on the $config['pagination']['resultsPerPage'] config value
      * this returns the offset for the current page number
-     * @param none
+     * @param  void
      * @return int
      */
     public function getOffset()
     {
-        return ($this->currentPageNumber - 1) * $this->rowsPerPage;
+        return ($this->currentPageNumber - 1) * $this->resultsPerPage;
     }
 
     /**
-     * Get Rows Per Page Config
+     * Get Results Per Page Config Value
      *
      * Gets the rows per page configuration setting
-     * @param none
+     * @param  void
      * @return int
      */
-    public function getRowsPerPage()
+    public function getResultsPerPage()
     {
-        return $this->rowsPerPage;
+        return $this->resultsPerPage;
     }
 
     /**
-     * Set Total Rows Found
+     * Set Total Results Found
      *
-     * Set the total rows matching the query
-     * @param int, number of rows found
+     * Set the total results from the query
+     * @param  int $totalResultsFound number of rows found
+     * @return void
      */
-    public function setTotalRowsFound($totalRowsFound)
+    public function setTotalResultsFound(int $totalResultsFound)
     {
-        $this->totalRowsFound = $totalRowsFound;
+        $this->totalResultsFound = $totalResultsFound;
     }
 
     /**
      * Private: Build Pagination
      *
-     * Build pagination link array
+     * Build pagination links array
+     * @param  void
+     * @return void
      */
     private function buildPagination()
     {
         // Calculate the number of page in this set
-        $numberOfPages = ceil($this->totalRowsFound / $this->rowsPerPage);
+        $numberOfPages = ceil($this->totalResultsFound / $this->resultsPerPage);
 
         // Calcuate starting and ending page in the central link series
-        $startPage = ($this->currentPageNumber - $this->numberOfLinks > 0) ? $this->currentPageNumber - $this->numberOfLinks : 1;
-        $endPage = ($this->currentPageNumber + $this->numberOfLinks <= $numberOfPages) ? $this->currentPageNumber + $this->numberOfLinks : $numberOfPages;
+        $startPage = ($this->currentPageNumber - $this->numberOfAdjacentLinks > 0) ? $this->currentPageNumber - $this->numberOfAdjacentLinks : 1;
+        $endPage = ($this->currentPageNumber + $this->numberOfAdjacentLinks <= $numberOfPages) ? $this->currentPageNumber + $this->numberOfAdjacentLinks : $numberOfPages;
 
         // Create array for page links
         $pageList = [];
@@ -206,9 +193,11 @@ class TwigExtensionPagination extends \Twig_Extension
     }
 
     /**
-     * Paginate
+     * Pagination
      *
-     * Generate pagination links
+     * Render pagination links HTML
+     * @param  void
+     * @return void
      */
     public function pagination()
     {
@@ -218,7 +207,7 @@ class TwigExtensionPagination extends \Twig_Extension
         }
 
         // If there are no rows, or if there is only one page then return nothing
-        if ($this->totalRowsFound === 0 || $this->rowsPerPage >= $this->totalRowsFound) {
+        if ($this->totalResultsFound === 0 || $this->resultsPerPage >= $this->totalResultsFound) {
             return $pageListCache = '';
         }
 
@@ -228,5 +217,18 @@ class TwigExtensionPagination extends \Twig_Extension
         $values['pageUrl'] = $this->pageUrl;
 
         return $this->environment->render('_pagination.html', $values);
+    }
+
+    /**
+     * Set Pagination Configuration
+     *
+     * @param  array $config Configuration array of options
+     * @return void
+     */
+    public function setConfig(array $config)
+    {
+        $this->resultsPerPage = $config['resultsPerPage'];
+        $this->numberOfAdjacentLinks = $config['numberOfAdjacentLinks'];
+        $this->domain = isset($config['domain']) ? $config['domain'] : '/';
     }
 }

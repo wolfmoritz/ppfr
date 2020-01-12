@@ -70,8 +70,8 @@ $config['image']['file.upload.max.size'] = '6M'; // Use "B", "K", M", or "G"
 /**
  * Pagination Options
  */
-$config['pagination']['rowsPerPage'] = 21;
-$config['pagination']['numberOfLinks'] = 2;
+$config['pagination']['resultsPerPage'] = 8;
+$config['pagination']['numberOfAdjacentLinks'] = 2;
 
 /**
  * Recipe Query Counts

@@ -110,7 +110,6 @@ return call_user_func(
         });
 
         // Security
-        // TODO Rename references to SecurityHandler
         $app->container->singleton('security', function () use ($app) {
             return new Recipe\Library\SecurityHandler($app);
         });
@@ -125,8 +124,10 @@ return call_user_func(
         };
 
         // Pagination Extension
-        $app->PaginationHandler = function () {
-            return new Recipe\Extensions\TwigExtensionPagination();
+        $app->PaginationHandler = function () use ($app) {
+            $options = $app->config('pagination');
+            $options['domain'] = $app->request()->getUrl();
+            return new Recipe\Extensions\TwigExtensionPagination($options);
         };
 
         // Sitemap
