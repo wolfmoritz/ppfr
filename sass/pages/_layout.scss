@@ -11,6 +11,8 @@
 .section-inner {
  width: 90vw;
  max-width: $max-width;
- @include margin(0 auto);
-
+ @include margin(1em auto);
+ background: $clr-background;
+ border-radius: $border-radius;
+ @include padding(1em);
 }

@@ -3,16 +3,17 @@
 *,
 *::before,
 *::after {
- box-sizing: border-box;
-@include margin(0);
- @include padding(0);
+  box-sizing: border-box;
+  @include margin(0);
+  @include padding(0);
 }
 
 body,
 html {
- background: $clr-background;
- min-height: 100vh;
- width: 100vw;
+  background: $clr-background;
+  background: $light-grey;
+  min-height: 100vh;
+  width: 100vw;
 }
 
 body {
@@ -20,49 +21,53 @@ body {
   font-weight: $ff-n;
   display: flex;
   flex-flow: column nowrap;
- }
+}
 
- img {
+img {
   width: 100%;
   height: auto;
   display: block;
- }
- 
- p {
+} 
+
+p {
   color: $clr-text-dark;
- }
- h1,
+}
+
+h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
- font-family: $ff-serif;
- font-weight: $ff-b;
- color: $clr-primary;
- @include  margin(.5em null);
+  font-family: $ff-serif;
+  font-weight: $ff-b;
+  color: $clr-primary;
+  @include margin(.5em null);
 }
 
 h1 {
- font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 h2 {
- font-size: 2rem;
-}
-h3{
- font-size: 1.5rem;
-}
-h4{
- font-size: 1.25rem;
-}
-h5 {
- font-size: .8rem;
- font-family: $ff-sans;
- font-weight: $ff-l;
+  font-size: 2rem;
 }
 
- // Default elements
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: .8rem;
+  font-family: $ff-sans;
+  font-weight: $ff-l;
+}
+
+// Default elements
 
 ul,
 ol {
@@ -79,18 +84,20 @@ dl {
 dt {
   font-weight: 600;
   @include margin(0);
- 
+
 }
 
 dd {
   @include margin(0);
- 
-}
- // Utilities
 
- .span {
+}
+
+// Utilities
+
+.span {
   grid-column: 1 / -1;
 }
-.section-title{
+
+.section-title {
   grid-column: 1 / -1;
 }
