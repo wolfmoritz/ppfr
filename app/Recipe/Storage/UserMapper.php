@@ -17,18 +17,24 @@ class UserMapper extends DataMapperAbstract
     /**
      * Get User by ID
      *
-     * @param int, user_id
-     * @return DomainObjectAbstract, user
+     * @param  int $userId
+     * @return DomainObject
      */
     public function getUser($userId)
     {
-        return $this->findById($userId);
+        $this->sql = $this->defaultSelect . ' where user_id = ?';
+        $this->bindValues[] = $userId;
+
+        return $this->findRow();
     }
 
     /**
-     * Get User by email
+     * Get User by Email
+     *
+     * @param string $email
+     * @return DomainObject
      */
-    public function getUserByEmail($email)
+    public function getUserByEmail(string $email)
     {
         $this->sql = $this->defaultSelect . ' where email = ?';
         $this->bindValues[] = $email;

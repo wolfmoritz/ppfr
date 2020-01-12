@@ -128,49 +128,34 @@ $app->get('/logout', function () {
 // -------------------------- Recipe Routes --------------------------
 
 // Get all recipes
-$app->get('/recipe/', function () {
+$app->get('/recipe(/)', function () {
     (new IndexController())->allRecipes();
 })->name('recipesAll');
 
-// Show a recipe
-$app->get('/recipe/show(/:id(/:slug))', function ($id, $slug = null) {
-    (new IndexController())->showRecipe($id, $slug);
+// Show a recipe (Slug is not used to query recipe)
+$app->get('/recipe/show(/:id/:slug)', function ($id, $slug) {
+    (new IndexController())->showRecipe($id);
 })->conditions(['id' => '\d+'])->name('showRecipe');
 
-// Show a recipe - fall through if missing url segment and the ID has a trailing slash
-$app->get('/recipe/show(/:id)/', function ($id) {
-    (new IndexController())->showRecipe($id);
-})->conditions(['id' => '\d+']);
-
 // Search recipes
-$app->get('/recipe/search', function () use ($app) {
+$app->get('/recipe/search(/)', function () use ($app) {
     (new IndexController())->searchRecipes();
 })->name('recipeSearch');
 
 // Popular recipes
-$app->get('/recipe/popular', function () use ($app) {
+$app->get('/recipe/popular(/)', function () use ($app) {
     (new IndexController())->popularRecipes();
 })->name('recipesPopular');
 
 // Get recipes by category
-$app->get('/recipe/category(/:category)', function ($category = null) {
+$app->get('/recipe/category(/:category(/))', function ($category = null) {
     (new IndexController())->getRecipesByCategory($category);
 })->conditions(['category' => '[a-zA-Z-]+'])->name('recipesByCategory');
 
-// Get recipes by category - fall through for trailing slash
-$app->get('/recipe/category(/:category)/', function ($category = null) {
-    (new IndexController())->getRecipesByCategory($category);
-})->conditions(['category' => '[a-zA-Z-]+']);
-
 // Get recipes by user. The username segment is a throwaway as far as the route is concerned
-$app->get('/recipe/user(/:id(/:username))', function ($id, $username = null) {
+$app->get('/recipe/user(/:id/:username(/))', function ($id, $username = null) {
     (new IndexController())->getRecipesByUser($id);
-})->name('recipesByUser');
-
-// Get recipes by user - fall through for trailing slash
-$app->get('/recipe/user(/:id(/:username))/', function ($id, $username = null) {
-    (new IndexController())->getRecipesByUser($id);
-});
+})->conditions(['id' => '\d+'])->name('recipesByUser');
 
 // -------------------------- Blog Routes --------------------------
 
