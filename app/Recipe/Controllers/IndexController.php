@@ -134,17 +134,16 @@ class IndexController extends BaseController
      * Display a Single Recipe
      *
      * @param int    $id    Recipe ID
-     * @param string $slug  Recipe url slug
      * @return void
      */
-    public function showRecipe($id, $slug = null)
+    public function showRecipe($id)
     {
         // Get dependencies
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
         $categoryMapper = ($this->dataMapper)('CategoryMapper');
         $crawlerDetect = $this->app->crawlerDetect;
 
-        // If $id is not an integer or at least numeric, throw 404
+        // If $id cannot be interpreted as an integer, throw 404
         if (!is_integer((int) $id)) {
             return $this->notFound();
         }
@@ -155,11 +154,6 @@ class IndexController extends BaseController
         // If no recipe found then return 404
         if (!$recipe) {
             return $this->notFound();
-        }
-
-        // If no slug was provided, then 301 redirect back to here with the slug
-        if ($slug !== $recipe->url) {
-            return $this->redirect($this->app->urlFor('showRecipe') . $recipe->niceUrl(), 301);
         }
 
         // Get categories for this recipe
@@ -223,40 +217,39 @@ class IndexController extends BaseController
     public function getRecipesByUser($userId)
     {
         // Get dependencies
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $UserMapper = $dataMapper('UserMapper');
-        $Paginator = $this->app->PaginationHandler;
-        $twig = $this->app->twig;
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
+        $userMapper = ($this->dataMapper)('UserMapper');
+        $paginator = $this->getPaginator();
 
         // Get the page number
         $pageNumber = $this->app->request->get('page') ?: 1;
 
-        // Verify user and get proper name and ID
-        $userResult = $UserMapper->getUser($userId);
+        // Get proper name and ID which we need for the pagination setup prior to running the recipe query
+        $user = $userMapper->getUser($userId);
 
-        // If no valid user was found then return 404
-        if (!$userResult) {
+        // If no user found then return 404
+        if (!$user) {
             $this->notFound();
         }
 
         // Configure pagination object
-        $Paginator->useQueryString = true;
-        $Paginator->setPagePath($this->app->urlFor('recipesByUser', ['id' => $userResult->user_id, 'username' => $userResult->user_url]));
-        $Paginator->setCurrentPageNumber($pageNumber);
+        $paginator->useQueryString = true;
+        $paginator->setPagePath($this->app->urlFor('recipesByUser', ['id' => $userId, 'username' => $user->user_url]));
+        $paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
-        $recipes = $RecipeMapper->getRecipesByUser($userResult->user_id, $Paginator->getRowsPerPage(), $Paginator->getOffset());
+        $recipes = $recipeMapper->getRecipesByUser((int) $userId, $paginator->getRowsPerPage(), $paginator->getOffset());
+
+        // If no recipes found for this user then return 404
+        if (!$recipes) {
+            $this->notFound();
+        }
 
         // Get count of recipes returned by query and load pagination
-        $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
-        $twig->parserExtensions[] = $Paginator;
+        $paginator->setTotalRowsFound($recipeMapper->foundRows());
+        $this->loadTwigExtension($paginator);
 
-        // Return the array of recipes and the user name (set in the category field)
-        $data['list'] = $recipes;
-        $data['category']['name'] = $userResult->user_name . '\'s';
-
-        $twig->display('recipeList.html', ['recipes' => $data, 'title' => $userResult->user_name]);
+        $this->render('recipeList.html', ['recipes' => $recipes, 'source' => $user->user_name . '\'s', 'title' => $user->user_name]);
     }
 
     /**

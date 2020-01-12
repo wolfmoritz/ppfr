@@ -80,7 +80,7 @@ class SecurityHandler
      * @param array, user data from session
      * @return bool, true (authorized) or false (not authorized)
      */
-    public function authorizedToEditRecipe(\Recipe\Storage\Recipe $recipe, array $user = null)
+    public function authorizedToEditRecipe($recipe, $user = null)
     {
         $SessionHandler = $this->app->SessionHandler;
         $user = $SessionHandler->getData();
