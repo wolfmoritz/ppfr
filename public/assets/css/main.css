@@ -583,12 +583,22 @@ footer a:hover {
 }
 
 .wrapper {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 1em;
   grid-template-columns: 1fr;
+  background: #dee0e6;
+}
+.wrapper .content {
+  background: #f6f6f6;
+  padding: 1em;
+  margin: 0.5em;
+  border-radius: 7px;
+  border: 1px solid rgba(28, 28, 28, 0.2);
 }
 .wrapper .sidebar {
   background: #dee0e6;
@@ -596,7 +606,8 @@ footer a:hover {
 .wrapper .sidebar .sidebar-item {
   background: #f6f6f6;
   padding: 0.5em;
-  margin: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   border: 1px solid rgba(28, 28, 28, 0.2);
   border-radius: 7px;
 }
@@ -635,6 +646,13 @@ footer a:hover {
 }
 .wrapper .sidebar .recipeOwner a {
   color: #1c1c1c;
+}
+
+.ingredients, .recipeDirections {
+  margin-bottom: 2em;
+}
+.ingredients p, .ingredients li, .recipeDirections p, .recipeDirections li {
+  margin-bottom: 0.75em;
 }
 
 /* no grid support? */
