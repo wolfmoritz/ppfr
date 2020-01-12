@@ -11,7 +11,7 @@ class BlogMapper extends DataMapperAbstract
 {
     protected $table = 'blog';
     protected $primaryKey = 'blog_id';
-    protected $modifyColumns = ['title', 'url', 'content', 'content_excerpt', 'published_date'];
+    protected $modifiableColumns = ['title', 'url', 'content', 'content_excerpt', 'published_date'];
     protected $domainObjectClass = __NAMESPACE__ . '\Blog';
     protected $defaultSelect = 'select SQL_CALC_FOUND_ROWS b.*, concat(us.first_name, \' \', us.last_name) user_name, concat(us.user_id, \'/\', us.first_name, \'+\', us.last_name) user_url from blog b join pp_user us on b.created_by = us.user_id';
 
@@ -66,11 +66,11 @@ class BlogMapper extends DataMapperAbstract
         $Toolbox = $app->Toolbox;
 
         // Set URL safe domainObject title
-        $blog->url = $Toolbox->cleanUrl($domainObject->title);
+        $domainObject->url = $Toolbox->cleanUrl($domainObject->title);
 
         // Set content excerpt
         $domainObject->content_excerpt = $Toolbox->truncateHtmlText($domainObject->content);
 
-        return parent::save($blog);
+        return parent::save($domainObject);
     }
 }
