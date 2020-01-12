@@ -81,6 +81,17 @@ class BaseController
     }
 
     /**
+     * Get Twig Paginator
+     *
+     * @param  void
+     * @return object
+     */
+    protected function getPaginator()
+    {
+        return $this->app->PaginationHandler;
+    }
+
+    /**
      * Load Twig Extension
      *
      * @param  object $extension
@@ -90,16 +101,5 @@ class BaseController
     {
         $twig = $this->app->twig;
         $twig->parserExtensions[] = $extension;
-    }
-
-    /**
-     * Get Twig Paginator
-     *
-     * @param  void
-     * @return object
-     */
-    protected function getPaginator()
-    {
-        return $this->app->PaginationHandler;
     }
 }
