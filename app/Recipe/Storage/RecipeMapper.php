@@ -165,12 +165,14 @@ class RecipeMapper extends DataMapperAbstract
      *  - Title
      *  - Ingredients
      *  - Instructions
-     * @param string, search terms
-     * @param int, limit
-     * @param int, offset
-     * @param bool, only get published recipes (true)
+     *  - Notes
+     * @param  string $terms                Search terms
+     * @param  int    $limit                Limit
+     * @param  int    $offset               Offset
+     * @param  bool   $publishedRecipesOnly Only get published recipes (true)
+     * @return array
      */
-    public function searchRecipes($terms, $limit, $offset, $publishedRecipesOnly = true)
+    public function searchRecipes(string $terms, int $limit, int $offset, bool $publishedRecipesOnly = true)
     {
         // Create array of search terms split by word
         $termsArray = preg_split('/\s+/', $terms);
@@ -187,17 +189,20 @@ class RecipeMapper extends DataMapperAbstract
         $titleSearch = '(';
         $ingredientSearch = '(';
         $instructionSearch = '(';
+        $notesSearch = '(';
 
         for ($i = 0; $i <= $numberOfTerms; $i++) {
             $titleSearch .= "r.title {$regex}";
             $ingredientSearch .= "r.ingredients {$regex}";
             $instructionSearch .= "r.instructions {$regex}";
+            $notesSearch .= "r.notes {$regex}";
 
             // Continue search strings with "and" if there is more then one search term
             if ($i !== $numberOfTerms) {
                 $titleSearch .= ' and ';
                 $ingredientSearch .= ' and ';
                 $instructionSearch .= ' and ';
+                $notesSearch .= ' and ';
             }
         }
 
@@ -205,16 +210,17 @@ class RecipeMapper extends DataMapperAbstract
         $titleSearch .= ')';
         $ingredientSearch .= ')';
         $instructionSearch .= ')';
+        $notesSearch .= ')';
 
-        // Add bind parameters, repeating each set of terms for each field
-        for ($i = 0; $i < 3; $i++) {
+        // Add bind parameters (for each field), repeating each set of terms for each field
+        for ($i = 0; $i < 4; $i++) {
             foreach ($termsArray as $term) {
                 $this->bindValues[] = $term;
             }
         }
 
         // Add predicates to sql statement
-        $this->sql .= " ({$titleSearch} or {$ingredientSearch} or {$instructionSearch})";
+        $this->sql .= " ({$titleSearch} or {$ingredientSearch} or {$instructionSearch} or {$notesSearch})";
 
         if ($publishedRecipesOnly) {
             $this->sql .= ' and r.published_date <= curdate()';
