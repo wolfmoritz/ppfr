@@ -102,6 +102,14 @@ dd {
   margin: 0;
 }
 
+.span {
+  grid-column: 1/-1;
+}
+
+.section-title {
+  grid-column: 1/-1;
+}
+
 /* Large Top Logo */
 .large-logo {
   top: 0;

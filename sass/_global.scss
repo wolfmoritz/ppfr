@@ -86,3 +86,11 @@ dd {
   @include margin(0);
  
 }
+ // Utilities
+
+ .span {
+  grid-column: 1 / -1;
+}
+.section-title{
+  grid-column: 1 / -1;
+}

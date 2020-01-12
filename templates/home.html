@@ -21,7 +21,7 @@
     <h2>Popular</h2>
     {{ cards.recipeCards(recipes.popularRecipes) }}
     <div class="span" id="more-recipes-button">
-      <a  class="btn" href="{{ siteUrlFor('recipesPopular') }}">See More</a>
+      <a class="btn" href="{{ siteUrlFor('recipesPopular') }}">See More</a>
     </div>
   </div>
 </section>
@@ -37,27 +37,33 @@
     {% for p in recipes.blogPosts %}
 
     <article>
-      <h2 class="span"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl) }}">{{ p.title }}</a></h2>
+      <h3 class="span">
+        <a href="{{ siteUrlFor('showBlogPost', p.niceUrl) }}">{{ p.title }}</a>
+      </h3>
       <p>
         {{ p.content_excerpt }}
-        <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl) }}">read more&hellip;</a></small>
+       
       </p>
+      <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl) }}">read more&hellip;</a></small>
       <h5>{{ p.published_date|date('F j, Y') }}</h5>
     </article>
 
     {% else %}
+
     <h3>No Posts Found</h3>
+
     {% endfor %}
+
     <div class="span" id="more-recipes-button">
       <a class="btn" href="{{ siteUrlFor('blogPosts') }}">See More</a>
     </div>
 
+  </div>
 </section>
+
 <section id="categories">
   <div class="section-inner">
-
     {% include '_categories.html' %}
-  </div>
   </div>
 </section>
 
