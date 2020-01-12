@@ -150,7 +150,7 @@ class IndexController extends BaseController
         }
 
         // Fetch recipe
-        $recipe = $recipeMapper->findById((int) $id);
+        $recipe = $recipeMapper->getRecipe((int) $id);
 
         // If no recipe found then return 404
         if (!$recipe) {
@@ -266,14 +266,5 @@ class IndexController extends BaseController
     {
         $twig = $this->app->twig;
         $twig->display('about.html', ['title' => 'About']);
-    }
-
-    /**
-     * Blog Post Page
-     */
-    public function blogPost()
-    {
-        $twig = $this->app->twig;
-        $twig->display('blog.html', ['title' => 'Blog']);
     }
 }

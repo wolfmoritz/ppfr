@@ -28,6 +28,21 @@ class RecipeMapper extends DataMapperAbstract
     }
 
     /**
+     * Get Recipe by ID
+     *
+     * Get recipe by recipe ID
+     * @param  int $recipeId Recipe ID
+     * @return DomainObject
+     */
+    public function getRecipe(int $recipeId)
+    {
+        $this->sql = $this->defaultSelect . ' where r.recipe_id = ?';
+        $this->bindValues[] = $recipeId;
+
+        return $this->findRow();
+    }
+
+    /**
      * Get Recipes in Reverse Date Order
      *
      * Returns an array of Domain Objects (one for each record)
