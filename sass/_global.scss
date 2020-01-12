@@ -11,29 +11,27 @@
 body,
 html {
  background: $clr-background;
+ min-height: 100vh;
+ width: 100vw;
 }
 
 body {
- font-family: $ff-sans;
- font-weight: 400;
- min-height: 100vh;
- width: 100%;
+  font-family: $ff-sans;
+  font-weight: $ff-n;
+  display: flex;
+  flex-flow: column nowrap;
+ }
 
- display: flex;
- flex-flow: column nowrap;
-}
-
-img {
- width: 100%;
- height: auto;
- display: block;
-}
-
-p {
- color: $clr-text-dark;
-}
-
-h1,
+ img {
+  width: 100%;
+  height: auto;
+  display: block;
+ }
+ 
+ p {
+  color: $clr-text-dark;
+ }
+ h1,
 h2,
 h3,
 h4,
@@ -41,8 +39,8 @@ h5,
 h6 {
  font-family: $ff-serif;
  font-weight: $ff-b;
- color: $clr-accent-light;
- @include margin(.5em null);
+ color: $clr-primary;
+ @include  margin(.5em null);
 }
 
 h1 {
@@ -63,19 +61,8 @@ h5 {
  font-family: $ff-sans;
  font-weight: $ff-l;
 }
-.large-logo{
 
-  top: 0;
- display: flex;
- justify-content: center;
- align-items: center;
- background: $clr-primary;
- img{
-   width: 300px;
- }
-}
-
-// Default elements
+ // Default elements
 
 ul,
 ol {
@@ -99,31 +86,3 @@ dd {
   @include margin(0);
  
 }
-
-// widgets
-
-.btn {
-  background: $clr-primary;
-  @include padding(.75em 1.5em);
-  @include margin(.5em null null);
-  
-  border-radius: $border-radius;
-  border: solid 1px rgba($clr-accent-dark, .5);
-  display: inline-block;
- 
-  &:hover {
-   background: $clr-accent-light;
-   color: $clr-background;
-   border: solid 1px rgba($clr-text-dark, .5);
-   cursor: pointer;
-  }
- }
- // Utilities
-
- .span {
-   grid-column: 1 / -1;
- }
- .section-title{
-   grid-column: 1 / -1;
- }
- 

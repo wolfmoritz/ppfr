@@ -1,232 +1,247 @@
-   // top nav
+/* Large Top Logo */
+.large-logo {
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $clr-accent-light;
+  img {
+    width: 300px;
+  }
+}
 
- /* navigation styles start here */
+// top nav
+
+/* navigation styles start here */
 
 header {
- background: $clr-accent-light;
- text-align: center;
- position: sticky;
- top: 0;
- z-index: 999;
- width: 100%;
- @include padding(.75em 0);
- box-shadow: $box-shadow-dark;
- h1 {
-  @include margin(0);
- 
- }
+  background: $clr-primary;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  @include padding(.75em 0);
+  box-shadow: $box-shadow-dark;
+
+  h1 {
+    @include margin(0);
+
+  }
 }
-.logo{
+
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .logo a {
- color: white;
- letter-spacing: .1em;
- text-decoration: none;
- font-size: 1.5rem;
+  color: white;
+  letter-spacing: .1em;
+  text-decoration: none;
+  font-size: 1.5rem;
 }
 
 .nav-toggle {
- position: absolute !important;
- top: -9999px !important;
- left: -9999px !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }
 
 .nav-toggle:focus~.nav-toggle-label {
- outline: 3px solid rgba(lightblue, .75);
+  outline: 3px solid rgba(lightblue, .75);
 }
 
 .nav-toggle-label {
- position: absolute;
- top: 0;
- right: 0;
- @include margin(null 1em null null);
- height: 100%;
- display: flex;
- align-items: center;
- cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  @include margin(null 1em null null);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .nav-toggle-label span,
 .nav-toggle-label span::before,
 .nav-toggle-label span::after {
- display: block;
- background: white;
- height: 3px;
- width: 2em;
- border-radius: 2px;
- position: relative;
+  display: block;
+  background: white;
+  height: 3px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
 }
 
 .nav-toggle-label span::before,
 .nav-toggle-label span::after {
- content: '';
- position: absolute;
+  content: '';
+  position: absolute;
 }
 
 .nav-toggle-label span::before {
- bottom: 8px;
+  bottom: 8px;
 }
 
 .nav-toggle-label span::after {
- top: 8px;
+  top: 8px;
 }
 
 nav {
- position: absolute;
- text-align: center;
- top: 100%;
- left: 0;
- background: $clr-accent-light;
- width: 100%;
- transform: scale(1, 0);
- transform-origin: top;
- transition: transform 400ms ease-in-out;
+  position: absolute;
+  text-align: center;
+  top: 100%;
+  left: 0;
+  background: $clr-accent-light;
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
 }
 
 nav ul {
   @include margin(0);
   @include padding(0);
- list-style: none;
+  list-style: none;
 }
 
 nav li {
- @include margin(null null 1em);
+  @include margin(null null 1em);
 }
 
 nav a {
- color: white;
- text-decoration: none;
- font-size: 1rem;
- text-transform: uppercase;
- opacity: 0;
- transition: opacity 150ms ease-in-out;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
 }
 
 nav a:hover {
- color: #000;
+  color: #000;
 }
 
 .nav-toggle:checked~nav {
- transform: scale(1, 1);
+  transform: scale(1, 1);
 }
 
 .nav-toggle:checked~nav a,
 .nav-toggle:checked~nav .form__search {
- opacity: 1;
- transition: opacity 250ms ease-in-out 250ms;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
 }
 
 /* I added this */
 
 .form__search {
- display: flex;
- justify-content: center;
- display: inline-block;
-@include margin(null null 1em);
- border-radius: 10px;
- overflow: hidden;
- opacity: 0;
+  display: flex;
+  justify-content: center;
+  display: inline-block;
+  @include margin(null null 1em);
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0;
 }
 
 .form__search input {
- font-family: inherit;
- font-size: 100%;
- @include padding(.5em 1em);
- color: currentColor;
- border: none;
- text-transform: uppercase;
+  font-family: inherit;
+  font-size: 100%;
+  @include padding(.5em 1em);
+  color: currentColor;
+  border: none;
+  text-transform: uppercase;
 
 }
 
 .form__search .form-group:hover {
- cursor: pointer;
+  cursor: pointer;
 }
 
 .form__search .form-group {
- background: #efefef;
- border-radius: 7px;
- overflow: hidden;
- display: flex;
- flex-flow: row nowrap;
- width: 100%;
+  background: #efefef;
+  border-radius: 7px;
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
 }
 
 .form__search input:focus {
- border: none;
- outline: transparent;
+  border: none;
+  outline: transparent;
 }
 
 .form__search button:hover {
- cursor: pointer;
+  cursor: pointer;
 }
 
 .form__search .button__search {
- background: transparent;
- border: none;
- font-size: 100%;
- @include padding(null .5em null .25em);
- background: #efefef;
+  background: transparent;
+  border: none;
+  font-size: 100%;
+  @include padding(null .5em null .25em);
+  background: #efefef;
 }
 
 .form__search .button__search:focus {
- outline: none;
+  outline: none;
 
 }
 
 @media screen and (min-width: 900px) {
- .nav-toggle-label {
-  display: none;
- }
+  .nav-toggle-label {
+    display: none;
+  }
 
- header {
-  display: grid;
-  grid-template-columns: minmax(10px, 1fr) auto minmax(750px, 4fr) minmax(10px, 1fr);
- }
+  header {
+    display: grid;
+    grid-template-columns: minmax(10px, 1fr) auto minmax(750px, 4fr) minmax(10px, 1fr);
+  }
 
- .logo {
-  grid-column: 2 / 3;
- }
+  .logo {
+    grid-column: 2 / 3;
+  }
 
- nav {
+  nav {
 
-  position: relative;
-  text-align: left;
-  transition: none;
-  transform: scale(1, 1);
-  background: none;
-  top: initial;
-  left: initial;
+    position: relative;
+    text-align: left;
+    transition: none;
+    transform: scale(1, 1);
+    background: none;
+    top: initial;
+    left: initial;
 
-  grid-column: 3 / 4;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
- }
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
 
- nav ul {
-  display: flex;
- }
+  nav ul {
+    display: flex;
+  }
 
- nav li {
-  @include margin(null null 0 3em);
- }
+  nav li {
+    @include margin(null null 0 3em);
+  }
 
- nav a {
-  opacity: 1;
- }
+  nav a {
+    opacity: 1;
+  }
 
- /* I added this */
- .form__search {
-  opacity: 1;
-  @include margin(null null 0 2em);
+  /* I added this */
+  .form__search {
+    opacity: 1;
+    @include margin(null null 0 2em);
 
- }
+  }
 
- i {
-   font-size: 1.2rem;
-  font-weight: bold;
- }
+  i {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }

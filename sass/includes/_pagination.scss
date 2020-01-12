@@ -26,9 +26,9 @@
   @include padding(.5em .5em);
   @include margin(null .25em);
   border-radius: $border-radius;
-  background: $bright-green;
+  background: $clr-primary;
   text-decoration: none;
-  color: $clr-primary;
+  color: $clr-text-light;
   cursor: pointer;
 
 
@@ -42,11 +42,12 @@
  .active {
   a {
    font-weight: $ff-b;
-   color: $white;
+   background: $clr-accent-light;
+   color: $clr-text-light;
    cursor: default;
    &:hover{
-    color: $white;
-    background: $bright-green;
+    color: $clr-text-dark;
+    background: $clr-accent-light;
    }
   }
  }

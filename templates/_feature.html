@@ -12,7 +12,7 @@
       <h2 class="feature__title">{{ recipe.title }}</h2>
       <p class="feature__subtitle">{{ recipe.subtitle }}</p>
       {% if onHome %}
-      <div class="btn"><a href="{{ siteUrlFor('showRecipe', recipe.niceUrl) }}">See Recipe</a></div>
+      <a class="btn" href="{{ siteUrlFor('showRecipe', recipe.niceUrl) }}">See Recipe</a>
       {% endif %}
     </div>
 

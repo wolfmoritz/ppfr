@@ -9,8 +9,8 @@
   <div class="section-inner">
     <h2>Recent</h2>
     {{ cards.recipeCards(recipes.latestRecipes) }}
-    <div class="btn span" id="more-recipes-button">
-      <a href="{{ siteUrlFor('recipesAll') }}">See More</a>
+    <div class="span" id="more-recipes-button">
+      <a class="btn" href="{{ siteUrlFor('recipesAll') }}">See More</a>
     </div>
   </div>
   </div>
@@ -20,8 +20,8 @@
   <div class="section-inner">
     <h2>Popular</h2>
     {{ cards.recipeCards(recipes.popularRecipes) }}
-    <div class="btn span" id="more-recipes-button">
-      <a href="{{ siteUrlFor('recipesPopular') }}">See More</a>
+    <div class="span" id="more-recipes-button">
+      <a  class="btn" href="{{ siteUrlFor('recipesPopular') }}">See More</a>
     </div>
   </div>
 </section>
@@ -48,8 +48,8 @@
     {% else %}
     <h3>No Posts Found</h3>
     {% endfor %}
-    <div class="btn span" id="more-recipes-button">
-      <a href="{{ siteUrlFor('blogPosts') }}">See More</a>
+    <div class="span" id="more-recipes-button">
+      <a class="btn" href="{{ siteUrlFor('blogPosts') }}">See More</a>
     </div>
 
 </section>
