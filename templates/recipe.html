@@ -3,8 +3,9 @@
 {% block body %}
 
 {% include "_feature.html" %}
-<div class="body-wrapper">
-		<main class="left-col">
+<div class="wrapper">
+	
+		<main class="content">
 			<div class="recipeIngredients">
 				
 					<h4 class="span">Ingredients</h4>
@@ -24,17 +25,17 @@
 			</div>
 		</main>
 	
-		<aside class="right-col">
+		<aside class="sidebar">
 			{% if authorizedToEditRecipe(recipe) %} 
 				<div class=" edit-button">
 				<a class="btn" href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}" role="button">Edit</a>
 			</div>
 			{% endif %}
-			<div class="aside-item recipeSocial">
+			<div class="sidebar-item recipeSocial">
 				{% include "_social.html" %}
 			</div>
 	
-			<div class="aside-item recipeMeta">
+			<div class="sidebar-item recipeMeta">
 				<h4 class="span">Quick Info</h4>
 	
 				<!-- Begin recipe-meta -->
@@ -58,8 +59,8 @@
 				<!-- .recipe-meta -->
 			</div>
 	
-			<div class="aside-item recipeNotes">
-				<div class="section-inner">
+			<div class="sidebar-item recipeNotes">
+			
 					{% if recipe.notes %}
 	
 					<h4>Notes</h4>
@@ -68,11 +69,11 @@
 					</div><!-- end notes -->
 	
 					{% endif %}
-				</div>
+			
 			</div>
 	
-			<div class="aside-item recipeCategory" itemprop="recipeCategory">
-				<div class="section-inner">
+			<div class="sidebar-item recipeCategory" itemprop="recipeCategory">
+				
 					<h4>Recipe Categories</h4>
 				
 						{% for c in recipe.categories %}
@@ -82,11 +83,11 @@
 					
 						{% endfor %}
 
-				</div>
+			
 				
 			</div>
 	
-			<div class="aside-item recipeOwner">
+			<div class="sidebar-item recipeOwner">
 				<div>
 					Other recipes by <a href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
 							itemprop="author">{{ recipe.user_name }}</span></a>
