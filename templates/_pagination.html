@@ -1,12 +1,12 @@
 {# Pagiation Include #}
 
 
-  <div class="pagination"  >
+  <div class="pagination">
   	{% for p in links %}
   	{% if loop.first %}{# Always start with the "Previous" link #}
-   
+
       <a href="{{ p.href }}" aria-label="Previous" title="Previous" > <span aria-hidden="true">&laquo;</span></a>
-    
+
     {% endif %}
 
     {% if p.link == 'ellipsis' %}{# Include if the link is set to be some sort ellipsis #}
@@ -18,11 +18,11 @@
     {% endif %}
 
     {% if loop.last %}{# Always end with the "Next" link #}
-   
+
       <a href="{{ p.href }}" aria-label="Next" title="Next" >
         <span aria-hidden="true">&raquo;</span>
       </a>
-    
+
     {% endif %}
     {% endfor %}
   </div>

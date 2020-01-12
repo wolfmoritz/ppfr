@@ -138,12 +138,12 @@ $app->get('/recipe/show(/:id/:slug)', function ($id, $slug) {
 })->conditions(['id' => '\d+'])->name('showRecipe');
 
 // Search recipes
-$app->get('/recipe/search(/)', function () use ($app) {
+$app->get('/recipe/search(/)', function () {
     (new IndexController())->searchRecipes();
 })->name('recipeSearch');
 
 // Popular recipes
-$app->get('/recipe/popular(/)', function () use ($app) {
+$app->get('/recipe/popular(/)', function () {
     (new IndexController())->popularRecipes();
 })->name('recipesPopular');
 

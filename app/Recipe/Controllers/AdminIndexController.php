@@ -52,10 +52,10 @@ class AdminIndexController
         $Paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
-        $recipes = $RecipeMapper->getRecipes($Paginator->getRowsPerPage(), $Paginator->getOffset(), false);
+        $recipes = $RecipeMapper->getRecipes($Paginator->getResultsPerPage(), $Paginator->getOffset(), false);
 
         // Get count of recipes returned by query and load pagination
-        $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
+        $Paginator->setTotalResultsFound($RecipeMapper->foundRows());
         $twig->parserExtensions[] = $Paginator;
 
         $twig->display('admin/userRecipeList.html', ['recipes' => $recipes]);
@@ -83,10 +83,10 @@ class AdminIndexController
         $Paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
-        $recipes = $RecipeMapper->getRecipesByUser($user['user_id'], $Paginator->getRowsPerPage(), $Paginator->getOffset(), false);
+        $recipes = $RecipeMapper->getRecipesByUser($user['user_id'], $Paginator->getResultsPerPage(), $Paginator->getOffset(), false);
 
         // Get count of recipes returned by query and load pagination
-        $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
+        $Paginator->setTotalResultsFound($RecipeMapper->foundRows());
         $twig->parserExtensions[] = $Paginator;
 
         $twig->display('admin/userRecipeList.html', ['recipes' => $recipes]);

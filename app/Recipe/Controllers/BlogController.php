@@ -65,15 +65,14 @@ class BlogController extends BaseController
         $pageNumber = $this->app->request->get('page') ?: 1;
 
         // Configure pagination object
-        $Paginator->useQueryString = true;
         $Paginator->setPagePath($this->app->urlFor('blogPosts'));
         $Paginator->setCurrentPageNumber((int) $pageNumber);
 
         // Fetch posts
-        $posts = $BlogMapper->getPosts($Paginator->getRowsPerPage(), $Paginator->getOffset());
+        $posts = $BlogMapper->getPosts($Paginator->getResultsPerPage(), $Paginator->getOffset());
 
         // Get count of posts returned by query and load pagination
-        $Paginator->setTotalRowsFound($BlogMapper->foundRows());
+        $Paginator->setTotalResultsFound($BlogMapper->foundRows());
         $twig->parserExtensions[] = $Paginator;
 
         $twig->display('blogList.html', ['posts' => $posts, 'title' => 'Blog Posts']);
@@ -95,15 +94,14 @@ class BlogController extends BaseController
         $pageNumber = $this->app->request->get('page') ?: 1;
 
         // Configure pagination object
-        $Paginator->useQueryString = true;
         $Paginator->setPagePath($this->app->urlFor('adminBlogPosts'));
         $Paginator->setCurrentPageNumber((int) $pageNumber);
 
         // Fetch posts
-        $posts = $BlogMapper->getPosts($Paginator->getRowsPerPage(), $Paginator->getOffset(), false);
+        $posts = $BlogMapper->getPosts($Paginator->getResultsPerPage(), $Paginator->getOffset(), false);
 
         // Get count of posts returned by query and load pagination
-        $Paginator->setTotalRowsFound($BlogMapper->foundRows());
+        $Paginator->setTotalResultsFound($BlogMapper->foundRows());
         $twig->parserExtensions[] = $Paginator;
 
         $twig->display('admin/userBlogList.html', ['posts' => $posts, 'title' => 'Blog Posts']);
