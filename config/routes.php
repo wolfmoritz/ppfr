@@ -147,10 +147,10 @@ $app->get('/recipe/search', function () use ($app) {
     (new IndexController())->searchRecipes();
 })->name('recipeSearch');
 
-// Top recipes
-$app->get('/recipe/top', function () use ($app) {
-    (new IndexController())->topRecipes();
-})->name('recipesTop');
+// Popular recipes
+$app->get('/recipe/popular', function () use ($app) {
+    (new IndexController())->popularRecipes();
+})->name('recipesPopular');
 
 // Get recipes by category
 $app->get('/recipe/category(/:category)', function ($category = null) {
