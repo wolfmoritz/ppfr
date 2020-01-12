@@ -583,33 +583,66 @@ footer a:hover {
 }
 
 .wrapper {
-  width: 100%;
-  margin: 0 auto;
+  background: #dee0e6;
   padding-right: 1.5em;
   padding-left: 1.5em;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1em;
-  grid-template-columns: 1fr;
-  background: #dee0e6;
 }
 .wrapper .content {
+  order: 2;
+}
+.wrapper .content .recipeIngredients {
   background: #f6f6f6;
-  padding: 1em;
-  margin: 0.5em;
-  border-radius: 7px;
+  padding: 0 0.5em;
+  margin: 0.75em;
   border: 1px solid rgba(28, 28, 28, 0.2);
+  border-radius: 7px;
+}
+.wrapper .content .recipeIngredients .ingredients p,
+.wrapper .content .recipeIngredients .ingredients li {
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+.wrapper .content .recipeDirections {
+  background: #f6f6f6;
+  padding: 0.5em;
+  margin: 0.75em;
+  border: 1px solid rgba(28, 28, 28, 0.2);
+  border-radius: 7px;
+}
+.wrapper .content .recipeDirections .recipetext p,
+.wrapper .content .recipeDirections .recipetext li {
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
 }
 .wrapper .sidebar {
-  background: #dee0e6;
+  order: 1;
 }
 .wrapper .sidebar .sidebar-item {
   background: #f6f6f6;
   padding: 0.5em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin: 0.75em;
   border: 1px solid rgba(28, 28, 28, 0.2);
   border-radius: 7px;
+}
+.wrapper .sidebar .recipeCategory {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: block;
+}
+.wrapper .sidebar .recipeCategory .categories-item {
+  background: #91c499;
+  color: #f6f6f6;
+  text-decoration: none;
+  padding: 0.25em 0.5em;
+  border-radius: 7px;
+  border: 1px solid rgba(28, 28, 28, 0.2);
+}
+.wrapper .sidebar .recipeCategory .categories-item:hover {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #1c1c1c;
+  background: #339966;
 }
 .wrapper .sidebar .socialContainer {
   display: flex;
@@ -628,56 +661,68 @@ footer a:hover {
   line-height: 1.3;
   margin-bottom: 0.5em;
 }
-.wrapper .sidebar .recipeCategory .categories-item {
-  background: #91c499;
-  color: #f6f6f6;
-  text-decoration: none;
-  padding: 0.25em 0.5em;
-  border-radius: 7px;
-  border: 1px solid rgba(28, 28, 28, 0.2);
-}
-.wrapper .sidebar .recipeCategory .categories-item:hover {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #1c1c1c;
-  background: #339966;
-}
 .wrapper .sidebar .recipeOwner {
   line-height: 1.3;
+  display: block;
 }
 .wrapper .sidebar .recipeOwner a {
   color: #1c1c1c;
 }
 
-.ingredients, .recipeDirections {
-  margin-bottom: 2em;
-}
-.ingredients p, .ingredients li, .recipeDirections p, .recipeDirections li {
-  margin-bottom: 0.75em;
-}
-
-/* no grid support? */
 @media screen and (min-width: 900px) {
-  .sidebar {
-    float: right;
-    width: 19.1489%;
-  }
-
-  .content {
-    float: left;
-    width: 79.7872%;
-  }
-
   .wrapper {
-    margin: 0 auto;
-    grid-template-columns: 3fr 1.25fr;
+    grid-template-columns: 3fr 1.5fr;
+  }
+  .wrapper .content {
+    order: 1;
+  }
+  .wrapper .sidebar {
+    order: 2;
+  }
+  .wrapper .recipeCategory {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    display: block;
+  }
+  .wrapper .recipeCategory .categories-item {
+    background: #91c499;
+    color: #f6f6f6;
+    text-decoration: none;
+    padding: 0.25em 0.5em;
+    border-radius: 7px;
+    border: 1px solid rgba(28, 28, 28, 0.2);
+  }
+  .wrapper .recipeCategory .categories-item:hover {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #1c1c1c;
+    background: #339966;
+  }
+  .wrapper .socialContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+  .wrapper .recipeMeta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5em 1em;
+  }
+  .wrapper .recipeNotes p {
+    line-height: 1.3;
+    margin-bottom: 0.5em;
+  }
+  .wrapper .recipeOwner {
+    line-height: 1.3;
+    display: none;
+  }
+  .wrapper .recipeOwner a {
+    color: #1c1c1c;
   }
 }
+/* no grid support? */
 /* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
-@supports (display: grid) {
-  .wrapper > * {
-    width: auto;
-    margin: 0;
-  }
-}
 
 /*# sourceMappingURL=main.css.map */
