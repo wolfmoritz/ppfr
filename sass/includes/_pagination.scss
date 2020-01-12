@@ -10,12 +10,12 @@
  .disabled {
   a {
    background: transparent;
-   color: $clr-text;
+   color: $clr-text-dark;
    font-size: 1.3rem;
 
    // cursor: default;
    &:hover {
-    color: $clr-text;
+    color: $clr-text-dark;
     background: transparent;
    }
   }
@@ -28,13 +28,13 @@
   border-radius: $border-radius;
   background: $bright-green;
   text-decoration: none;
-  color: $green;
+  color: $clr-primary;
   cursor: pointer;
 
 
   &:hover {
-   color: $clr-text;
-   background: $clr-primary;
+   color: $clr-text-dark;
+   background: $clr-accent-light;
    cursor: pointer;
   }
  }

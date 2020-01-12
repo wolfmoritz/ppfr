@@ -4,10 +4,10 @@
 
 // Default Color Scheme
 
-$black: #1c1c1c;
-$white: #f6f6f6;
-$green: #91c499;
-$bright-green: #339966;
+$black: #000;
+$white: #fff;
+$green: #47a547;
+$bright-green: #00ff00;
 $grey: #909090;
 
 $orange: #ffa822;
@@ -16,12 +16,13 @@ $red: #ff6150;
 $light-grey: #dee0e6;
 $light-blue: #1ac0c6;
 
-$clr-primary: $green;
+$clr-primary: $blue;
+$clr-accent-light: lighten($blue, 20%);
 $clr-background: $white;
-$clr-text: $black;
-$clr-accent-light: $bright-green;
-$clr-accent-dark: $grey;
+$clr-text-dark: $black;
+$clr-text-light: $white; 
 
+$clr-accent-dark: $grey;
 
 // Default styles
 $border-radius: 7px;
@@ -48,3 +49,8 @@ $ff-l: 300;
 $max-width: 1200px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 900px;
+
+// Button Colors
+
+$btn-default: $clr-primary;
+$btn-hover: $clr-accent-light;

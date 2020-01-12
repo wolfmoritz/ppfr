@@ -30,7 +30,7 @@ img {
 }
 
 p {
- color: $clr-text;
+ color: $clr-text-dark;
 }
 
 h1,
@@ -114,7 +114,7 @@ dd {
   &:hover {
    background: $clr-accent-light;
    color: $clr-background;
-   border: solid 1px rgba($clr-text, .5);
+   border: solid 1px rgba($clr-text-dark, .5);
    cursor: pointer;
   }
  }

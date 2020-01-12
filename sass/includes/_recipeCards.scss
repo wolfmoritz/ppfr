@@ -33,7 +33,7 @@
    white-space: nowrap;
    overflow: hidden;
    @include ellipsis;
-   color: $clr-text;
+   color: $clr-text-dark;
    text-decoration: none;
    align-self: flex-start;
    font-weight: $ff-l;

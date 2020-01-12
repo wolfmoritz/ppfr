@@ -25,7 +25,7 @@
 
 body,
 html {
-  background: #f6f6f6;
+  background: #fff;
 }
 
 body {
@@ -44,7 +44,7 @@ img {
 }
 
 p {
-  color: #1c1c1c;
+  color: #000;
 }
 
 h1,
@@ -55,7 +55,7 @@ h5,
 h6 {
   font-family: "Merriweather", serif;
   font-weight: 700;
-  color: #339966;
+  color: #228bc6;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
@@ -87,7 +87,7 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #91c499;
+  background: #134e6f;
 }
 .large-logo img {
   width: 300px;
@@ -114,7 +114,7 @@ dd {
 }
 
 .btn {
-  background: #91c499;
+  background: #134e6f;
   padding: 0.75em 1.5em;
   margin-top: 0.5em;
   border-radius: 7px;
@@ -122,9 +122,9 @@ dd {
   display: inline-block;
 }
 .btn:hover {
-  background: #339966;
-  color: #f6f6f6;
-  border: solid 1px rgba(28, 28, 28, 0.5);
+  background: #228bc6;
+  color: #fff;
+  border: solid 1px rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
 
@@ -138,14 +138,14 @@ dd {
 
 /* navigation styles start here */
 header {
-  background: #339966;
+  background: #228bc6;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 999;
   width: 100%;
   padding: 0.75em 0;
-  box-shadow: 0 2px 2px rgba(28, 28, 28, 0.5);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
 }
 header h1 {
   margin: 0;
@@ -215,7 +215,7 @@ nav {
   text-align: center;
   top: 100%;
   left: 0;
-  background: #339966;
+  background: #228bc6;
   width: 100%;
   transform: scale(1, 0);
   transform-origin: top;
@@ -371,7 +371,7 @@ nav a:hover {
   width: 100%;
   height: 450px;
   position: relative;
-  background: linear-gradient(#339966, #91c499);
+  background: linear-gradient(#228bc6, #134e6f);
 }
 .feature__container img {
   width: 100%;
@@ -394,31 +394,31 @@ nav a:hover {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  background-color: rgba(28, 28, 28, 0.25);
+  background-color: rgba(0, 0, 0, 0.25);
   text-align: center;
 }
 .feature__container .feature__title {
-  color: #f6f6f6;
-  text-shadow: 0 2px 2px rgba(28, 28, 28, 0.25);
+  color: #fff;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
   font-size: 2.4rem;
   margin-bottom: 0.5em;
 }
 .feature__container .feature__subtitle {
-  color: #f6f6f6;
-  text-shadow: 0 2px 2px rgba(28, 28, 28, 0.25);
+  color: #fff;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
   font-size: 1.4rem;
   margin-bottom: 0.5em;
 }
 
 footer {
-  background: #339966;
-  color: #1c1c1c;
+  background: #228bc6;
+  color: #000;
   margin-top: auto;
   padding-top: 2em;
   padding-bottom: 2em;
 }
 footer h6 {
-  color: #1c1c1c;
+  color: #000;
   font-family: "Ralesway", sans-serif;
   font-weight: 300;
   font-size: 1em;
@@ -429,22 +429,22 @@ footer .footer-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1em;
-  color: #1c1c1c;
+  color: #000;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 footer a {
-  color: #f6f6f6;
+  color: #fff;
   text-decoration: none;
   font-weight: 400;
 }
 footer a:hover {
-  color: #91c499;
+  color: #47a547;
 }
 
 .recipe-card {
-  background: #f6f6f6;
+  background: #fff;
   display: flex;
   flex-flow: column nowrap;
   border-radius: 7px;
@@ -479,13 +479,13 @@ footer a:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
-  color: #1c1c1c;
+  color: #000;
   text-decoration: none;
   align-self: flex-start;
   font-weight: 300;
 }
 .recipe-card .title-container .recipe-title:hover {
-  color: #339966;
+  color: #228bc6;
   font-weight: 400;
 }
 
@@ -502,18 +502,18 @@ footer a:hover {
   justify-content: flex-start;
 }
 .categories-list a {
-  color: #f6f6f6;
+  background: #134e6f;
+  color: #fff;
   text-decoration: none;
-  background: #339966;
-  border: solid 1px #339966;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.25em 0.5em;
   margin: 0.25em;
   border-radius: 7px;
 }
 .categories-list a:hover {
-  color: #1c1c1c;
-  background: #91c499;
-  border: solid 1px rgba(28, 28, 28, 0.25);
+  color: #000;
+  background: #228bc6;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .pagination {
@@ -529,11 +529,11 @@ footer a:hover {
 }
 .pagination .disabled a {
   background: transparent;
-  color: #1c1c1c;
+  color: #000;
   font-size: 1.3rem;
 }
 .pagination .disabled a:hover {
-  color: #1c1c1c;
+  color: #000;
   background: transparent;
 }
 .pagination a {
@@ -541,24 +541,24 @@ footer a:hover {
   margin-right: 0.25em;
   margin-left: 0.25em;
   border-radius: 7px;
-  background: #339966;
+  background: #00ff00;
   text-decoration: none;
-  color: #91c499;
+  color: #134e6f;
   cursor: pointer;
 }
 .pagination a:hover {
-  color: #1c1c1c;
-  background: #91c499;
+  color: #000;
+  background: #228bc6;
   cursor: pointer;
 }
 .pagination .active a {
   font-weight: 700;
-  color: #f6f6f6;
+  color: #fff;
   cursor: default;
 }
 .pagination .active a:hover {
-  color: #f6f6f6;
-  background: #339966;
+  color: #fff;
+  background: #00ff00;
 }
 
 .grid-container {
@@ -593,10 +593,10 @@ footer a:hover {
   order: 2;
 }
 .wrapper .content .recipeIngredients {
-  background: #f6f6f6;
+  background: #fff;
   padding: 0 0.5em;
   margin: 0.75em;
-  border: 1px solid rgba(28, 28, 28, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 7px;
 }
 .wrapper .content .recipeIngredients .ingredients p,
@@ -605,10 +605,10 @@ footer a:hover {
   margin-bottom: 0.5rem;
 }
 .wrapper .content .recipeDirections {
-  background: #f6f6f6;
+  background: #fff;
   padding: 0.5em;
   margin: 0.75em;
-  border: 1px solid rgba(28, 28, 28, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 7px;
 }
 .wrapper .content .recipeDirections .recipetext p,
@@ -620,10 +620,10 @@ footer a:hover {
   order: 1;
 }
 .wrapper .sidebar .sidebar-item {
-  background: #f6f6f6;
+  background: #fff;
   padding: 0.5em;
   margin: 0.75em;
-  border: 1px solid rgba(28, 28, 28, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 7px;
 }
 .wrapper .sidebar .recipeCategory {
@@ -632,17 +632,17 @@ footer a:hover {
   display: block;
 }
 .wrapper .sidebar .recipeCategory .categories-item {
-  background: #91c499;
-  color: #f6f6f6;
+  background: #134e6f;
+  color: #fff;
   text-decoration: none;
   padding: 0.25em 0.5em;
   border-radius: 7px;
-  border: 1px solid rgba(28, 28, 28, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 .wrapper .sidebar .recipeCategory .categories-item:hover {
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #1c1c1c;
-  background: #339966;
+  color: #000;
+  background: #228bc6;
 }
 .wrapper .sidebar .socialContainer {
   display: flex;
@@ -666,7 +666,7 @@ footer a:hover {
   display: block;
 }
 .wrapper .sidebar .recipeOwner a {
-  color: #1c1c1c;
+  color: #000;
 }
 
 @media screen and (min-width: 900px) {
@@ -680,49 +680,8 @@ footer a:hover {
     order: 2;
   }
   .wrapper .recipeCategory {
-    padding-top: 1em;
-    padding-bottom: 1em;
     display: block;
   }
-  .wrapper .recipeCategory .categories-item {
-    background: #91c499;
-    color: #f6f6f6;
-    text-decoration: none;
-    padding: 0.25em 0.5em;
-    border-radius: 7px;
-    border: 1px solid rgba(28, 28, 28, 0.2);
-  }
-  .wrapper .recipeCategory .categories-item:hover {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #1c1c1c;
-    background: #339966;
-  }
-  .wrapper .socialContainer {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-  }
-  .wrapper .recipeMeta {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 0.5em 1em;
-  }
-  .wrapper .recipeNotes p {
-    line-height: 1.3;
-    margin-bottom: 0.5em;
-  }
-  .wrapper .recipeOwner {
-    line-height: 1.3;
-    display: none;
-  }
-  .wrapper .recipeOwner a {
-    color: #1c1c1c;
-  }
 }
-/* no grid support? */
-/* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
 
 /*# sourceMappingURL=main.css.map */

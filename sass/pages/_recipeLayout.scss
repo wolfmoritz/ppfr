@@ -72,12 +72,12 @@
 
          &:hover {
            border: $outline-light;
-           color: $clr-text;
+           color: $clr-text-dark;
            background: $clr-accent-light;
          }
        }
      }
-
+ 
      .socialContainer {
        display: flex;
        flex-flow: row wrap;
@@ -104,7 +104,7 @@
        display: block;
 
        a {
-         color: $clr-text;
+         color: $clr-text-dark;
        }
      }
    }
