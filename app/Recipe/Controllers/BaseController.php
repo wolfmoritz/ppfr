@@ -52,7 +52,7 @@ class BaseController
      * @param string $url
      * @param int    $code Default 302 Temporary
      */
-    public function redirect(string $url, int $code = 302)
+    protected function redirect(string $url, int $code = 302)
     {
         return $this->app->redirect($url, $code);
     }
@@ -64,7 +64,7 @@ class BaseController
      * @param void
      * @return void
      */
-    public function notFound()
+    protected function notFound()
     {
         return $this->app->notFound();
     }
@@ -78,5 +78,28 @@ class BaseController
     protected function getConfig(string $name)
     {
         return $this->app->config($name);
+    }
+
+    /**
+     * Load Twig Extension
+     *
+     * @param  object $extension
+     * @return void
+     */
+    protected function loadTwigExtension(object $extension)
+    {
+        $twig = $this->app->twig;
+        $twig->parserExtensions[] = $extension;
+    }
+
+    /**
+     * Get Twig Paginator
+     *
+     * @param  void
+     * @return object
+     */
+    protected function getPaginator()
+    {
+        return $this->app->PaginationHandler;
     }
 }

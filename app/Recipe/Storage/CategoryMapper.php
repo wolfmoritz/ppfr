@@ -10,8 +10,6 @@ class CategoryMapper extends DataMapperAbstract
 {
   protected $table = 'pp_category';
   protected $primaryKey = 'category_id';
-  protected $modifyColumns = [];
-  protected $defaultSelect = 'select * from pp_category';
 
   /**
    * Get All Categories

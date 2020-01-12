@@ -11,7 +11,7 @@ class RecipeMapper extends DataMapperAbstract
 {
     protected $table = 'pp_recipe';
     protected $primaryKey = 'recipe_id';
-    protected $modifyColumns = ['title', 'subtitle', 'url', 'servings', 'temperature', 'prep_time', 'prep_time_iso', 'cook_time', 'cook_time_iso', 'ingredients', 'instructions', 'instructions_excerpt', 'notes', 'view_count', 'main_photo', 'published_date'];
+    protected $modifiableColumns = ['title', 'subtitle', 'url', 'servings', 'temperature', 'prep_time', 'prep_time_iso', 'cook_time', 'cook_time_iso', 'ingredients', 'instructions', 'instructions_excerpt', 'notes', 'view_count', 'main_photo', 'published_date'];
     protected $domainObjectClass = __NAMESPACE__ . '\Recipe';
     protected $defaultSelect = 'select SQL_CALC_FOUND_ROWS r.*, concat(u.first_name, \' \', u.last_name) user_name, concat(u.first_name, \'-\', u.last_name) user_url from pp_recipe r join pp_user u on r.created_by = u.user_id';
 

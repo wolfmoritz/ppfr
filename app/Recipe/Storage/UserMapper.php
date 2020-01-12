@@ -11,8 +11,7 @@ class UserMapper extends DataMapperAbstract
     protected $table = 'pp_user';
     protected $tableAlias = 'us';
     protected $primaryKey = 'user_id';
-    protected $modifyColumns = ['last_login_date'];
-    protected $domainObjectClass = __NAMESPACE__ . '\User';
+    protected $modifiableColumns = ['last_login_date'];
     protected $defaultSelect = 'select us.*, concat(us.first_name, \' \', us.last_name) user_name, concat(us.first_name, \'-\', us.last_name) user_url from pp_user us';
 
     /**
@@ -35,10 +34,6 @@ class UserMapper extends DataMapperAbstract
         $this->bindValues[] = $email;
 
         // Fetch and return user
-        $this->execute();
-        $result = $this->statement->fetch();
-        $this->clear();
-
-        return $result;
+        return $this->findRow();
     }
 }

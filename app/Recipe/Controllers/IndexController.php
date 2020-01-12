@@ -31,36 +31,69 @@ class IndexController extends BaseController
     }
 
     /**
-     * Show All Recipes
+     * Display All Recipes in Reverse Date Order
      *
-     **/
-    public function getAllRecipes()
+     * @param  void
+     * @return void
+     */
+    public function allRecipes()
     {
-        // Get mapper and twig template engine
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $Paginator = $this->app->PaginationHandler;
-        $twig = $this->app->twig;
+        // Get dependencies
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
+        $paginator = $this->getPaginator();
 
-        // Get the page number
+        // Get the requested page number
         $pageNumber = $this->app->request->get('page') ?: 1;
 
         // Configure pagination object
-        $Paginator->useQueryString = true;
-        $Paginator->setPagePath($this->app->urlFor('recipesAll'));
-        $Paginator->setCurrentPageNumber($pageNumber);
+        $paginator->useQueryString = true;
+        $paginator->setPagePath($this->app->urlFor('recipesAll'));
+        $paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
-        $recipes = $RecipeMapper->getRecipes($Paginator->getRowsPerPage(), $Paginator->getOffset());
+        $data = $recipeMapper->getRecipes($paginator->getRowsPerPage(), $paginator->getOffset());
 
         // Get count of recipes returned by query and load pagination
-        $Paginator->setTotalRowsFound($RecipeMapper->foundRows());
-        $twig->parserExtensions[] = $Paginator;
+        $paginator->setTotalRowsFound($recipeMapper->foundRows());
+        $this->loadTwigExtension($paginator);
 
-        // Return the array of recipes and the category name
-        $data['list'] = $recipes;
+        // Set heading
+        $data['category']['name'] = 'All';
 
-        $twig->display('recipeList.html', ['recipes' => $data, 'title' => 'All Recipes']);
+        $this->render('recipeList.html', ['recipes' => $data, 'title' => 'All Recipes']);
+    }
+
+    /**
+     * Display Top Recipes by View Count Desc
+     *
+     * @param  void
+     * @return void
+     */
+    public function topRecipes()
+    {
+        // Get dependencies
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
+        $paginator = $this->getPaginator();
+
+        // Get the requested page number
+        $pageNumber = $this->app->request->get('page') ?: 1;
+
+        // Configure pagination object
+        $paginator->useQueryString = true;
+        $paginator->setPagePath($this->app->urlFor('recipesTop'));
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        // Fetch top recipes
+        $data = $recipeMapper->getTopRecipes($paginator->getRowsPerPage(), $paginator->getOffset());
+
+        // Get count of recipes returned by query and load pagination
+        $paginator->setTotalRowsFound($recipeMapper->foundRows());
+        $this->loadTwigExtension($paginator);
+
+        // Set heading
+        $data['category']['name'] = 'Popular';
+
+        $this->render('recipeList.html', ['recipes' => $data, 'title' => 'Popular Recipes']);
     }
 
     /**

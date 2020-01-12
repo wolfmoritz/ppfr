@@ -43,7 +43,7 @@ $app->group('/admin', $authenticated(), function () use ($app, $authorized) {
 
     // All Recipes
     $app->get('/recipes/all(/:page)', $authorized('admin'), function ($page = 1) {
-        (new AdminIndexController())->getAllRecipes($page);
+        (new AdminIndexController())->allRecipes($page);
     })->name('adminAllRecipes');
 
     // Recipes for Current User
@@ -129,7 +129,7 @@ $app->get('/logout', function () {
 
 // Get all recipes
 $app->get('/recipe/', function () {
-    (new IndexController())->getAllRecipes();
+    (new IndexController())->allRecipes();
 })->name('recipesAll');
 
 // Show a recipe
@@ -146,6 +146,11 @@ $app->get('/recipe/show(/:id)/', function ($id) {
 $app->get('/recipe/search', function () use ($app) {
     (new IndexController())->searchRecipes();
 })->name('recipeSearch');
+
+// Top recipes
+$app->get('/recipe/top', function () use ($app) {
+    (new IndexController())->topRecipes();
+})->name('recipesTop');
 
 // Get recipes by category
 $app->get('/recipe/category(/:category)', function ($category = null) {
