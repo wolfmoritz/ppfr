@@ -31,8 +31,8 @@ class CategoryMapper extends DataMapperAbstract
    * Get Category
    *
    * Get a category by URL slug
-   * @param string, category url
-   * @return mixed, category record or null
+   * @param  string $slug Category url
+   * @return mixed
    */
   public function getCategory($slug)
   {

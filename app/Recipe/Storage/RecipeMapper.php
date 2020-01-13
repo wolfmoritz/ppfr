@@ -76,44 +76,6 @@ class RecipeMapper extends DataMapperAbstract
     }
 
     /**
-     * Get Recipes with Photos (first) with Offset
-     *
-     * Define limit and offset to limit result set.
-     * Returns an array of Domain Objects (one for each record)
-     * @param int, limit
-     * @param int, offset
-     * @param bool, only get published recipes (true)
-     * @return array
-     */
-    public function getRecipesWithPhoto($limit = null, $offset = null, $publishedRecipesOnly = true)
-    {
-        $this->sql = $this->defaultSelect;
-
-        // Add order by clause. MySQL does not have an 'order by nulls last' syntax,
-        // so this 'r.main_photo is not null desc' is a trick I found on Stackoverflow to do the same
-        // Changed to filter out no-photo recipes
-        $this->sql .= ' where r.main_photo is not null';
-
-        if ($publishedRecipesOnly) {
-            $this->sql .= ' and r.published_date <= curdate()';
-        }
-
-        $this->sql .= ' order by r.view_count desc';
-
-        if ($limit) {
-            $this->sql .= " limit ?";
-            $this->bindValues[] = $limit;
-        }
-
-        if ($offset) {
-            $this->sql .= " offset ?";
-            $this->bindValues[] = $offset;
-        }
-
-        return $this->find();
-    }
-
-    /**
      * Get Recipes by Category
      *
      * @param mixed, int or string, category
