@@ -63,35 +63,30 @@ class CategoryMapper extends DataMapperAbstract
    *
    * Updates recipe category assignments
    * Deletes all current assignments, then reinserts new set
-   * @param recipe_id, integer, the recipe ID
-   * @param categories, array, optional, array of category ID's
-   * @return boolean, true/false on success/failure
+   * @param  int   $recipeId   Recipe_id, integer, the recipe ID
+   * @param  array $categories Optional array of category ID's
+   * @return void
    */
-  public function saveRecipeCategoryAssignments($recipeId, $categories = [])
+  public function saveRecipeCategoryAssignments(int $recipeId, array $categories = null)
   {
     // Delete existing category assignments
     $this->sql = 'delete from pp_recipe_category where recipe_id = ?';
     $this->bindValues[] = $recipeId;
     $this->execute();
-    $this->clear();
 
     // Now insert all categories
-
     if (!empty($categories)) {
-      $this->sql = 'insert into pp_recipe_category (recipe_id, category_id) values (?, ?)';
+      $this->sql = 'insert into pp_recipe_category (recipe_id, category_id) values ';
 
       foreach ($categories as $cat => $value ) {
+        $this->sql .= '(?, ?), ';
         $this->bindValues[] = $recipeId;
         $this->bindValues[] = $cat;
-        $this->execute();
-
-        // Reset array for next iteration
-        $this->bindValues = [];
       }
 
-      $this->clear();
+      // Strip off trailing ', ' from building the statement
+      $this->sql = mb_substr($this->sql, 0, -2) . ';';
+      $this->execute();
     }
-
-    return true;
   }
 }

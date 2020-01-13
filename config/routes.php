@@ -43,7 +43,7 @@ $app->group('/admin', $authenticated(), function () use ($app, $authorized) {
 
     // All Recipes
     $app->get('/recipes/all(/:page)', $authorized('admin'), function ($page = 1) {
-        (new AdminIndexController())->allRecipes($page);
+        (new AdminIndexController())->getAllRecipes($page);
     })->name('adminAllRecipes');
 
     // Recipes for Current User
