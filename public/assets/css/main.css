@@ -450,7 +450,6 @@ footer a:hover {
 
 .recipe-card {
   background: #fff;
-  background: #dee0e6;
   display: flex;
   flex-flow: column nowrap;
   border-radius: 7px;
@@ -603,14 +602,16 @@ footer a:hover {
   order: 2;
 }
 .wrapper .content .recipeIngredients {
+  color: #000;
   background: #fff;
-  padding: 0 0.5em;
+  padding: 0 0.5em 0.5em;
   margin: 0.75em;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 7px;
 }
 .wrapper .content .recipeIngredients .ingredients p,
-.wrapper .content .recipeIngredients .ingredients li {
+.wrapper .content .recipeIngredients .ingredients li,
+.wrapper .content .recipeIngredients .ingredients div {
   line-height: 1.3;
   margin-bottom: 0.5rem;
 }
@@ -622,8 +623,8 @@ footer a:hover {
   border-radius: 7px;
 }
 .wrapper .content .recipeDirections .recipetext p,
-.wrapper .content .recipeDirections .recipetext li {
-  line-height: 1.3;
+.wrapper .content .recipeDirections .recipetext li,
+.wrapper .content .recipeDirections .recipetext div {
   margin-bottom: 0.5rem;
 }
 .wrapper .sidebar {
@@ -688,6 +689,10 @@ footer a:hover {
   }
   .wrapper .sidebar {
     order: 2;
+  }
+  .wrapper .sidebar .sidebar-item h4 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
   }
   .wrapper .recipeCategory {
     display: block;
