@@ -199,7 +199,7 @@ class AuthenticationController
 
         if (is_string($recipient)) {
             $emailTo[] = $recipient;
-        } elseif (is_array($recipient)){
+        } elseif (is_array($recipient)) {
             $emailTo = $recipient;
         }
 

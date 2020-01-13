@@ -51,7 +51,7 @@ class RecipeMapper extends DataMapperAbstract
      * @param  bool $publishedRecipesOnly Only get published recipes (true)
      * @return array
      */
-    public function getRecipes(int $limit= null, int $offset = null, bool $publishedRecipesOnly = true)
+    public function getRecipes(int $limit = null, int $offset = null, bool $publishedRecipesOnly = true)
     {
         $this->sql = $this->defaultSelect;
 
