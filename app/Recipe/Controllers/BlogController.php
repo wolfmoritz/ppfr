@@ -56,26 +56,20 @@ class BlogController extends BaseController
     public function getBlogPosts()
     {
         // Get services
-        $dataMapper = $this->app->dataMapper;
-        $BlogMapper = $dataMapper('BlogMapper');
-        $Paginator = $this->app->PaginationHandler;
-        $twig = $this->app->twig;
-
-        // Get the page number
-        $pageNumber = $this->app->request->get('page') ?: 1;
+        $blogMapper = ($this->dataMapper)('BlogMapper');
+        $paginator = $this->getPaginator();
 
         // Configure pagination object
-        $Paginator->setPagePath($this->app->urlFor('blogPosts'));
-        $Paginator->setCurrentPageNumber((int) $pageNumber);
+        $paginator->setPagePath($this->app->urlFor('blogPosts'));
 
         // Fetch posts
-        $posts = $BlogMapper->getPosts($Paginator->getResultsPerPage(), $Paginator->getOffset());
+        $posts = $blogMapper->getPosts($paginator->getResultsPerPage(), $paginator->getOffset());
 
         // Get count of posts returned by query and load pagination
-        $Paginator->setTotalResultsFound($BlogMapper->foundRows());
-        $twig->parserExtensions[] = $Paginator;
+        $paginator->setTotalResultsFound($blogMapper->foundRows());
+        $this->loadTwigExtension($paginator);
 
-        $twig->display('blogList.html', ['posts' => $posts, 'title' => 'Blog Posts']);
+        $this->render('blogList.html', ['posts' => $posts, 'title' => 'Blog Posts']);
     }
 
     /**
@@ -85,26 +79,20 @@ class BlogController extends BaseController
     public function getAdminBlogPosts()
     {
         // Get services
-        $dataMapper = $this->app->dataMapper;
-        $BlogMapper = $dataMapper('BlogMapper');
-        $Paginator = $this->app->PaginationHandler;
-        $twig = $this->app->twig;
-
-        // Get the page number
-        $pageNumber = $this->app->request->get('page') ?: 1;
+        $blogMapper = ($this->dataMapper)('BlogMapper');
+        $paginator = $this->getPaginator();
 
         // Configure pagination object
-        $Paginator->setPagePath($this->app->urlFor('adminBlogPosts'));
-        $Paginator->setCurrentPageNumber((int) $pageNumber);
+        $paginator->setPagePath($this->app->urlFor('adminBlogPosts'));
 
         // Fetch posts
-        $posts = $BlogMapper->getPosts($Paginator->getResultsPerPage(), $Paginator->getOffset(), false);
+        $posts = $blogMapper->getPosts($paginator->getResultsPerPage(), $paginator->getOffset(), false);
 
         // Get count of posts returned by query and load pagination
-        $Paginator->setTotalResultsFound($BlogMapper->foundRows());
-        $twig->parserExtensions[] = $Paginator;
+        $paginator->setTotalResultsFound($blogMapper->foundRows());
+        $this->loadTwigExtension($paginator);
 
-        $twig->display('admin/userBlogList.html', ['posts' => $posts, 'title' => 'Blog Posts']);
+        $this->render('admin/userBlogList.html', ['posts' => $posts, 'title' => 'Blog Posts']);
     }
 
     /**
@@ -116,19 +104,17 @@ class BlogController extends BaseController
     public function editPost($id = null)
     {
         // Get mapper and services
-        $dataMapper = $this->app->dataMapper;
-        $BlogMapper = $dataMapper('BlogMapper');
-        $SessionHandler = $this->app->SessionHandler;
-        $SecurityHandler = $this->app->security;
+        $blogMapper = ($this->dataMapper)('BlogMapper');
+        $sessionHandler = $this->app->SessionHandler;
 
         // Get user session data for reference
-        $sessionData = $SessionHandler->getData();
+        $sessionData = $sessionHandler->getData();
 
         // If a blog post ID was supplied, get that post, otherwise get a blank blog record
         if ($id !== null) {
-            $blog = $BlogMapper->findById((int) $id);
+            $blog = $blogMapper->findById((int) $id);
         } else {
-            $blog = $BlogMapper->make();
+            $blog = $blogMapper->make();
         }
 
         // Verify authority to edit post
@@ -143,10 +129,10 @@ class BlogController extends BaseController
             // $recipe->mergeRecipe($sessionData['blog']);
 
             // Unset session data
-            $SessionHandler->unsetData('blog');
+            $sessionHandler->unsetData('blog');
         }
 
         // Display
-        $this->app->twig->display('admin/editBlogPost.html', ['blog' => $blog, 'title' => 'Edit Blog Post']);
+        $this->render('admin/editBlogPost.html', ['blog' => $blog, 'title' => 'Edit Blog Post']);
     }
 }

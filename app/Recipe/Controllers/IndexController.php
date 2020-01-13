@@ -42,12 +42,8 @@ class IndexController extends BaseController
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
         $paginator = $this->getPaginator();
 
-        // Get the requested page number
-        $pageNumber = $this->app->request->get('page') ?: 1;
-
         // Configure pagination object
         $paginator->setPagePath($this->app->urlFor('recipesAll'));
-        $paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
         $data = $recipeMapper->getRecipes($paginator->getResultsPerPage(), $paginator->getOffset());
@@ -71,12 +67,8 @@ class IndexController extends BaseController
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
         $paginator = $this->getPaginator();
 
-        // Get the requested page number
-        $pageNumber = $this->app->request->get('page') ?: 1;
-
         // Configure pagination object
         $paginator->setPagePath($this->app->urlFor('recipesPopular'));
-        $paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch top recipes
         $data = $recipeMapper->getTopRecipes($paginator->getResultsPerPage(), $paginator->getOffset());
@@ -98,10 +90,7 @@ class IndexController extends BaseController
         // Get mapper and twig template engine
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
         $categoryMapper = ($this->dataMapper)('CategoryMapper');
-        $Paginator = $this->getPaginator();
-
-        // Get the page number
-        $pageNumber = $this->app->request->get('page') ?: 1;
+        $paginator = $this->getPaginator();
 
         // Verify category and get proper name and ID
         $categoryResult = $categoryMapper->getCategory($category);
@@ -114,15 +103,14 @@ class IndexController extends BaseController
         $categoryResult = (Array) $categoryResult[0];
 
         // Configure pagination object
-        $Paginator->setPagePath($this->app->urlFor('recipesByCategory', ['category' => $categoryResult['url']]));
-        $Paginator->setCurrentPageNumber($pageNumber);
+        $paginator->setPagePath($this->app->urlFor('recipesByCategory', ['category' => $categoryResult['url']]));
 
         // Fetch recipes
-        $data = $recipeMapper->getRecipesByCategory($categoryResult['category_id'], $Paginator->getResultsPerPage(), $Paginator->getOffset());
+        $data = $recipeMapper->getRecipesByCategory($categoryResult['category_id'], $paginator->getResultsPerPage(), $paginator->getOffset());
 
         // Get count of recipes returned by query and load pagination
-        $Paginator->setTotalResultsFound($recipeMapper->foundRows());
-        $this->loadTwigExtension($Paginator);
+        $paginator->setTotalResultsFound($recipeMapper->foundRows());
+        $this->loadTwigExtension($paginator);
 
         $this->render('recipeList.html', ['recipes' => $data, 'source' => $category, 'title' => $categoryResult['name']]);
     }
@@ -176,7 +164,6 @@ class IndexController extends BaseController
         // Get dependencies parameters
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
         $terms = $this->app->request->get('terms');
-        $pageNo = $this->app->request->get('page') ?: 1;
 
         // If no terms were provided (just the search button clicked), then go to home page
         if ($terms == '') {
@@ -186,14 +173,13 @@ class IndexController extends BaseController
         // Configure pagination object
         $paginator = $this->getPaginator();
         $paginator->setPagePath($this->app->urlFor('recipeSearch'), ['terms' => $terms]);
-        $paginator->setCurrentPageNumber($pageNo);
 
         // Fetch recipes
         $data = $recipeMapper->searchRecipes($terms, $paginator->getResultsPerPage(), $paginator->getOffset());
 
         // If we found just one row on the first page of results, just show the recipe page
         // Note, this is faster than count($recipes) === 1
-        if ($pageNo == 1 && isset($data[0]) && !isset($data[1])) {
+        if ($paginator->getCurrentPageNumber() == 1 && isset($data[0]) && !isset($data[1])) {
             // Redirect to show recipe page
             return $this->redirect($this->app->urlFor('showRecipe') . $data[0]->niceUrl(), 301);
         }
@@ -217,9 +203,6 @@ class IndexController extends BaseController
         $userMapper = ($this->dataMapper)('UserMapper');
         $paginator = $this->getPaginator();
 
-        // Get the page number
-        $pageNumber = $this->app->request->get('page') ?: 1;
-
         // Get proper name and ID which we need for the pagination setup prior to running the recipe query
         $user = $userMapper->getUser($userId);
 
@@ -230,7 +213,6 @@ class IndexController extends BaseController
 
         // Configure pagination object
         $paginator->setPagePath($this->app->urlFor('recipesByUser', ['id' => $userId, 'username' => $user->user_url]));
-        $paginator->setCurrentPageNumber($pageNumber);
 
         // Fetch recipes
         $recipes = $recipeMapper->getRecipesByUser((int) $userId, $paginator->getResultsPerPage(), $paginator->getOffset());
@@ -252,7 +234,6 @@ class IndexController extends BaseController
      */
     public function about()
     {
-        $twig = $this->app->twig;
-        $twig->display('about.html', ['title' => 'About']);
+        $this->render('about.html', ['title' => 'About']);
     }
 }

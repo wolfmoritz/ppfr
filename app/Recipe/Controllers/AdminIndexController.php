@@ -6,18 +6,8 @@ namespace Recipe\Controllers;
  *
  * Renders secured  pages
  */
-class AdminIndexController
+class AdminIndexController extends BaseController
 {
-    private $app;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->app = \Slim\Slim::getInstance();
-    }
-
     /**
      * Get Home Page
      */
@@ -42,23 +32,20 @@ class AdminIndexController
     public function getAllRecipes($pageNumber = 1)
     {
         // Get mapper and twig template engine
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $twig = $this->app->twig;
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
 
         // Configure pagination object
-        $Paginator = $this->app->PaginationHandler;
-        $Paginator->setPagePath($this->app->urlFor('adminAllRecipes'));
-        $Paginator->setCurrentPageNumber($pageNumber);
+        $paginator = $this->getPaginator();
+        $paginator->setPagePath($this->app->urlFor('adminAllRecipes'));
 
         // Fetch recipes
-        $recipes = $RecipeMapper->getRecipes($Paginator->getResultsPerPage(), $Paginator->getOffset(), false);
+        $recipes = $recipeMapper->getRecipes($paginator->getResultsPerPage(), $paginator->getOffset(), false);
 
         // Get count of recipes returned by query and load pagination
-        $Paginator->setTotalResultsFound($RecipeMapper->foundRows());
-        $twig->parserExtensions[] = $Paginator;
+        $paginator->setTotalResultsFound($recipeMapper->foundRows());
+        $this->loadTwigExtension($paginator);
 
-        $twig->display('admin/userRecipeList.html', ['recipes' => $recipes]);
+        $this->render('admin/userRecipeList.html', ['recipes' => $recipes]);
     }
 
     /**
@@ -69,27 +56,24 @@ class AdminIndexController
     public function getRecipesByUser($pageNumber = 1)
     {
         // Get mapper and twig template engine
-        $dataMapper = $this->app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-        $SessionHandler = $this->app->SessionHandler;
-        $twig = $this->app->twig;
+        $recipeMapper = ($this->dataMapper)('RecipeMapper');
+        $sessionHandler = $this->app->SessionHandler;
 
         // Get user from session
-        $user = $SessionHandler->getData();
+        $user = $sessionHandler->getData();
 
         // Configure pagination object
-        $Paginator = $this->app->PaginationHandler;
-        $Paginator->setPagePath($this->app->urlFor('adminRecipesByUser'));
-        $Paginator->setCurrentPageNumber($pageNumber);
+        $paginator = $this->getPaginator();
+        $paginator->setPagePath($this->app->urlFor('adminRecipesByUser'));
 
         // Fetch recipes
-        $recipes = $RecipeMapper->getRecipesByUser($user['user_id'], $Paginator->getResultsPerPage(), $Paginator->getOffset(), false);
+        $recipes = $recipeMapper->getRecipesByUser($user['user_id'], $paginator->getResultsPerPage(), $paginator->getOffset(), false);
 
         // Get count of recipes returned by query and load pagination
-        $Paginator->setTotalResultsFound($RecipeMapper->foundRows());
-        $twig->parserExtensions[] = $Paginator;
+        $paginator->setTotalResultsFound($recipeMapper->foundRows());
+        $this->loadTwigExtension($paginator);
 
-        $twig->display('admin/userRecipeList.html', ['recipes' => $recipes]);
+        $this->render('admin/userRecipeList.html', ['recipes' => $recipes]);
     }
 
     /**
@@ -161,6 +145,6 @@ class AdminIndexController
         }
 
         // Display
-        $this->app->twig->display('admin/editRecipe.html', ['recipe' => $recipe, 'categories' => $categories, 'title' => 'Edit Recipe']);
+        $this->render('admin/editRecipe.html', ['recipe' => $recipe, 'categories' => $categories, 'title' => 'Edit Recipe']);
     }
 }

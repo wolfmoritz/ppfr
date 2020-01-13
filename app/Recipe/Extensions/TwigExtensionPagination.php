@@ -24,6 +24,7 @@ class TwigExtensionPagination extends \Twig_Extension
     public function __construct(array $config)
     {
         $this->setConfig($config);
+        $this->setCurrentPageNumber();
     }
 
     // Initialize
@@ -74,13 +75,18 @@ class TwigExtensionPagination extends \Twig_Extension
     /**
      * Set Current Page Number
      *
-     * Set the current page number
+     * Automatically gets the page number request from query parameter for $this->queryStringParam
+     * Or, accepts the current page number explicitly as an argument
      * @param  int $pageNumber Current page number
      * @return void
      */
-    public function setCurrentPageNumber(int $pageNumber)
+    public function setCurrentPageNumber(int $pageNumber = null)
     {
-        $this->currentPageNumber = ($pageNumber) ? $pageNumber : 1;
+        if ($pageNumber) {
+            $this->currentPageNumber = ($pageNumber) ? $pageNumber : 1;
+        } else {
+            $this->currentPageNumber = isset($_GET[$this->queryStringParam]) ? htmlspecialchars($_GET[$this->queryStringParam]) : 1;
+        }
     }
 
     /**
