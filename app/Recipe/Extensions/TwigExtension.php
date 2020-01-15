@@ -2,35 +2,21 @@
 namespace Recipe\Extensions;
 
 /**
- * Custom Extensions for Twig
+ * Custom Extensions for Twig Templates
  */
-class TwigExtension extends \Twig_Extension
+class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\Extension\GlobalsInterface
 {
-    protected $environment;
-
-    // Identifer
-    public function getName()
-    {
-        return 'moritz';
-    }
-
-    // Initialize
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
-    }
-
     /**
      * Register Global variables
      */
     public function getGlobals()
     {
-        return array(
+        return [
             'mode' => $this->getConfig('mode'),
             'production' => ($this->getConfig('mode') === 'production') ? true : false,
             'request' => $this->getServerVars(),
             'categories' => $this->categories(),
-        );
+        ];
     }
 
     /**
@@ -38,10 +24,10 @@ class TwigExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('excerpt', array($this, 'truncateHtml')),
-            new \Twig_SimpleFilter('formatIngredients', array($this, 'formatIngredients')),
-        );
+        return [
+            new \Twig\TwigFilter('excerpt', [$this, 'truncateHtml']),
+            new \Twig\TwigFilter('formatIngredients', [$this, 'formatIngredients']),
+        ];
     }
 
     /**
@@ -49,22 +35,22 @@ class TwigExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('flash', array($this, 'flash')),
-            new \Twig_SimpleFunction('checked', array($this, 'checked')),
-            new \Twig_SimpleFunction('excerpt', array($this, 'truncateHtml')),
-            new \Twig_SimpleFunction('imageUrl', array($this, 'imageUrl')),
-            new \Twig_SimpleFunction('siteUrlFor', array($this, 'siteUrlFor')),
-            new \Twig_SimpleFunction('uriSegment', array($this, 'uriSegment')),
-            new \Twig_SimpleFunction('formatIngredients', array($this, 'formatIngredients')),
-            new \Twig_SimpleFunction('topRecipes', array($this, 'topRecipes')),
-            new \Twig_SimpleFunction('randomRecipes', array($this, 'randomRecipes')),
-            new \Twig_SimpleFunction('config', array($this, 'getConfig')),
-            new \Twig_SimpleFunction('session', array($this, 'getSession')),
-            new \Twig_SimpleFunction('role', array($this, 'authorizedRole')),
-            new \Twig_SimpleFunction('authorizedToEditRecipe', array($this, 'authorizedToEditRecipe')),
-            new \Twig_SimpleFunction('blogPostNav', array($this, 'getBlogPostNav'), array('is_safe' => array('html'))),
-        );
+        return [
+            new \Twig\TwigFunction('flash', [$this, 'flash']),
+            new \Twig\TwigFunction('checked', [$this, 'checked']),
+            new \Twig\TwigFunction('excerpt', [$this, 'truncateHtml']),
+            new \Twig\TwigFunction('imageUrl', [$this, 'imageUrl']),
+            new \Twig\TwigFunction('siteUrlFor', [$this, 'siteUrlFor']),
+            new \Twig\TwigFunction('uriSegment', [$this, 'uriSegment']),
+            new \Twig\TwigFunction('formatIngredients', [$this, 'formatIngredients']),
+            new \Twig\TwigFunction('topRecipes', [$this, 'topRecipes']),
+            new \Twig\TwigFunction('randomRecipes', [$this, 'randomRecipes']),
+            new \Twig\TwigFunction('config', [$this, 'getConfig']),
+            new \Twig\TwigFunction('session', [$this, 'getSession']),
+            new \Twig\TwigFunction('role', [$this, 'authorizedRole']),
+            new \Twig\TwigFunction('authorizedToEditRecipe', [$this, 'authorizedToEditRecipe']),
+            new \Twig\TwigFunction('blogPostNav', [$this, 'getBlogPostNav'], ['is_safe' => ['html']]),
+        ];
     }
 
     /**

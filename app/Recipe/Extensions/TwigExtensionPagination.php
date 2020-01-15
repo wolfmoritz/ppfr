@@ -4,12 +4,11 @@ namespace Recipe\Extensions;
 /**
  * Custom Pagination Extension for Twig Templates
  */
-class TwigExtensionPagination extends \Twig_Extension
+class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implements \Twig\Extension\GlobalsInterface
 {
-    protected $environment;
     protected $domain;
     protected $pageUrl;
-    public $queryStringParam = 'page';
+    protected $queryStringParam = 'page';
     protected $currentPageNumber;
     protected $resultsPerPage;
     protected $numberOfAdjacentLinks;
@@ -27,20 +26,14 @@ class TwigExtensionPagination extends \Twig_Extension
         $this->setCurrentPageNumber();
     }
 
-    // Initialize
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
-    }
-
     /**
      * Register Global variables
      */
     public function getGlobals()
     {
-        return array(
+        return [
             'currentPageNumber' => $this->getCurrentPageNumber(),
-        );
+        ];
     }
 
     /**
@@ -48,9 +41,9 @@ class TwigExtensionPagination extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('pagination', [$this, 'pagination'], ['is_safe' => ['html']]),
-        );
+        return [
+            new \Twig\TwigFunction('pagination', [$this, 'pagination'], ['needs_environment' => true, 'is_safe' => ['html']]),
+        ];
     }
 
     /**
@@ -205,7 +198,7 @@ class TwigExtensionPagination extends \Twig_Extension
      * @param  void
      * @return void
      */
-    public function pagination()
+    public function pagination(\Twig\Environment $env)
     {
         static $pageListCache;
         if ($pageListCache) {
@@ -222,7 +215,7 @@ class TwigExtensionPagination extends \Twig_Extension
         $values['currentPage'] = $this->currentPageNumber;
         $values['pageUrl'] = $this->pageUrl;
 
-        return $this->environment->render('_pagination.html', $values);
+        return $env->render('_pagination.html', $values);
     }
 
     /**
