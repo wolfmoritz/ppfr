@@ -84,9 +84,9 @@ class CategoryMapper extends DataMapperAbstract
                 $this->bindValues[] = $cat;
             }
 
-              // Strip off trailing ', ' from building the statement
-              $this->sql = mb_substr($this->sql, 0, -2) . ';';
-              $this->execute();
+            // Strip off trailing ', ' from building the statement
+            $this->sql = mb_substr($this->sql, 0, -2) . ';';
+            $this->execute();
         }
     }
 }
