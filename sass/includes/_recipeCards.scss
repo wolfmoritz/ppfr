@@ -6,7 +6,8 @@
  display: flex;
  flex-flow: column nowrap;
  border-radius: $border-radius;
- box-shadow: $box-shadow;
+ box-shadow: $box-shadow-light;
+ border: $outline-light;
  overflow: hidden;
 
  .img-container {

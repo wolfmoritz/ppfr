@@ -1,12 +1,12 @@
 // footer
 
 footer {
- background: $clr-accent-light;
- color: $black;
+ background: $clr-primary;
+ color: $clr-text-light;
  @include margin(auto null null);
  @include padding(2em null);
 h6{
- color: $black;
+ color: $clr-text-light;
  font-family: $ff-sans;
  font-weight: $ff-l;
  font-size: 1em;
@@ -17,17 +17,17 @@ h6{
   max-width: $max-width;
   @include margin(0 auto);
   @include padding(1em);
-  color: $black;
+  color: $clr-text-light;
   display: flex;
   justify-content: space-around;
   align-items: center;
  }
  a{
-  color: $white;
+  color: $clr-text-light;
   text-decoration: none;
   font-weight: $ff-n;
   &:hover{
-   color: $green;
+   color: $btn-hover;
   }
  }
 }

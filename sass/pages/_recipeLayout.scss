@@ -1,5 +1,5 @@
  .wrapper {
-   background: $light-grey;
+  
    @include padding(null 1.5em);
 
    display: grid;
@@ -9,11 +9,10 @@
      order: 2;
 
      .recipeIngredients {
-       color: $clr-text-dark;
-       background: $white;
+     
        @include padding(0 .5em .5em);
        @include margin(.75em);
-       border: $outline-dark;
+
        border-radius: $border-radius;
 
        .ingredients {
@@ -30,11 +29,9 @@
      }
 
      .recipeDirections {
-
-       background: $white;
        @include padding(.5em);
        @include margin(.75em);
-       border: $outline-dark;
+     
        border-radius: $border-radius;
 
        .recipetext {
@@ -54,10 +51,10 @@
      order: 1;
 
      .sidebar-item {
-       background: $white;
+     
        @include padding(.5em);
        @include margin(.75em);
-       border: $outline-dark;
+      
        border-radius: $border-radius;
      }
 
@@ -67,7 +64,6 @@
 
        .categories-item {
          background: $clr-primary;
-         color: $clr-background;
          text-decoration: none;
          @include padding(.25em .5em);
          border-radius: $border-radius;

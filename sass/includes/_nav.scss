@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: $clr-accent-light;
+  background: $clr-background;
   img {
     width: 300px;
   }
@@ -37,10 +37,13 @@ header {
 }
 
 .logo a {
-  color: white;
+  color: $clr-text-light;
   letter-spacing: .1em;
   text-decoration: none;
   font-size: 1.5rem;
+  &:hover{
+    color: $clr-accent-light;
+  }
 }
 
 .nav-toggle {
@@ -68,7 +71,7 @@ header {
 .nav-toggle-label span::before,
 .nav-toggle-label span::after {
   display: block;
-  background: white;
+  background: $clr-text-light;
   height: 3px;
   width: 2em;
   border-radius: 2px;
@@ -94,7 +97,7 @@ nav {
   text-align: center;
   top: 100%;
   left: 0;
-  background: $clr-accent-light;
+  background: $clr-primary;
   width: 100%;
   transform: scale(1, 0);
   transform-origin: top;
@@ -112,16 +115,15 @@ nav li {
 }
 
 nav a {
-  color: white;
+  color:$clr-text-light;
   text-decoration: none;
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: 1.2rem;
   opacity: 0;
   transition: opacity 150ms ease-in-out;
 }
 
 nav a:hover {
-  color: #000;
+  color: $clr-accent-light;
 }
 
 .nav-toggle:checked~nav {
@@ -141,7 +143,7 @@ nav a:hover {
   justify-content: center;
   display: inline-block;
   @include margin(null null 1em);
-  border-radius: 10px;
+  border-radius: $border-radius;
   overflow: hidden;
   opacity: 0;
 }
@@ -152,8 +154,6 @@ nav a:hover {
   @include padding(.5em 1em);
   color: currentColor;
   border: none;
-  text-transform: uppercase;
-
 }
 
 .form__search .form-group:hover {
@@ -161,8 +161,8 @@ nav a:hover {
 }
 
 .form__search .form-group {
-  background: #efefef;
-  border-radius: 7px;
+  background: $clr-background;
+  border-radius: $border-radius;
   overflow: hidden;
   display: flex;
   flex-flow: row nowrap;
@@ -183,7 +183,7 @@ nav a:hover {
   border: none;
   font-size: 100%;
   @include padding(null .5em null .25em);
-  background: #efefef;
+  background: $clr-background;
 }
 
 .form__search .button__search:focus {
@@ -219,19 +219,18 @@ nav a:hover {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    ul {
+      display: flex;
+    }
+    li {
+      @include margin(null null 0 3em);
+    }
+    a {
+      opacity: 1;
+    }
+  
   }
 
-  nav ul {
-    display: flex;
-  }
-
-  nav li {
-    @include margin(null null 0 3em);
-  }
-
-  nav a {
-    opacity: 1;
-  }
 
   /* I added this */
   .form__search {

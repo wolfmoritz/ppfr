@@ -1,21 +1,19 @@
 .btn {
  background: $btn-default;
  color: $clr-text-light;
- @include padding(.75em 1.5em);
+ @include padding(.5em 1em);
  @include margin(.5em null null);
  
  border-radius: $border-radius;
  border: $outline-dark;
  display: inline-block;
  text-decoration: none;
- transition: background 150ms ease-in-out;
-
-
+ transition: all 150ms ease-in-out;
 
  &:hover {
   background: $btn-hover;
   color: $clr-text-dark;
-  border: $outline-light;
+  border: $outline-medium;
   cursor: pointer;
  }
 }

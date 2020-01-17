@@ -25,8 +25,7 @@
 
 body,
 html {
-  background: #fff;
-  background: #dee0e6;
+  background: #ffffff;
   min-height: 100vh;
   width: 100vw;
 }
@@ -45,7 +44,7 @@ img {
 }
 
 p {
-  color: #000;
+  color: #262626;
 }
 
 h1,
@@ -54,33 +53,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Merriweather", serif;
+  font-family: "Ralesway", sans-serif;
   font-weight: 700;
-  color: #134e6f;
+  color: #262626;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-}
-
-h5 {
-  font-size: 0.8rem;
-  font-family: "Ralesway", sans-serif;
-  font-weight: 300;
 }
 
 ul,
@@ -117,7 +94,7 @@ dd {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #228bc6;
+  background: #ffffff;
 }
 .large-logo img {
   width: 300px;
@@ -125,14 +102,14 @@ dd {
 
 /* navigation styles start here */
 header {
-  background: #134e6f;
+  background: #262626;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 999;
   width: 100%;
   padding: 0.75em 0;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 5px 1px #262626;
 }
 header h1 {
   margin: 0;
@@ -145,10 +122,13 @@ header h1 {
 }
 
 .logo a {
-  color: white;
+  color: #ffffff;
   letter-spacing: 0.1em;
   text-decoration: none;
   font-size: 1.5rem;
+}
+.logo a:hover {
+  color: #ff6150;
 }
 
 .nav-toggle {
@@ -176,7 +156,7 @@ header h1 {
 .nav-toggle-label span::before,
 .nav-toggle-label span::after {
   display: block;
-  background: white;
+  background: #ffffff;
   height: 3px;
   width: 2em;
   border-radius: 2px;
@@ -202,7 +182,7 @@ nav {
   text-align: center;
   top: 100%;
   left: 0;
-  background: #228bc6;
+  background: #262626;
   width: 100%;
   transform: scale(1, 0);
   transform-origin: top;
@@ -220,16 +200,15 @@ nav li {
 }
 
 nav a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: 1.2rem;
   opacity: 0;
   transition: opacity 150ms ease-in-out;
 }
 
 nav a:hover {
-  color: #000;
+  color: #ff6150;
 }
 
 .nav-toggle:checked ~ nav {
@@ -248,7 +227,7 @@ nav a:hover {
   justify-content: center;
   display: inline-block;
   margin-bottom: 1em;
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
   opacity: 0;
 }
@@ -259,7 +238,6 @@ nav a:hover {
   padding: 0.5em 1em;
   color: currentColor;
   border: none;
-  text-transform: uppercase;
 }
 
 .form__search .form-group:hover {
@@ -267,8 +245,8 @@ nav a:hover {
 }
 
 .form__search .form-group {
-  background: #efefef;
-  border-radius: 7px;
+  background: #ffffff;
+  border-radius: 0px;
   overflow: hidden;
   display: flex;
   flex-flow: row nowrap;
@@ -290,7 +268,7 @@ nav a:hover {
   font-size: 100%;
   padding-right: 0.5em;
   padding-left: 0.25em;
-  background: #efefef;
+  background: #ffffff;
 }
 
 .form__search .button__search:focus {
@@ -324,16 +302,13 @@ nav a:hover {
     justify-content: flex-end;
     align-items: center;
   }
-
   nav ul {
     display: flex;
   }
-
   nav li {
     margin-bottom: 0;
     margin-left: 3em;
   }
-
   nav a {
     opacity: 1;
   }
@@ -358,7 +333,7 @@ nav a:hover {
   width: 100%;
   height: 450px;
   position: relative;
-  background: linear-gradient(#228bc6, #134e6f);
+  background: linear-gradient(#ff6150, #262626);
 }
 .feature__container img {
   width: 100%;
@@ -381,49 +356,49 @@ nav a:hover {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(38, 38, 38, 0.25);
   text-align: center;
 }
 .feature__container .feature__title {
-  color: #fff;
-  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  text-shadow: 0 2px 2px rgba(38, 38, 38, 0.25);
   font-size: 2.4rem;
   margin-bottom: 0.5em;
 }
 .feature__container .feature__subtitle {
-  color: #fff;
-  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  text-shadow: 0 2px 2px rgba(38, 38, 38, 0.25);
   font-size: 1.4rem;
   margin-bottom: 0.5em;
 }
 
 .btn {
-  background: #134e6f;
-  color: #fff;
-  padding: 0.75em 1.5em;
+  background: #262626;
+  color: #ffffff;
+  padding: 0.5em 1em;
   margin-top: 0.5em;
   border-radius: 0px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #262626;
   display: inline-block;
   text-decoration: none;
-  transition: background 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 .btn:hover {
-  background: #228bc6;
-  color: #000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #ff6150;
+  color: #262626;
+  border: 1px solid #444444;
   cursor: pointer;
 }
 
 footer {
-  background: #228bc6;
-  color: #000;
+  background: #262626;
+  color: #ffffff;
   margin-top: auto;
   padding-top: 2em;
   padding-bottom: 2em;
 }
 footer h6 {
-  color: #000;
+  color: #ffffff;
   font-family: "Ralesway", sans-serif;
   font-weight: 300;
   font-size: 1em;
@@ -434,26 +409,27 @@ footer .footer-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1em;
-  color: #000;
+  color: #ffffff;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 footer a {
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 400;
 }
 footer a:hover {
-  color: #47a547;
+  color: #ff6150;
 }
 
 .recipe-card {
-  background: #fff;
+  background: #ffffff;
   display: flex;
   flex-flow: column nowrap;
   border-radius: 0px;
-  box-shadow: 0 2px 2px #aaaaaa;
+  box-shadow: 0 1px 5px 1px #eaeaea;
+  border: 1px solid #eaeaea;
   overflow: hidden;
 }
 .recipe-card .img-container {
@@ -484,18 +460,18 @@ footer a:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
-  color: #000;
+  color: #262626;
   text-decoration: none;
   align-self: flex-start;
   font-weight: 300;
 }
 .recipe-card .title-container .recipe-title:hover {
-  color: #228bc6;
+  color: #ff6150;
   font-weight: 400;
 }
 
 #categories {
-  background: #dee0e6;
+  background: #eaeaea;
   padding-top: 1em;
   padding-bottom: 1em;
 }
@@ -504,21 +480,21 @@ footer a:hover {
   width: 100%;
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .categories-list a {
-  background: #134e6f;
-  color: #fff;
+  background: #262626;
+  color: #ffffff;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #eaeaea;
   padding: 0.25em 0.5em;
   margin: 0.25em;
   border-radius: 0px;
 }
 .categories-list a:hover {
-  color: #000;
-  background: #228bc6;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #262626;
+  background: #ff6150;
+  border: 1px solid #262626;
 }
 
 .pagination {
@@ -526,7 +502,7 @@ footer a:hover {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  background: #dee0e6;
+  background: #eaeaea;
   margin-top: 1em;
   margin-bottom: 1em;
   padding-top: 0.5em;
@@ -534,11 +510,11 @@ footer a:hover {
 }
 .pagination .disabled a {
   background: transparent;
-  color: #000;
+  color: #262626;
   font-size: 1.3rem;
 }
 .pagination .disabled a:hover {
-  color: #000;
+  color: #262626;
   background: transparent;
 }
 .pagination a {
@@ -546,25 +522,25 @@ footer a:hover {
   margin-right: 0.25em;
   margin-left: 0.25em;
   border-radius: 0px;
-  background: #134e6f;
+  background: #262626;
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
 }
 .pagination a:hover {
-  color: #000;
-  background: #228bc6;
+  color: #262626;
+  background: #ff6150;
   cursor: pointer;
 }
 .pagination .active a {
   font-weight: 700;
-  background: #228bc6;
-  color: #fff;
+  background: #ff6150;
+  color: #ffffff;
   cursor: default;
 }
 .pagination .active a:hover {
-  color: #000;
-  background: #228bc6;
+  color: #262626;
+  background: #ff6150;
 }
 
 .grid-container {
@@ -582,7 +558,7 @@ footer a:hover {
   width: 90vw;
   max-width: 1200px;
   margin: 1em auto;
-  background: #fff;
+  background: #ffffff;
   border-radius: 0px;
   padding: 1em;
 }
@@ -592,7 +568,6 @@ footer a:hover {
 }
 
 .wrapper {
-  background: #dee0e6;
   padding-right: 1.5em;
   padding-left: 1.5em;
   display: grid;
@@ -602,11 +577,8 @@ footer a:hover {
   order: 2;
 }
 .wrapper .content .recipeIngredients {
-  color: #000;
-  background: #fff;
   padding: 0 0.5em 0.5em;
   margin: 0.75em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0px;
 }
 .wrapper .content .recipeIngredients .ingredients p,
@@ -616,10 +588,8 @@ footer a:hover {
   margin-bottom: 0.5rem;
 }
 .wrapper .content .recipeDirections {
-  background: #fff;
   padding: 0.5em;
   margin: 0.75em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0px;
 }
 .wrapper .content .recipeDirections .recipetext p,
@@ -631,10 +601,8 @@ footer a:hover {
   order: 1;
 }
 .wrapper .sidebar .sidebar-item {
-  background: #fff;
   padding: 0.5em;
   margin: 0.75em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0px;
 }
 .wrapper .sidebar .recipeCategory {
@@ -643,17 +611,16 @@ footer a:hover {
   display: block;
 }
 .wrapper .sidebar .recipeCategory .categories-item {
-  background: #134e6f;
-  color: #fff;
+  background: #262626;
   text-decoration: none;
   padding: 0.25em 0.5em;
   border-radius: 0px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #262626;
 }
 .wrapper .sidebar .recipeCategory .categories-item:hover {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #000;
-  background: #228bc6;
+  border: 1px solid #eaeaea;
+  color: #262626;
+  background: #ff6150;
 }
 .wrapper .sidebar .socialContainer {
   display: flex;
@@ -677,7 +644,7 @@ footer a:hover {
   display: block;
 }
 .wrapper .sidebar .recipeOwner a {
-  color: #000;
+  color: #262626;
 }
 
 @media screen and (min-width: 900px) {

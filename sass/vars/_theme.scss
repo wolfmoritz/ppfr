@@ -4,33 +4,39 @@
 
 // Default Color Scheme
 
-$black: #000;
-$white: #fff;
-$green: #47a547;
-$bright-green: #00ff00;
-$grey: #909090;
+$black: #262626;
+$white: #ffffff;
 
 $orange: #ffa822;
 $blue: #134e6f;
 $red: #ff6150;
-$light-grey: #dee0e6;
 $light-blue: #1ac0c6;
 
-$clr-primary: $blue;
-$clr-accent-light: lighten($blue, 20%);
+$light-grey: rgb(234,234,234);
+$md-grey: rgb(68,68,68);
+$dark-grey: rgb(37, 37, 37);
+
+$clr-primary: $black; 
+
+$clr-accent-light: $red;
+$clr-accent-dark: $dark-grey;
+
 $clr-background: $white;
+
 $clr-text-dark: $black;
 $clr-text-light: $white; 
 
-$clr-accent-dark: $grey;
-
 // Default styles
 $border-radius: 0px;
-$box-shadow: 0 2px 2px lighten($grey, 10%);
-$box-shadow-dark: 0 2px 2px rgba($black, .5);
-$text-shadow: 0 2px 2px rgba($black, .25);
-$outline-light: 1px solid rgba(white, .2);
-$outline-dark: 1px solid rgba($black, .2);
+
+$box-shadow-light: 0 1px 5px 1px $light-grey;
+$box-shadow-dark: 0 1px 5px 1px $black;
+
+$text-shadow: 0 2px 2px rgba($clr-text-dark, .25);
+
+$outline-light: 1px solid $light-grey;
+$outline-medium: 1px solid $md-grey;
+$outline-dark: 1px solid $black;
 
 // Fonts
 $ff-serif: 'Merriweather', serif; 
