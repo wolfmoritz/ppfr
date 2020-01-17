@@ -1,11 +1,10 @@
-{% extends 'layout.html' %}
+{% extends 'twoCol.html' %}
 
-{% block body %}
+{% block feature %}
+{% include "includes/_feature.html" %}
+{% endblock %}
 
-{% include "_feature.html" %}
-<div class="wrapper">
-
-	<main class="content">
+{% block content %}
 		<div class="recipeIngredients">
 
 			<h4 class="span">Ingredients</h4>
@@ -23,9 +22,11 @@
 			</div>
 
 		</div>
-	</main>
+	
+{% endblock %}
 
-	<aside class="sidebar">
+{% block sidebar %}
+	
 		{% if authorizedToEditRecipe(recipe) %}
 		<div class=" edit-button">
 			<a class="btn" href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}" role="button">Edit</a>
@@ -33,7 +34,7 @@
 		{% endif %}
 
 		<div class="sidebar-item recipeSocial">
-			{% include "_social.html" %}
+			{% include "includes/_social.html" %}
 		</div>
 
 		{% if recipe.servings or recipe.temperature or recipe.prep_time or recipe.cook_time %}
@@ -107,11 +108,4 @@
 	<div> Viewed: {{ recipe.view_count|number_format }} Times</div>
 </div><!-- .recipeOwner -->
 
-
-
-
-
-
-</aside>
-</div>
 {% endblock %}

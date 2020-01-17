@@ -1,30 +1,26 @@
-{% extends 'layout.html' %}
+{% extends 'twoCol.html' %}
 
-{% block body %}
-	<div class="two-col">
-		<div class="left-col">
-			<section id="recipeList">
-				<div class="section-inner">
-					<h2>{{ source }}
-						Recipes</h2>
-					<div class="grid-container">
+{% block content %}
+<section id="recipeList">
+	<div class="section-inner">
+		<h2>{{ source }}
+			Recipes</h2>
+		<div class="grid-container">
 
-						{% for r in recipes %}
-							{% include '_recipeCard.html' %}
-						{% else %}
-							<h3>No Recipes Found</h3>
-						{% endfor %}
+			{% for r in recipes %}
+			{% include 'includes/_recipeCard.html' %}
+			{% else %}
+			<h3>No Recipes Found</h3>
+			{% endfor %}
 
-					</div>
-				</div>
-			</section>
-			{{ pagination() }}
-		</div>
-		<div class="right-col">
-			<div class="section-inner">
-				{% include '_categories.html' %}
-			</div>
 		</div>
 	</div>
+</section>
+{{ pagination() }}
 
+{% endblock %}
+
+{% block sidebar %}
+<h3>this works</h3>
+{% include 'includes/_categories.html' %}
 {% endblock %}
