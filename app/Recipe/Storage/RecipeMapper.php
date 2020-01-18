@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Storage;
 
 use Piton\ORM\DataMapperAbstract;
@@ -20,9 +23,9 @@ class RecipeMapper extends DataMapperAbstract
      *
      * Get last added published recipe
      * @param  void
-     * @return object DomainObject
+     * @return DomainObject DomainObject
      */
-    public function getLatestRecipe()
+    public function getLatestRecipe(): ?DomainObject
     {
         return $this->getRecipes(1)[0];
     }
@@ -34,7 +37,7 @@ class RecipeMapper extends DataMapperAbstract
      * @param  int $recipeId Recipe ID
      * @return DomainObject
      */
-    public function getRecipe(int $recipeId)
+    public function getRecipe(int $recipeId): ?DomainObject
     {
         $this->sql = $this->defaultSelect . ' where r.recipe_id = ?';
         $this->bindValues[] = $recipeId;
@@ -51,7 +54,7 @@ class RecipeMapper extends DataMapperAbstract
      * @param  bool $publishedRecipesOnly Only get published recipes (true)
      * @return array
      */
-    public function getRecipes(int $limit = null, int $offset = null, bool $publishedRecipesOnly = true)
+    public function getRecipes(int $limit = null, int $offset = null, bool $publishedRecipesOnly = true): ?array
     {
         $this->sql = $this->defaultSelect;
 
@@ -78,13 +81,13 @@ class RecipeMapper extends DataMapperAbstract
     /**
      * Get Recipes by Category
      *
-     * @param mixed, int or string, category
-     * @param int, limit
-     * @param int, offset
-     * @param bool, only get published recipes (true)
-     * @return array
+     * @param int|string $category Category ID or URL
+     * @param int        $limit
+     * @param int        $offset
+     * @param bool       $publishedRecipesOnly
+     * @return array|null
      */
-    public function getRecipesByCategory($category, $limit = null, $offset = null, $publishedRecipesOnly = true)
+    public function getRecipesByCategory($category, int $limit = null, int $offset = null, bool $publishedRecipesOnly = true): ?array
     {
         $this->sql = $this->defaultSelect . " join pp_recipe_category rc on r.recipe_id = rc.recipe_id";
 
@@ -132,9 +135,9 @@ class RecipeMapper extends DataMapperAbstract
      * @param  int    $limit                Limit
      * @param  int    $offset               Offset
      * @param  bool   $publishedRecipesOnly Only get published recipes (true)
-     * @return array
+     * @return array|null
      */
-    public function searchRecipes(string $terms, int $limit, int $offset, bool $publishedRecipesOnly = true)
+    public function searchRecipes(string $terms, int $limit, int $offset, bool $publishedRecipesOnly = true): ?array
     {
         // Create array of search terms split by word
         $termsArray = preg_split('/\s+/', $terms);
@@ -147,17 +150,17 @@ class RecipeMapper extends DataMapperAbstract
         $regex = ' REGEXP CONCAT(\'[[:<:]]\', ?, \'e?s?[[:>:]]\')';
 
         // Start search strings on each field
-        $numberOfTerms = count($termsArray) - 1; // Zero indexed
+        $numberOfTerms = count($termsArray) - 1;
         $titleSearch = '(';
         $ingredientSearch = '(';
         $instructionSearch = '(';
         $notesSearch = '(';
 
         for ($i = 0; $i <= $numberOfTerms; $i++) {
-            $titleSearch .= "r.title {$regex}";
-            $ingredientSearch .= "r.ingredients {$regex}";
-            $instructionSearch .= "r.instructions {$regex}";
-            $notesSearch .= "r.notes {$regex}";
+            $titleSearch .= "r.title $regex";
+            $ingredientSearch .= "r.ingredients $regex";
+            $instructionSearch .= "r.instructions $regex";
+            $notesSearch .= "r.notes $regex";
 
             // Continue search strings with "and" if there is more then one search term
             if ($i !== $numberOfTerms) {
@@ -182,7 +185,7 @@ class RecipeMapper extends DataMapperAbstract
         }
 
         // Add predicates to sql statement
-        $this->sql .= " ({$titleSearch} or {$ingredientSearch} or {$instructionSearch} or {$notesSearch})";
+        $this->sql .= " ($titleSearch or $ingredientSearch or $instructionSearch or $notesSearch)";
 
         if ($publishedRecipesOnly) {
             $this->sql .= ' and r.published_date <= curdate()';
@@ -205,13 +208,13 @@ class RecipeMapper extends DataMapperAbstract
     /**
      * Get Recipes by User
      *
-     * @param int, user
-     * @param int, limit
-     * @param int, offset
-     * @param bool, only get published recipes (true)
-     * @return array
+     * @param  int  $userId
+     * @param  int  $limit
+     * @param  int  $offset
+     * @param  bool $publishedRecipesOnly
+     * @return array|null
      */
-    public function getRecipesByUser($userId, $limit = null, $offset = null, $publishedRecipesOnly = true)
+    public function getRecipesByUser(int $userId, int $limit = null, int $offset = null, bool $publishedRecipesOnly = true): ?array
     {
         $this->sql = $this->defaultSelect . ' where r.created_by = ?';
         $this->bindValues[] = $userId;
@@ -245,9 +248,9 @@ class RecipeMapper extends DataMapperAbstract
      * @param  int  $limit
      * @param  int  $offset
      * @param  bool $publishedRecipesOnly Only get published recipes (true)
-     * @return array
+     * @return array|null
      */
-    public function getTopRecipes($limit = null, $offset = null, $publishedRecipesOnly = true)
+    public function getTopRecipes(int $limit = null, int $offset = null, bool $publishedRecipesOnly = true): ?array
     {
         $this->sql = $this->defaultSelect;
 
@@ -276,9 +279,9 @@ class RecipeMapper extends DataMapperAbstract
      *
      * Returns an array of Domain Objects (one for each record)
      * @param  int  $limit
-     * @return array
+     * @return array|null
      */
-    public function getRandomRecipes($limit = 5)
+    public function getRandomRecipes(int $limit = 5): ?array
     {
         $this->sql = $this->defaultSelect . " where published_date <= curdate() order by rand() limit ?";
         $this->bindValues[] = $limit;
@@ -289,44 +292,45 @@ class RecipeMapper extends DataMapperAbstract
     /**
      * Increment Recipe View Count
      *
-     * @param int $recipeID Recipe ID
+     * @param  int $recipeID Recipe ID
+     * @return void
      */
-    public function incrementRecipeViewCount(int $recipeId)
+    public function incrementRecipeViewCount(int $recipeId): void
     {
         $this->sql = 'update pp_recipe set view_count = view_count + 1 where recipe_id = ?;';
         $this->bindValues[] = $recipeId;
 
-        return $this->execute();
+        $this->execute();
     }
 
     /**
      * Save Recipe
      *
      * Adds pre-save manipulation prior to calling _save
-     * @param  object DomainObject
-     * @return mixed  Domain Object on success, false otherwise
+     * @param  DomainObject $domainObject
+     * @return DomainObject|null
      */
-    public function save(DomainObject $domainObject)
+    public function save(DomainObject $domainObject): ?DomainObject
     {
         // Get dependencies
         $app = \Slim\Slim::getInstance();
-        $Toolbox = $app->Toolbox;
+        $toolbox = $app->Toolbox;
 
         // Set URL safe recipe title
-        $domainObject->url = $Toolbox->cleanUrl($domainObject->title);
+        $domainObject->url = $toolbox->cleanUrl($domainObject->title);
 
         // Set prep time duration in ISO8601 format
-        if ($time = $Toolbox->stringToSeconds($domainObject->prep_time)) {
-            $domainObject->prep_time_iso = $Toolbox->timeToIso8601Duration($time);
+        if ($time = $toolbox->stringToSeconds($domainObject->prep_time)) {
+            $domainObject->prep_time_iso = $toolbox->timeToIso8601Duration($time);
         }
 
         // Set cook time duration in ISO8601 format
-        if ($time = $Toolbox->stringToSeconds($domainObject->cook_time)) {
-            $domainObject->cook_time_iso = $Toolbox->timeToIso8601Duration($time);
+        if ($time = $toolbox->stringToSeconds($domainObject->cook_time)) {
+            $domainObject->cook_time_iso = $toolbox->timeToIso8601Duration($time);
         }
 
         // Set instructions excerpt
-        $domainObject->instructions_excerpt = $Toolbox->truncateHtmlText($domainObject->instructions);
+        $domainObject->instructions_excerpt = $toolbox->truncateHtmlText($domainObject->instructions);
 
         return parent::save($domainObject);
     }

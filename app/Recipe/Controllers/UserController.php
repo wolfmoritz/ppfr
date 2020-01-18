@@ -1,33 +1,24 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Controllers;
 
 /**
  * User Controller
  */
-class UserController
+class UserController extends BaseController
 {
-    private $app;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->app = \Slim\Slim::getInstance();
-    }
-
     /**
      * Display All Users
      */
     public function allUsers()
     {
-        // Get mapper and twig template engine
-        $dataMapper = $this->app->dataMapper;
-        $UserMapper = $dataMapper('UserMapper');
-        $twig = $this->app->twig;
+        // Get dependencies
+        $UserMapper = ($this->dataMapper)('UserMapper');
 
         $users = $UserMapper->find();
 
-        $twig->display('admin/userList.html', ['users' => $users, 'title' => 'All Users']);
+        $this->render('admin/userList.html', ['users' => $users, 'title' => 'All Users']);
     }
 }

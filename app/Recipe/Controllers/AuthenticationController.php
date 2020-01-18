@@ -1,17 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Controllers;
 
 /**
  * Authentication (Login) Controller
  */
-class AuthenticationController
+class AuthenticationController extends BaseController
 {
-    /**
-     * Slim App
-     * @var object
-     */
-    private $app;
-
     /**
      * Login Token Key Name
      * @var string
@@ -25,28 +22,24 @@ class AuthenticationController
     private $loginTokenExpiresKey = 'loginTokenExpires';
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->app = \Slim\Slim::getInstance();
-    }
-
-    /**
      * Show Login Form
+     *
+     * @param void
+     * @return void
      */
-    public function showLoginForm()
+    public function showLoginForm(): void
     {
-        $twig = $this->app->twig;
-        $twig->display('login.html');
+        $this->render('login.html');
     }
 
     /**
      * Request Login Token
      *
      * Validates email and sends login link to user
+     * @param void
+     * @return void
      */
-    public function requestLoginToken()
+    public function requestLoginToken(): void
     {
         // Get dependencies
         $session = $this->app->SessionHandler;
@@ -113,11 +106,11 @@ class AuthenticationController
             $this->app->log->alert('Invalid Login: ' . $providedEmail);
 
             // Go to home page
-            $this->app->redirectTo('home');
+            $this->redirect('home');
         }
 
         // Redirect to home page
-        $this->app->redirectTo('home');
+        $this->redirect('home');
     }
 
     /**
@@ -125,8 +118,9 @@ class AuthenticationController
      *
      * Validate login token and start session
      * @param string $token Token from link in user email
+     * @return void
      */
-    public function login($token)
+    public function login(string $token): void
     {
         // Get dependencies
         $session = $this->app->SessionHandler;
@@ -151,7 +145,7 @@ class AuthenticationController
             $userMapper->save($user);
 
             // Go to admin dashboard
-            return $this->app->redirectTo('adminDashboard');
+            $this->redirect('adminDashboard');
         }
 
         // Not valid, log and show 404
@@ -165,22 +159,23 @@ class AuthenticationController
 
         $this->app->log->info('Invalid login token, supplied: ' . $message);
 
-        return $this->app->notFound();
+        $this->notFound();
     }
 
     /**
      * Logout Session
      *
      * @param void
+     * @return void
      */
-    public function logout()
+    public function logout(): void
     {
         // Destroy session
-        $SessionHandler = $this->app->SessionHandler;
-        $SessionHandler->destroy();
+        $sessionHandler = $this->app->SessionHandler;
+        $sessionHandler->destroy();
 
         // Direct home
-        $this->app->redirectTo('home');
+        $this->redirect('home');
     }
 
     /**
@@ -192,7 +187,7 @@ class AuthenticationController
      * @param string        $message
      * @return void
      */
-    protected function sendEmail($recipient, string $subject, string $message)
+    protected function sendEmail($recipient, string $subject, string $message): void
     {
         // Get dependencies
         $email = $this->app->emailHandler;

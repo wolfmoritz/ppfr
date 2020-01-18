@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Controllers;
 
 /**
@@ -26,6 +29,9 @@ class BaseController
 
     /**
      * Constructor
+     *
+     * @param  void
+     * @return void
      */
     public function __construct()
     {
@@ -41,7 +47,7 @@ class BaseController
      * @param array  $data     Data array to merge into template
      * @return void
      */
-    protected function render(string $template, ?array $data)
+    protected function render(string $template, array $data = null): void
     {
         $this->app->twig->display($template, $data);
     }
@@ -52,9 +58,9 @@ class BaseController
      * @param string $url
      * @param int    $code Default 302 Temporary
      */
-    protected function redirect(string $url, int $code = 302)
+    protected function redirect(string $url, int $code = 302): void
     {
-        return $this->app->redirect($url, $code);
+        $this->app->redirect($url, $code);
     }
 
     /**
@@ -64,16 +70,16 @@ class BaseController
      * @param void
      * @return void
      */
-    protected function notFound()
+    protected function notFound(): void
     {
-        return $this->app->notFound();
+        $this->app->notFound();
     }
 
     /**
      * Get App Config Setting
      *
      * @param  string $name
-     * @return mixed
+     * @return array|string|null
      */
     protected function getConfig(string $name)
     {
@@ -86,7 +92,7 @@ class BaseController
      * @param  void
      * @return object
      */
-    protected function getPaginator()
+    protected function getPaginator(): object
     {
         return $this->app->PaginationHandler;
     }
@@ -97,7 +103,7 @@ class BaseController
      * @param  object $extension
      * @return void
      */
-    protected function loadTwigExtension(object $extension)
+    protected function loadTwigExtension(object $extension): void
     {
         $twig = $this->app->twig;
         $twig->parserExtensions[] = $extension;

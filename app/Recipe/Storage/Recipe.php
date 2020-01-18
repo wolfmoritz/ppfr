@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Storage;
 
 use Piton\ORM\DomainObject;
@@ -10,8 +13,11 @@ class Recipe extends DomainObject
 {
     /**
      * Get Nice Recipe URL
+     *
+     * @param  void
+     * @return string
      */
-    public function niceUrl()
+    public function niceUrl(): string
     {
         return '/' . $this->recipe_id . '/' . $this->url;
     }
@@ -20,8 +26,10 @@ class Recipe extends DomainObject
      * Merge Data
      *
      * Merge an array of values into the class properties by array key = property
+     * @param  array $modifiedRecipe
+     * @return void
      */
-    public function mergeRecipe(array $modifiedRecipe)
+    public function mergeRecipe(array $modifiedRecipe): void
     {
         // Make sure we have an array
         if (!is_array($modifiedRecipe)) {

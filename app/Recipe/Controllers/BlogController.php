@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Controllers;
 
 /**
@@ -11,10 +14,10 @@ class BlogController extends BaseController
     /**
      * Show a Single Post
      *
-     * @param int, blog id
-     * @param string, blog url
+     * @param int    $id Blog id
+     * @param string $url Blog URL
      */
-    public function showPost($id, $url = null)
+    public function showPost(int $id, string $url = null): void
     {
         // Get data mappers
         $dataMapper = $this->app->dataMapper;
@@ -28,7 +31,6 @@ class BlogController extends BaseController
         // If no post found then 404
         if (!$blog) {
             $this->app->notFound();
-            return;
         }
 
         // Authorization check
@@ -52,8 +54,10 @@ class BlogController extends BaseController
     /**
      * Get Blog Posts
      *
+     * @param  void
+     * @return void
      */
-    public function getBlogPosts()
+    public function getBlogPosts(): void
     {
         // Get services
         $blogMapper = ($this->dataMapper)('BlogMapper');
@@ -75,8 +79,10 @@ class BlogController extends BaseController
     /**
      * Get Blog Posts (Admin)
      *
+     * @param  void
+     * @return void
      */
-    public function getAdminBlogPosts()
+    public function getAdminBlogPosts(): void
     {
         // Get services
         $blogMapper = ($this->dataMapper)('BlogMapper');
@@ -99,9 +105,10 @@ class BlogController extends BaseController
      * Edit Blog Post
      *
      * Create or edit a blog post
-     * @param int, blog post id
+     * @param int $id Blog post ID
+     * @return void
      */
-    public function editPost($id = null)
+    public function editPost(int $id = null): void
     {
         // Get mapper and services
         $blogMapper = ($this->dataMapper)('BlogMapper');

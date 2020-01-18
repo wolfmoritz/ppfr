@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Controllers;
 
 /**
@@ -14,7 +17,7 @@ class IndexController extends BaseController
      * @param void
      * @return void
      */
-    public function home()
+    public function home(): void
     {
         // Get data mappers and twig
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
@@ -36,7 +39,7 @@ class IndexController extends BaseController
      * @param  void
      * @return void
      */
-    public function allRecipes()
+    public function allRecipes(): void
     {
         // Get dependencies
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
@@ -85,7 +88,7 @@ class IndexController extends BaseController
      *
      * @param mixed, category slug or ID
      **/
-    public function getRecipesByCategory($category)
+    public function getRecipesByCategory(string $category): void
     {
         // Get mapper and twig template engine
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
@@ -100,19 +103,17 @@ class IndexController extends BaseController
             $this->notFound();
         }
 
-        $categoryResult = (Array) $categoryResult[0];
-
         // Configure pagination object
-        $paginator->setPagePath($this->app->urlFor('recipesByCategory', ['category' => $categoryResult['url']]));
+        $paginator->setPagePath($this->app->urlFor('recipesByCategory', ['category' => $categoryResult->url]));
 
         // Fetch recipes
-        $data = $recipeMapper->getRecipesByCategory($categoryResult['category_id'], $paginator->getResultsPerPage(), $paginator->getOffset());
+        $data = $recipeMapper->getRecipesByCategory($categoryResult->category_id, $paginator->getResultsPerPage(), $paginator->getOffset());
 
         // Get count of recipes returned by query and load pagination
         $paginator->setTotalResultsFound($recipeMapper->foundRows());
         $this->loadTwigExtension($paginator);
 
-        $this->render('recipeList.html', ['recipes' => $data, 'source' => $category, 'title' => $categoryResult['name']]);
+        $this->render('recipeList.html', ['recipes' => $data, 'source' => $category, 'title' => $categoryResult->name]);
     }
 
     /**
@@ -121,7 +122,7 @@ class IndexController extends BaseController
      * @param int    $id    Recipe ID
      * @return void
      */
-    public function showRecipe($id)
+    public function showRecipe($id): void
     {
         // Get dependencies
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
@@ -130,7 +131,7 @@ class IndexController extends BaseController
 
         // If $id cannot be interpreted as an integer, throw 404
         if (!is_integer((int) $id)) {
-            return $this->notFound();
+            $this->notFound();
         }
 
         // Fetch recipe
@@ -138,7 +139,7 @@ class IndexController extends BaseController
 
         // If no recipe found then return 404
         if (!$recipe) {
-            return $this->notFound();
+            $this->notFound();
         }
 
         // Get categories for this recipe
@@ -159,7 +160,7 @@ class IndexController extends BaseController
      *
      * @return mixed, array of results or null
      */
-    public function searchRecipes()
+    public function searchRecipes(): void
     {
         // Get dependencies parameters
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
@@ -181,7 +182,7 @@ class IndexController extends BaseController
         // Note, this is faster than count($recipes) === 1
         if ($paginator->getCurrentPageNumber() == 1 && isset($data[0]) && !isset($data[1])) {
             // Redirect to show recipe page
-            return $this->redirect($this->app->urlFor('showRecipe') . $data[0]->niceUrl(), 301);
+            $this->redirect($this->app->urlFor('showRecipe') . $data[0]->niceUrl(), 301);
         }
 
         // Get count of recipes returned by query and load pagination
@@ -196,7 +197,7 @@ class IndexController extends BaseController
      *
      * @param int, user ID
      **/
-    public function getRecipesByUser($userId)
+    public function getRecipesByUser($userId): void
     {
         // Get dependencies
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
@@ -232,7 +233,7 @@ class IndexController extends BaseController
     /**
      * About Page
      */
-    public function about()
+    public function about(): void
     {
         $this->render('about.html', ['title' => 'About']);
     }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Storage;
 
 use Piton\ORM\DataMapperAbstract;
@@ -23,9 +26,9 @@ class BlogMapper extends DataMapperAbstract
      * @param  int  $limit
      * @param  int  $offset
      * @param  bool $publishedPostsOnly Only get published posts (true)
-     * @return array
+     * @return array|null
      */
-    public function getPosts(int $limit = null, int $offset = null, bool $publishedPostsOnly = true)
+    public function getPosts(int $limit = null, int $offset = null, bool $publishedPostsOnly = true): ?array
     {
         $this->sql = $this->defaultSelect;
 
@@ -57,9 +60,9 @@ class BlogMapper extends DataMapperAbstract
      *
      * Adds pre-save manipulation prior to calling _save
      * @param Domain Object
-     * @return mixed, Domain Object on success, false otherwise
+     * @return DomainObject|null Domain Object on success, null otherwise
      */
-    public function save(DomainObject $domainObject)
+    public function save(DomainObject $domainObject): ?DomainObject
     {
         // Get dependencies
         $app = \Slim\Slim::getInstance();

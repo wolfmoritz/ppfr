@@ -1,7 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Storage;
 
 use Piton\ORM\DataMapperAbstract;
+use Piton\ORM\DomainObject;
 
 /**
  * Category Mapper
@@ -16,9 +20,9 @@ class CategoryMapper extends DataMapperAbstract
     *
     * Returns an array of all categories
     * @param  void
-    * @return array
+    * @return array|null
     */
-    public function getAllCategories()
+    public function getAllCategories(): ?array
     {
         // Use default select statement unless other SQL has been supplied
         $this->makeSelect();
@@ -32,15 +36,15 @@ class CategoryMapper extends DataMapperAbstract
     *
     * Get a category by URL slug
     * @param  string $slug Category url
-    * @return mixed
+    * @return DomainObject|null
     */
-    public function getCategory($slug)
+    public function getCategory(string $slug): ?DomainObject
     {
         $this->makeSelect();
         $this->sql .= ' and url = ?';
         $this->bindValues[] = $slug;
 
-        return $this->find();
+        return $this->findRow();
     }
 
     /**
@@ -48,9 +52,9 @@ class CategoryMapper extends DataMapperAbstract
     *
     * Returns all categories assigned to a recipe
     * @param  int   $recipeId Recipe ID
-    * @return mixed           Array of categories on success, null if not found
+    * @return array|null           Array of categories on success, null if not found
     */
-    public function getAssignedCategories(int $recipeId)
+    public function getAssignedCategories(int $recipeId): ?array
     {
         $this->sql = 'select c.* from pp_category c join pp_recipe_category rc on c.category_id = rc.category_id where rc.recipe_id = ?;';
         $this->bindValues[] = $recipeId;
@@ -67,7 +71,7 @@ class CategoryMapper extends DataMapperAbstract
     * @param  array $categories Optional array of category ID's
     * @return void
     */
-    public function saveRecipeCategoryAssignments(int $recipeId, array $categories = null)
+    public function saveRecipeCategoryAssignments(int $recipeId, array $categories = null): void
     {
         // Delete existing category assignments
         $this->sql = 'delete from pp_recipe_category where recipe_id = ?';
