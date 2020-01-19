@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Extensions;
 
 /**
@@ -28,8 +31,11 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
 
     /**
      * Register Global variables
+     *
+     * @param void
+     * @return array
      */
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return [
             'currentPageNumber' => $this->getCurrentPageNumber(),
@@ -38,8 +44,11 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
 
     /**
      * Register Custom Functions
+     *
+     * @param void
+     * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig\TwigFunction('pagination', [$this, 'pagination'], ['needs_environment' => true, 'is_safe' => ['html']]),
@@ -54,7 +63,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      * @param  array  $queryParams Array of query strings and values
      * @return void
      */
-    public function setPagePath(string $pagePath, array $queryParams = null)
+    public function setPagePath(string $pagePath, array $queryParams = null): void
     {
         $this->pageUrl = $this->domain . $pagePath . '?';
 
@@ -73,12 +82,12 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      * @param  int $pageNumber Current page number
      * @return void
      */
-    public function setCurrentPageNumber(int $pageNumber = null)
+    public function setCurrentPageNumber(int $pageNumber = null): void
     {
         if ($pageNumber) {
             $this->currentPageNumber = ($pageNumber) ? $pageNumber : 1;
         } else {
-            $this->currentPageNumber = isset($_GET[$this->queryStringParam]) ? htmlspecialchars($_GET[$this->queryStringParam]) : 1;
+            $this->currentPageNumber = isset($_GET[$this->queryStringParam]) ? (int) htmlspecialchars($_GET[$this->queryStringParam]) : 1;
         }
     }
 
@@ -86,9 +95,10 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      * Get Current Page Number
      *
      * Gets the current page number for display in templates
-     * @return string, page number
+     * @param void
+     * @return int Page number
      */
-    public function getCurrentPageNumber()
+    public function getCurrentPageNumber(): int
     {
         return $this->currentPageNumber;
     }
@@ -101,7 +111,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      * @param  void
      * @return int
      */
-    public function getOffset()
+    public function getOffset(): int
     {
         return ($this->currentPageNumber - 1) * $this->resultsPerPage;
     }
@@ -113,7 +123,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      * @param  void
      * @return int
      */
-    public function getResultsPerPage()
+    public function getResultsPerPage(): int
     {
         return $this->resultsPerPage;
     }
@@ -125,7 +135,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      * @param  int $totalResultsFound number of rows found
      * @return void
      */
-    public function setTotalResultsFound(int $totalResultsFound)
+    public function setTotalResultsFound(int $totalResultsFound): void
     {
         $this->totalResultsFound = $totalResultsFound;
     }
@@ -135,9 +145,9 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      *
      * Build pagination links array
      * @param  void
-     * @return void
+     * @return array
      */
-    private function buildPagination()
+    private function buildPagination(): array
     {
         // Calculate the number of page in this set
         $numberOfPages = ceil($this->totalResultsFound / $this->resultsPerPage);
@@ -150,7 +160,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
         $pageList = [];
 
         //  Start with Previous link
-        if ((int) $this->currentPageNumber === 1) {
+        if ($this->currentPageNumber === 1) {
             $pageList[] = ['href' => $this->pageUrl . 1, 'link' => ''];
         } else {
             $pageList[] = ['href' => $this->pageUrl . ($this->currentPageNumber - 1), 'link' => ''];
@@ -224,7 +234,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
      * @param  array $config Configuration array of options
      * @return void
      */
-    public function setConfig(array $config)
+    public function setConfig(array $config): void
     {
         $this->resultsPerPage = $config['resultsPerPage'];
         $this->numberOfAdjacentLinks = $config['numberOfAdjacentLinks'];

@@ -35,12 +35,11 @@ class AdminActionController
         $Validation = $this->app->Validation;
 
         // If a recipe ID was supplied, get that recipe. Otherwise get a blank recipe record
-        $newRecipe = false;
         if (!empty($this->app->request->post('recipe_id'))) {
             $recipe = $RecipeMapper->findById((int) $this->app->request->post('recipe_id'));
+            $id = $this->app->request->post('recipe_id');
         } else {
             $recipe = $RecipeMapper->make();
-            $newRecipe = true;
         }
 
         // Verify authority to modify recipe

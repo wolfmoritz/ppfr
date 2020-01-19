@@ -1,19 +1,37 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Recipe\Extensions;
+
+use Twig\Extension\AbstractExtension;
+use Twig\Extension\GlobalsInterface;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+use Exception;
 
 /**
  * Custom Extensions for Twig Templates
  */
-class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\Extension\GlobalsInterface
+class TwigExtension extends AbstractExtension implements GlobalsInterface
 {
     /**
-     * Register Global variables
+     * Class Cache
+     * @var array
      */
-    public function getGlobals()
+    protected $cache = [];
+
+    /**
+     * Register Global variables
+     *
+     * @param void
+     * @return array
+     */
+    public function getGlobals(): array
     {
         return [
             'mode' => $this->getConfig('mode'),
-            'production' => ($this->getConfig('mode') === 'production') ? true : false,
+            'production' => ($this->getConfig('mode') === 'production'),
             'request' => $this->getServerVars(),
             'categories' => $this->categories(),
         ];
@@ -21,35 +39,40 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
 
     /**
      * Register Custom Filters
+     *
+     * @param void
+     * @return array
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig\TwigFilter('excerpt', [$this, 'truncateHtml']),
-            new \Twig\TwigFilter('formatIngredients', [$this, 'formatIngredients']),
+            new TwigFilter('excerpt', [$this, 'truncateHtml']),
+            new TwigFilter('formatIngredients', [$this, 'formatIngredients']),
         ];
     }
 
     /**
      * Register Custom Functions
+     *
+     * @param void
+     * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new \Twig\TwigFunction('flash', [$this, 'flash']),
-            new \Twig\TwigFunction('checked', [$this, 'checked']),
-            new \Twig\TwigFunction('excerpt', [$this, 'truncateHtml']),
-            new \Twig\TwigFunction('imageUrl', [$this, 'imageUrl']),
-            new \Twig\TwigFunction('siteUrlFor', [$this, 'siteUrlFor']),
-            new \Twig\TwigFunction('uriSegment', [$this, 'uriSegment']),
-            new \Twig\TwigFunction('formatIngredients', [$this, 'formatIngredients']),
-            new \Twig\TwigFunction('topRecipes', [$this, 'topRecipes']),
-            new \Twig\TwigFunction('randomRecipes', [$this, 'randomRecipes']),
-            new \Twig\TwigFunction('config', [$this, 'getConfig']),
-            new \Twig\TwigFunction('session', [$this, 'getSession']),
-            new \Twig\TwigFunction('role', [$this, 'authorizedRole']),
-            new \Twig\TwigFunction('authorizedToEditRecipe', [$this, 'authorizedToEditRecipe']),
-            new \Twig\TwigFunction('blogPostNav', [$this, 'getBlogPostNav'], ['is_safe' => ['html']]),
+            new TwigFunction('flash', [$this, 'flash']),
+            new TwigFunction('checked', [$this, 'checked']),
+            new TwigFunction('excerpt', [$this, 'truncateHtml']),
+            new TwigFunction('imageUrl', [$this, 'imageUrl']),
+            new TwigFunction('siteUrlFor', [$this, 'siteUrlFor']),
+            new TwigFunction('uriSegment', [$this, 'uriSegment']),
+            new TwigFunction('formatIngredients', [$this, 'formatIngredients']),
+            new TwigFunction('randomRecipes', [$this, 'randomRecipes']),
+            new TwigFunction('config', [$this, 'getConfig']),
+            new TwigFunction('session', [$this, 'getSession']),
+            new TwigFunction('role', [$this, 'authorizedRole']),
+            new TwigFunction('authorizedToEditRecipe', [$this, 'authorizedToEditRecipe']),
+            new TwigFunction('blogPostNav', [$this, 'getBlogPostNav'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -57,27 +80,30 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
      * Get Configuration Items
      *
      * Gets settings from $app->config(<config-items>);
-     * @param string, config item name
+     * @param string $item Config item name
+     * @return string|array|null
      */
-    public function getConfig($item)
+    public function getConfig(string $item)
     {
-        $app = \Slim\Slim::getInstance();
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
 
-        return $app->config($item);
+        return $this->cache['app']->config($item);
     }
 
     /**
      * Get Server Request Variables
      *
      * Gets selected variables from $_SERVER
+     * @param void
+     * @return array
      */
-    public function getServerVars()
+    public function getServerVars(): array
     {
-        $app = \Slim\Slim::getInstance();
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
 
         return array(
-            'host' => $app->request->getHost(),
-            'basePath' => $app->request->getRootUri(),
+            'host' => $this->cache['app']->request->getHost(),
+            'basePath' => $this->cache['app']->request->getRootUri(),
         );
     }
 
@@ -87,12 +113,12 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
      * Because we are not replacing Slim Views with Twig, but using them together but separately,
      * we needed a way to get to flash messages in the Twig template.
      *
-     * @param String, Default 'message'
-     * @return String
+     * @param string $key Default 'message'
+     * @return string
      */
-    public function flash($key = 'message')
+    public function flash(string $key = 'message'): string
     {
-        return isset($_SESSION['slim.flash'][$key]) ? $_SESSION['slim.flash'][$key] : false;
+        return $_SESSION['slim.flash'][$key] ?? false;
     }
 
     /**
@@ -100,8 +126,9 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
      *
      * If the supplied value is true "1" returns the checked string
      * @param 0/1
+     * @return string
      */
-    public function checked($checked = 0)
+    public function checked($checked = 0): string
     {
         return (isset($checked) && $checked == 1) ? 'checked="checked"' : '';
     }
@@ -110,87 +137,83 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
      * truncateHtml can truncate a string up to a number of characters while preserving whole words and HTML tags
      * http://alanwhipple.com/2011/05/25/php-truncate-string-preserving-html-tags-words/
      *
-     * @param string $text String to truncate.
-     * @param integer $length Length of returned string, including ellipsis.
-     * @param string $ending Ending to be appended to the trimmed string.
-     * @param boolean $exact If false, $text will not be cut mid-word
-     * @param boolean $considerHtml If true, HTML tags would be handled correctly
-     *
+     * @param string $text         String to truncate.
+     * @param int    $length       Length of returned string, including ellipsis.
+     * @param string $ending       Ending to be appended to the trimmed string.
+     * @param bool   $exact        If false, $text will not be cut mid-word
+     * @param bool   $considerHtml If true, HTML tags would be handled correctly
      * @return string Trimmed string.
      */
 
-    public function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
+    public function truncateHtml(string $text, int $length = 100, string $ending = '...', bool $exact = false, bool $considerHtml = true): string
     {
-        $app = \Slim\Slim::getInstance();
-        $Toolbox = $app->Toolbox;
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        $toolbox = $this->cache['app']->Toolbox;
 
-        return $Toolbox::truncateHtmlText($text, $length, $ending, $exact, $considerHtml);
+        return $toolbox::truncateHtmlText($text, $length, $ending, $exact, $considerHtml);
     }
 
     /**
      * Get Upload Image URL
+     *
+     * @param int|string $id
+     * @param string     $filename
+     * @param int        $width
+     * @param int        @height
+     * @return string
      */
-    public function imageUrl($id, $filename, $width = null, $height = null)
+    public function imageUrl($id, string $filename, int $width = null, int $height = null): string
     {
-        static $largeUri;
-        static $thumbUri;
-        static $baseUrl = '';
-        static $app;
-
         // Cache variables for next request
-        if (!isset($app)) {
-            $app = \Slim\Slim::getInstance();
-
-            $largeUri = $app->config('image')['file.uri'];
-            $thumbUri = $app->config('image')['file.thumb.uri'];
-
-            $baseUrl = $app->request->getUrl() . $app->request->getRootUri() . '/';
-        }
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        isset($this->cache['largeUri']) ?: $this->cache['largeUri'] = $this->cache['app']->config('image')['file.uri'];
+        isset($this->cache['thumbUri']) ?: $this->cache['thumbUri'] = $this->cache['app']->config('image')['file.thumb.uri'];
+        isset($this->cache['baseUrl']) ?: $this->cache['baseUrl'] = $this->cache['app']->request->getUrl() . $this->cache['app']->request->getRootUri() . '/';
 
         // Was the full sized image requested?
         if ($width === null && $height === null) {
             // Just return url to the original image
 
             // This is a temporary hack (no $baseUrl) as our photos are on the old site
-            if (strpos($largeUri, 'http') === 0) {
-                return "{$largeUri}{$id}/files/{$filename}";
+            if (strpos($this->cache['largeUri'], 'http') === 0) {
+                return "{$this->cache['largeUri']}{$id}/files/{$filename}";
             }
 
             // Test if "_large" variant exists and return the full size version
             $fileInfo = pathinfo($filename);
-            $largeImageFile = "{$largeUri}{$id}/files/{$fileInfo['filename']}_large.{$fileInfo['extension']}";
+            $largeImageFile = "{$this->cache['largeUri']}{$id}/files/{$fileInfo['filename']}_large.{$fileInfo['extension']}";
             if (file_exists($largeImageFile)) {
-                return $baseUrl . $largeImageFile;
+                return $this->cache['baseUrl'] . $largeImageFile;
             }
 
             // Otherwise return default
-            return "{$baseUrl}{$largeUri}{$id}/files/{$filename}";
+            return "{$this->cache['baseUrl']}{$this->cache['largeUri']}{$id}/files/{$filename}";
         }
 
         // Make sure at least one dimension is set to a numeric size
         if (!is_numeric($width) && !is_numeric($height)) {
-            throw new \Exception('imageUrl expects at least one numeric dimension');
+            throw new Exception('imageUrl expects at least one numeric dimension');
         }
 
         // If width or height is not provided, set to empty string to keep aspect ratio
         $width = (is_numeric($width)) ? $width : '';
         $height = (is_numeric($height)) ? $height : '';
 
-        return $baseUrl . $thumbUri . $id . '/' . $width . 'x' . $height . '/' . $filename;
+        return $this->cache['baseUrl'] . $this->cache['thumbUri'] . $id . '/' . $width . 'x' . $height . '/' . $filename;
     }
 
     /**
      * Get Full URL to Named Route
      *
-     * @param String, the named route
-     * @param mixed, array of segments, or URI string
-     * @return String, the site URL + route path
+     * @param string            $namedRoute Named of the route
+     * @param array|string|null $segments   Array of segments, or URI string
+     * @return string Full URL
      */
-    public function siteUrlFor($namedRoute, $segments = null)
+    public function siteUrlFor(string $namedRoute, $segments = null): string
     {
-        $app = \Slim\Slim::getInstance();
-        $domain = $app->request()->getUrl();
-        $route = $app->urlFor($namedRoute);
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        isset($this->cache['domain']) ?: $this->cache['domain'] = $this->cache['app']->request()->getUrl();
+        $route = $this->cache['app']->urlFor($namedRoute);
         $urlSegments = '';
 
         if (is_array($segments)) {
@@ -201,36 +224,38 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
             $urlSegments = '/' . $urlSegments;
         }
 
-        return $domain . $route . $urlSegments;
+        return $this->cache['domain'] . $route . $urlSegments;
     }
 
     /**
      * Get Request Segment
      *
      * Get request URI segment by position (1 indexed)
+     * @param int $pos
+     * @return string|null
      */
-    public function uriSegment($pos)
+    public function uriSegment(int $pos): string
     {
-        $app = \Slim\Slim::getInstance();
-        $request = $app->request;
-
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        $request = $this->cache['app']->request;
+        $segments = [];
         $uriPath = $request->getResourceUri();
 
         if (isset($uriPath)) {
             $segments = explode('/', $uriPath);
-
-            return isset($segments[$pos]) ? $segments[$pos] : null;
         }
+
+        return $segments[$pos] ?? null;
     }
 
     /**
      * Format Ingredients
      *
      * Takes ingredients string and creates list items with checkboxes
-     * @param string, ingredients text
-     * @return string, html ingredients
+     * @param string $ing Ingredients text
+     * @return string
      */
-    public function formatIngredients($ingr)
+    public function formatIngredients(string $ingr): string
     {
         // Clean input of \r's and then create array of ingredients
         $ingr = str_replace("\n\r", "\n", $ingr);
@@ -247,80 +272,48 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
      * Get Categories
      *
      * Get all categories
+     * @param void
+     * @return array
      */
-    public function categories()
+    public function categories(): array
     {
-        // Cache results
-        static $categories;
-
-        if ($categories) {
-            return $categories;
+        // Check cache
+        if (isset($this->cache['categories'])) {
+            return $this->cache['categories'];
         }
 
-        $app = \Slim\Slim::getInstance();
-        $dataMapper = $app->dataMapper;
-        $CategoryMapper = $dataMapper('CategoryMapper');
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        $categoryMapper = ($this->cache['app']->dataMapper)('CategoryMapper');
 
-        return $categories = $CategoryMapper->getAllCategories();
-    }
-
-    /**
-     * Get Top Recipes
-     */
-    public function topRecipes($limit = 5)
-    {
-        // Cache results
-        static $topRecipes;
-
-        if ($topRecipes) {
-            return $topRecipes;
-        }
-
-        $app = \Slim\Slim::getInstance();
-        $dataMapper = $app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-
-        return $topRecipes = $RecipeMapper->getTopRecipes($limit);
+        return $this->cache['categories'] = $categoryMapper->getAllCategories();
     }
 
     /**
      * Get Random Recipes
+     *
+     * @param int $limit
+     * @return array|null
      */
-    public function randomRecipes($limit = 5)
+    public function randomRecipes(int $limit = 5): ?array
     {
-        // Cache results
-        static $randomRecipes;
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        $recipeMapper = ($this->cache['app']->dataMapper)('RecipeMapper');
 
-        if ($randomRecipes) {
-            return $randomRecipes;
-        }
-
-        $app = \Slim\Slim::getInstance();
-        $dataMapper = $app->dataMapper;
-        $RecipeMapper = $dataMapper('RecipeMapper');
-
-        return $randomRecipes = $RecipeMapper->getRandomRecipes($limit);
+        return $recipeMapper->getRandomRecipes($limit);
     }
 
-    public function getSession($key = null)
+    /**
+     * Get Session Data
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function getSession(string $key = null)
     {
-        static $sessionData = [];
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
 
-        // Cach session data to avoid round trips to the DB
-        if (!$sessionData) {
-            $app = \Slim\Slim::getInstance();
-            $SessionHandler = $app->SessionHandler;
-
-            // Get all of the session data, it can't be that much, right?
-            $sessionData = $SessionHandler->getData();
-        }
-
-        // Returns the key if provided, else all values
-        if ($key === null) {
-            return ($sessionData) ? $sessionData : null;
-        }
-
-        return isset($sessionData[$key]) ? $sessionData[$key] : null;
+        $sessionHandler = $this->cache['app']->SessionHandler;
+        return $sessionHandler->getData($key);
     }
 
     /**
@@ -328,12 +321,12 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
      *
      * Compares supplied role against user role
      * @param string $role Role name
-     * @return Boolean
+     * @return bool
      */
-    public function authorizedRole($role = null)
+    public function authorizedRole(string $role = null): bool
     {
-        $app = \Slim\Slim::getInstance();
-        $security = $app->security;
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        $security = $this->cache['app']->security;
 
         return $security->authorized($role, false);
     }
@@ -341,13 +334,13 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
     /**
      * Verify User is Authorized to Edit Recipe
      *
-     * @param object $recipe Recipe object
-     * @return Boolean
+     * @param \Piton\ORM\DomainObject $recipe DomainObject
+     * @return bool
      */
-    public function authorizedToEditRecipe($recipe)
+    public function authorizedToEditRecipe(\Piton\ORM\DomainObject $recipe): bool
     {
-        $app = \Slim\Slim::getInstance();
-        $security = $app->security;
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        $security = $this->cache['app']->security;
 
         return $security->authorizedToEditRecipe($recipe);
     }
@@ -355,15 +348,16 @@ class TwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\E
     /**
      * Get Blog Posts Nav
      *
+     * @param void
+     * @return array|null
      */
-    public function getBlogPostNav()
+    public function getBlogPostNav(): ?array
     {
-        $app = \Slim\Slim::getInstance();
-        $dataMapper = $app->dataMapper;
-        $BlogMapper = $dataMapper('BlogMapper');
+        isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
+        $blogMapper = ($this->cache['app']->dataMapper)('BlogMapper');
 
         // Get posts
-        $posts = $BlogMapper->getPosts();
+        $posts = $blogMapper->getPosts();
 
         // Nest array by month
         $priorPosts = [];

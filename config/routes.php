@@ -2,6 +2,7 @@
 /**
  * Application Routes
  */
+
 namespace Recipe\Controllers;
 
 // Authentication closure to secure admin routes

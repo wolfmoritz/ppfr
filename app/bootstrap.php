@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Load Base Files
  *
@@ -9,6 +10,8 @@
  * - Dependencies
  * - Routes
  */
+
+declare(strict_types=1);
 
 // Define the application root directory
 define('ROOT_DIR', dirname(__DIR__) . '/');
