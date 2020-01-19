@@ -8,10 +8,11 @@
 <section id="recent">
   <div class="section-inner">
     <h2>New Recipes</h2>
-    {{ cards.recipeCards(recipes.latestRecipes) }}
     <div class="span" id="more-recipes-button">
       <a class="btn" href="{{ siteUrlFor('recipesAll') }}">See More</a>
     </div>
+    {{ cards.recipeCards(recipes.latestRecipes) }}
+    
   </div>
   </div>
 </section>
@@ -19,10 +20,11 @@
 <section id="popular">
   <div class="section-inner">
     <h2>Popular Recipes</h2>
-    {{ cards.recipeCards(recipes.popularRecipes) }}
     <div class="span" id="more-recipes-button">
       <a class="btn" href="{{ siteUrlFor('recipesPopular') }}">See More</a>
     </div>
+    {{ cards.recipeCards(recipes.popularRecipes) }}
+ 
   </div>
 </section>
 <section id="random">
@@ -34,12 +36,16 @@
 <section id="blog">
   <div class="section-inner">
     <h2>Blog</h2>
+  </h3>
+  <div class="span" id="more-recipes-button">
+    <a class="btn" href="{{ siteUrlFor('blogPosts') }}">See More</a>
+  </div>
     {% for p in recipes.blogPosts %}
 
     <article>
       <h3 class="span">
         <a href="{{ siteUrlFor('showBlogPost', p.niceUrl) }}">{{ p.title }}</a>
-      </h3>
+  
       <p>
         {{ p.content_excerpt }}
        
@@ -54,9 +60,7 @@
 
     {% endfor %}
 
-    <div class="span" id="more-recipes-button">
-      <a class="btn" href="{{ siteUrlFor('blogPosts') }}">See More</a>
-    </div>
+  
 
   </div>
 </section>

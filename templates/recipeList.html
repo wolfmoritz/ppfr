@@ -3,10 +3,9 @@
 {% block content %}
 <section id="recipeList">
 	<div class="section-inner">
-		<h2>{{ source }}
-			Recipes</h2>
+	
 		<div class="grid-container">
-
+			<h2 class="span">{{ source }} Recipes</h2>
 			{% for r in recipes %}
 			{% include 'includes/_recipeCard.html' %}
 			{% else %}

@@ -128,7 +128,7 @@ header h1 {
   font-size: 1.5rem;
 }
 .logo a:hover {
-  color: #ff6150;
+  color: #eaeaea;
 }
 
 .nav-toggle {
@@ -208,7 +208,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ff6150;
+  color: #eaeaea;
 }
 
 .nav-toggle:checked ~ nav {
@@ -333,7 +333,7 @@ nav a:hover {
   width: 100%;
   height: 450px;
   position: relative;
-  background: linear-gradient(#ff6150, #262626);
+  background: linear-gradient(#eaeaea, #262626);
 }
 .feature__container img {
   width: 100%;
@@ -384,7 +384,7 @@ nav a:hover {
   transition: all 150ms ease-in-out;
 }
 .btn:hover {
-  background: #ff6150;
+  background: #eaeaea;
   color: #262626;
   border: 1px solid #444444;
   cursor: pointer;
@@ -420,7 +420,7 @@ footer a {
   font-weight: 400;
 }
 footer a:hover {
-  color: #ff6150;
+  color: #eaeaea;
 }
 
 .recipe-card {
@@ -466,7 +466,7 @@ footer a:hover {
   font-weight: 300;
 }
 .recipe-card .title-container .recipe-title:hover {
-  color: #ff6150;
+  color: #eaeaea;
   font-weight: 400;
 }
 
@@ -493,7 +493,7 @@ footer a:hover {
 }
 .categories-list a:hover {
   color: #262626;
-  background: #ff6150;
+  background: #eaeaea;
   border: 1px solid #262626;
 }
 
@@ -529,24 +529,24 @@ footer a:hover {
 }
 .pagination a:hover {
   color: #262626;
-  background: #ff6150;
+  background: #eaeaea;
   cursor: pointer;
 }
 .pagination .active a {
   font-weight: 700;
-  background: #ff6150;
+  background: #eaeaea;
   color: #ffffff;
   cursor: default;
 }
 .pagination .active a:hover {
   color: #262626;
-  background: #ff6150;
+  background: #eaeaea;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.3em;
+  gap: 1em;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -620,7 +620,7 @@ footer a:hover {
 .wrapper .sidebar .recipeCategory .categories-item:hover {
   border: 1px solid #eaeaea;
   color: #262626;
-  background: #ff6150;
+  background: #eaeaea;
 }
 .wrapper .sidebar .socialContainer {
   display: flex;
