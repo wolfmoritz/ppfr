@@ -205,7 +205,7 @@ class IndexController extends BaseController
         $paginator = $this->getPaginator();
 
         // Get proper name and ID which we need for the pagination setup prior to running the recipe query
-        $user = $userMapper->getUser($userId);
+        $user = $userMapper->getUser((int) $userId);
 
         // If no user found then return 404
         if (!$user) {
