@@ -220,7 +220,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
             return $this->cache['domain'] . $this->cache['app']->urlFor($namedRoute) . '/' . ltrim((string) $segments, '/');
         }
 
-        return null;
+        return $this->cache['domain'] . $this->cache['app']->urlFor($namedRoute);
     }
 
     /**
