@@ -29,7 +29,7 @@
 	
 		{% if authorizedToEditRecipe(recipe) %}
 		<div class=" edit-button">
-			<a class="btn" href="{{ siteUrlFor('adminEditRecipe') }}/{{recipe.recipe_id }}" role="button">Edit</a>
+			<a class="btn" href="{{ siteUrlFor('adminEditRecipe', recipe.recipe_id) }}" role="button">Edit</a>
 		</div>
 		{% endif %}
 
@@ -97,7 +97,7 @@
 
 <div class="sidebar-item recipeOwner">
 	<div>
-		Other recipes by <a href="{{ siteUrlFor('recipesByUser', [recipe.created_by, recipe.user_url]) }}"><span
+		Other recipes by <a href="{{ siteUrlFor('recipesByUser', recipe.niceUserUrl()) }}"><span
 				itemprop="author">{{ recipe.user_name }}</span></a>
 	</div>
 	<div>

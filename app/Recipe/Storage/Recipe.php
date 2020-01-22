@@ -23,6 +23,17 @@ class Recipe extends DomainObject
     }
 
     /**
+     * Get Nice User URL
+     *
+     * @param  void
+     * @return string
+     */
+    public function niceUserUrl(): string
+    {
+        return '/' . $this->created_by . '/' . $this->user_url;
+    }
+
+    /**
      * Merge Data
      *
      * Merge an array of values into the class properties by array key = property

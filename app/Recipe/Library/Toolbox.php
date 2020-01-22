@@ -8,16 +8,6 @@ namespace Recipe\Library;
  */
 class Toolbox
 {
-    static $app;
-
-    /**
-     * Constructor
-     */
-    public function __construct(\Slim\Slim $app)
-    {
-        self::$app = $app;
-    }
-
     /**
      * Truncate HTML Text
      *
@@ -109,7 +99,7 @@ class Toolbox
             foreach ($matches as $match) {
                 if (end($match) === 'd') {
                     $mult = 24 * 60 * 60;
-                } else if (end($match) === 'h') {
+                } elseif (end($match) === 'h') {
                     $mult = 60 * 60;
                 } else {
                     $mult = 60;

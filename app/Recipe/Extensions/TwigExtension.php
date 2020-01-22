@@ -114,11 +114,11 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      * we needed a way to get to flash messages in the Twig template.
      *
      * @param string $key Default 'message'
-     * @return string
+     * @return string Nullable
      */
-    public function flash(string $key = 'message'): string
+    public function flash(string $key = 'message'): ?string
     {
-        return $_SESSION['slim.flash'][$key] ?? false;
+        return $_SESSION['slim.flash'][$key] ?? null;
     }
 
     /**
@@ -209,22 +209,18 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      * @param array|string|null $segments   Array of segments, or URI string
      * @return string Full URL
      */
-    public function siteUrlFor(string $namedRoute, $segments = null): string
+    public function siteUrlFor(string $namedRoute, $segments = null): ?string
     {
         isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
         isset($this->cache['domain']) ?: $this->cache['domain'] = $this->cache['app']->request()->getUrl();
-        $route = $this->cache['app']->urlFor($namedRoute);
-        $urlSegments = '';
 
         if (is_array($segments)) {
-            $urlSegments = '/' . implode('/', $segments);
+            return $this->cache['domain'] . $this->cache['app']->urlFor($namedRoute, $segments);
         } elseif ($segments !== null) {
-            $urlSegments = $segments;
-            $urlSegments = ltrim($segments, '/');
-            $urlSegments = '/' . $urlSegments;
+            return $this->cache['domain'] . $this->cache['app']->urlFor($namedRoute) . '/' . ltrim((string) $segments, '/');
         }
 
-        return $this->cache['domain'] . $route . $urlSegments;
+        return $this->cache['domain'] . $this->cache['app']->urlFor($namedRoute);
     }
 
     /**

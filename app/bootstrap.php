@@ -161,8 +161,8 @@ return call_user_func(
         });
 
         // Load Toolbox
-        $app->Toolbox = function () use ($app) {
-            return new Recipe\Library\Toolbox($app);
+        $app->Toolbox = function () {
+            return new Recipe\Library\Toolbox();
         };
 
         // Validation
