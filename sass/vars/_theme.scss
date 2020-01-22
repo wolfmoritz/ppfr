@@ -6,11 +6,9 @@
 
 $black: #262626;
 $white: #ffffff;
+$orange: orange;
+$dark-orange: rgb(155,103,255);
 
-$orange: #ffa822;
-$blue: #134e6f;
-$red: #ff6150;
-$light-blue: #1ac0c6;
 
 $light-grey: rgb(234,234,234);
 $md-grey: rgb(68,68,68);
@@ -21,10 +19,14 @@ $clr-primary: $black;
 $clr-accent-light: $light-grey;
 $clr-accent-dark: $dark-grey;
 
+
 $clr-background: $white;
+$clr-background-light: $white;
+$clr-background-dark: $black;
 
 $clr-text-dark: $black;
 $clr-text-light: $white; 
+$clr-text-accent: $orange;
 
 // Default styles
 $border-radius: 0px;
