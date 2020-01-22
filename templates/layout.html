@@ -16,7 +16,7 @@
     {{ currentPageNumber }}{% endif %}</title>
 
   <link rel="stylesheet" href="{{ request.basePath  }}/assets/fonts/css/all.min.css">
-  <link href="{{ request.basePath }}/assets/css/main.css" rel="stylesheet" type="text/css" media="screen">
+  <link href="{{ request.basePath }}/assets/css/main.min.css" rel="stylesheet" type="text/css" media="screen">
 
 </head>
 
@@ -25,9 +25,7 @@
   <script async defer crossorigin="anonymous"
     src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=251905954939842&autoLogAppEvents=1">
   </script>
-  <div class="large-logo">
-    <img src="{{ request.basePath }}/assets/img/ppfrLogo.png" alt="">
-  </div>
+ 
 
   {% include "includes/_nav.html" %}
   
