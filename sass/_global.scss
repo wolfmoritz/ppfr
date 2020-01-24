@@ -20,6 +20,9 @@ body {
   font-weight: $ff-n;
   display: flex;
   flex-flow: column nowrap;
+  @media screen and (min-width: 900px){
+    @include padding(160px null null);
+  }
 }
 
 img {

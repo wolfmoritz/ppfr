@@ -1,33 +1,26 @@
 <header>
-  <div class="logo" title="Peri's Place For Recipes"><a href="{{ siteUrlFor('home') }}">
-    <img src="{{ request.basePath }}/assets/img/ppfrLogo.svg" alt="">
-
-  </a></div>
-  <input type="checkbox" id="nav-toggle" class="nav-toggle">
-  <nav>
-    <ul>
-      <li class="{% if uriSegment(1) == '' %}active{% endif %}"><a href="{{ siteUrlFor('home') }}">Home </a></li>
-      <li class="{% if uriSegment(1) == 'about' %}active{% endif %}"><a href="{{ siteUrlFor('about') }}">About Me</a>
-      </li>
-      <li class="{% if uriSegment(1) == 'blog' %}active{% endif %}"><a href="{{ siteUrlFor('blogPosts') }}">Blog</a>
-      </li>
-      <li class="{% if uriSegment(1) == 'recipe' %}active{% endif %}"><a href="{{ siteUrlFor('recipesAll') }}">All
-          Recipes</a></li>
+  <div class="logo" title="Peri's Place For Recipes">
+    <a href="{{ siteUrlFor('home') }}">
+      <img src="{{ request.basePath }}/assets/img/ppfrLogo.svg" alt="">
+    </a>
+  </div>
+  <button class="nav-toggle" aria-label="toggle navigation">
+    <span class="hamburger"></span>
+</button>
+  <nav class="nav">
+    <ul class="nav__list">
+      <li class="{% if uriSegment(1) == '' %}active{% endif %} nav__item"><a href="{{ siteUrlFor('home') }}">Home</a></li>
+      <li class="{% if uriSegment(1) == 'about' %}active{% endif %} nav__item"><a href="{{ siteUrlFor('about') }}">About Me</a></li>
+      <li class="{% if uriSegment(1) == 'blog' %}active{% endif %} nav__item"><a href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
+      <li class="{% if uriSegment(1) == 'recipe' %}active{% endif %} nav__item"><a href="{{ siteUrlFor('recipesAll') }}">All Recipes</a></li>
     </ul>
-    <form class="form__search" action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8">
-      <div class="form-group">
-        <input type="search" placeholder="Search" aria-label="Search" id="searchInput" autocomplete="off" name="terms"
-          value="{{ recipes.searchTerms }}">
-
-        <button type="submit" class="button__search">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-    </form>
   </nav>
 
-  <label for="nav-toggle" class="nav-toggle-label">
-    <span></span>
-  </label>
-
+<div class="search">
+<form class="search__form" action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8">
+  <input class="search__input" type="text" placeholder="Find a recipe..." aria-label="Search" id="searchInput" autocomplete="off" name="terms"
+  value="{{ recipes.searchTerms }}"/>
+  <button class="search__button" type="submit"><i class="fas fa-search"></i></button>
+</form>
+</div>
 </header>
