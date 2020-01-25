@@ -16,6 +16,7 @@ html {
 }
 
 body {
+  @include padding(235px null null);
   font-family: $ff-sans;
   font-weight: $ff-n;
   display: flex;

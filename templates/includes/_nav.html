@@ -2,7 +2,7 @@
   {# Logo Section #}
   <div class="logo" title="Peri's Place For Recipes">
     <a href="{{ siteUrlFor('home') }}">
-      <img src="{{ request.basePath }}/assets/img/ppfrLogo.svg" alt="">
+      <img class="logo__img" src="{{ request.basePath }}/assets/img/ppfrLogo.svg" alt="">
     </a>
   </div>
 {#  Toggle Button #}
@@ -12,13 +12,14 @@
 {# Navigation Links #}
   <nav class="nav">
     <ul class="nav__list">
-      <li class="{% if uriSegment(1) == '' %}active{% endif %} nav__item"><a
-          href="{{ siteUrlFor('home') }}">Homehead</a></li>
-      <li class="{% if uriSegment(1) == 'about' %}active{% endif %} nav__item"><a href="{{ siteUrlFor('about') }}">About
+      <li class="nav__item {% if uriSegment(1) == '' %}nav__active{% endif %}"><a
+          href="{{ siteUrlFor('home') }}">Home</a></li>
+      <li class="nav__item {% if uriSegment(1) == 'about' %}nav__active{% endif %}">
+        <a href="{{ siteUrlFor('about') }}">About
           Me</a></li>
-      <li class="{% if uriSegment(1) == 'blog' %}active{% endif %} nav__item"><a
+      <li class="nav__item {% if uriSegment(1) == 'blog' %}nav__active{% endif %}"><a
           href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
-      <li class="{% if uriSegment(1) == 'recipe' %}active{% endif %} nav__item"><a
+      <li class="nav__item {% if uriSegment(1) == 'recipe' %}nav__active{% endif %}"><a
           href="{{ siteUrlFor('recipesAll') }}">All Recipes</a></li>
     </ul>
   </nav>
