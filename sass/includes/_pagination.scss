@@ -19,7 +19,6 @@
     background: transparent;
    }
   }
-
  }
 
  a {
@@ -33,8 +32,8 @@
 
 
   &:hover {
-   color: $clr-text-dark;
-   background: $clr-accent-light;
+   color: $clr-text-accent;
+   background: $clr-accent-medium;
    cursor: pointer;
   }
  }
@@ -42,8 +41,8 @@
  .active {
   a {
    font-weight: $ff-b;
-   background: $clr-accent-light;
-   color: $clr-text-light;
+   background: $clr-background-light;
+   color: $clr-text-accent;
    cursor: default;
    &:hover{
     color: $clr-text-dark;
