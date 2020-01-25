@@ -57,7 +57,7 @@ header {
         color: $clr-text-dark;
         text-transform: uppercase;
         font-size: 1.2rem;
-        font-weight: 300;
+        font-weight: $ff-n;
 
         &:hover {
           color: $clr-text-accent;
@@ -74,7 +74,7 @@ header {
 /* Nav Toggle */
 
 .nav-toggle {
-  padding: .5em;
+  @include padding(.5em);
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -157,7 +157,7 @@ header {
   &__input {
     @include border-left-radius(7px);
     @include border-right-radius(0px);
-    @include border-color(#ccc null #ccc #ccc);
+    @include border-color($light-grey null $light-grey $light-grey);
     @include border-style(solid null solid solid);
     @include border-width(1px 0 1px 1px);
 
@@ -165,8 +165,8 @@ header {
   }
 
   &__button {
-    background: #e1e1e1;
-    color: #020202;
+    background: $light-grey;
+    color: $clr-text-dark;
     font-size: 1.2rem;
     @include border-right-radius(7px);
   }
