@@ -12,12 +12,8 @@
       {# This is the honeypot to limit spam messages. Keep the inline style and also the javascript at the bottom #}
       <div class="form-group" style="display:none;">
         <label>Alternate Email Address</label>
-        <input type="email" class="form-control alt-email" name="alt-email" placeholder="Email" autocomplete="off">
+        <input type="email" class="form-control alt-email" name="alt-email" placeholder="Email" value="alt@example.com" autocomplete="off">
       </div>
     </form>
-
-    <script type="text/javascript">
-      document.getElementsByClassName('alt-email')[0].setAttribute('value', 'alt@example.com');
-    </script>
   </div>
 {% endblock %}
