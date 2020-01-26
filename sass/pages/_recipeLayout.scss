@@ -65,15 +65,21 @@
 
        .categories-item {
          background: $clr-primary;
-         text-decoration: none;
          @include padding(.25em .5em);
+         @include margin(.25em null);
+         text-align: center;
          border-radius: $border-radius;
          border: $outline-dark;
+        //  display: flex;
+        //  flex-flow: row wrap;
+        display: block;
+         text-decoration: none;
+         color: $clr-text-light;
 
          &:hover {
            border: $outline-light;
-           color: $clr-text-dark;
-           background: $clr-accent-light;
+           color: $clr-text-light;
+           background: $clr-background-accent;
          }
        }
      }
@@ -113,7 +119,7 @@
  @media screen and (min-width: $breakpoint-desktop) {
    .wrapper {
 
-     grid-template-columns: 3fr 1.5fr;
+     grid-template-columns: 4fr 1fr;
 
      .content {
        order: 1;
@@ -133,6 +139,7 @@
 
      .recipeCategory {
        display: block;
+
      }
    }
  }

@@ -104,6 +104,11 @@ dd {
 .section-title {
   grid-column: 1 / -1;
 }
+.sidebar-title{
+  text-align: center;
+  font-weight: $ff-b;
+  font-size: 1.8rem;
+}
 
 .underline{
   border: 0;

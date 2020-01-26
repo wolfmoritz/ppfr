@@ -1,11 +1,14 @@
 #categories {
  background: $medium-grey;
  @include padding(.5em 1em);
+ .categories-list{
+  flex-flow: row wrap;
+ }
 }
 .categories-list {
  width: 100%;
  display: flex;
- flex-flow: row wrap;
+ flex-flow: column nowrap;
  justify-content: center;
  @include padding(.5em null);
 
@@ -13,14 +16,15 @@
   background: $btn-default;
   color: $clr-text-light;
   text-decoration: none;
+  text-align: center;
   
   border: $outline-light;
-  @include padding(.25em .5em);
+  @include padding(.5em);
   @include margin(.25em);
   border-radius: $border-radius;
 
   &:hover {
-   color: $clr-text-dark;
+   color: $clr-text-light;
    background: $btn-hover;
    border: $outline-dark;
   }

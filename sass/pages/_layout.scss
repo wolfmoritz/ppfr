@@ -3,9 +3,9 @@
  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
  gap: 1em;
  width: 100%;
- max-width: $max-width;
+ // max-width: $max-width;
  @include margin(0 auto);
- @include padding(1em null);
+ // @include padding(1em null);
 
 }
 .section-inner {

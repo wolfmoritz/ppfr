@@ -14,11 +14,12 @@ $dark-grey: rgb(85, 85, 85);
 
 $clr-primary: $black; 
 
-$clr-accent-light: $red;
+$clr-accent-light: $light-grey;
 $clr-accent-dark: $medium-grey;
 
 $clr-background-light: $white;
 $clr-background-dark: $black;
+$clr-background-accent: $red;
 
 $clr-text-dark: $black;
 $clr-text-light: $white; 
@@ -59,5 +60,5 @@ $breakpoint-desktop: 900px;
 
 // Button Colors
 
-$btn-default: $clr-primary;
-$btn-hover: $clr-accent-light;
+$btn-default: $clr-background-dark;
+$btn-hover: $clr-background-accent;
