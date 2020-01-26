@@ -162,21 +162,21 @@ class IndexController extends BaseController
      */
     public function searchRecipes(): void
     {
-        // Get dependencies parameters
+        // Get dependencies, parameters
         $recipeMapper = ($this->dataMapper)('RecipeMapper');
         $terms = $this->app->request->get('terms');
-
-        // If no terms were provided (just the search button clicked), then go to home page
-        if ($terms == '') {
-            $this->redirect('home');
-        }
+        $data = [];
+        $rowCount = 0;
 
         // Configure pagination object
         $paginator = $this->getPaginator();
         $paginator->setPagePath($this->app->urlFor('recipeSearch'), ['terms' => $terms]);
 
         // Fetch recipes
-        $data = $recipeMapper->searchRecipes($terms, $paginator->getResultsPerPage(), $paginator->getOffset());
+        if (!empty($terms)) {
+            $data = $recipeMapper->searchRecipes($terms, $paginator->getResultsPerPage(), $paginator->getOffset());
+            $rowCount = $recipeMapper->foundRows();
+        }
 
         // If we found just one row on the first page of results, just show the recipe page
         // Note, this is faster than count($recipes) === 1
@@ -186,10 +186,10 @@ class IndexController extends BaseController
         }
 
         // Get count of recipes returned by query and load pagination
-        $paginator->setTotalResultsFound($recipeMapper->foundRows());
+        $paginator->setTotalResultsFound($rowCount);
         $this->loadTwigExtension($paginator);
 
-        $this->render('recipeList.html', ['recipes' => $data, 'source' => ucwords($terms), 'title' => 'Search']);
+        $this->render('recipeList.html', ['recipes' => $data, 'searchTerms' => $terms, 'source' => ucwords($terms), 'title' => 'Search']);
     }
 
     /**

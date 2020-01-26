@@ -230,7 +230,7 @@ class TwigExtension extends AbstractExtension implements GlobalsInterface
      * @param int $pos
      * @return string|null
      */
-    public function uriSegment(int $pos): string
+    public function uriSegment(int $pos): ?string
     {
         isset($this->cache['app']) ?: $this->cache['app'] = \Slim\Slim::getInstance();
         $request = $this->cache['app']->request;

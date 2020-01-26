@@ -19,7 +19,7 @@
           Me</a></li>
       <li class="nav__item {% if uriSegment(1) == 'blog' %}nav__active{% endif %}"><a
           href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
-      <li class="nav__item {% if uriSegment(1) == 'recipe' %}nav__active{% endif %}"><a
+      <li class="nav__item {% if uriSegment(2) == 'all' %}nav__active{% endif %}"><a
           href="{{ siteUrlFor('recipesAll') }}">All Recipes</a></li>
     </ul>
   </nav>
@@ -27,7 +27,7 @@
   <div class="search">
     <form class="search__form" action="{{ siteUrlFor('recipeSearch') }}" method="get" accept-charset="utf-8">
       <input class="search__input" type="text" placeholder="Find a recipe..." aria-label="Search" id="searchInput"
-        autocomplete="off" name="terms" value="{{ recipes.searchTerms }}" />
+        autocomplete="off" name="terms" value="{{ searchTerms }}" />
       <button class="search__button" type="submit"><i class="fas fa-search"></i></button>
     </form>
   </div>

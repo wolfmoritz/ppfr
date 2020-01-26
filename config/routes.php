@@ -129,7 +129,7 @@ $app->get('/logout', function () {
 // -------------------------- Recipe Routes --------------------------
 
 // Get all recipes
-$app->get('/recipe(/)', function () {
+$app->get('/recipe/all(/)', function () {
     (new IndexController())->allRecipes();
 })->name('recipesAll');
 
