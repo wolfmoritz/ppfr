@@ -11,7 +11,7 @@ Options -Indexes
 
 # Additional Headers
 Header set Strict-Transport-Security "max-age=631138519; includeSubDomains"
-Header set Content-Security-Policy "default-src 'self' www.peareye.com peareye.com;  script-src 'self' *.googleapis.com *.facebook.net *.facebook.com *.pinterest.com fonts.gstatic.com *.statcounter.com *.google-analytics.com; style-src 'self' *.facebook.net *.facebook.com *.pinterest.com fonts.gstatic.com *.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' www.facebook.com www.peareye.com peareye.com"
+#Header set Content-Security-Policy "default-src 'self' www.peareye.com peareye.com;  script-src 'self' ssl.google-analytics.com *.googleapis.com *.facebook.net *.facebook.com *.pinterest.com fonts.gstatic.com *.statcounter.com *.google-analytics.com; style-src 'self' *.facebook.net *.facebook.com *.pinterest.com fonts.gstatic.com *.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' www.facebook.com www.peareye.com peareye.com"
 Header set X-Frame-Options DENY
 Header set X-Content-Type-Options nosniff
 Header set Referrer-Policy no-referrer-when-downgrade
