@@ -1,31 +1,44 @@
 {# Pagiation Include #}
 
-
   <div class="pagination">
-  	{% for p in links %}
-  	{% if loop.first %}{# Always start with the "Previous" link #}
+    {% for p in links %}
+      {# Always start with the "Previous" link #}
+      {% if loop.first %}
+        <div {% if currentPage == 1 %}class="disabled"{% endif %}>
+          {% if currentPage != 1 %}
+          <a href="{{ p.href }}" aria-label="Previous" title="Previous"><span aria-hidden="true">&laquo;</span></a>
+          {% else %}
+          <span aria-hidden="true">&laquo;</span>
+          {% endif %}
+        </div>
+      {% endif %}
 
-      <a href="{{ p.href }}" aria-label="Previous" title="Previous" > <span aria-hidden="true">&laquo;</span></a>
+      {# Include if the link is set to be some sort ellipsis #}
+      {% if p.link == 'ellipsis' %}
+      <div class="disabled">&hellip;</div>
+      {% endif %}
 
-    {% endif %}
+      {# For all other working links #}
+      {% if not loop.first and not loop.last and p.link != 'ellipsis' %}
+      <div {% if currentPage == p.link %}class="active"{% endif %}>
+        {% if currentPage != p.link %}
+        <a href="{{ p.href }}">{{ p.link }}</a>
+        {% else %}
+        <a>{{ p.link }}</a>
+        {% endif %}
+      </div>
+      {% endif %}
 
-    {% if p.link == 'ellipsis' %}{# Include if the link is set to be some sort ellipsis #}
-    <div class="disabled"><a>&hellip;</a></div>
-    {% endif %}
-
-    {% if not loop.first and not loop.last and p.link != 'ellipsis' %}{# For all other working links #}
-    <div {% if currentPage == p.link %}class="active"{% endif %}><a href="{{ p.href }}" >{{ p.link }}</a></div>
-    {% endif %}
-
-    {% if loop.last %}{# Always end with the "Next" link #}
-    <div class="">
-      <a href="{{ p.href }}" aria-label="Next" title="Next" >
+      {# Always end with the "Next" link #}
+      {% if loop.last %}
+      <div {% if currentPage == lastPage %}class="disabled"{% endif %}>
+        {% if currentPage != lastPage %}
+        <a href="{{ p.href }}" aria-label="Next" title="Next" ><span aria-hidden="true">&raquo;</span></a>
+        {% else %}
         <span aria-hidden="true">&raquo;</span>
-      </a>
-    </div>
-
-
-    {% endif %}
+        {% endif %}
+      </div>
+      {% endif %}
     {% endfor %}
   </div>
 

@@ -29,7 +29,7 @@ $config['debug'] = false;
  * Used for the sitemap
  * Note, do not include a trailing slash
  */
-$config['baseurl'] = '';
+$config['baseurl'] = 'https://perisplaceforrecipes.com';
 
 /**
  * Database Settings
@@ -47,6 +47,7 @@ $config['session']['checkIpAddress'] = true; // Will check the user's IP address
 $config['session']['checkUserAgent'] = true; // Will check the user's user agent against the one stored in the database. FALSE by default.
 $config['session']['salt'] = ''; // Salt key to hash
 $config['session']['secondsUntilExpiration'] = 15552000; // 180 days (60*60*24*180)
+$config['session']['tableName'] = 'pp_session';
 
 /**
  * Default Admin Emails
@@ -70,16 +71,16 @@ $config['image']['file.upload.max.size'] = '6M'; // Use "B", "K", M", or "G"
 /**
  * Pagination Options
  */
-$config['pagination']['resultsPerPage'] = 8;
+$config['pagination']['resultsPerPage'] = 12;
 $config['pagination']['numberOfAdjacentLinks'] = 2;
 
 /**
  * Recipe Query Counts
  */
-$config['home']['recentRecipes'] = 10;
-$config['home']['popularRecipes'] = 10;
-$config['home']['randomRecipes'] = 10;
-$config['home']['recentBlogPosts'] = 10;
+$config['home']['recentRecipes'] = 4;
+$config['home']['popularRecipes'] = 4;
+$config['home']['randomRecipes'] = 4;
+$config['home']['recentBlogPosts'] = 4;
 
 /**
  * Routing Options

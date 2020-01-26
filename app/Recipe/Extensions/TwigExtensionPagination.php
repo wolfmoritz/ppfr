@@ -13,6 +13,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
     protected $pageUrl;
     protected $queryStringParam = 'page';
     protected $currentPageNumber;
+    protected $numberOfPages;
     protected $resultsPerPage;
     protected $numberOfAdjacentLinks;
     protected $totalResultsFound;
@@ -150,11 +151,11 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
     private function buildPagination(): array
     {
         // Calculate the number of page in this set
-        $numberOfPages = ceil($this->totalResultsFound / $this->resultsPerPage);
+        $this->numberOfPages = ceil($this->totalResultsFound / $this->resultsPerPage);
 
-        // Calcuate starting and ending page in the central link series
+        // Calcuate starting and ending page in the central set of links
         $startPage = ($this->currentPageNumber - $this->numberOfAdjacentLinks > 0) ? $this->currentPageNumber - $this->numberOfAdjacentLinks : 1;
-        $endPage = ($this->currentPageNumber + $this->numberOfAdjacentLinks <= $numberOfPages) ? $this->currentPageNumber + $this->numberOfAdjacentLinks : $numberOfPages;
+        $endPage = ($this->currentPageNumber + $this->numberOfAdjacentLinks <= $this->numberOfPages) ? $this->currentPageNumber + $this->numberOfAdjacentLinks : $this->numberOfPages;
 
         // Create array for page links
         $pageList = [];
@@ -182,18 +183,18 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
         }
 
         // Do we need to add ellipsis after the link series?
-        if ($endPage <= $numberOfPages - 2) {
+        if ($endPage <= $this->numberOfPages - 2) {
             $pageList[] = ['href' => '', 'link' => 'ellipsis'];
         }
 
         // Always include last page link
-        if ($endPage < $numberOfPages) {
-            $pageList[] = ['href' => $this->pageUrl . $numberOfPages, 'link' => $numberOfPages];
+        if ($endPage < $this->numberOfPages) {
+            $pageList[] = ['href' => $this->pageUrl . $this->numberOfPages, 'link' => $this->numberOfPages];
         }
 
         // And finally, the Next link
-        if ($endPage === $numberOfPages) {
-            $pageList[] = ['href' => $this->pageUrl . $numberOfPages, 'link' => ''];
+        if ($endPage === $this->numberOfPages) {
+            $pageList[] = ['href' => $this->pageUrl . $this->numberOfPages, 'link' => ''];
         } else {
             $pageList[] = ['href' => $this->pageUrl . ($this->currentPageNumber + 1), 'link' => ''];
         }
@@ -223,6 +224,7 @@ class TwigExtensionPagination extends \Twig\Extension\AbstractExtension implemen
         // Pass the page list and current page to the template
         $values['links'] = $this->buildPagination();
         $values['currentPage'] = $this->currentPageNumber;
+        $values['lastPage'] = $this->numberOfPages;
         $values['pageUrl'] = $this->pageUrl;
 
         return $env->render('_pagination.html', $values);
