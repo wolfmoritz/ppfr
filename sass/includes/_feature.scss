@@ -1,25 +1,45 @@
-#feature{
-  @include margin(null null 0);
-}
-.feature__container {
+.feature {
   width: 100%;
-  height: 450px;
+  height: 375px;
   position: relative;
-  background: linear-gradient($clr-accent-light, $clr-primary);
+  background: linear-gradient($clr-accent-dark, $clr-accent-light);
+ 
+  @media screen and (min-width: 900px) {
+    @include margin(0 auto);
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    overflow: hidden;
+    @include border-color($clr-accent-dark);
+    @include border-width(1px);
+    @include border-style(solid);
 
-  img { 
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
+    display: grid;
+    grid-template-columns: minmax(375px, 1fr) minmax(300px, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .feature__content {
+  &__image {
+    img {
+      width: 100%;
+      height: 375px;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+
+      @media screen and (min-width: 900px) {
+        position: unset;
+      }
+    }
+  }
+
+  &__content {
+    background-color: rgba($clr-background-dark, .15);
+    color: $clr-text-light;
+    text-shadow: $text-shadow;
     position: relative;
     height: 100%;
     width: 100%;
@@ -29,19 +49,36 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    background-color: rgba($clr-text-dark, .25);
     text-align: center;
+
+    @media screen and (min-width: 900px) {
+      background-color: $clr-background-light;
+      background-color: $clr-background-light;
+      color: $clr-text-dark;
+    }
   }
-  .feature__title{
+
+  &__title {
     color: $clr-text-light;
     text-shadow: $text-shadow;
     font-size: 2.4rem;
     @include margin(null null .5em);
+
+    @media screen and (min-width: 900px) {
+      font-size: 2rem;
+      color: $clr-text-dark;
+    }
   }
-  .feature__subtitle{
+
+  &__subtitle {
     color: $clr-text-light;
     text-shadow: $text-shadow;
     font-size: 1.4rem;
     @include margin(null null .5em);
+
+    @media screen and (min-width: 900px) {
+      color: $clr-text-dark;
+    }
   }
+
 }
