@@ -1,10 +1,10 @@
 .pagination {
  display: flex;
- flex-flow: row wrap;
+ flex-flow: row nowrap;
  justify-content: center;
  align-items: center;
  background: $light-grey;
- @include margin(1em null);
+ // @include margin(1em null);
  @include padding(.5em null);
 
  .disabled {
@@ -13,27 +13,26 @@
    color: $clr-text-dark;
    font-size: 1.3rem;
 
-   // cursor: default;
+   cursor: default;
    &:hover {
-    color: $clr-text-dark;
-    background: transparent;
+    color: inherit;
+    background: inherit;
    }
   }
- }
+ }  
 
  a {
+ 
   @include padding(.5em .5em);
-  @include margin(null .25em);
+  @include margin(null .35em);
   border-radius: $border-radius;
   background: $clr-primary;
   text-decoration: none;
   color: $clr-text-light;
-  cursor: pointer;
-
-
+  // cursor: pointer;
   &:hover {
    color: $clr-text-accent;
-   background: $clr-accent-dark;
+   background: $clr-background-light;
    cursor: pointer;
   }
  }
@@ -41,12 +40,13 @@
  .active {
   a {
    font-weight: $ff-b;
-   background: $clr-background-light;
-   color: $clr-text-accent;
+   background-color: $light-grey;
+   color: $clr-text-dark;
    cursor: default;
-   &:hover{
+
+   &:hover {
     color: $clr-text-dark;
-    background: $clr-accent-light;
+    background-color: $light-grey;
    }
   }
  }

@@ -4,7 +4,7 @@
   position: relative;
   background: linear-gradient($clr-accent-dark, $clr-accent-light);
  
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: $breakpoint-desktop) {
     @include margin(0 auto);
     box-shadow: $box-shadow;
     border-radius: $border-radius;
@@ -30,7 +30,7 @@
       bottom: 0;
       z-index: 0;
 
-      @media screen and (min-width: 900px) {
+      @media screen and (min-width: $breakpoint-desktop) {
         position: unset;
       }
     }
@@ -51,7 +51,7 @@
     align-items: center;
     text-align: center;
 
-    @media screen and (min-width: 900px) {
+    @media screen and (min-width: $breakpoint-desktop) {
       background-color: $clr-background-light;
       background-color: $clr-background-light;
       color: $clr-text-dark;
@@ -64,7 +64,7 @@
     font-size: 2.4rem;
     @include margin(null null .5em);
 
-    @media screen and (min-width: 900px) {
+    @media screen and (min-width: $breakpoint-desktop) {
       font-size: 2rem;
       color: $clr-text-dark;
     }
@@ -76,7 +76,7 @@
     font-size: 1.4rem;
     @include margin(null null .5em);
 
-    @media screen and (min-width: 900px) {
+    @media screen and (min-width: $breakpoint-desktop) {
       color: $clr-text-dark;
     }
   }

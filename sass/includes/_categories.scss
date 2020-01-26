@@ -1,12 +1,13 @@
 #categories {
- background: $light-grey;
- @include padding(1em null);
+ background: $medium-grey;
+ @include padding(.5em 1em);
 }
 .categories-list {
  width: 100%;
  display: flex;
  flex-flow: row wrap;
  justify-content: center;
+ @include padding(.5em null);
 
  a {
   background: $btn-default;

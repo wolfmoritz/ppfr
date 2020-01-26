@@ -2,22 +2,21 @@
 
 {% block blogBody %}
 
-          {% for p in posts %}
-       
-   <article>
-              <h2 class="span"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">{{ p.title }}</a></h2>
-              <p>
-                {{ p.content_excerpt }}
-                <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">read more&hellip;</a></small>
-              </p>
-              <h5>{{ p.published_date|date('F j, Y') }}</h5>
-   </article>
-          
-         
-          {% else %}
-          <h3>No Posts Found</h3>
-          {% endfor %}
+{% for p in posts %}
 
-          {{ pagination() }}
+<article class="blog">
+  <h2 class="blog__title span"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">{{ p.title }}</a></h2>
+  <p> {{ p.content_excerpt }} </p>
+  <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">read more&hellip;</a></small>
+  <h5>{{ p.published_date|date('F j, Y') }}</h5>
+</article>
+<hr class="underline">
+
+
+{% else %}
+<h3>No Posts Found</h3>
+{% endfor %}
+
+{{ pagination() }}
 
 {% endblock %}

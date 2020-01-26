@@ -1,46 +1,35 @@
-{% extends 'layout.html' %}
+{% extends 'twoCol.html' %}
 
-{% block body %}
-<section id="blog">
-  <div class="section-inner">
-      {% block blogBody %}
-     
-  
-  
-    	{% endblock %}
+{% block content %}
+
+ 
+    {% block blogBody %}
+
+    {% endblock %}
+
+
+{% endblock %}
+
+
+{% block sidebar %}
+<div class="blog-archive">
+  <h5 class="blog-archive__header">Blog Archive</h5>
+
+  {% for month, posts in blogPostNav() %}
+  <div class="blog-archive__month">
+
+    <a class="" data-toggle="collapse" href="#collapseMonth-{{ month }}">{{ month|date('F Y') }}</a>
+    <div id="collapseMonth-{{ month }}" class="collapse">
+      <ul class="">
+        {% for post in posts %}
+        <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
-  </section>
-   
+  {% endfor %}
+</div>
+</div>
+    
 
-   
-
-      <aside>
-        <div class="aside__item">
-          <h5 class="page-header">Other Posts</h5>
-  
-          {% for month, posts in blogPostNav() %}
-          <div>
-            <a class="" data-toggle="collapse" href="#collapseMonth-{{ month }}">{{ month|date('F Y') }}</a>
-            <div id="collapseMonth-{{ month }}" class="collapse">
-              <ul class="list-unstyled">
-                {% for post in posts %}
-                <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
-                {% endfor %}
-            </ul>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-  
-        <div class="aside__item">
-          <h5 class="page-header">Random Recipe</h5>
-          <ul class="list-unstyled">
-            {% for r in randomRecipes(4) %}
-            <li><a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.sub_title }}">{{ r.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      </aside>
-
-  
 {% endblock %}

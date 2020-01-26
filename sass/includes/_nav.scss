@@ -172,8 +172,8 @@ header {
   }
 }
 
-// Media Query Viewport >= 900px
-@media screen and (min-width: 900px) {
+// Media Query Viewport >= $breakpoint-desktop
+@media screen and (min-width: $breakpoint-desktop) {
   body {
     @include margin(0);
   }

@@ -1,0 +1,32 @@
+.blog-card {
+ display: flex;
+ flex-flow: column nowrap;
+ border: $outline-light;
+ box-shadow: $box-shadow;
+ border-radius: $border-radius;
+
+ a {
+  text-decoration: none;
+ }
+
+ &__title {
+  @include padding(1em);
+  background: $light-grey;
+  min-height: 90px;
+ }
+
+ &__content {
+  background: $clr-background-light;
+  // @include margin(auto null null);
+  @include padding(1em);
+  justify-self: flex-end;
+  align-self: flex-end;
+  flex: 1;
+ }
+
+ &__footer {
+  background: $light-grey;
+  @include padding(1em);
+  @include margin(auto null null);
+ }
+}
