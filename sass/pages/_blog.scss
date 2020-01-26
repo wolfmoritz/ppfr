@@ -30,3 +30,69 @@
   @include margin(auto null null);
  }
 }
+
+// Blog Page
+
+.blog {
+ &:first-of-type{
+  @include margin(2em null null);
+ }
+&:last-of-type{
+  @include margin(null null 4em);
+}
+ &__title {
+  font-size: 1.2rem;
+  font-weight: $ff-b;
+
+  a {
+   text-decoration: none;
+   color: $clr-text-dark;
+
+   &:hover {
+    color: $clr-text-accent;
+   }
+  }
+ }
+
+}
+
+.blog-archive {
+
+ @include padding(1em);
+
+ &__header {
+  font-size: 1.8rem;
+  font-weight: $ff-b;
+  @include margin(null null 1em);
+ }
+
+ &__month {
+  @include margin(null null 1em);
+
+ }
+
+ &__month-title {
+  font-size: 1.2rem;
+  font-weight: $ff-b;
+ }
+
+ &__item {
+  display: block;
+
+  &:first-of-type {
+   @include margin(.5em null null);
+  }
+ }
+
+ a {
+  text-decoration: none;
+  @include margin(null null .5em);
+  color: $clr-text-dark;
+
+  &:hover {
+   color: $clr-text-accent;
+  }
+ }
+
+
+}

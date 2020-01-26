@@ -2,34 +2,31 @@
 
 {% block content %}
 
- 
-    {% block blogBody %}
+   {% block blogBody %}
 
-    {% endblock %}
-
+   {% endblock %}
 
 {% endblock %}
 
-
 {% block sidebar %}
 <div class="blog-archive">
-  <h5 class="blog-archive__header">Blog Archive</h5>
+  <div class="blog-archive__header">Blog Archive</div>
 
   {% for month, posts in blogPostNav() %}
   <div class="blog-archive__month">
-
-    <a class="" data-toggle="collapse" href="#collapseMonth-{{ month }}">{{ month|date('F Y') }}</a>
+    <a class="blog-archive__month-title" data-toggle="collapse" href="#collapseMonth-{{ month }}">{{ month|date('F Y') }}</a>
     <div id="collapseMonth-{{ month }}" class="collapse">
-      <ul class="">
+
         {% for post in posts %}
-        <li><a href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a></li>
+       <a  class="blog-archive__item" href="{{ siteUrlFor('showBlogPost', post.niceUrl()) }}" title="{{ post.title }}">{{ post.title }}</a>
+        
         {% endfor %}
-      </ul>
+     
     </div>
   </div>
   {% endfor %}
 </div>
 </div>
-    
+
 
 {% endblock %}
