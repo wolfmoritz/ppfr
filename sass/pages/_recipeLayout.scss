@@ -46,6 +46,38 @@
        }
 
      }
+     .directions-container{
+      width: 80vw;
+      max-width: 1000px;
+      @include margin(0 auto);
+    }
+    .directions {
+      @include margin(1.2em null);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1em;
+      @media screen and (min-width: 768px){
+        grid-template-columns: 1fr 2fr;
+      }
+      @media screen and (min-width: 900px){
+        grid-template-columns: 1fr 1fr;
+    
+      }
+     &__image{
+    
+       img {
+        border-radius: $border-radius;
+        overflow: hidden;
+        box-shadow: $box-shadow;
+       }
+     }
+    }
+    figcaption{
+      font-weight: $ff-l;
+      color: $clr-text-medium;
+      font-size: .9rem;
+      @include margin(.5rem null null);
+    }
    }
 
    .sidebar {
