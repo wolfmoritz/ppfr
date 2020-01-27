@@ -50,6 +50,9 @@
       width: 80vw;
       max-width: 1000px;
       @include margin(0 auto);
+      h4 {
+        font-size: 1.6rem;
+      }
     }
     .directions {
       @include margin(1.2em null);
@@ -63,12 +66,19 @@
         grid-template-columns: 1fr 1fr;
     
       }
+    
      &__image{
     
        img {
         border-radius: $border-radius;
         overflow: hidden;
         box-shadow: $box-shadow;
+       }
+     }
+     &__content{
+       p{
+         @include padding(null null .8em);
+     
        }
      }
     }

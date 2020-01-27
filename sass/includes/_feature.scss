@@ -79,5 +79,12 @@
       color: $clr-text-dark;
     }
   }
+  &__meta{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: .5rem 1.5em;
+    // width: 50%;
+    text-align: left;
+  }
 
 }
