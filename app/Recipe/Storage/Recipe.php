@@ -40,7 +40,7 @@ class Recipe extends DomainObject
      * @param  array $modifiedRecipe
      * @return void
      */
-    public function mergeRecipe(array $modifiedRecipe): void
+    public function mergeRecipe(array $modifiedRecipe)
     {
         // Make sure we have an array
         if (!is_array($modifiedRecipe)) {
