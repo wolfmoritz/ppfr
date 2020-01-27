@@ -1,16 +1,14 @@
-<section id="feature">
-  <div class="section-inner">
+
+  
     <div class="feature">
       <div class="feature__image">
         {% if recipe.main_photo %}
         <!-- Begin recipe.main_photo -->
-
-        <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}"
-          alt="Photo of {{ recipe.title }}">
-
+        <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" alt="Photo of {{ recipe.title }}">
         <!-- End recipe.main_photo -->
         {% endif %}
       </div>
+
       <div class="feature__content">
         <h2 class="feature__title">{{ recipe.title }}</h2>
         <p class="feature__subtitle">{{ recipe.subtitle }}</p>
@@ -47,5 +45,4 @@
 
       </div>
     </div>
-  </div>
-</section>
+  

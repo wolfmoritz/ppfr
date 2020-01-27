@@ -1,19 +1,26 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <div class="loginPage">
-    <form class="form-signin" action="{{ siteUrlFor('requestLoginToken') }}" method="post" accept-charset="utf-8">
+<section id="login">
+  <div class="section-inner">
+    <div class="loginPage">
+      <form class="form-signin" action="{{ siteUrlFor('requestLoginToken') }}" method="post" accept-charset="utf-8">
 
-      <h2>Please login</h2>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Enter registered email" required autofocus autocomplete="off">
-      <button class="btn btn-lg btn-primary" type="submit">Request Login</button>
+        <h2>Please login</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Enter registered email"
+          required autofocus autocomplete="off">
+        <button class="btn btn-lg btn-primary" type="submit">Request Login</button>
 
-      {# This is the honeypot to limit spam messages. Keep the inline style and also the javascript at the bottom #}
-      <div class="form-group" style="display:none;">
-        <label>Alternate Email Address</label>
-        <input type="email" class="form-control alt-email" name="alt-email" placeholder="Email" value="alt@example.com" autocomplete="off">
-      </div>
-    </form>
+        {# This is the honeypot to limit spam messages. Keep the inline style and also the javascript at the bottom #}
+        <div class="form-group" style="display:none;">
+          <label>Alternate Email Address</label>
+          <input type="email" class="form-control alt-email" name="alt-email" placeholder="Email"
+            value="alt@example.com" autocomplete="off">
+        </div>
+      </form>
+    </div>
   </div>
+</section>
+
 {% endblock %}

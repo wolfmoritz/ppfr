@@ -5,65 +5,60 @@
 {% endblock %}
 
 {% block content %}
-		<div class="recipeIngredients">
+<div class="ingredients">
+	<h3 class="recipe-title">Ingredients</h3>
+	<div class="ingredients__items">
+		{{ recipe.ingredients|raw }}
+	</div>
+</div>
 
-			<h4 class="span">Ingredients</h4>
-			<div class="ingredients">
-				{{ recipe.ingredients|raw }}
-			</div>
-
+<div class="instructions">
+	<h3 class="recipe-title">Preparation</h3>
+		<div class="instructions__items" itemprop="recipeInstructions">
+			{{ recipe.instructions|raw }}
 		</div>
-
-		<div class="recipeDirections">
-
-			<h4>Preparation</h4>
-			<div class="recipetext" itemprop="recipeInstructions">
-				{{ recipe.instructions|raw }}
-			</div>
-
-		</div>
-	
+</div>
 {% endblock %}
 
 {% block sidebar %}
-	
-		{% if authorizedToEditRecipe(recipe) %}
-		<div class=" edit-button">
-			<a class="btn" href="{{ siteUrlFor('adminEditRecipe', recipe.recipe_id) }}" role="button">Edit</a>
-		</div>
-		{% endif %}
 
-		<div class="sidebar-item recipeSocial">
-			{% include "includes/_social.html" %}
-		</div>
+{% if authorizedToEditRecipe(recipe) %}
+<div class="sidebar-item edit-button">
+	<a class="btn" href="{{ siteUrlFor('adminEditRecipe', recipe.recipe_id) }}" role="button">Edit Recipe</a>
+</div>
+{% endif %}
 
-		{% if recipe.servings or recipe.temperature or recipe.prep_time or recipe.cook_time %}
-		<div class="sidebar-item recipeMeta">
-			<h4 class="span">Quick Info</h4>
+<div class="sidebar-item recipeSocial">
+	{% include "includes/_social.html" %}
+</div>
 
-			<!-- Begin recipe-meta -->
+{% if recipe.servings or recipe.temperature or recipe.prep_time or recipe.cook_time %}
+<div class="sidebar-item recipeMeta">
+	<h4 class="span">Quick Info</h4>
 
-			{% if recipe.servings %}
-			<div>Servings:</div>
-			<div itemprop="recipeYield">{{ recipe.servings|raw }}</div>
-			{% endif %}
+	<!-- Begin recipe-meta -->
 
-			{% if recipe.temperature %}
-			<div>Oven Temp:</div>
-			<div>{{ recipe.temperature|raw }}</div>
-			{% endif %}
+	{% if recipe.servings %}
+	<div>Servings:</div>
+	<div itemprop="recipeYield">{{ recipe.servings|raw }}</div>
+	{% endif %}
 
-			{% if recipe.prep_time %}
-			<div>Prep Time:</div>
-			<div><span itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time|raw }}</span></div>
-			{% endif %}
+	{% if recipe.temperature %}
+	<div>Oven Temp:</div>
+	<div>{{ recipe.temperature|raw }}</div>
+	{% endif %}
 
-			{% if recipe.cook_time %}
-			<div>Cook Time:</div>
-			<div><span itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time|raw }}</span></div>
-			{% endif %}
-			<!-- .recipe-meta -->
-		</div>
+	{% if recipe.prep_time %}
+	<div>Prep Time:</div>
+	<div><span itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time|raw }}</span></div>
+	{% endif %}
+
+	{% if recipe.cook_time %}
+	<div>Cook Time:</div>
+	<div><span itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time|raw }}</span></div>
+	{% endif %}
+	<!-- .recipe-meta -->
+</div>
 
 {% endif %}
 
@@ -82,11 +77,11 @@
 
 <div class="sidebar-item recipeCategory" itemprop="recipeCategory">
 
-	<h4>Recipe Categories</h4>
+	<h4>Find More</h4>
 
 	{% for c in recipe.categories %}
 
-	<a class="categories-item" href="{{ siteUrlFor('recipesByCategory', c.url) }}"
+	<a class="btn categories-item" href="{{ siteUrlFor('recipesByCategory', c.url) }}"
 		title="View recipes for {{ c.name }}">{{ c.name }}</a>
 
 	{% endfor %}

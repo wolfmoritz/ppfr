@@ -3,7 +3,7 @@
 .about{
  display: grid;
  gap: 1em;
- @media screen and (min-width: 900px){
+ @media screen and (min-width: $breakpoint-desktop){
   
   grid-template-columns: 1fr 1fr;
   
