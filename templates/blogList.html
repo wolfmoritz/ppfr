@@ -8,7 +8,7 @@
   <h2 class="blog__title"><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">{{ p.title }}</a></h2>
   <p> {{ p.content_excerpt }} </p>
   <small><a href="{{ siteUrlFor('showBlogPost', p.niceUrl()) }}">read more&hellip;</a></small>
-  <h5>{{ p.published_date|date('F j, Y') }}</h5>
+  <p>{{ p.published_date|date('F j, Y') }}</p>
 </article>
 <hr class="underline">
 

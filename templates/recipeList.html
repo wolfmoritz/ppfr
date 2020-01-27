@@ -8,7 +8,7 @@
 			{% for r in recipes %}
 			{% include 'includes/_recipeCard.html' %}
 			{% else %}
-			<h3>No Recipes Found</h3>
+			<h2>No Recipes Found</h2>
 			{% endfor %}
 
 		</div>
@@ -20,7 +20,7 @@
 
 {% block sidebar %}
 <div class="sidebar-item categories-list-sidebar">
-	<h3 class="sidebar-title">Categories</h3>
+	<h2 class="sidebar-title">Categories</h2>
 	{% include 'includes/_categories.html' %}
 </div>
 {% endblock %}

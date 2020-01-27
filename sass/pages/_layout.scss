@@ -3,11 +3,10 @@
  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
  gap: 1em;
  width: 100%;
- // max-width: $max-width;
  @include margin(0 auto);
- // @include padding(1em null);
 
 }
+
 .section-inner {
  width: 90vw;
  max-width: $max-width;
@@ -15,4 +14,71 @@
  background: $clr-background-light;
  border-radius: $border-radius;
  @include padding(null 1em);
+}
+
+// 2 column layout
+ 
+.wrapper {
+ width: 100%;
+ display: grid;
+ grid-template-columns: 1fr;
+ gap: 1em;
+
+ @media screen and (min-width: $breakpoint-tablet) {
+  width: 90%;
+  @include margin(0 auto);
+  grid-template-columns: repeat(2, 1fr);
+ }
+
+ @media screen and (min-width: $breakpoint-desktop) {
+  max-width: $max-width;
+  grid-template-columns: 2fr 1fr;
+ }
+
+ .content {
+  @include padding(null 1em);
+  display: flex;
+  flex-flow: column nowrap;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+   @include padding(0);
+  }
+ }
+
+ .sidebar {
+  @include padding(null 1em);
+  background: $clr-background-medium;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+   // background: green;
+  }
+  @media screen and (min-width: $breakpoint-desktop) {
+   // background: coral;
+  }
+
+ }
+ // Sidebar Section
+.sidebar {
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: center;
+ @include padding(1em);
+
+ .sidebar-item {
+   @include padding(.5em);
+   @include margin(.5em);
+   background: $clr-background-light;
+
+   @include margin(null null 1em);
+   border: $outline-light;
+   border-radius: $border-radius;
+  
+
+   @media screen and (min-width: $breakpoint-tablet) {
+     width: 100%;
+   }
+
+   @media screen and (min-width: $breakpoint-desktop) {}
+ }
+}
 }

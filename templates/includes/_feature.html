@@ -1,23 +1,48 @@
-<section id="feature">
-<div class="section-inner">
+
+  
     <div class="feature">
       <div class="feature__image">
-      {% if recipe.main_photo %}
-      <!-- Begin recipe.main_photo -->
-      
+        {% if recipe.main_photo %}
+        <!-- Begin recipe.main_photo -->
         <img itemprop="image" src="{{ imageUrl(recipe.recipe_id, recipe.main_photo) }}" alt="Photo of {{ recipe.title }}">
-    
-      <!-- End recipe.main_photo -->
-      {% endif %}
-    </div>
+        <!-- End recipe.main_photo -->
+        {% endif %}
+      </div>
+
       <div class="feature__content">
         <h2 class="feature__title">{{ recipe.title }}</h2>
         <p class="feature__subtitle">{{ recipe.subtitle }}</p>
         {% if onHome %}
         <a class="btn" href="{{ siteUrlFor('showRecipe', recipe.niceUrl) }}">See Recipe</a>
         {% endif %}
-    
+
+        {% if not onHome %}
+        <!-- Begin recipe-meta -->
+        <div class="feature__meta">
+          {% if recipe.servings %}
+          <div>Servings:</div>
+          <div itemprop="recipeYield">{{ recipe.servings|raw }}</div>
+          {% endif %}
+
+          {% if recipe.temperature %}
+          <div>Oven Temp:</div>
+          <div>{{ recipe.temperature|raw }}</div>
+          {% endif %}
+
+          {% if recipe.prep_time %}
+          <div>Prep Time:</div>
+          <div><span itemprop="prepTime" content="{{ recipe.prep_time_iso}}">{{ recipe.prep_time|raw }}</span></div>
+          {% endif %}
+
+          {% if recipe.cook_time %}
+          <div>Cook Time:</div>
+          <div><span itemprop="cookTime" content="{{ recipe.cook_time_iso}}">{{ recipe.cook_time|raw }}</span></div>
+          {% endif %}
+          <!-- .recipe-meta -->
+        </div>
+
+        {% endif %}
+
       </div>
     </div>
-</div>
-</section>
+  

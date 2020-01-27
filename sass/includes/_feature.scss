@@ -3,19 +3,19 @@
   height: 375px;
   position: relative;
   background: linear-gradient($clr-accent-dark, $clr-accent-light);
- 
+  @media screen and (min-width: $breakpoint-tablet) {
+    width: 90%;
+    @include margin(2em auto);
+  }
   @media screen and (min-width: $breakpoint-desktop) {
-    @include margin(0 auto);
+    
+    max-width: $max-width;
+ 
     box-shadow: $box-shadow;
     border-radius: $border-radius;
     overflow: hidden;
-    @include border-color($clr-accent-dark);
-    @include border-width(1px);
-    @include border-style(solid);
-
     display: grid;
     grid-template-columns: minmax(375px, 1fr) minmax(300px, 1fr);
-    grid-template-columns: repeat(2, 1fr);
   }
 
   &__image {
@@ -37,7 +37,7 @@
   }
 
   &__content {
-    background-color: rgba($clr-background-dark, .15);
+    background-color: rgba($clr-background-dark, .25);
     color: $clr-text-light;
     text-shadow: $text-shadow;
     position: relative;
@@ -62,8 +62,12 @@
     text-shadow: $text-shadow;
     font-size: 2.4rem;
     @include margin(null null .5em);
-
+    width: 95%;
+    @media screen and (min-width: $breakpoint-tablet){
+      width: 75%;
+    }
     @media screen and (min-width: $breakpoint-desktop) {
+      width: unset;
       font-size: 2rem;
       color: $clr-text-dark;
     }
@@ -78,6 +82,12 @@
     @media screen and (min-width: $breakpoint-desktop) {
       color: $clr-text-dark;
     }
+  }
+  &__meta{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: .5rem 1.5em;
+    text-align: left;
   }
 
 }

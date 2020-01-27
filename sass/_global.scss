@@ -19,6 +19,7 @@ body {
   @include padding(235px null null);
   font-family: $ff-sans;
   font-weight: $ff-n;
+  line-height: 1.4;
   display: flex;
   flex-flow: column nowrap;
   @media screen and (min-width: $breakpoint-desktop){
@@ -36,39 +37,30 @@ p {
   color: $clr-text-dark;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+p {margin-bottom: 1.15rem;}
+
+h1, h2, h3, h4, h5 {
+  @include margin(null null .5em);
   font-family: $ff-sans;
-  font-weight: $ff-b;
-  color: $clr-primary;
-  @include margin(.5em null);
+  font-weight: $ff-n;
+  line-height: 1.15;
 }
 
-// h1 {
-//   font-size: 2.5rem;
-// }
+h1 {
 
-// h2 {
-//   font-size: 2rem;
-// }
+  font-size: 3.052rem;
+  
+}
 
-// h3 {
-//   font-size: 1.5rem;
-// }
+h2 {font-size: 2.441rem;}
 
-// h4 {
-//   font-size: 1.25rem;
-// }
+h3 {font-size: 1.953rem;}
 
-// h5 {
-//   font-size: .8rem;
-//   font-family: $ff-sans;
-//   font-weight: $ff-l;
-// }
+h4 {font-size: 1.563rem;}
+
+h5 {font-size: 1.25rem;}
+
+small, .text_small {font-size: 0.8rem;}
 
 // Default elements
 
@@ -121,3 +113,9 @@ dd {
  .underline:last-child {
    display: none;
  }
+     figcaption {
+      font-weight: $ff-l;
+      color: $clr-text-medium;
+      font-size: .9rem;
+      @include margin(.5rem null null);
+    }

@@ -174,10 +174,6 @@ header {
 
 // Media Query Viewport >= $breakpoint-desktop
 @media screen and (min-width: $breakpoint-desktop) {
-  body {
-    @include margin(0);
-  }
-
   .nav-toggle {
     display: none;
   }
@@ -188,7 +184,6 @@ header {
     grid-template-areas:
       "logo . nav"
       "logo . search";
-    // gap: 1em;
     box-shadow: $box-shadow-dark;
 
     .nav {
