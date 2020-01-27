@@ -119,7 +119,7 @@ $app->post('/requestlogintoken', function () {
 // Login
 $app->get('/login/:token', function ($token) {
     (new AuthenticationController())->login($token);
-})->conditions(['id' => '[a-zA-Z0-9]{64}'])->name('login');
+})->conditions(['token' => '[a-zA-Z0-9]{64}'])->name('login');
 
 // Logout
 $app->get('/logout', function () {
