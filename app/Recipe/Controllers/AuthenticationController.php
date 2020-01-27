@@ -127,7 +127,8 @@ class AuthenticationController extends BaseController
         $userMapper = ($this->app->dataMapper)('UserMapper');
         $savedToken = $session->getData($this->loginTokenKey);
         $tokenExpires = $session->getData($this->loginTokenExpiresKey);
-        $user_id = $session->getData('user_id');
+        $userEmail = $session->getData('email');
+        $userId = $session->getData('user_id');
 
         // Check whether token matches, and if within expires time
         if ($token === $savedToken && time() < $tokenExpires) {
@@ -140,7 +141,7 @@ class AuthenticationController extends BaseController
 
             // Update last login date and time
             $user = $userMapper->make();
-            $user->user_id = $user_id;
+            $user->user_id = $userId;
             $user->last_login_date = $userMapper->now();
             $userMapper->save($user);
 
@@ -149,7 +150,7 @@ class AuthenticationController extends BaseController
         }
 
         // Not valid, log and show 404
-        $message = "Provided: $token\nSaved: " . ($savedToken ?? 'none') . "\nTime: " . time() . ' Expires: ' . ($tokenExpires ?? 'none');
+        $message = "Email: $userEmail\nProvided: $token\nSaved: " . ($savedToken ?? 'none') . "\nTime: " . time() . ' Expires: ' . ($tokenExpires ?? 'none');
         $now = date('Y-m-d H:i:s');
         $this->sendEmail(
             $this->app->config('admin')['email'],

@@ -55,12 +55,20 @@ class BaseController
     /**
      * Redirect
      *
-     * @param string $url
-     * @param int    $code Default 302 Temporary
+     * @param string        $route
+     * @param array|string  $params
+     * @param int           $status Default 302 Temporary
      */
-    protected function redirect(string $url, int $code = 302): void
+    protected function redirect(string $route, $params = null, int $status = 302): void
     {
-        $this->app->redirect($url, $code);
+        if (is_string($params)) {
+            $params = '/' . ltrim($params, '/');
+            $this->app->redirect($this->app->urlFor($route) . $params, $status);
+        } elseif (is_array($params)) {
+            $this->redirect($this->app->urlFor($route, $params), $status);
+        } else {
+            $this->app->redirect($this->app->urlFor($route), $status);
+        }
     }
 
     /**

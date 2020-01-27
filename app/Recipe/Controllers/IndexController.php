@@ -182,7 +182,7 @@ class IndexController extends BaseController
         // Note, this is faster than count($recipes) === 1
         if ($paginator->getCurrentPageNumber() == 1 && isset($data[0]) && !isset($data[1])) {
             // Redirect to show recipe page
-            $this->redirect($this->app->urlFor('showRecipe') . $data[0]->niceUrl(), 301);
+            $this->redirect('showRecipe', $data[0]->niceUrl(), 301);
         }
 
         // Get count of recipes returned by query and load pagination
