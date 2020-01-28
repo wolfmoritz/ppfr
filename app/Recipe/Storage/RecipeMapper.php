@@ -39,7 +39,10 @@ class RecipeMapper extends DataMapperAbstract
      */
     public function getRecipe(int $recipeId): ?DomainObject
     {
-        return $this->findById($recipeId);
+        $this->sql = $this->defaultSelect . " where r.recipe_id = ?";
+        $this->bindValues[] = $recipeId;
+
+        return $this->findRow();
     }
 
     /**
