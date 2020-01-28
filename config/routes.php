@@ -161,7 +161,7 @@ $app->get('/recipe/user(/:id/:username(/))', function ($id, $username = null) {
 // -------------------------- Blog Routes --------------------------
 
 // Default blog posts list page
-$app->get('/blog/', function () {
+$app->get('/blog/all', function () {
     (new BlogController())->getBlogPosts();
 })->name('blogPosts');
 

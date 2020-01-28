@@ -25,7 +25,10 @@ class UserMapper extends DataMapperAbstract
      */
     public function getUser(int $userId): ?DomainObject
     {
-        return $this->findById($userId);
+        $this->sql = $this->defaultSelect . ' where user_id = ?';
+        $this->bindValues[] = $userId;
+
+        return $this->findRow();
     }
 
     /**
