@@ -28,12 +28,11 @@
     width: 90%;
     @include margin(0 auto);
     @include padding(null null 3em);
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2fr 1fr;
   }
 
   @media screen and (min-width: $breakpoint-desktop) {
     max-width: $max-width;
-    grid-template-columns: 2fr 1fr;
   }
 
   .content {

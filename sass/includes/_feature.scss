@@ -2,7 +2,8 @@
   width: 100%;
   height: 375px;
   position: relative;
-  background: linear-gradient($clr-accent-dark, $clr-accent-light);
+  // background: linear-gradient($clr-background-medium, $clr-background-light);
+  background: $gradient;
   @media screen and (min-width: $breakpoint-tablet) {
     width: 90%;
     @include margin(2em auto);
@@ -37,7 +38,7 @@
   }
 
   &__content {
-    background-color: rgba($clr-background-dark, .25);
+    // background-color: rgba($clr-background-dark, .25);
     color: $clr-text-light;
     text-shadow: $text-shadow;
     position: relative;
@@ -84,10 +85,16 @@
     }
   }
   &__meta{
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: .5rem 1.5em;
-    text-align: left;
+  display: none;
+    @media screen and (min-width: $breakpoint-desktop) {
+      border: $outline-light;
+      @include padding(.5em);
+      border-radius: $border-radius;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: .5rem 1.5em;
+      text-align: left; 
+    }
   }
 
 }

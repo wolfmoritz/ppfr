@@ -79,6 +79,9 @@
   gap: .5rem 1.5em;
   text-align: left;
   align-self: flex-start;
+  @media screen and (min-width: $breakpoint-desktop) {
+    display: none;
+  }
 }
 
 .recipeNotes {

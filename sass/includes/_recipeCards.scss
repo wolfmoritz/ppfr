@@ -1,7 +1,7 @@
 // Recipe Cards
 
 .recipe-card {
- background: $clr-background-light;
+
 
  display: flex;
  flex-flow: column nowrap;
@@ -11,6 +11,7 @@
  overflow: hidden;
 
  .img-container {
+  background: $gradient;
   width: 100%;
   height: 200px;
   min-height: 200px;
