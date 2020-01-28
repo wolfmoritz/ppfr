@@ -13,7 +13,7 @@
    color: $clr-text-dark;
    font-size: 1.3rem;
 
-   cursor: default;
+  pointer-events: none;
    &:hover {
     color: inherit;
     background: inherit;

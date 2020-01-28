@@ -1,27 +1,45 @@
 header {
+  width: 100%;
+  background: $clr-background-light;
+  box-shadow: $box-shadow-dark;
   position: fixed;
   z-index: 1;
-  background: $clr-background-light;
   top: 0;
-  width: 100%;
-  @include padding(0.5em 1em);
-  box-shadow: $box-shadow-dark;
+
+  @media screen and (min-width: $breakpoint-desktop) {
+    @include padding(null 1em);
+  }
+
+  .header-inner {
+
+    @media screen and (min-width: $breakpoint-desktop) {
+      width: $default-width;
+      max-width: $max-width;
+      @include margin(0 auto);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) max-content;
+      grid-template-areas:
+        "logo . nav"
+        "logo . search";
+    }
+  }
 
   .logo {
     grid-area: logo;
-    min-width: 332px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
     .logo__img {
-      @include padding(1em);
+      @include padding(.5em);
       z-index: 5;
-      min-width: 332px;
+      width: 275px;
     }
   }
 
   .nav {
+    @include padding(3rem null null);
     background: $clr-background-light;
     color: $clr-text-dark;
     z-index: 20;
@@ -29,15 +47,23 @@ header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
-
+    top: 0;
     position: fixed;
-    top: 140px;
+    top: 170px;
     bottom: 0;
     left: 0;
     right: 0;
     transform: translate(100%);
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+
+    @media screen and (min-width: $breakpoint-tablet) {}
+
+    @media screen and (min-width: $breakpoint-desktop) {
+      @include padding(0);
+      grid-area: nav;
+      transform: none;
+      position: static;
+    }
 
     &__list {
       width: 100%;
@@ -47,34 +73,52 @@ header {
       justify-content: flex-start;
       align-items: center;
       flex-flow: column nowrap;
+
+      @media screen and (min-width: $breakpoint-desktop) {
+        top: initial;
+        bottom: initial;
+        left: initial;
+        right: initial;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+        align-items: center;
+      }
     }
 
     &__item {
       @include margin(1em null);
 
+      @media screen and (min-width: $breakpoint-desktop) {
+        @include margin(0 0 0 3em);
+      }
+
       a {
         text-decoration: none;
         color: $clr-text-dark;
-        text-transform: uppercase;
         font-size: 1.2rem;
-        font-weight: $ff-n;
+        font-weight: $ff-l;
+
+        @media screen and (min-width: $breakpoint-tablet) {}
+
+        @media screen and (min-width: $breakpoint-desktop) {}
 
         &:hover {
-          color: $clr-text-accent;
+          color: $clr-text-medium;
         }
       }
-
     }
   }
 }
-.nav__active  a{
+
+.nav__active a {
   color: $clr-text-accent !important;
-
+  pointer-events: none;
 }
-/* Nav Toggle */
 
+/* Nav Toggle */
 .nav-toggle {
-  @include padding(.5em);
+  @include padding(1.1em);
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -82,6 +126,10 @@ header {
   right: 1em;
   top: 1em;
   z-index: 1000;
+
+  @media screen and (min-width: $breakpoint-desktop) {
+    display: none;
+  }
 }
 
 .nav-open .nav {
@@ -139,7 +187,14 @@ header {
 .search {
   grid-area: search;
   border-radius: $border-radius;
-  @include margin(1em);
+  @include margin(null 1em 1em);
+
+  @media screen and (min-width: $breakpoint-desktop) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    @include margin(0);
+  }
 
   &__form {
     display: flex;
@@ -149,13 +204,12 @@ header {
   &__input,
   &__button {
     @include margin(0);
-    @include padding(0.5em);
+    @include padding(1em 1.5em);
     border: none;
-
   }
 
   &__input {
-    @include border-left-radius(7px);
+    @include border-left-radius($border-radius);
     @include border-right-radius(0px);
     @include border-color($light-grey null $light-grey $light-grey);
     @include border-style(solid null solid solid);
@@ -167,51 +221,6 @@ header {
   &__button {
     background: $light-grey;
     color: $clr-text-dark;
-    font-size: 1.2rem;
-    @include border-right-radius(7px);
-  }
-}
-
-// Media Query Viewport >= $breakpoint-desktop
-@media screen and (min-width: $breakpoint-desktop) {
-  .nav-toggle {
-    display: none;
-  }
-
-  header {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) max-content;
-    grid-template-areas:
-      "logo . nav"
-      "logo . search";
-    box-shadow: $box-shadow-dark;
-
-    .nav {
-      grid-area: nav;
-      transform: none;
-      position: static;
-
-      &__list {
-        top: initial;
-        bottom: initial;
-        left: initial;
-        right: initial;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: flex-end;
-        align-items: center;
-      }
-
-      &__item {
-        @include margin(0 0 0 3em);
-      }
-    }
-  }
-  .search{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    @include margin(0);
-    @include padding(null null null 3em);
+    @include border-right-radius($border-radius);
   }
 }

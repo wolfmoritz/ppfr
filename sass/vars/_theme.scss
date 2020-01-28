@@ -64,7 +64,13 @@ $max-width: 1200px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 900px;
 
+$default-width: 95%;
+
 // Button Colors
 
 $btn-default: $clr-background-dark;
 $btn-hover: $clr-background-accent;
+
+@media screen and (min-width: $breakpoint-tablet) {}
+
+@media screen and (min-width: $breakpoint-desktop) {}

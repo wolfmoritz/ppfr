@@ -8,6 +8,7 @@
   @include padding(0);
 }
 
+
 body,
 html {
   background: $clr-background-light;
@@ -16,14 +17,15 @@ html {
 }
 
 body {
-  @include padding(235px null null);
+  @include padding(150px null null);
   font-family: $ff-sans;
   font-weight: $ff-n;
   line-height: 1.4;
   display: flex;
   flex-flow: column nowrap;
-  @media screen and (min-width: $breakpoint-desktop){
-    @include padding(160px null null);
+
+  @media screen and (min-width: $breakpoint-desktop) {
+    @include padding(100px null null);
   }
 }
 
@@ -31,15 +33,21 @@ img {
   width: 100%;
   height: auto;
   display: block;
-} 
+}
 
 p {
   color: $clr-text-dark;
 }
 
-p {margin-bottom: 1.15rem;}
+p {
+  margin-bottom: 1.15rem;
+}
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   @include margin(null null .5em);
   font-family: $ff-sans;
   font-weight: $ff-n;
@@ -49,18 +57,29 @@ h1, h2, h3, h4, h5 {
 h1 {
 
   font-size: 3.052rem;
-  
+
 }
 
-h2 {font-size: 2.441rem;}
+h2 {
+  font-size: 2.441rem;
+}
 
-h3 {font-size: 1.953rem;}
+h3 {
+  font-size: 1.953rem;
+}
 
-h4 {font-size: 1.563rem;}
+h4 {
+  font-size: 1.563rem;
+}
 
-h5 {font-size: 1.25rem;}
+h5 {
+  font-size: 1.25rem;
+}
 
-small, .text_small {font-size: 0.8rem;}
+small,
+.text_small {
+  font-size: 0.8rem;
+}
 
 // Default elements
 
@@ -96,26 +115,29 @@ dd {
 .section-title {
   grid-column: 1 / -1;
 }
-.sidebar-title{
+
+.sidebar-title {
   text-align: center;
   font-weight: $ff-b;
   font-size: 1.8rem;
 }
 
-.underline{
+.underline {
   border: 0;
-    height: 1px;
-    width: 75%;
-    @include margin(1em auto);
-    background: $medium-grey;
-    background-image: linear-gradient(to right, $light-grey, $medium-grey, $light-grey);
- }
- .underline:last-child {
-   display: none;
- }
-     figcaption {
-      font-weight: $ff-l;
-      color: $clr-text-medium;
-      font-size: .9rem;
-      @include margin(.5rem null null);
-    }
+  height: 1px;
+  width: 75%;
+  @include margin(1em auto);
+  background: $medium-grey;
+  background-image: linear-gradient(to right, $light-grey, $medium-grey, $light-grey);
+}
+
+.underline:last-child {
+  display: none;
+}
+
+figcaption {
+  font-weight: $ff-l;
+  color: $clr-text-medium;
+  font-size: .9rem;
+  @include margin(.5rem null null);
+}
