@@ -1,7 +1,7 @@
 .btn {
  background: $btn-default;
  color: $clr-text-light;
- @include padding(.5em 1em);
+ @include padding(.25em .75em);
  @include margin(.5em null null);
  
  border-radius: $border-radius;

@@ -1,33 +1,66 @@
 #categories {
- background: $medium-grey;
+ .section-inner {
+  @include padding(0);
+ }
+
  @include padding(.5em 1em);
- .categories-list{
+ display: flex;
+ flex-flow: row wrap;
+
+ .categories-list {
   flex-flow: row wrap;
+  background: $clr-background-medium;
+  border-radius: $border-radius;
+ }
+
+ .categories-list {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  @include padding(.5em null);
+
+  a {
+   font-size: 1.2rem;
+   @include padding(.5rem);
+   color: $clr-text-dark;
+   text-decoration: none;
+
+   &:hover {
+    color: $clr-text-accent;
+   }
+  }
  }
 }
-.categories-list {
- width: 100%;
- display: flex;
- flex-flow: column nowrap;
- justify-content: center;
- @include padding(.5em null);
-
- a {
-  background: $btn-default;
-  color: $clr-text-light;
-  text-decoration: none;
-  text-align: center;
-  
-  border: $outline-light;
-  @include padding(.5em);
-  @include margin(.25em);
-  border-radius: $border-radius;
-
-  &:hover {
-   color: $clr-text-light;
-   background: $btn-hover;
-   border: $outline-dark;
+.recipeCategory{
+ .categories-list{
+  display: flex;
+  flex-flow: row wrap;
+  @media screen and (min-width: $breakpoint-tablet) {
+   flex-flow: column nowrap;
+   justify-content: flex-start;
   }
 
+@media screen and (min-width: $breakpoint-desktop) {}
  }
+
+a{
+ text-decoration: none;
+ @include padding(.25em .5em);
+ color: $clr-text-dark;
+ font-size:1.2rem;
+ @media screen and (min-width: $breakpoint-tablet) {
+  @media screen and (min-width: $breakpoint-tablet) {}
+
+  @media screen and (min-width: $breakpoint-desktop) {
+   font-size: 1rem;
+  }
+ }
+
+@media screen and (min-width: $breakpoint-desktop) {}
+ &:hover{
+  color: $clr-text-accent;
+ }
+}
+
 }

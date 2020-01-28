@@ -77,7 +77,7 @@
 
 	{% for c in recipe.categories %}
 
-	<a class="btn categories-item" href="{{ siteUrlFor('recipesByCategory', c.url) }}"
+	<a class="categories-item" href="{{ siteUrlFor('recipesByCategory', c.url) }}"
 		title="View recipes for {{ c.name }}">{{ c.name }}</a>
 
 	{% endfor %}

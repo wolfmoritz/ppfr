@@ -17,15 +17,18 @@ html {
 }
 
 body {
-  @include padding(150px null null);
+  @include padding(180px null null);
   font-family: $ff-sans;
   font-weight: $ff-n;
   line-height: 1.4;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column nowrap; 
 
+  @media screen and (min-width: $breakpoint-tablet) {
+    @include padding(190px null null);
+  }
   @media screen and (min-width: $breakpoint-desktop) {
-    @include padding(100px null null);
+    @include padding(140px null null);
   }
 }
 
@@ -48,7 +51,7 @@ h2,
 h3,
 h4,
 h5 {
-  @include margin(null null .5em);
+  @include margin(.25rem null);
   font-family: $ff-sans;
   font-weight: $ff-n;
   line-height: 1.15;

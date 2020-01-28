@@ -4,7 +4,8 @@
 
    {% for cat in categories %}
  
-     <a class="categories-item" href="{{ siteUrlFor('recipesByCategory', cat.url) }}"
+     <a class="categories-item" 
+     href="{{ siteUrlFor('recipesByCategory', cat.url) }}"
        title="View recipes for {{ cat.name }}">{{ cat.name }}</a>
    
    {% endfor %}
