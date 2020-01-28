@@ -282,7 +282,7 @@ class RecipeMapper extends DataMapperAbstract
      */
     public function getRandomRecipes(int $limit = 5): ?array
     {
-        $this->sql = $this->defaultSelect . " where published_date <= curdate() order by rand() limit ?";
+        $this->sql = $this->defaultSelect . " where r.main_photo is not null and published_date <= curdate() order by rand() limit ?";
         $this->bindValues[] = $limit;
 
         return $this->find();
