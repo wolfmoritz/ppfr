@@ -3,8 +3,11 @@
 footer {
  background: $clr-primary;
  color: $clr-text-light;
- @include margin(2em null null);
- @include padding(2em null);
+ @media screen and (min-width: 768px){ 
+  @include margin(2em null null);
+  @include padding(2em null);
+ }
+
 h6{
  color: $clr-text-light;
  font-family: $ff-sans;
