@@ -62,18 +62,14 @@
 
 {% endif %}
 
+{% if recipe.notes %}
 <div class="sidebar-item recipeNotes">
-
-	{% if recipe.notes %}
-
 	<h4>Notes</h4>
 	<div class="recipetext" itemprop="description">
 		{{ recipe.notes|raw }}
 	</div><!-- end notes -->
-
-	{% endif %}
-
 </div>
+{% endif %}
 
 <div class="sidebar-item recipeCategory" itemprop="recipeCategory">
 
