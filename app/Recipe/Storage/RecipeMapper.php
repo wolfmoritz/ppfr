@@ -39,10 +39,7 @@ class RecipeMapper extends DataMapperAbstract
      */
     public function getRecipe(int $recipeId): ?DomainObject
     {
-        $this->sql = $this->defaultSelect . ' where r.recipe_id = ?';
-        $this->bindValues[] = $recipeId;
-
-        return $this->findRow();
+        return $this->findById($recipeId);
     }
 
     /**
@@ -201,7 +198,6 @@ class RecipeMapper extends DataMapperAbstract
             $this->bindValues[] = $offset;
         }
 
-        // Execute
         return $this->find();
     }
 
@@ -295,7 +291,7 @@ class RecipeMapper extends DataMapperAbstract
      * @param  int $recipeID Recipe ID
      * @return void
      */
-    public function incrementRecipeViewCount(int $recipeId): void
+    public function incrementRecipeViewCount(int $recipeId)
     {
         $this->sql = 'update pp_recipe set view_count = view_count + 1 where recipe_id = ?;';
         $this->bindValues[] = $recipeId;

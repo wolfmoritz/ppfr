@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b18644d73ec052cedc5818795fe85a29",
+    "content-hash": "dfdc25a936b5a9f0d0352276809b4d73",
     "packages": [
         {
             "name": "codeguy/upload",
@@ -307,20 +307,20 @@
         },
         {
             "name": "pitoncms/orm",
-            "version": "0.2.1",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PitonCMS/ORM.git",
-                "reference": "54bf6544ce2740ba1f1591d3fe5222dc542db4d5"
+                "reference": "ee18a47a9113116f019e2e6cfcfa078efaf61d17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PitonCMS/ORM/zipball/54bf6544ce2740ba1f1591d3fe5222dc542db4d5",
-                "reference": "54bf6544ce2740ba1f1591d3fe5222dc542db4d5",
+                "url": "https://api.github.com/repos/PitonCMS/ORM/zipball/ee18a47a9113116f019e2e6cfcfa078efaf61d17",
+                "reference": "ee18a47a9113116f019e2e6cfcfa078efaf61d17",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "php": ">=7.3"
             },
             "type": "library",
             "autoload": {
@@ -348,7 +348,7 @@
                 "orm",
                 "storage"
             ],
-            "time": "2019-04-27T09:45:49+00:00"
+            "time": "2020-01-27T21:10:11+00:00"
         },
         {
             "name": "pitoncms/session",

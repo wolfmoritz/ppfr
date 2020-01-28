@@ -71,7 +71,7 @@ class CategoryMapper extends DataMapperAbstract
     * @param  array $categories Optional array of category ID's
     * @return void
     */
-    public function saveRecipeCategoryAssignments(int $recipeId, array $categories = null): void
+    public function saveRecipeCategoryAssignments(int $recipeId, array $categories = null)
     {
         // Delete existing category assignments
         $this->sql = 'delete from pp_recipe_category where recipe_id = ?';
