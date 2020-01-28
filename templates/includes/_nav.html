@@ -17,9 +17,9 @@
       <li class="nav__item {% if uriSegment(1) == 'about' %}nav__active{% endif %}">
         <a href="{{ siteUrlFor('about') }}">About
           Me</a></li>
-      <li class="nav__item {% if uriSegment(1) == 'blog' %}nav__active{% endif %}"><a
+      <li class="nav__item {% if uriSegment(1) == 'blog' and uriSegment(2) == 'all' %}nav__active{% endif %}"><a
           href="{{ siteUrlFor('blogPosts') }}">Blog</a></li>
-      <li class="nav__item {% if uriSegment(2) == 'all' %}nav__active{% endif %}"><a
+      <li class="nav__item {% if uriSegment(1) == 'recipe' and uriSegment(2) == 'all' %}nav__active{% endif %}"><a
           href="{{ siteUrlFor('recipesAll') }}">All Recipes</a></li>
     </ul>
   </nav>
