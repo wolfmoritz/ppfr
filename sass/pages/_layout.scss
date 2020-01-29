@@ -59,6 +59,7 @@
     @media screen and (min-width: $breakpoint-tablet) {
       flex-flow: column nowrap;
       justify-content: flex-start;
+      border-radius: $border-radius;
     }
 
     .sidebar-item {
