@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
   gap: 1em;
+  @include margin(null null 2em null);
 }
 
 .section-inner {
