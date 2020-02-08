@@ -1,5 +1,5 @@
 // Default Fonts
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto:400,700|Lato:300,400,700&display=swap');
 
 
 // Default Color Scheme
@@ -8,16 +8,13 @@ $black: rgb(38, 38, 38);
 $white: rgb(255, 255, 255);
 $red: rgb(218, 37, 54);
 $orange: rgba(255, 166, 0, 0.932);
+$blue: rgb(52, 65, 134);
 
 $light-grey: rgb(234, 234, 234);
 $medium-grey: rgb(134, 133, 133);
 $dark-grey: rgb(85, 85, 85);
 
-$clr-primary: $black;
-
-$clr-accent-light: $light-grey;
-$clr-accent-medium: $light-grey;
-$clr-accent-dark: $medium-grey;
+$clr-primary: $blue;
 
 $clr-background-light: $white;
 $clr-background-dark: $black;
@@ -31,7 +28,6 @@ $clr-text-accent: $red;
 
 // Default styles
 $border-radius: 7px;
-
 $box-shadow-light: 0 1px 5px 1px $light-grey;
 $box-shadow-dark: 0 1px 5px 1px rgba($black, .25);
 $box-shadow: 
@@ -44,11 +40,8 @@ $outline-dark: 1px solid $black;
 $gradient: linear-gradient(rgba($red, .5), rgba($orange, .5), $white);
 
 // Fonts
-$ff-serif: 'Merriweather',
-serif;
-$ff-sans: 'Ralesway',
-sans-serif;
-
+$ff-serif: 'Noto',serif;
+$ff-sans: 'Lato',sans-serif;
 $ff-body: $ff-sans;
 $ff-heading: $ff-serif;
 $ff-accent: $ff-sans;
