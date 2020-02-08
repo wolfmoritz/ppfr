@@ -51,26 +51,30 @@ h2,
 h3,
 h4,
 h5 {
-  @include margin(.25rem null);
+  color: $clr-text-dark;
+  @include margin(.25em null .5em);
   font-family: $ff-serif;
-  font-weight: $ff-n;
+  // font-weight: $ff-n;
   line-height: 1.15;
 }
 
 h1 {
-  font-size: 3.052rem;
+  font-size: 3rem;
+ 
 }
 
 h2 {
-  font-size: 2.441rem;
+  font-size: 2rem;
+
 }
 
 h3 {
-  font-size: 1.953rem;
+  font-size: 1.75rem;
 }
 
 h4 {
-  font-size: 1.563rem;
+  font-size: 1.5rem;
+
 }
 
 h5 {
@@ -110,16 +114,6 @@ dd {
 
 .span {
   grid-column: 1 / -1;
-}
-
-.section-title {
-  grid-column: 1 / -1;
-}
-
-.sidebar-title {
-  text-align: center;
-  font-weight: $ff-b;
-  font-size: 1.8rem;
 }
 
 .underline {

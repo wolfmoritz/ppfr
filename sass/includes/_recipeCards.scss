@@ -1,6 +1,7 @@
 // Recipe Cards
 
 .recipe-card {
+ cursor: pointer;
  display: flex;
  flex-flow: column nowrap;
  border-radius: $border-radius;
@@ -28,19 +29,19 @@
  }
 
  &__title-container {
-  @include padding(2em .5em .5em);
   text-align: center;
   display: flex;
   justify-content: center;
  }
  &__recipe-title {
+  @include padding(2em .5em .5em);
   white-space: nowrap;
   overflow: hidden;
   @include ellipsis;
   color: $clr-text-dark;
   text-decoration: none;
   align-self: flex-start;
-  font-weight: $ff-l;
+  font-weight: $ff-n;
 
   &:hover {
    color: $clr-text-accent;

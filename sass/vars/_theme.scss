@@ -4,7 +4,7 @@
 
 // Default Color Scheme
 
-$black: rgb(38, 38, 38);
+$black: rgb(60, 60, 60);
 $white: rgb(255, 255, 255);
 $red: rgb(218, 37, 54);
 $orange: rgb(255, 166, 0);
@@ -18,7 +18,7 @@ $clr-primary: $blue;
 $clr-accent: $orange;
 
 $clr-background-light: $white;
-$clr-background-dark: $black;
+$clr-background-dark: $clr-primary;
 $clr-background-medium: $light-grey;
 $clr-background-accent: $clr-accent;
 
