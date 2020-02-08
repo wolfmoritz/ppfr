@@ -1,25 +1,22 @@
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-  gap: 1em;
-  @include margin(null null 2em null);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5em;
+  @include padding(null null 1.5em);
 }
 
 .section-inner {
   width: $default-width;
   max-width: $max-width;
   @include padding(null 1em);
-  @include margin(0 auto 2em);
+  @include margin(0 auto);
   background: $clr-background-light;
   border-radius: $border-radius;
 
-  @media screen and (min-width: 768px) {
-    @include padding(0 null 2rem);
-  }
+  // @media screen and (min-width: 768px) {
+  //   @include padding(0 null 10rem);
+  // }
 }
-
-
-
 // 2 column layout
 
 .wrapper {

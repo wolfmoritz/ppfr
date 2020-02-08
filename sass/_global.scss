@@ -21,11 +21,12 @@ body {
   font-weight: $ff-n;
   line-height: 1.4;
   display: flex;
-  flex-flow: column nowrap; 
+  flex-flow: column nowrap;
 
   @media screen and (min-width: $breakpoint-tablet) {
     @include padding(190px null null);
   }
+
   @media screen and (min-width: $breakpoint-desktop) {
     @include padding(140px null null);
   }
@@ -51,15 +52,13 @@ h3,
 h4,
 h5 {
   @include margin(.25rem null);
-  font-family: $ff-sans;
+  font-family: $ff-serif;
   font-weight: $ff-n;
   line-height: 1.15;
 }
 
 h1 {
-
   font-size: 3.052rem;
-
 }
 
 h2 {
@@ -78,7 +77,6 @@ h5 {
   font-size: 1.25rem;
 }
 
-small,
 .text_small {
   font-size: 0.8rem;
 }

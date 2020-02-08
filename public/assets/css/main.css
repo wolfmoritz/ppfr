@@ -70,7 +70,7 @@ h4,
 h5 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-  font-family: "Lato", sans-serif;
+  font-family: "Noto", serif;
   font-weight: 400;
   line-height: 1.15;
 }
@@ -95,7 +95,6 @@ h5 {
   font-size: 1.25rem;
 }
 
-small,
 .text_small {
   font-size: 0.8rem;
 }
@@ -701,9 +700,9 @@ footer a:hover {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-  gap: 1em;
-  margin-bottom: 2em;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5em;
+  padding-bottom: 1.5em;
 }
 
 .section-inner {
@@ -711,15 +710,9 @@ footer a:hover {
   max-width: 1200px;
   padding-right: 1em;
   padding-left: 1em;
-  margin: 0 auto 2em;
+  margin: 0 auto;
   background: white;
   border-radius: 7px;
-}
-@media screen and (min-width: 768px) {
-  .section-inner {
-    padding-top: 0;
-    padding-bottom: 2rem;
-  }
 }
 
 .wrapper {
