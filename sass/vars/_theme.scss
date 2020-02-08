@@ -34,17 +34,14 @@ $border-radius: 7px;
 
 $box-shadow-light: 0 1px 5px 1px $light-grey;
 $box-shadow-dark: 0 1px 5px 1px rgba($black, .25);
-$box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, .25),
-0.125em 0.125em 0.25em rgba(0, 0, 0, .15);
-
-
+$box-shadow: 
+   0.25em 0.25em 0.75em rgba($black, .25),
+   0.125em 0.125em 0.25em rgba($black, .15);
 $text-shadow: 0 2px 2px rgba($clr-text-dark, .25);
-
 $outline-light: 1px solid $light-grey;
 $outline-medium: 1px solid $medium-grey;
 $outline-dark: 1px solid $black;
-
-$gradient: linear-gradient(rgba($red, .75), $orange, $orange, rgba($red, .75));
+$gradient: linear-gradient(rgba($red, .5), rgba($orange, .5), $white);
 
 // Fonts
 $ff-serif: 'Merriweather',
