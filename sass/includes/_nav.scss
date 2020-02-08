@@ -209,13 +209,22 @@ header {
   }
 
   &__input {
+    font-size: 1.3rem;
+    @include padding(.25em);
     @include border-left-radius($border-radius);
     @include border-right-radius(0px);
     @include border-color($light-grey null $light-grey $light-grey);
     @include border-style(solid null solid solid);
     @include border-width(1px 0 1px 1px);
-
     flex: 1;
+    &::placeholder {
+      color: $clr-text-accent;
+      opacity: .75;
+      transition: opacity .250s linear;
+    }
+    &:focus::placeholder {
+      opacity: 0;
+    }
   }
 
   &__button {

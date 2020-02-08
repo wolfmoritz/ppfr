@@ -7,7 +7,7 @@
 $black: rgb(38, 38, 38);
 $white: rgb(255, 255, 255);
 $red: rgb(218, 37, 54);
-$orange: rgba(255, 166, 0, 0.932);
+$orange: rgb(255, 166, 0);
 $blue: rgb(52, 65, 134);
 
 $light-grey: rgb(234, 234, 234);
@@ -15,16 +15,17 @@ $medium-grey: rgb(134, 133, 133);
 $dark-grey: rgb(85, 85, 85);
 
 $clr-primary: $blue;
+$clr-accent: $orange;
 
 $clr-background-light: $white;
 $clr-background-dark: $black;
 $clr-background-medium: $light-grey;
-$clr-background-accent: $red;
+$clr-background-accent: $clr-accent;
 
 $clr-text-dark: $black;
 $clr-text-light: $white;
 $clr-text-medium: $medium-grey;
-$clr-text-accent: $red;
+$clr-text-accent: $clr-accent;
 
 // Default styles
 $border-radius: 7px;
@@ -37,7 +38,7 @@ $text-shadow: 0 2px 2px rgba($clr-text-dark, .25);
 $outline-light: 1px solid $light-grey;
 $outline-medium: 1px solid $medium-grey;
 $outline-dark: 1px solid $black;
-$gradient: linear-gradient(rgba($red, .5), rgba($orange, .5), $white);
+$gradient: linear-gradient(rgba($red, .5), rgba($clr-accent, .5), $white);
 
 // Fonts
 $ff-serif: 'Noto',serif;
