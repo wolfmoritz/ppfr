@@ -5,7 +5,7 @@
 {% endif %}
 
     <div class="recipe-card">
-      <div class="img-container">
+      <div class="recipe-card__img-container">
         <a href="{{ siteUrlFor('showRecipe', r.niceUrl) }}">
           <img
             src="{{ imageUrl }}"
@@ -13,7 +13,7 @@
             alt="Photo of {{ r.title }}"
         /></a>
       </div>
-      <div class="title-container">
-        <a class="recipe-title" href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.title }}"> {{ r.title }}</a>
+      <div class="recipe-card__title-container">
+        <a class="recipe-card__recipe-title" href="{{ siteUrlFor('showRecipe', r.niceUrl) }}" title="{{ r.title }}"> {{ r.title }}</a>
       </div>
     </div>

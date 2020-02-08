@@ -1,21 +1,24 @@
 // Recipe Cards
 
 .recipe-card {
-
-
  display: flex;
  flex-flow: column nowrap;
  border-radius: $border-radius;
  box-shadow: $box-shadow-light;
  border: $outline-light;
  overflow: hidden;
+ transform: scale(1);
+ transition: all .35s ease-in-out;
+ &:hover{
+  transform: scale(1.04);
+  box-shadow: $box-shadow-dark;
+ }
 
- .img-container {
+ &__img-container {
   background: $gradient;
   width: 100%;
-  height: 120px;
-  min-height: 120px;
-  overflow: hidden;
+  height: 250px;
+  min-height: 250px;
 
   img {
    width: 100%;
@@ -24,26 +27,23 @@
   }
  }
 
- .title-container {
-  @include padding(1em .5em .5em);
+ &__title-container {
+  @include padding(2em .5em .5em);
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  align-items: flex-end;
+ }
+ &__recipe-title {
+  white-space: nowrap;
+  overflow: hidden;
+  @include ellipsis;
+  color: $clr-text-dark;
+  text-decoration: none;
+  align-self: flex-start;
+  font-weight: $ff-l;
 
-  .recipe-title {
-   white-space: nowrap;
-   overflow: hidden;
-   @include ellipsis;
-   color: $clr-text-dark;
-   text-decoration: none;
-   align-self: flex-start;
-   font-weight: $ff-l;
-
-   &:hover {
-    color: $clr-text-accent;
-   }
+  &:hover {
+   color: $clr-text-accent;
   }
  }
 }

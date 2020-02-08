@@ -380,7 +380,7 @@ figcaption {
 header {
   width: 100%;
   background: white;
-  box-shadow: 0 1px 5px 1px rgba(38, 38, 38, 0.25);
+  box-shadow: 0 2px 5px 1px rgba(38, 38, 38, 0.25);
   position: fixed;
   z-index: 1;
   top: 0;
@@ -788,31 +788,34 @@ footer a:hover {
   display: flex;
   flex-flow: column nowrap;
   border-radius: 7px;
-  box-shadow: 0 1px 5px 1px #eaeaea;
+  box-shadow: 0 2px 5px 1px #eaeaea;
   border: 1px solid #eaeaea;
   overflow: hidden;
+  transform: scale(1);
+  transition: all 0.35s ease-in-out;
 }
-.recipe-card .img-container {
+.recipe-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 2px 5px 1px rgba(38, 38, 38, 0.25);
+}
+.recipe-card__img-container {
   background: linear-gradient(rgba(218, 37, 54, 0.5), rgba(255, 166, 0, 0.5), white);
   width: 100%;
-  height: 120px;
-  min-height: 120px;
-  overflow: hidden;
+  height: 250px;
+  min-height: 250px;
 }
-.recipe-card .img-container img {
+.recipe-card__img-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.recipe-card .title-container {
-  padding: 1em 0.5em 0.5em;
+.recipe-card__title-container {
+  padding: 2em 0.5em 0.5em;
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  align-items: flex-end;
 }
-.recipe-card .title-container .recipe-title {
+.recipe-card__recipe-title {
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
@@ -826,7 +829,7 @@ footer a:hover {
   align-self: flex-start;
   font-weight: 300;
 }
-.recipe-card .title-container .recipe-title:hover {
+.recipe-card__recipe-title:hover {
   color: #ffa600;
 }
 

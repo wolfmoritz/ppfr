@@ -29,8 +29,8 @@ $clr-text-accent: $clr-accent;
 
 // Default styles
 $border-radius: 7px;
-$box-shadow-light: 0 1px 5px 1px $light-grey;
-$box-shadow-dark: 0 1px 5px 1px rgba($black, .25);
+$box-shadow-light: 0 2px 5px 1px $light-grey;
+$box-shadow-dark: 0 2px 5px 1px rgba($black, .25);
 $box-shadow: 
    0.25em 0.25em 0.75em rgba($black, .25),
    0.125em 0.125em 0.25em rgba($black, .15);
