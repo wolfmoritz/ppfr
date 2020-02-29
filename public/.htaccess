@@ -33,7 +33,7 @@ RewriteRule ^(.*)$ http://perisplaceforrecipes.com/$1 [L,R=301]
 # such as an image or css document, if this isn't true this sends the
 # request to index.php.
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|css|js|map|ico)$ [NC]
 RewriteRule . index.php [L]
 
 # To clean up URL's with index.php in the request path that appeared in results

@@ -7,7 +7,7 @@
         "codeguy/upload": "*",
         "intervention/image": "2.*",
         "pitoncms/session": "^1",
-        "pitoncms/orm": "^0.3",
+        "pitoncms/orm": "0.3.3",
         "vlucas/valitron": "^1.2",
         "jaybizzle/crawler-detect": "1.*",
         "phpmailer/phpmailer": "^6.1"

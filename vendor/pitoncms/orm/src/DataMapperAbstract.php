@@ -19,6 +19,7 @@ use Exception;
  * Piton Abstract Data Mapper Class
  *
  * All data mapper classes for tables should extend this class.
+ * @version 0.3.3
  */
 abstract class DataMapperAbstract
 {
@@ -188,7 +189,7 @@ abstract class DataMapperAbstract
 
         // Execute the query & return
         if ($this->execute()) {
-            return $this->statement->fetch();
+            return $this->statement->fetch() ?: null;
         }
 
         return null;
@@ -210,7 +211,7 @@ abstract class DataMapperAbstract
 
         // Execute the query
         if ($this->execute()) {
-            return $this->statement->fetchAll();
+            return $this->statement->fetchAll() ?: null;
         }
 
         return null;
@@ -225,7 +226,7 @@ abstract class DataMapperAbstract
      */
     public function foundRows(): ?int
     {
-        return (int) $this->dbh->query('select found_rows()')->fetch(PDO::FETCH_COLUMN);
+        return (int) $this->dbh->query('select found_rows()')->fetch(PDO::FETCH_COLUMN) ?: null;
     }
 
     /**
@@ -426,7 +427,7 @@ abstract class DataMapperAbstract
 
         // Execute and assign last insert ID to primary key and return
         if ($this->execute()) {
-            $domainObject->{$this->primaryKey} = $this->dbh->lastInsertId();
+            $domainObject->{$this->primaryKey} = (int) $this->dbh->lastInsertId();
             return $domainObject;
         }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dfdc25a936b5a9f0d0352276809b4d73",
+    "content-hash": "29e3c7c4fce139252cca1133d9e13c75",
     "packages": [
         {
             "name": "codeguy/upload",
@@ -307,20 +307,20 @@
         },
         {
             "name": "pitoncms/orm",
-            "version": "0.3.0",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PitonCMS/ORM.git",
-                "reference": "ee18a47a9113116f019e2e6cfcfa078efaf61d17"
+                "reference": "cdd3dc170c1a5fd89f091bf485e99c1d3160402f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PitonCMS/ORM/zipball/ee18a47a9113116f019e2e6cfcfa078efaf61d17",
-                "reference": "ee18a47a9113116f019e2e6cfcfa078efaf61d17",
+                "url": "https://api.github.com/repos/PitonCMS/ORM/zipball/cdd3dc170c1a5fd89f091bf485e99c1d3160402f",
+                "reference": "cdd3dc170c1a5fd89f091bf485e99c1d3160402f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.3"
+                "php": ">=7.1"
             },
             "type": "library",
             "autoload": {
@@ -348,20 +348,20 @@
                 "orm",
                 "storage"
             ],
-            "time": "2020-01-27T21:10:11+00:00"
+            "time": "2020-02-16T16:33:42+00:00"
         },
         {
             "name": "pitoncms/session",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PitonCMS/Session.git",
-                "reference": "ba54ab5f8623c7822c382e106964fa8de12e9c1f"
+                "reference": "59960936744f9da8d246edc22ba309d5b64200e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PitonCMS/Session/zipball/ba54ab5f8623c7822c382e106964fa8de12e9c1f",
-                "reference": "ba54ab5f8623c7822c382e106964fa8de12e9c1f",
+                "url": "https://api.github.com/repos/PitonCMS/Session/zipball/59960936744f9da8d246edc22ba309d5b64200e4",
+                "reference": "59960936744f9da8d246edc22ba309d5b64200e4",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +392,7 @@
                 "sessions",
                 "sessionstate"
             ],
-            "time": "2018-12-21T12:24:01+00:00"
+            "time": "2020-02-01T09:01:22+00:00"
         },
         {
             "name": "psr/http-message",
