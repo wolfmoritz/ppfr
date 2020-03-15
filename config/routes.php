@@ -166,14 +166,9 @@ $app->get('/blog/all', function () {
 })->name('blogPosts');
 
 // Blog post
-$app->get('/blog(/:id(/:url))', function ($id, $url = null) {
+$app->get('/blog/:id(/:url)', function ($id, $url = null) {
     (new BlogController())->showPost($id, $url);
 })->conditions(['id' => '\d+'])->name('showBlogPost');
-
-// Blog post - fall through if missing url segment and the ID has a trailing slash
-$app->get('/blog(/:id)/', function ($id) {
-    (new BlogController())->showPost($id);
-})->conditions(['id' => '\d+']);
 
 // -------------------------- Misc Routes --------------------------
 
