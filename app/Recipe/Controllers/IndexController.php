@@ -175,7 +175,7 @@ class IndexController extends BaseController
         // Fetch recipes
         if (!empty($terms)) {
             $data = $recipeMapper->searchRecipes($terms, $paginator->getResultsPerPage(), $paginator->getOffset());
-            $rowCount = $recipeMapper->foundRows();
+            $rowCount = $recipeMapper->foundRows() ?? 0;
         }
 
         // If we found just one row on the first page of results, just show the recipe page

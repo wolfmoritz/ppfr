@@ -27,7 +27,7 @@ RewriteRule ^files/thumbnails/.*\.(jpe?g|png) thumb.php [L,NC]
 # Redirect from www subdomain to preferred domain (no-www)
 RewriteCond %{HTTP_HOST} !^localhost$ [NC]
 RewriteCond %{HTTP_HOST} ^www [NC]
-RewriteRule ^(.*)$ http://perisplaceforrecipes.com/$1 [L,R=301]
+RewriteRule ^(.*)$ https://perisplaceforrecipes.com/$1 [L,R=301]
 
 # Final check to see if the user is attempting to access a valid file,
 # such as an image or css document, if this isn't true this sends the
