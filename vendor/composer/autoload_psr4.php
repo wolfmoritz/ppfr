@@ -12,7 +12,7 @@ return array(
     'Slim\\Views\\' => array($vendorDir . '/slim/views'),
     'Slim\\Logger\\' => array($vendorDir . '/slim/logger'),
     'Recipe\\' => array($baseDir . '/app/Recipe'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
     'Piton\\Session\\' => array($vendorDir . '/pitoncms/session/src'),
     'Piton\\ORM\\' => array($vendorDir . '/pitoncms/orm/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
