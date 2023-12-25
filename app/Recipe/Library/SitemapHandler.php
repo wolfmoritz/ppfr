@@ -8,7 +8,6 @@ namespace Recipe\Library;
  */
 class SitemapHandler
 {
-
     protected $app;
     protected $baseUrl;
     protected $sitemapFileName = 'sitemap.xml';
@@ -99,10 +98,10 @@ class SitemapHandler
             $sitemapUrl = urlencode($this->baseUrl . '/' . $this->sitemapFileName);
 
             // Google
-            $submitSitemapUrl[] = "http://www.google.com/webmasters/tools/ping?sitemap=" . $sitemapUrl;
+            $submitSitemapUrl[] = "https://www.google.com/webmasters/tools/ping?sitemap=" . $sitemapUrl;
 
             // Bing
-            $submitSitemapUrl[] = 'http://www.bing.com/ping?sitemap=' . $sitemapUrl;
+            $submitSitemapUrl[] = 'https://www.bing.com/ping?sitemap=' . $sitemapUrl;
 
             foreach ($submitSitemapUrl as $submission) {
                 $log->alert('..Submitting sitemap to: ' . $submission);

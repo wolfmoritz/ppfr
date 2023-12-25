@@ -1,7 +1,6 @@
 # Things to ignore
 
 # Development configuration file
-config/config.dev.php
 config/config.local.php
 migrate.php
 *-old/

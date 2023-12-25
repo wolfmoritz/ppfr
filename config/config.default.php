@@ -4,19 +4,16 @@
  *
  * DO NOT CHANGE THIS FILE
  *
- * Copy this config.default.php file to config.prod.php and define all
- * required production configuration settings on the production server.
+ * Copy this config.default.php file to config.local.php and define all
+ * local environment configuration settings.
  *
- * Define all development settings in config.dev.php on the development server.
- * The config.dev.php file is loaded after config.prod.php so it overrides any production settings.
- *
- * Do not commit config.prod.php or config.dev.php to version control.
+ * Do not commit config.local.php to version control.
  */
 
 /**
  * General Configuration Settings
  *
- * In your config.dev.php file set mode = 'development', debug = true.
+ * In your config.local.php file set mode = 'development', debug = true when working in a development environment.
  *
  * mode = string, 'production' | 'development', Can be used in app and templates to check for instance
  * debug = boolean, Expose enhanced debugging messages. Turn off in production
