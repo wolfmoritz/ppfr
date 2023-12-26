@@ -7,23 +7,23 @@ RUN   apt-get update && \
       apt-get update && \
       apt-get install -y \
       apache2 \
-      php7.4 \
-      php7.4-cli \
-      libapache2-mod-php7.4 \
+      php7.3 \
+      php7.3-cli \
+      libapache2-mod-php7.3 \
       php-apcu \
       php-xdebug \
-      php7.4-gd \
-      php7.4-json \
-      php7.4-ldap \
-      php7.4-mbstring \
-      php7.4-mysql \
-      # php7.4-pgsql \
-      # php7.4-sqlite3 \
-      php7.4-xml \
-      php7.4-xsl \
-      php7.4-zip \
-      # php7.4-soap \
-      # php7.4-opcache \
+      php7.3-gd \
+      php7.3-json \
+      php7.3-ldap \
+      php7.3-mbstring \
+      php7.3-mysql \
+      # php7.3-pgsql \
+      # php7.3-sqlite3 \
+      php7.3-xml \
+      php7.3-xsl \
+      php7.3-zip \
+      # php7.3-soap \
+      # php7.3-opcache \
       nano \
       sendmail \
       composer \
